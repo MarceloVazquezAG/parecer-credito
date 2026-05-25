@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AG Antecipa — Análise de Crédito | TEX QUÍMICA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{--navy:#07111e;--navy2:#0d1e30;--navy3:#132a40;--blue:#1a6cff;--blue2:#3d87ff;--blue-pale:#0d2444;--teal:#00c9a7;--teal2:#00e6be;--teal-pale:#002e28;--amber:#f59e0b;--amber2:#fbbf24;--amber-pale:#2d1f04;--red:#ef4444;--red2:#f87171;--red-pale:#2c0a0a;--green:#22c55e;--green2:#4ade80;--green-pale:#052010;--gray1:#8b98a8;--gray2:#b0bec8;--gray3:#d4dde6;--line:rgba(255,255,255,0.06);--line2:rgba(255,255,255,0.12);--bg:#050e18;--surface:#0a1828;--surface2:#0f2035;--surface3:#152540;--text:#e8f0f8;--text2:#a8bece;--gold:#f0c040;--r-sm:6px;--r-md:10px;--r-lg:16px;--r-xl:22px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:.4}
+h1,h2,h3,h4{font-family:'Syne',sans-serif;letter-spacing:-.02em}
+code,.mono{font-family:'DM Mono',monospace}
+.container{max-width:1400px;margin:0 auto;padding:0 32px}
+.hero{position:relative;overflow:hidden;padding:0;background:linear-gradient(160deg,#091828 0%,#050e18 60%);border-bottom:1px solid var(--line2)}
+.hero-grid{display:grid;grid-template-columns:1fr 420px;min-height:340px;align-items:stretch}
+.hero-left{padding:56px 48px 48px;position:relative;z-index:2}
+.hero-right{background:var(--surface);border-left:1px solid var(--line2);padding:40px 36px;display:flex;flex-direction:column;justify-content:center;gap:14px;position:relative}
+.hero-right::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,108,255,.04) 0%,transparent 60%);pointer-events:none}
+.logo-badge{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:6px 14px;border-radius:var(--r-sm);margin-bottom:24px}
+.hero h1{font-size:clamp(32px,5vw,52px);font-weight:800;color:#fff;line-height:1.05;margin-bottom:10px}
+.hero h1 span{color:var(--amber2)}
+.hero-subtitle{font-size:14px;color:var(--gray1);margin-bottom:28px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:20px}
+.meta-item{display:flex;flex-direction:column;gap:2px}
+.meta-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray1)}
+.meta-value{font-family:'DM Mono',monospace;font-size:12px;color:var(--text2)}
+.verdict-panel{background:linear-gradient(135deg,#2d1f04 0%,#1a1200 100%);border:1px solid rgba(245,158,11,.3);border-radius:var(--r-lg);padding:20px 22px}
+.verdict-label{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--amber2);margin-bottom:4px;font-weight:500}
+.verdict-main{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--amber2);margin-bottom:6px}
+.verdict-sub{font-size:12px;color:rgba(251,191,36,.6)}
+.risk-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:100px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.risk-moderate{background:rgba(245,158,11,.15);color:var(--amber2);border:1px solid rgba(245,158,11,.3)}
+.risk-low{background:rgba(34,197,94,.12);color:var(--green2);border:1px solid rgba(34,197,94,.25)}
+.risk-high{background:rgba(239,68,68,.12);color:var(--red2);border:1px solid rgba(239,68,68,.25)}
+.risk-ok{background:rgba(0,201,167,.1);color:var(--teal2);border:1px solid rgba(0,201,167,.2)}
+.risk-info{background:rgba(26,108,255,.12);color:var(--blue2);border:1px solid rgba(26,108,255,.25)}
+.risk-warn{background:rgba(245,158,11,.1);color:var(--amber);border:1px solid rgba(245,158,11,.2)}
+.limit-box{background:var(--blue-pale);border:1px solid rgba(26,108,255,.25);border-radius:var(--r-md);padding:16px 18px}
+.limit-amount{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--blue2);line-height:1;margin-bottom:4px}
+.limit-label{font-size:11px;color:var(--gray1);text-transform:uppercase;letter-spacing:.08em}
+.hero-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.12}
+.orb1{width:500px;height:500px;background:var(--amber);top:-150px;left:-100px}
+.orb2{width:300px;height:300px;background:var(--blue);bottom:-80px;right:150px}
+.nav-bar{position:sticky;top:0;z-index:100;background:rgba(5,14,24,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--line2);padding:0 32px}
+.nav-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;overflow-x:auto;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-tab{flex-shrink:0;padding:14px 20px;font-size:12px;font-weight:500;color:var(--gray1);cursor:pointer;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap;text-transform:uppercase;letter-spacing:.06em;text-decoration:none;display:block}
+.nav-tab:hover{color:var(--text2)}
+.nav-tab.active{color:var(--blue2);border-bottom-color:var(--blue)}
+main{padding:48px 0 80px}
+.section{margin-bottom:56px}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--line2)}
+.section-num{width:32px;height:32px;background:var(--blue);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:#fff;flex-shrink:0}
+.section-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#fff}
+.section-sub{font-size:12px;color:var(--gray1);margin-left:auto}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:32px}
+.kpi-card{background:var(--surface);border:1px solid var(--line2);border-radius:var(--r-lg);padding:20px 22px;position:relative;overflow:hidden;transition:border-color .2s,transform .2s}
+.kpi-card:hover{border-color:var(--line);transform:translateY(-1px)}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent,var(--blue))}
+.kpi-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray1);margin-bottom:8px;font-weight:500}
+.kpi-value{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--accent,var(--blue2));line-height:1;margin-bottom:4px}
+.kpi-sub{font-size:11px;color:var(--gray1)}
+.status-table{width:100%;border-collapse:collapse;border-radius:var(--r-lg);overflow:hidden}
+.status-table th{background:var(--surface3);padding:11px 16px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray1);font-weight:600;border-bottom:1px solid var(--line2)}
+.status-table td{padding:11px 16px;font-size:13px;border-bottom:1px solid var(--line);vertical-align:middle}
+.status-table tr:last-child td{border-bottom:none}
+.status-table tr:nth-child(even) td{background:rgba(255,255,255,.015)}
+.status-table tr:hover td{background:rgba(26,108,255,.04)}
+.dim{color:var(--text);font-weight:500}
+.val{color:var(--text2)}
+.chart-wrap{background:var(--surface);border:1px solid var(--line2);border-radius:var(--r-lg);padding:24px}
+.chart-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:4px}
+.chart-desc{font-size:11px;color:var(--gray1);margin-bottom:20px}
+.charts-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.charts-3col{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:24px}
+.gauge-wrap{display:flex;flex-direction:column;align-items:center;padding:8px 0}
+.gauge-svg{width:180px;height:100px;overflow:visible}
+.gauge-score{font-family:'Syne',sans-serif;font-size:40px;font-weight:800;color:var(--amber2);text-align:center;line-height:1;margin-top:-8px}
+.gauge-label{font-size:11px;color:var(--gray1);text-align:center;margin-top:4px}
+.risk-matrix{display:flex;flex-direction:column;gap:10px}
+.risk-row{display:grid;grid-template-columns:90px 1fr;gap:14px;align-items:start;background:var(--surface);border:1px solid var(--line2);border-radius:var(--r-md);padding:14px 16px;transition:border-color .2s}
+.risk-row:hover{border-color:var(--line)}
+.risk-row.high{border-left:3px solid var(--red)}
+.risk-row.med{border-left:3px solid var(--amber)}
+.risk-row.low{border-left:3px solid var(--teal)}
+.risk-level{display:flex;flex-direction:column;gap:6px}
+.risk-desc{font-size:13px;color:var(--text2);line-height:1.5}
+.risk-desc strong{color:var(--text);font-weight:500}
+.risk-mitigation{font-size:11px;color:var(--gray1);margin-top:4px;padding-top:8px;border-top:1px solid var(--line);line-height:1.5}
+.analysis-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.strength-box{background:var(--green-pale);border:1px solid rgba(34,197,94,.2);border-radius:var(--r-lg);padding:24px}
+.weakness-box{background:var(--amber-pale);border:1px solid rgba(245,158,11,.2);border-radius:var(--r-lg);padding:24px}
+.box-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.strength-box .box-title{color:var(--green2)}
+.weakness-box .box-title{color:var(--amber2)}
+.check-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.check-list li{font-size:12.5px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative}
+.check-list li::before{content:attr(data-icon);position:absolute;left:0;font-size:12px}
+.final-verdict{background:var(--navy2);border:1px solid var(--line2);border-radius:var(--r-xl);overflow:hidden;margin-bottom:32px}
+.verdict-header{background:linear-gradient(90deg,var(--navy3) 0%,#0d2035 100%);padding:24px 32px;border-bottom:1px solid var(--line2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.verdict-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+.verdict-item{padding:24px 28px;border-right:1px solid var(--line2)}
+.verdict-item:last-child{border-right:none}
+.verdict-item-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray1);margin-bottom:8px}
+.verdict-item-value{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;line-height:1.1}
+.v-moderate{color:var(--amber2)}
+.v-approve{color:var(--green2)}
+.v-limit{color:var(--blue2)}
+.analyst-note{background:linear-gradient(135deg,rgba(26,108,255,.06) 0%,rgba(0,201,167,.04) 100%);border:1px solid rgba(26,108,255,.2);border-radius:var(--r-xl);padding:32px 36px;position:relative;overflow:hidden;margin-top:32px}
+.analyst-note::before{content:'"';position:absolute;top:-20px;left:24px;font-size:180px;font-family:'Syne',sans-serif;color:rgba(26,108,255,.06);line-height:1;pointer-events:none}
+.analyst-note-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--blue2);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.analyst-note p{font-size:13.5px;color:var(--text2);line-height:1.8;margin-bottom:12px}
+.analyst-note p:last-child{margin-bottom:0}
+.analyst-note strong{color:var(--text);font-weight:500}
+.conditions{display:flex;flex-direction:column;gap:0;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line2)}
+.condition-row{display:grid;grid-template-columns:40px 1fr;border-bottom:1px solid var(--line);transition:background .15s}
+.condition-row:last-child{border-bottom:none}
+.condition-row:hover{background:rgba(26,108,255,.04)}
+.cond-num{background:var(--surface3);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:13px;color:var(--blue2);font-weight:500;border-right:1px solid var(--line2)}
+.cond-body{padding:14px 18px}
+.cond-title{font-size:12px;font-weight:600;color:var(--text);margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em}
+.cond-desc{font-size:12px;color:var(--text2);line-height:1.5}
+.process-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.process-card{background:var(--surface);border:1px solid var(--line2);border-radius:var(--r-md);padding:16px 18px}
+.process-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--gray1);margin-bottom:6px}
+.process-type{font-size:13px;color:var(--text);font-weight:500;margin-bottom:4px}
+.process-court{font-size:11px;color:var(--gray1)}
+.process-note{font-size:11px;color:var(--text2);margin-top:8px;padding-top:8px;border-top:1px solid var(--line);line-height:1.5}
+footer{background:var(--navy2);border-top:1px solid var(--line2);padding:24px 32px}
+.footer-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.footer-brand{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--blue2)}
+.footer-meta{font-size:11px;color:var(--gray1);text-align:right;line-height:1.6}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--surface3);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--line2)}
+.progress-row{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.progress-header{display:flex;justify-content:space-between;align-items:baseline}
+.progress-name{font-size:12px;color:var(--text2)}
+.progress-pct{font-family:'DM Mono',monospace;font-size:12px;color:var(--text);font-weight:500}
+.progress-track{height:5px;background:var(--surface3);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;border-radius:3px}
+.pont-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pont-card{background:var(--surface);border:1px solid var(--line2);border-radius:var(--r-lg);padding:20px}
+.pont-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.inline-alert{display:flex;align-items:flex-start;gap:12px;background:var(--red-pale);border:1px solid rgba(239,68,68,.25);border-radius:var(--r-md);padding:14px 16px;margin-top:12px;font-size:12.5px;color:var(--text2);line-height:1.6}
+.inline-alert.warn{background:var(--amber-pale);border-color:rgba(245,158,11,.25)}
+.inline-alert.ok{background:var(--green-pale);border-color:rgba(34,197,94,.2)}
+.inline-alert.info{background:var(--blue-pale);border-color:rgba(26,108,255,.2)}
+.alert-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.remun-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.remun-card{background:var(--surface);border:1px solid var(--line2);border-radius:var(--r-lg);padding:18px 20px}
+.remun-type{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray1);margin-bottom:6px}
+.remun-annual{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--text);margin-bottom:4px}
+.remun-monthly{font-size:12px;color:var(--teal2);font-family:'DM Mono',monospace}
+@media(max-width:900px){
+  .hero-grid,.charts-2col,.charts-3col,.analysis-2col,.pont-grid{grid-template-columns:1fr}
+  .hero-right{border-left:none;border-top:1px solid var(--line2)}
+  .verdict-grid{grid-template-columns:1fr}
+  .remun-grid{grid-template-columns:1fr 1fr}
+  .hero-left{padding:36px 24px 32px}
+  .container{padding:0 16px}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-bg"><div class="orb orb1"></div><div class="orb orb2"></div></div>
+  <div class="hero-grid">
+    <div class="hero-left">
+      <div class="logo-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        AG ANTECIPA — ANÁLISE DE CRÉDITO
+      </div>
+      <h1>TEX<br><span>QUÍMICA</span></h1>
+      <p class="hero-subtitle">TEX QUIMICA INTERNATIONAL LTDA — Parecer Técnico Completo</p>
+      <div class="hero-meta">
+        <div class="meta-item"><span class="meta-label">CNPJ</span><span class="meta-value">49.180.793/0001-67</span></div>
+        <div class="meta-item"><span class="meta-label">Data Base</span><span class="meta-value">Maio / 2026</span></div>
+        <div class="meta-item"><span class="meta-label">Regime</span><span class="meta-value">Lucro Real — Balanços 2024/2025</span></div>
+        <div class="meta-item"><span class="meta-label">Fontes</span><span class="meta-value">Balanços + BACEN + Serasa + CreditBox</span></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="verdict-panel">
+        <div class="verdict-label">Recomendação Final</div>
+        <div class="verdict-main">APROVAR COM RESSALVAS</div>
+        <div class="verdict-sub">Risco moderado-elevado — Limite inicial conservador</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <span class="risk-chip risk-moderate">⬡ Risco Moderado-Elevado</span>
+        <span class="risk-chip risk-warn">Score 700/1000</span>
+        <span class="risk-chip risk-high">⚠ PEFIN R$ 3,75k ativo</span>
+      </div>
+      <div class="limit-box">
+        <div class="limit-label">Limite Sugerido Inicial</div>
+        <div class="limit-amount">R$ 150k – R$ 250k</div>
+        <div style="font-size:11px;color:var(--gray1);margin-top:4px;">Prazo máx. 60 dias — Revisão em 60 dias operacionais</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <a href="#overview" class="nav-tab active">Visão Geral</a>
+    <a href="#financeiro" class="nav-tab">Financeiro</a>
+    <a href="#serasa" class="nav-tab">Serasa</a>
+    <a href="#bacen" class="nav-tab">BACEN / SCR</a>
+    <a href="#creditbox" class="nav-tab">CreditBox</a>
+    <a href="#patrimonio" class="nav-tab">Ativos</a>
+    <a href="#socios" class="nav-tab">Sócios</a>
+    <a href="#riscos" class="nav-tab">Riscos</a>
+    <a href="#parecer" class="nav-tab">Parecer Final</a>
+  </div>
+</nav>
+
+<main>
+<div class="container">
+
+<!-- 0. DASHBOARD -->
+<section id="overview" class="section">
+  <div class="section-header">
+    <div class="section-num" style="background:var(--surface3);border:1px solid var(--line2);font-size:16px;">◈</div>
+    <h2 class="section-title">Dashboard Executivo de Risco</h2>
+    <span class="section-sub">Base: 22/05/2026</span>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi-card" style="--accent:var(--teal)"><div class="kpi-label">Receita Bruta Acum. 2026</div><div class="kpi-value">R$ 3,51MM</div><div class="kpi-sub">Jan–Abr/26 — Lucro Líq. R$ 279k</div></div>
+    <div class="kpi-card" style="--accent:var(--amber)"><div class="kpi-label">Score CreditBox</div><div class="kpi-value" style="color:var(--amber2)">700<small style="font-size:14px;font-weight:400">/1000</small></div><div class="kpi-sub">Risco moderado — modelo quantitativo</div></div>
+    <div class="kpi-card" style="--accent:var(--green)"><div class="kpi-label">Inadimplência Bancária</div><div class="kpi-value" style="color:var(--green2)">R$ 0,00</div><div class="kpi-sub">4 operações / 1 banco (Itaú)</div></div>
+    <div class="kpi-card" style="--accent:var(--amber)"><div class="kpi-label">Dívida BACEN (SCR)</div><div class="kpi-value" style="color:var(--amber2)">R$ 341k</div><div class="kpi-sub">100% Capital de Giro LP — 0% vencido</div></div>
+    <div class="kpi-card" style="--accent:var(--red)"><div class="kpi-label">Faturamento Abr/2026</div><div class="kpi-value" style="color:var(--red2)">R$ 264k</div><div class="kpi-sub">−79% vs jan/26 — TENDÊNCIA CRÍTICA</div></div>
+    <div class="kpi-card" style="--accent:var(--red)"><div class="kpi-label">PEFIN Serasa</div><div class="kpi-value" style="color:var(--red2)">R$ 3,75k</div><div class="kpi-sub">CW Logística — Duplicata — Jun/2025 — ATIVO</div></div>
+  </div>
+  <table class="status-table">
+    <thead><tr><th>Dimensão</th><th>Status</th><th>Classificação</th></tr></thead>
+    <tbody>
+      <tr><td class="dim">Situação Cadastral</td><td class="val">ATIVA desde 13/01/2023 — 3 anos de existência</td><td><span class="risk-chip risk-ok" style="font-size:10px;padding:4px 10px">REGULAR</span></td></tr>
+      <tr><td class="dim">Regime Tributário</td><td class="val">Lucro Real — contabilidade com balanços assinados</td><td><span class="risk-chip risk-ok" style="font-size:10px;padding:4px 10px">POSITIVO</span></td></tr>
+      <tr><td class="dim">Serasa — PEFIN</td><td class="val">1 ocorrência ativa — R$ 3.750 — CW Logística — Jun/2025</td><td><span class="risk-chip risk-high" style="font-size:10px;padding:4px 10px">ALERTA</span></td></tr>
+      <tr><td class="dim">Consultas ao Mercado</td><td class="val">Baixas — pico de 3 em jan/26 (múltiplas casas simultâneas)</td><td><span class="risk-chip risk-warn" style="font-size:10px;padding:4px 10px">MONITORAR</span></td></tr>
+      <tr><td class="dim">Protestos / Cheques</td><td class="val">NADA CONSTA — Boa Vista e CENPROT limpos</td><td><span class="risk-chip risk-ok" style="font-size:10px;padding:4px 10px">LIMPO</span></td></tr>
+      <tr><td class="dim">Dívidas Públicas</td><td class="val">NADA CONSTA</td><td><span class="risk-chip risk-ok" style="font-size:10px;padding:4px 10px">LIMPO</span></td></tr>
+      <tr><td class="dim">Processos Jurídicos (PJ)</td><td class="val">NENHUM na empresa — sócios têm processos bancários</td><td><span class="risk-chip risk-warn" style="font-size:10px;padding:4px 10px">MONITORAR</span></td></tr>
+      <tr><td class="dim">Comportamento Pagamento</td><td class="val">ILM 90d emitente = 97–100% / ILM 30d consolidado = 67–69%</td><td><span class="risk-chip risk-warn" style="font-size:10px;padding:4px 10px">ATENÇÃO</span></td></tr>
+      <tr><td class="dim">BACEN / SCR</td><td class="val">R$ 341k a vencer — R$ 0 vencido — 0 discordâncias</td><td><span class="risk-chip risk-ok" style="font-size:10px;padding:4px 10px">BOM PAGADOR</span></td></tr>
+      <tr><td class="dim">Tendência Faturamento</td><td class="val">Jan/26 R$ 1,24MM → Abr/26 R$ 264k — queda de 79% em 4 meses</td><td><span class="risk-chip risk-high" style="font-size:10px;padding:4px 10px">ALERTA ALTO</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 1. IDENTIFICAÇÃO -->
+<section id="cadastro" class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <h2 class="section-title">Identificação do Cedente</h2>
+  </div>
+  <div class="charts-3col">
+    <table class="status-table">
+      <thead><tr><th>Campo</th><th>Informação</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Razão Social</td><td class="val">TEX QUIMICA INTERNATIONAL LTDA</td></tr>
+        <tr><td class="dim">CNPJ</td><td class="val mono">49.180.793/0001-67</td></tr>
+        <tr><td class="dim">Situação RF</td><td class="val">ATIVA desde 13/01/2023 (3 anos)</td></tr>
+        <tr><td class="dim">Capital Social</td><td class="val">R$ 735.000,00</td></tr>
+        <tr><td class="dim">Filiais</td><td class="val">1 (Blumenau/SC)</td></tr>
+        <tr><td class="dim">CNAE Principal</td><td class="val">46.89-3/02 — Comércio atacadista de fios e fibras beneficiados</td></tr>
+        <tr><td class="dim">CNAEs Secundários</td><td class="val">Químicos/Petroquímicos, Intermediários, Vestuário</td></tr>
+        <tr><td class="dim">Sócio-Administrador</td><td class="val">Guilherme De Agostini Camargo — CPF 388.695.268-10</td></tr>
+        <tr><td class="dim">Sócia</td><td class="val">Mariana Milesi Camargo — CPF 550.410.028-35</td></tr>
+        <tr><td class="dim">Endereço</td><td class="val">Rua da Paz, 1601 Sl 706 — Chácara Santo Antônio — SP</td></tr>
+        <tr><td class="dim">Contador</td><td class="val">Juliana Bauer Martins — CRC SC-037777/O-4</td></tr>
+        <tr><td class="dim">Início BACEN</td><td class="val">01/03/2023</td></tr>
+      </tbody>
+    </table>
+    <div class="chart-wrap">
+      <div class="chart-title">Evolução Societária e Financeira</div>
+      <div class="chart-desc">Empresa nova com crescimento rápido e mudanças relevantes</div>
+      <div style="position:relative;padding-left:24px;border-left:1px solid var(--line2);display:flex;flex-direction:column;gap:20px">
+        <div style="position:relative"><div style="position:absolute;left:-29px;top:3px;width:9px;height:9px;border-radius:50%;background:var(--blue);border:2px solid var(--bg)"></div><div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--gray1);margin-bottom:3px">Jan/2023</div><div style="font-size:13px;color:var(--text);font-weight:500">Constituição — Capital Social R$ 260.000</div></div>
+        <div style="position:relative"><div style="position:absolute;left:-29px;top:3px;width:9px;height:9px;border-radius:50%;background:var(--teal);border:2px solid var(--bg)"></div><div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--gray1);margin-bottom:3px">Jan–Jun/2024</div><div style="font-size:13px;color:var(--text);font-weight:500">Primeiras receitas — R$ 830k bruto (apenas 3 meses c/ faturamento)</div></div>
+        <div style="position:relative"><div style="position:absolute;left:-29px;top:3px;width:9px;height:9px;border-radius:50%;background:var(--amber);border:2px solid var(--bg)"></div><div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--gray1);margin-bottom:3px">2025</div><div style="font-size:13px;color:var(--text);font-weight:500">Aporte de R$ 475k (CS → R$ 735k). Jun/Jul/Ago: faturamento ZERO. Prejuízo R$ 237k no ano.</div></div>
+        <div style="position:relative"><div style="position:absolute;left:-29px;top:3px;width:9px;height:9px;border-radius:50%;background:var(--green);border:2px solid var(--bg)"></div><div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--gray1);margin-bottom:3px">Jan–Mar/2026</div><div style="font-size:13px;color:var(--text);font-weight:500">Aceleração: R$ 2,7MM bruto em 3 meses — Lucro R$ 362k</div></div>
+        <div style="position:relative"><div style="position:absolute;left:-29px;top:3px;width:9px;height:9px;border-radius:50%;background:var(--red);border:2px solid var(--bg)"></div><div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--gray1);margin-bottom:3px">Abr/2026</div><div style="font-size:13px;color:var(--text);font-weight:500">Queda abrupta — R$ 264k líquido (−79% vs jan). Prejuízo mensal R$ 82k.</div></div>
+      </div>
+      <div class="inline-alert warn" style="margin-top:14px"><span class="alert-icon">⚠</span><span>Saída de <strong>Alexandre Gomes Camargo</strong> (signatário da DRE 2024) não está formalizada em documentos societários — identificar data exata de saída e herança de passivos.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. FINANCEIRO -->
+<section id="financeiro" class="section">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <h2 class="section-title">Análise Financeira — Balanços + DRE 2024/2025/2026</h2>
+    <span class="section-sub">Documentos assinados pelo sócio-administrador</span>
+  </div>
+  <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr)">
+    <div class="kpi-card" style="--accent:var(--blue)"><div class="kpi-label">Receita Bruta Jan–Abr/26</div><div class="kpi-value">R$ 3,51MM</div><div class="kpi-sub">Após devoluções líq.: R$ 2,95MM</div></div>
+    <div class="kpi-card" style="--accent:var(--red)"><div class="kpi-label">Taxa de Devolução 2026</div><div class="kpi-value" style="color:var(--red2)">31,5%</div><div class="kpi-sub">2025: 37,2% — Estruturalmente alta</div></div>
+    <div class="kpi-card" style="--accent:var(--amber)"><div class="kpi-label">Resultado Jan–Abr/26</div><div class="kpi-value" style="color:var(--amber2)">R$ 279k</div><div class="kpi-sub">Abril isolado: −R$ 83k (prejuízo)</div></div>
+    <div class="kpi-card" style="--accent:var(--green)"><div class="kpi-label">Patrimônio Líquido</div><div class="kpi-value" style="color:var(--green2)">R$ 676k</div><div class="kpi-sub">Capital R$ 735k − Prej. acum. R$ 59k</div></div>
+  </div>
+  <div class="charts-3col">
+    <div class="chart-wrap">
+      <div class="chart-title">Faturamento Mensal — Histórico Completo</div>
+      <div class="chart-desc">Volatilidade extrema — meses zerados e pico em set/2025</div>
+      <div style="position:relative;height:200px;width:100%"><canvas id="faturamentoChart" style="position:absolute;inset:0"></canvas></div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Composição do Ativo — Abr/2026</div>
+      <div class="chart-desc">Ativo total R$ 1.270.161 — 100% circulante</div>
+      <div style="position:relative;height:200px;width:100%"><canvas id="ativoChart" style="position:absolute;inset:0"></canvas></div>
+    </div>
+  </div>
+  <div class="charts-2col">
+    <div class="chart-wrap">
+      <div class="chart-title">DRE Comparativa — Principais Linhas</div>
+      <div class="chart-desc">Turnaround em 2026 (jan-abr) após prejuízo em 2025</div>
+      <table class="status-table">
+        <thead><tr><th>Linha</th><th>2024 (6m)</th><th>2025 (12m)</th><th>2026 (jan-abr)</th></tr></thead>
+        <tbody>
+          <tr><td class="dim">Receita Bruta</td><td class="val mono">R$ 830k</td><td class="val mono">R$ 2,84MM</td><td class="val mono">R$ 3,51MM</td></tr>
+          <tr><td class="dim">Deduções/Devol.</td><td class="val mono">R$ 105k</td><td class="val mono" style="color:var(--red2)">R$ 1,41MM (49,7%)</td><td class="val mono" style="color:var(--amber2)">R$ 1,11MM (31,5%)</td></tr>
+          <tr><td class="dim">Receita Líquida</td><td class="val mono">R$ 725k</td><td class="val mono">R$ 1,43MM</td><td class="val mono">R$ 2,40MM</td></tr>
+          <tr><td class="dim">Margem Bruta</td><td class="val mono" style="color:var(--amber2)">5,0%</td><td class="val mono" style="color:var(--amber2)">~8%</td><td class="val mono" style="color:var(--green2)">30,1%</td></tr>
+          <tr><td class="dim">Resultado Líquido</td><td class="val mono" style="color:var(--green2)">R$ 13k</td><td class="val mono" style="color:var(--red2)">−R$ 237k</td><td class="val mono" style="color:var(--green2)">R$ 279k</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Receita Bruta Anual — Evolução</div>
+      <div class="chart-desc">Crescimento acelerado — mas atenção à tendência intra-2026</div>
+      <div style="position:relative;height:200px;width:100%"><canvas id="revenueChart" style="position:absolute;inset:0"></canvas></div>
+    </div>
+  </div>
+  <div class="inline-alert" style="margin-top:0"><span class="alert-icon">⚠</span><span><strong>ALERTA CRÍTICO — Abril/2026:</strong> Faturamento bruto caiu para R$ 397k (vs R$ 1,24MM em janeiro). Devoluções de R$ 134k (34% do bruto). Prejuízo mensal de R$ 82.868. Se a tendência se confirmar em mai/2026, a empresa entrará em ciclo de consumo de caixa. Solicitar extratos bancários de abril e maio antes de liberar qualquer operação.</span></div>
+</section>
+
+<!-- 3. SERASA -->
+<section id="serasa" class="section">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <h2 class="section-title">Serasa — Análise de Comportamento</h2>
+    <span class="section-sub">Base: 19/05/2026</span>
+  </div>
+  <div class="charts-2col">
+    <div class="chart-wrap">
+      <div class="chart-title">Anotações Cadastrais — TEX QUIMICA</div>
+      <div class="chart-desc">1 pendência financeira ativa — demais campos limpos</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--red-pale);border-radius:var(--r-sm);border:1px solid rgba(239,68,68,.2)"><span style="font-size:12px;color:var(--text2)">PEFIN (Pendência Financeira)</span><span class="risk-chip risk-high" style="font-size:10px;padding:3px 10px">R$ 3.750 — ATIVO</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--green-pale);border-radius:var(--r-sm);border:1px solid rgba(34,197,94,.15)"><span style="font-size:12px;color:var(--text2)">CONCENTRE / Cheques</span><span class="risk-chip risk-ok" style="font-size:10px;padding:3px 10px">NADA CONSTA</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--green-pale);border-radius:var(--r-sm);border:1px solid rgba(34,197,94,.15)"><span style="font-size:12px;color:var(--text2)">Dívidas Públicas</span><span class="risk-chip risk-ok" style="font-size:10px;padding:3px 10px">NADA CONSTA</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--green-pale);border-radius:var(--r-sm);border:1px solid rgba(34,197,94,.15)"><span style="font-size:12px;color:var(--text2)">Situação CNPJ</span><span class="risk-chip risk-ok" style="font-size:10px;padding:3px 10px">ATIVA</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--green-pale);border-radius:var(--r-sm);border:1px solid rgba(34,197,94,.15)"><span style="font-size:12px;color:var(--text2)">Protestos (CENPROT / Boa Vista)</span><span class="risk-chip risk-ok" style="font-size:10px;padding:3px 10px">NADA CONSTA</span></div>
+      </div>
+      <div style="margin-top:14px;background:var(--surface3);border-radius:var(--r-md);padding:14px 16px">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray1);margin-bottom:8px">5 Últimas Consultas ao CNPJ</div>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--text2)">
+          <div style="display:flex;justify-content:space-between"><span>08/05/2026</span><span style="color:var(--text)">Credere Consultoria e Fomento M</span></div>
+          <div style="display:flex;justify-content:space-between"><span>28/01/2026</span><span style="color:var(--text)">CMF Securitizadora S/A</span></div>
+          <div style="display:flex;justify-content:space-between"><span>15/01/2026</span><span style="color:var(--text)">Credere Consultoria e Fomento M</span></div>
+          <div style="display:flex;justify-content:space-between"><span>15/01/2026</span><span style="color:var(--text)">FMD Securitizadora S/A</span></div>
+          <div style="display:flex;justify-content:space-between"><span>03/12/2025</span><span style="color:var(--text)">CMF Securitizadora S/A</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Histórico de Consultas — Serasa</div>
+      <div class="chart-desc">Pico em jan/26 (3 simultâneas) — demais meses com volume baixo</div>
+      <div style="position:relative;height:240px;width:100%"><canvas id="consultasChart" style="position:absolute;inset:0"></canvas></div>
+    </div>
+  </div>
+  <div class="inline-alert warn"><span class="alert-icon">⚠</span><span><strong>PEFIN ATIVO — R$ 3.750 (CW Logística Em — Duplicata — 03/06/2025):</strong> Coincide com o período de faturamento ZERO da empresa (jun/jul/ago/2025). Indica que a TEX não conseguiu honrar uma duplicata durante o ciclo de inatividade. Condicionar aprovação à apresentação de comprovante de quitação ou acordo formal desta pendência.</span></div>
+</section>
+
+<!-- 4. BACEN -->
+<section id="bacen" class="section">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <h2 class="section-title">BACEN / SCR — Sistema de Informações de Crédito</h2>
+    <span class="section-sub">Abr/2026</span>
+  </div>
+  <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr)">
+    <div class="kpi-card" style="--accent:var(--amber)"><div class="kpi-label">Total a Vencer (SCR)</div><div class="kpi-value" style="color:var(--amber2)">R$ 341k</div><div class="kpi-sub">4 operações / 1 banco (Itaú)</div></div>
+    <div class="kpi-card" style="--accent:var(--green)"><div class="kpi-label">Vencidos</div><div class="kpi-value" style="color:var(--green2)">R$ 0,00</div><div class="kpi-sub">Zero inadimplência bancária</div></div>
+    <div class="kpi-card" style="--accent:var(--teal)"><div class="kpi-label">Limites Disponíveis</div><div class="kpi-value" style="color:var(--teal2)">R$ 167k</div><div class="kpi-sub">CG R$ 100k + Cheque Esp. R$ 67k</div></div>
+    <div class="kpi-card" style="--accent:var(--green)"><div class="kpi-label">Discordâncias / Judice</div><div class="kpi-value" style="color:var(--green2)">0</div><div class="kpi-sub">Prejuízo 12m e 48m: R$ 0,00</div></div>
+  </div>
+  <div class="charts-2col">
+    <div class="chart-wrap">
+      <div class="chart-title">Carteira por Modalidade (BACEN)</div>
+      <div class="chart-desc">100% Capital de Giro LP — relacionamento único com Itaú</div>
+      <div style="position:relative;height:260px;width:100%"><canvas id="modalidadeChart" style="position:absolute;inset:0"></canvas></div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Cronograma de Vencimentos</div>
+      <div class="chart-desc">Maior concentração em 361–720 dias (27,4%)</div>
+      <div style="position:relative;height:260px;width:100%"><canvas id="vencimentosChart" style="position:absolute;inset:0"></canvas></div>
+    </div>
+  </div>
+  <div class="inline-alert ok"><span class="alert-icon">✓</span><span><strong>Disciplina bancária preservada:</strong> R$ 341k de Capital de Giro LP com zero vencido é o indicador mais robusto desta análise. O relacionamento exclusivo com o Itaú, iniciado em mar/2023, mostra consistência. Contudo, a alavancagem bancária de R$ 341k vs PL de R$ 676k (0,5x) é aceitável mas deve ser monitorada se o faturamento continuar caindo.</span></div>
+</section>
+
+<!-- 5. CREDITBOX -->
+<section id="creditbox" class="section">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <h2 class="section-title">CreditBox / CredMap — Comportamento no Mercado</h2>
+    <span class="section-sub">Base: 19/05/2026</span>
+  </div>
+  <div class="charts-3col">
+    <div class="chart-wrap">
+      <div class="chart-title">Faturamento Mensal como Emitente (CredMap)</div>
+      <div class="chart-desc">Crescimento acelerado out/25→mar/26 — Abr/26 sem dados de boletos</div>
+      <div style="position:relative;height:220px;width:100%"><canvas id="credmapChart" style="position:absolute;inset:0"></canvas></div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Score de Crédito — CreditBox</div>
+      <div class="chart-desc">Risco moderado — empresa jovem com histórico em construção</div>
+      <div class="gauge-wrap" style="margin-top:20px">
+        <svg class="gauge-svg" viewBox="0 0 180 100">
+          <path d="M 20 90 A 70 70 0 0 1 160 90" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="10" stroke-linecap="round"/>
+          <path d="M 20 90 A 70 70 0 0 1 160 90" fill="none" stroke="#f59e0b" stroke-width="10" stroke-linecap="round" stroke-dasharray="220" stroke-dashoffset="66"/>
+        </svg>
+        <div class="gauge-score">700</div>
+        <div class="gauge-label">de 1000 — Risco Moderado</div>
+      </div>
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--line2)">
+        <div class="progress-row"><div class="progress-header"><span class="progress-name">ILM 90d como Emitente (sacados)</span><span class="progress-pct" style="color:var(--green2)">97–100% ★</span></div><div class="progress-track"><div class="progress-fill" style="width:98%;background:var(--green)"></div></div></div>
+        <div class="progress-row"><div class="progress-header"><span class="progress-name">ILM 90d como Sacado</span><span class="progress-pct" style="color:var(--teal2)">93–95%</span></div><div class="progress-track"><div class="progress-fill" style="width:94%;background:var(--teal)"></div></div></div>
+        <div class="progress-row"><div class="progress-header"><span class="progress-name">ILM 30d Sacador/Avalista</span><span class="progress-pct" style="color:var(--red2)">67–69% ⚠</span></div><div class="progress-track"><div class="progress-fill" style="width:68%;background:var(--red)"></div></div></div>
+        <div class="progress-row"><div class="progress-header"><span class="progress-name">Perda Efetiva (emitente)</span><span class="progress-pct" style="color:var(--green2)">≈ 0%</span></div><div class="progress-track"><div class="progress-fill" style="width:1%;background:var(--green)"></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="pont-grid">
+    <div class="pont-card">
+      <div class="pont-title">⏱ Sacados da TEX QUÍMICA — Pontualidade de Recebimento</div>
+      <div class="progress-row"><div class="progress-header"><span class="progress-name">Mar/2026</span><span class="progress-pct" style="color:var(--green2)">97–100% ★</span></div><div class="progress-track"><div class="progress-fill" style="width:98%;background:var(--green)"></div></div></div>
+      <div class="progress-row"><div class="progress-header"><span class="progress-name">Fev/2026</span><span class="progress-pct" style="color:var(--green2)">97–100% ★</span></div><div class="progress-track"><div class="progress-fill" style="width:98%;background:var(--green)"></div></div></div>
+      <div class="progress-row"><div class="progress-header"><span class="progress-name">Jan/2026</span><span class="progress-pct" style="color:var(--green2)">97–100% ★</span></div><div class="progress-track"><div class="progress-fill" style="width:98%;background:var(--green)"></div></div></div>
+      <div class="progress-row"><div class="progress-header"><span class="progress-name">Dez/2025</span><span class="progress-pct" style="color:var(--amber2)">77–79% ⚠</span></div><div class="progress-track"><div class="progress-fill" style="width:78%;background:var(--amber)"></div></div></div>
+      <div class="progress-row"><div class="progress-header"><span class="progress-name">Nov/2025</span><span class="progress-pct" style="color:var(--green2)">97–100% ★</span></div><div class="progress-track"><div class="progress-fill" style="width:98%;background:var(--green)"></div></div></div>
+      <div class="inline-alert ok" style="margin-top:8px;font-size:11px"><span class="alert-icon" style="font-size:13px">✓</span><span>Sacados da TEX pagam bem — ILM emitente 97–100%. Dez/25 foi episódio isolado. Os clientes da empresa são o ponto positivo desta análise.</span></div>
+    </div>
+    <div class="pont-card">
+      <div class="pont-title">✓ TEX QUÍMICA como Pagadora — Sacador/Avalista</div>
+      <div class="progress-row"><div class="progress-header"><span class="progress-name">Dez/2025</span><span class="progress-pct" style="color:var(--green2)">97–100% ★ (R$ 200–300k)</span></div><div class="progress-track"><div class="progress-fill" style="width:98%;background:var(--green)"></div></div></div>
+      <div class="progress-row"><div class="progress-header"><span class="progress-name">Jan/2026</span><span class="progress-pct" style="color:var(--green2)">97–100% ★ (R$ 55–100k)</span></div><div class="progress-track"><div class="progress-fill" style="width:98%;background:var(--green)"></div></div></div>
+      <div class="progress-row"><div class="progress-header"><span class="progress-name">Fev/2026</span><span class="progress-pct" style="color:var(--green2)">97–100% ★ (R$ 100–200k)</span></div><div class="progress-track"><div class="progress-fill" style="width:98%;background:var(--green)"></div></div></div>
+      <div class="progress-row"><div class="progress-header"><span class="progress-name">Mar/2026</span><span class="progress-pct" style="color:var(--teal2)">97–100% (R$ 20–22k)</span></div><div class="progress-track"><div class="progress-fill" style="width:98%;background:var(--teal)"></div></div></div>
+      <div class="inline-alert warn" style="margin-top:8px;font-size:11px"><span class="alert-icon" style="font-size:13px">⚠</span><span>ILM Sacador/Avalista 30d = <strong>67–69%</strong> — 1 em cada 3 títulos antecipados atrasará no primeiro mês. Prazo máximo de 60 dias é obrigatório. Aos 90 dias o ILM sobe para 97–100%.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. ATIVOS EXECUTÁVEIS -->
+<section id="patrimonio" class="section">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <h2 class="section-title">Ativos Executáveis — Análise de Cobertura</h2>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:16px">
+    <div style="background:var(--surface);border:1px solid rgba(26,108,255,.4);background:rgba(26,108,255,.05);border-radius:var(--r-md);padding:14px 16px">
+      <div style="font-size:10px;color:var(--gray1);letter-spacing:.1em;margin-bottom:6px">CLIENTES A RECEBER</div>
+      <div style="font-size:13px;color:var(--text);font-weight:500;margin-bottom:2px">Duplicatas — Abr/2026</div>
+      <div style="font-size:11px;color:var(--gray1)">Sacados com ILM 97–100%</div>
+      <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--teal2);margin-top:8px">R$ 494.449 (60–80% executável)</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--line2);border-radius:var(--r-md);padding:14px 16px">
+      <div style="font-size:10px;color:var(--gray1);letter-spacing:.1em;margin-bottom:6px">ESTOQUES</div>
+      <div style="font-size:13px;color:var(--text);font-weight:500;margin-bottom:2px">Mercadoria para Revenda</div>
+      <div style="font-size:11px;color:var(--gray1)">Fios e fibras — liquidez média</div>
+      <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--teal2);margin-top:8px">R$ 410.622 (40–60% executável)</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--line2);border-radius:var(--r-md);padding:14px 16px">
+      <div style="font-size:10px;color:var(--gray1);letter-spacing:.1em;margin-bottom:6px">DISPONÍVEL + APLICAÇÕES</div>
+      <div style="font-size:13px;color:var(--text);font-weight:500;margin-bottom:2px">Caixa, Bancos e Fundo Itaú</div>
+      <div style="font-size:11px;color:var(--gray1)">Alta liquidez imediata</div>
+      <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--teal2);margin-top:8px">R$ 95.812 (100% executável)</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--line2);border-radius:var(--r-md);padding:14px 16px">
+      <div style="font-size:10px;color:var(--gray1);letter-spacing:.1em;margin-bottom:6px">ADIANTAMENTO IMPORTAÇÃO</div>
+      <div style="font-size:13px;color:var(--text);font-weight:500;margin-bottom:2px">Mercadoria no exterior/trânsito</div>
+      <div style="font-size:11px;color:var(--gray1)">Baixa executabilidade</div>
+      <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--amber2);margin-top:8px">R$ 234.246 (baixo/incerto)</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid rgba(34,197,94,.25);border-radius:var(--r-md);padding:14px 16px">
+      <div style="font-size:10px;color:var(--gray1);letter-spacing:.1em;margin-bottom:6px">AVAL PESSOAL — GUILHERME</div>
+      <div style="font-size:13px;color:var(--text);font-weight:500;margin-bottom:2px">Fundos + saldo bancário</div>
+      <div style="font-size:11px;color:var(--gray1)">Patrimônio identificado (informal)</div>
+      <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--teal2);margin-top:8px">~R$ 400k (verificar IRPF)</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid rgba(239,68,68,.25);border-radius:var(--r-md);padding:14px 16px">
+      <div style="font-size:10px;color:var(--gray1);letter-spacing:.1em;margin-bottom:6px">IMÓVEIS / VEÍCULOS (PJ)</div>
+      <div style="font-size:13px;color:var(--red2);font-weight:500;margin-bottom:2px">NENHUM IDENTIFICADO</div>
+      <div style="font-size:11px;color:var(--gray1)">Sem ativo imobilizado registrado</div>
+      <div style="font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--red2);margin-top:8px">R$ 0 — Risco elevado</div>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:16px;background:linear-gradient(90deg,rgba(0,201,167,.08) 0%,transparent 100%);border:1px solid rgba(0,201,167,.2);border-radius:var(--r-lg);padding:20px 28px;flex-wrap:wrap">
+    <div><div style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray1);margin-bottom:4px">Total Estimado Patrimônio Executável (com deságio)</div><div style="font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--teal2)">R$ 600k – R$ 900k</div></div>
+    <div style="margin-left:auto;display:flex;gap:20px;flex-wrap:wrap">
+      <div><div style="font-size:10px;color:var(--gray1);margin-bottom:2px">Clientes (60–80%)</div><div style="font-family:'DM Mono',monospace;color:var(--teal2)">~R$ 297–395k</div></div>
+      <div><div style="font-size:10px;color:var(--gray1);margin-bottom:2px">Estoques (40–60%)</div><div style="font-family:'DM Mono',monospace;color:var(--teal2)">~R$ 164–246k</div></div>
+      <div><div style="font-size:10px;color:var(--gray1);margin-bottom:2px">Disponível</div><div style="font-family:'DM Mono',monospace;color:var(--teal2)">~R$ 96k</div></div>
+      <div><div style="font-size:10px;color:var(--gray1);margin-bottom:2px">Cobertura vs limite</div><div style="font-family:'DM Mono',monospace;color:var(--amber2);font-weight:500">~2,4–3,6x</div></div>
+    </div>
+  </div>
+  <div class="inline-alert" style="margin-top:12px"><span class="alert-icon">⚠</span><span><strong>SEM GARANTIAS REAIS:</strong> A TEX QUÍMICA não possui imóveis nem veículos registrados na PJ. A cobertura depende integralmente de ativos circulantes (duplicatas e estoques) e do aval pessoal de Guilherme. Exigir o aval como condição de aprovação e solicitar o IRPF 2024/2025 de Guilherme para confirmar patrimônio.</span></div>
+</section>
+
+<!-- 7. SÓCIOS -->
+<section id="socios" class="section">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <h2 class="section-title">Análise dos Sócios e Ex-Administrador</h2>
+  </div>
+  <div class="charts-2col">
+    <div>
+      <div class="chart-wrap" style="margin-bottom:16px">
+        <div class="chart-title">Guilherme De Agostini Camargo — Sócio-Administrador</div>
+        <table class="status-table" style="margin-top:12px">
+          <tbody>
+            <tr><td class="dim">CPF</td><td class="val mono">388.695.268-10</td></tr>
+            <tr><td class="dim">Nascimento</td><td class="val">27/09/1990 — 36 anos</td></tr>
+            <tr><td class="dim">Situação CPF</td><td class="val">REGULAR desde 27/03/2020</td></tr>
+            <tr><td class="dim">Renda declarada (bureau)</td><td class="val">R$ 4.313,56/mês</td></tr>
+            <tr><td class="dim">Estado Civil</td><td class="val">Solteiro</td></tr>
+            <tr><td class="dim">PEP / Sanções</td><td><span class="risk-chip risk-ok" style="font-size:10px;padding:3px 8px">NÃO</span></td></tr>
+            <tr><td class="dim">BACEN pessoal</td><td class="val">R$ 602 a vencer — R$ 0 vencido (cartão)</td></tr>
+            <tr><td class="dim">Serasa</td><td><span class="risk-chip risk-ok" style="font-size:10px;padding:3px 8px">NADA CONSTA</span></td></tr>
+            <tr><td class="dim">Processos jurídicos</td><td><span class="risk-chip risk-warn" style="font-size:10px;padding:3px 8px">2 PROCESSOS BANCÁRIOS</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-title">Mariana Milesi Camargo — Sócia</div>
+        <table class="status-table" style="margin-top:12px">
+          <tbody>
+            <tr><td class="dim">CPF</td><td class="val mono">550.410.028-35</td></tr>
+            <tr><td class="dim">Nascimento</td><td class="val">11/11/2004 — 22 anos</td></tr>
+            <tr><td class="dim">Situação CPF</td><td class="val">REGULAR</td></tr>
+            <tr><td class="dim">Renda declarada</td><td class="val" style="color:var(--amber2)">R$ 0,00</td></tr>
+            <tr><td class="dim">PEP / Sanções / Processos</td><td><span class="risk-chip risk-ok" style="font-size:10px;padding:3px 8px">NADA CONSTA</span></td></tr>
+            <tr><td class="dim">Perfil</td><td class="val" style="color:var(--amber2)">Sócia figurativa — sem patrimônio identificado</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Processos Jurídicos — Guilherme + Ex-Adm. Alexandre</div>
+      <div class="chart-desc">Processos bancários e histórico do ex-signatário</div>
+      <div class="process-cards" style="grid-template-columns:1fr">
+        <div class="process-card" style="border-left:3px solid var(--amber)">
+          <div class="process-num">1000128-47.2021.8.26.0299</div>
+          <div class="process-type">Processo Bancário — Bradesco (Guilherme)</div>
+          <div class="process-court">TJSP/SP — Procedimento Comum Cível — Guilherme no polo PASSIVO</div>
+          <div class="process-note">Banco Bradesco S.A. como Ativo. Natureza bancária — verificar valor da causa e se há penhora ou bloqueio de ativos.</div>
+        </div>
+        <div class="process-card" style="border-left:3px solid var(--amber)">
+          <div class="process-num">1001174-13.2017.8.26.0299</div>
+          <div class="process-type">Execução Bancária — Santander (Guilherme)</div>
+          <div class="process-court">TJSP/SP — Execução de Título Extrajudicial — Guilherme no polo PASSIVO</div>
+          <div class="process-note">Banco Santander como Ativo. Execução de título é mais grave — verificar se há bens penhorados ou bloqueio judicial.</div>
+        </div>
+        <div class="process-card" style="border-left:3px solid var(--red)">
+          <div class="process-num">Alexandre Gomes Camargo — CPF 184.774.008-14 (Ex-Adm.)</div>
+          <div class="process-type">ALERTA — Empresa vinculada HALEAD Brasil com 8 protestos</div>
+          <div class="process-court">BACEN: R$ 2.222 vencido (15–30 dias) — PEFIN: R$ 3.326 (Município SP)</div>
+          <div class="process-note">Alexandre assinou a DRE 2024 — sua saída da sociedade precisa ser formalizada e verificada. O histórico da HALEAD (8 protestos) sinaliza risco de gestão.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. RISCOS -->
+<section id="riscos" class="section">
+  <div class="section-header">
+    <div class="section-num" style="background:var(--red)">8</div>
+    <h2 class="section-title">Matriz de Riscos Consolidada</h2>
+  </div>
+  <div class="risk-matrix">
+    <div class="risk-row high"><div class="risk-level"><span class="risk-chip risk-high" style="font-size:10px;padding:4px 10px">ALTO</span><span style="font-size:10px;color:var(--gray1);margin-top:4px">#1</span></div><div><div class="risk-desc"><strong>Faturamento em colapso: −79% em 4 meses (jan→abr/2026):</strong> de R$ 1,24MM para R$ 264k. Abril foi o primeiro mês com prejuízo em 2026 (−R$ 83k). Se mai/2026 confirmar a queda, a empresa entra em ciclo de consumo de caixa.</div><div class="risk-mitigation">→ Solicitar extrato bancário de abr e mai/2026. Se faturamento &lt; R$ 200k/mês → suspender aprovações imediatamente.</div></div></div>
+    <div class="risk-row high"><div class="risk-level"><span class="risk-chip risk-high" style="font-size:10px;padding:4px 10px">ALTO</span><span style="font-size:10px;color:var(--gray1);margin-top:4px">#2</span></div><div><div class="risk-desc"><strong>PEFIN ativo de R$ 3.750 (CW Logística — jun/2025):</strong> empresa jovem com negativação ativa. Coincide com período de faturamento zero (jun/jul/ago/2025). Demonstra incapacidade de honrar obrigações durante ciclos de inatividade.</div><div class="risk-mitigation">→ Exigir comprovante de quitação ou acordo formal como condição precedente à aprovação.</div></div></div>
+    <div class="risk-row high"><div class="risk-level"><span class="risk-chip risk-high" style="font-size:10px;padding:4px 10px">ALTO</span><span style="font-size:10px;color:var(--gray1);margin-top:4px">#3</span></div><div><div class="risk-desc"><strong>Taxa de devolução estruturalmente alta (31,5% em 2026 / 37% em 2025):</strong> mais de 1/3 do faturamento bruto retorna como devolução. Isso contamina os recebíveis — duplicatas emitidas sobre vendas que são revertidas parcialmente.</div><div class="risk-mitigation">→ Exigir NF-e de origem de cada título antecipado. Priorizar duplicatas de sacados com histórico confirmado de pagamento.</div></div></div>
+    <div class="risk-row high"><div class="risk-level"><span class="risk-chip risk-high" style="font-size:10px;padding:4px 10px">ALTO</span><span style="font-size:10px;color:var(--gray1);margin-top:4px">#4</span></div><div><div class="risk-desc"><strong>Ex-administrador Alexandre Gomes Camargo com histórico de risco:</strong> PEFIN ativo (R$ 3.326 — Município SP), BACEN com R$ 2.222 vencido, empresa vinculada HALEAD Brasil com 8 protestos. Assinou DRE 2024 — período de gestão sob sua responsabilidade.</div><div class="risk-mitigation">→ Confirmar data formal de saída societária. Verificar se há passivos fiscais/trabalhistas da fase inicial.</div></div></div>
+    <div class="risk-row med"><div class="risk-level"><span class="risk-chip risk-warn" style="font-size:10px;padding:4px 10px">MÉDIO</span><span style="font-size:10px;color:var(--gray1);margin-top:4px">#5</span></div><div><div class="risk-desc"><strong>ILM Sacador/Avalista 30 dias = 67–69%:</strong> 1 em cada 3 títulos antecipados pela TEX QUÍMICA tem atraso no primeiro mês. O ILM sobe para 97–100% em 90 dias — não é default, mas gera descasamento de caixa para a AG Antecipa.</div><div class="risk-mitigation">→ Limitar prazos a máximo 60 dias. Estruturar deságio compatível com o atraso esperado no primeiro mês.</div></div></div>
+    <div class="risk-row med"><div class="risk-level"><span class="risk-chip risk-warn" style="font-size:10px;padding:4px 10px">MÉDIO</span><span style="font-size:10px;color:var(--gray1);margin-top:4px">#6</span></div><div><div class="risk-desc"><strong>Guilherme (Adm.) com 2 processos bancários ativos:</strong> Bradesco (Procedimento Comum 2021) e Santander (Execução de Título 2017). A execução extrajudicial é especialmente relevante — pode resultar em penhora de bens pessoais.</div><div class="risk-mitigation">→ Solicitar certidões dos processos. Verificar se há penhora ativa que afete o patrimônio pessoal dado como aval.</div></div></div>
+    <div class="risk-row med"><div class="risk-level"><span class="risk-chip risk-warn" style="font-size:10px;padding:4px 10px">MÉDIO</span><span style="font-size:10px;color:var(--gray1);margin-top:4px">#7</span></div><div><div class="risk-desc"><strong>Empresa jovem (3 anos) com histórico de inatividade recorrente:</strong> jun/jul/ago/2025 com faturamento ZERO. Fevereiro/março/abril 2024 sem receita. Padrão de operação por lotes/campanhas, não fluxo contínuo.</div><div class="risk-mitigation">→ Monitorar sazonalidade. Não assumir que o pico de jan/26 é o padrão — a média 2025 foi de R$ 148k/mês.</div></div></div>
+    <div class="risk-row med"><div class="risk-level"><span class="risk-chip risk-warn" style="font-size:10px;padding:4px 10px">MÉDIO</span><span style="font-size:10px;color:var(--gray1);margin-top:4px">#8</span></div><div><div class="risk-desc"><strong>Sem garantias reais na PJ:</strong> nenhum imóvel ou veículo registrado. A cobertura depende de duplicatas (risco de devolução) e estoques (liquidez variável). Aval pessoal de Guilherme não está formalmente confirmado por IRPF.</div><div class="risk-mitigation">→ Exigir IRPF 2024 e 2025 de Guilherme. Formalizar aval pessoal no contrato.</div></div></div>
+    <div class="risk-row low"><div class="risk-level"><span class="risk-chip risk-ok" style="font-size:10px;padding:4px 10px">BAIXO</span><span style="font-size:10px;color:var(--gray1);margin-top:4px">#9</span></div><div><div class="risk-desc"><strong>Relacionamento bancário preservado — zero vencidos no SCR:</strong> R$ 341k de Capital de Giro com zero inadimplência bancária demonstra disciplina de gestão financeira mesmo durante os períodos difíceis de 2025.</div><div class="risk-mitigation">→ Monitorar BACEN trimestralmente. Qualquer vencimento no SCR deve acionar revisão imediata.</div></div></div>
+    <div class="risk-row low"><div class="risk-level"><span class="risk-chip risk-ok" style="font-size:10px;padding:4px 10px">BAIXO</span><span style="font-size:10px;color:var(--gray1);margin-top:4px">#10</span></div><div><div class="risk-desc"><strong>Capitalização crescente — aumento de R$ 260k para R$ 735k em 2025:</strong> aporte de R$ 475k pelos sócios demonstra comprometimento com a empresa mesmo após prejuízo de R$ 237k no mesmo ano.</div><div class="risk-mitigation">→ Monitorar se o aporte teve contrapartida operacional (crescimento sustentado) ou se foi para cobrir perdas.</div></div></div>
+  </div>
+</section>
+
+<!-- 9. PARECER -->
+<section id="parecer" class="section">
+  <div class="section-header">
+    <div class="section-num" style="background:var(--teal)">9</div>
+    <h2 class="section-title">Parecer Técnico Final</h2>
+  </div>
+  <div class="analysis-2col">
+    <div class="strength-box">
+      <div class="box-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Pontos Fortes</div>
+      <ul class="check-list">
+        <li data-icon="✓">Zero vencidos BACEN — R$ 341k de CG honrado impecavelmente</li>
+        <li data-icon="✓">ILM Emitente 97–100% — quando emite duplicatas, seus sacados pagam</li>
+        <li data-icon="✓">Lucro acumulado jan–abr/26 de R$ 279k após prejuízo de R$ 237k em 2025</li>
+        <li data-icon="✓">Capital Social triplicado (R$ 260k → R$ 735k) — sócios com comprometimento</li>
+        <li data-icon="✓">Sem protestos, cheques sem fundo ou dívidas públicas na PJ</li>
+        <li data-icon="✓">Setor de fios/fibras com demanda constante — modelo de importação e revenda</li>
+        <li data-icon="✓">Ativo total crescente: R$ 521k (jun/24) → R$ 1,27MM (abr/26)</li>
+      </ul>
+    </div>
+    <div class="weakness-box">
+      <div class="box-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Pontos de Atenção</div>
+      <ul class="check-list">
+        <li data-icon="⚠">PEFIN ativo R$ 3.750 — empresa de 3 anos já tem negativação</li>
+        <li data-icon="⚠">Faturamento em colapso: −79% de jan para abr/26 — tendência crítica</li>
+        <li data-icon="⚠">Taxa de devolução estrutural: 31–37% do bruto — recebíveis contaminados</li>
+        <li data-icon="⚠">Ex-adm. Alexandre com PEFIN, BACEN vencido e empresa c/ 8 protestos</li>
+        <li data-icon="⚠">Guilherme com 2 processos bancários (Bradesco + Santander)</li>
+        <li data-icon="⚠">ILM Sacador/Avalista 30d = 67–69% — atraso no 1º mês em 1/3 dos títulos</li>
+        <li data-icon="⚠">Sem garantias reais — sem imóvel ou veículo na PJ</li>
+        <li data-icon="⚠">Histórico de meses zerados (2023 inteiro + jun/jul/ago/2025)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Syne',sans-serif;font-size:15px;color:#fff;margin-bottom:16px">Condições para Aprovação — Ressalvas Obrigatórias</h3>
+  <div class="conditions">
+    <div class="condition-row"><div class="cond-num">1</div><div class="cond-body"><div class="cond-title">Quitação do PEFIN como Condição Precedente</div><div class="cond-desc">Apresentar comprovante de pagamento ou acordo formal com CW Logística antes de liberar qualquer operação. PEFIN ativo em empresa de 3 anos é disqualificador sem essa verificação.</div></div></div>
+    <div class="condition-row"><div class="cond-num">2</div><div class="cond-body"><div class="cond-title">Limite Inicial Conservador: R$ 150k – R$ 250k</div><div class="cond-desc">Baseado em 80% do menor faturamento líquido dos últimos 3 meses (abr/26 = R$ 264k → 80% = R$ 211k). Reavaliar após 60 dias de operação e apresentação do extrato de mai/2026.</div></div></div>
+    <div class="condition-row"><div class="cond-num">3</div><div class="cond-body"><div class="cond-title">Prazo Máximo de 60 Dias</div><div class="cond-desc">O ILM Sacador/Avalista 30d de 67–69% implica risco de descasamento. Com prazo de 60 dias, o ILM sobe para 95–97%, mitigando o risco de liquidez.</div></div></div>
+    <div class="condition-row"><div class="cond-num">4</div><div class="cond-body"><div class="cond-title">Análise Individual dos Sacados — Concentração máx. 30%</div><div class="cond-desc">Verificar CNPJ de cada sacado antes de antecipar. Dado que as devoluções alcançam 31–37%, priorizar sacados com histórico de pagamento comprovado. Limitar concentração a 30% por CNPJ.</div></div></div>
+    <div class="condition-row"><div class="cond-num">5</div><div class="cond-body"><div class="cond-title">Extrato Bancário de Abr e Mai/2026</div><div class="cond-desc">Confirmar se a queda de abr/2026 é pontual ou início de ciclo de retração. Se mai/2026 tiver faturamento &lt; R$ 200k, acionar revisão imediata do limite.</div></div></div>
+    <div class="condition-row"><div class="cond-num">6</div><div class="cond-body"><div class="cond-title">Aval Pessoal de Guilherme + IRPF 2024/2025</div><div class="cond-desc">Formalizar aval pessoal no contrato. Apresentar IRPF dos últimos 2 anos para confirmar patrimônio pessoal — especialmente diante dos processos bancários ativos (Bradesco e Santander).</div></div></div>
+    <div class="condition-row"><div class="cond-num">7</div><div class="cond-body"><div class="cond-title">Esclarecimento sobre Alexandre Gomes Camargo</div><div class="cond-desc">Confirmar data formal de saída societária. Verificar se há passivos fiscais, trabalhistas ou comerciais herdados do período 2023–2024 sob sua administração.</div></div></div>
+    <div class="condition-row"><div class="cond-num">8</div><div class="cond-body"><div class="cond-title">Nota Fiscal de Origem Obrigatória</div><div class="cond-desc">Exigir NF-e de cada lote antecipado. Alta taxa de devolução (31–37%) aumenta o risco de duplicatas emitidas sobre operações que serão revertidas — NF-e confirma a entrega efetiva.</div></div></div>
+  </div>
+
+  <div class="analyst-note">
+    <div class="analyst-note-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Avaliação Independente — Vale Antecipar com a TEX QUÍMICA?</div>
+    <p><strong>Sim, com disciplina cirúrgica de prazo e volume.</strong> A TEX QUÍMICA apresenta um perfil dual que exige leitura fria dos números, sem se deixar seduzir pelo desempenho de janeiro ou intimidar pelos meses zerados de 2025.</p>
+    <p><strong>(1) O que é real e positivo:</strong> Zero inadimplência bancária em R$ 341k de Capital de Giro, ILM emitente de 97–100% (seus clientes pagam bem), turnaround expressivo no 1º tri/2026 e capitalização voluntária dos sócios em 2025 após um ano de prejuízo. Esses são sinais de empresa que sobrevive a crises e mantém compromissos com o sistema financeiro.</p>
+    <p><strong>(2) O que preocupa genuinamente:</strong> A curva de faturamento de 2026 não mente — R$ 1,24MM em janeiro contra R$ 264k em abril é uma queda de 79% em 4 meses. Somada à taxa de devolução estrutural acima de 30%, o risco real é antecipar duplicatas de operações que podem ser parcialmente revertidas. O PEFIN ativo de R$ 3.750 não é pelo valor, mas pelo sinal — uma empresa que não conseguiu honrar R$ 3.750 durante um ciclo de inatividade tem capacidade de reserva limitada.</p>
+    <p><strong>(3) O risco da operação está nos títulos, não nos sacados.</strong> Os clientes da TEX pagam bem (ILM 97–100%). O risco é que as duplicatas apresentadas possam ter por trás vendas que serão revertidas (devolução) ou que o volume futuro de geração de títulos caia junto com o faturamento. Por isso o prazo máximo de 60 dias e a análise individual dos sacados são inegociáveis — não opcionais.</p>
+    <p>Com as 8 condições desta análise cumpridas, a <strong>relação risco-retorno é aceitável para um limite inicial de R$ 150k–R$ 250k.</strong> Qualquer ampliação deve ser condicionada ao faturamento de maio e junho de 2026 confirmando recuperação da queda de abril.</p>
+  </div>
+
+  <div class="final-verdict" style="margin-top:32px">
+    <div class="verdict-header">
+      <div><div style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray1);margin-bottom:4px">Resumo Executivo para Comitê</div><div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#fff">TEX QUIMICA INTERNATIONAL LTDA — CNPJ 49.180.793/0001-67 — São Paulo/SP</div></div>
+      <span class="risk-chip risk-moderate" style="font-size:12px;padding:8px 18px">⬡ Risco Moderado-Elevado</span>
+    </div>
+    <div class="verdict-grid">
+      <div class="verdict-item"><div class="verdict-item-label">Classificação Final</div><div class="verdict-item-value v-moderate">RISCO<br>MODERADO-ELEVADO</div></div>
+      <div class="verdict-item"><div class="verdict-item-label">Recomendação</div><div class="verdict-item-value v-approve">APROVAR<br>COM RESSALVAS</div></div>
+      <div class="verdict-item"><div class="verdict-item-label">Limite Sugerido Inicial</div><div class="verdict-item-value v-limit">R$ 150k<br><span style="font-size:14px">até R$ 250k — prazo máx. 60d</span></div></div>
+    </div>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-brand">AG ANTECIPA</div><div style="font-size:11px;color:var(--gray1);margin-top:3px">Análise de Crédito — Parecer Técnico</div></div>
+    <div class="footer-meta">Cruzamento: Balanços 2024/2025 + DRE Apr/2026 + BACEN/SCR + Serasa VADU + CreditBox + CredMap<br>Documento Confidencial — Maio/2026 — Proibida reprodução sem autorização</div>
+  </div>
+</footer>
+
+<script>
+const B='#1a6cff',B2='#3d87ff',T='#00c9a7',AM='#f59e0b',RD='#ef4444',GR='#22c55e',GY='#8b98a8',NV='#152540',WH='#e8f0f8';
+Chart.defaults.color=GY;Chart.defaults.font.family="'DM Sans',sans-serif";Chart.defaults.font.size=11;
+
+// Gráfico 1: Faturamento mensal (linha) — mai/25 a abr/26
+new Chart(document.getElementById('faturamentoChart'),{type:'line',data:{labels:['Mai/25','Jun','Jul','Ago','Set','Out','Nov','Dez','Jan/26','Fev','Mar','Abr'],datasets:[{label:'Faturamento Líquido (R$MM)',data:[0.093,0,0,0,0.861,0.248,0,0.231,1.238,0.867,0.579,0.264],borderColor:AM,backgroundColor:'rgba(245,158,11,0.08)',borderWidth:2,fill:true,tension:0.4,pointBackgroundColor:AM,pointRadius:4,pointHoverRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`R$ ${c.parsed.y.toFixed(2)}MM`}}},scales:{x:{grid:{display:false},border:{display:false},ticks:{font:{size:10}}},y:{grid:{color:'rgba(255,255,255,0.05)'},border:{display:false},min:0,max:1.5,ticks:{callback:v=>`R$${v}MM`}}}}});
+
+// Gráfico 2: Ativo Abr/2026 (donut)
+new Chart(document.getElementById('ativoChart'),{type:'doughnut',data:{labels:['Clientes','Estoques','Adiant. Importação','Disponível','Tributos'],datasets:[{data:[494.4,410.6,234.2,95.8,35.0],backgroundColor:[B,T,'#7c3aed',AM,GR],borderColor:'#050e18',borderWidth:3,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:10,font:{size:10},color:GY}},tooltip:{callbacks:{label:c=>`R$ ${(c.parsed/1000).toFixed(2)}MM`}}}}});
+
+// Gráfico 3: Receita bruta anual (barras)
+new Chart(document.getElementById('revenueChart'),{type:'bar',data:{labels:['2023','2024 (6m)','2025 (12m)','2026 (jan-abr)'],datasets:[{label:'Receita Bruta',data:[0,0.83,2.84,3.51],backgroundColor:[NV,'#152540',B,AM],borderRadius:8,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`R$ ${c.parsed.y.toFixed(2)}MM`}}},scales:{x:{grid:{display:false},border:{display:false}},y:{grid:{color:'rgba(255,255,255,0.05)'},border:{display:false},ticks:{callback:v=>`R$${v}MM`}}}}});
+
+// Gráfico 4: Consultas Serasa (barras)
+new Chart(document.getElementById('consultasChart'),{type:'bar',data:{labels:['Abr/25','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez','Jan/26','Fev','Mar','Abr'],datasets:[{label:'Consultas',data:[1,1,0,1,1,0,1,0,1,3,0,0,0],backgroundColor:[GY,GY,GY,GY,GY,GY,GY,GY,AM,RD,T,T,T],borderRadius:5,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.parsed.y} consulta(s)`}}},scales:{x:{grid:{display:false},border:{display:false},ticks:{font:{size:10}}},y:{grid:{color:'rgba(255,255,255,0.05)'},border:{display:false},min:0,max:5}}}});
+
+// Gráfico 5: BACEN Modalidades (donut)
+new Chart(document.getElementById('modalidadeChart'),{type:'doughnut',data:{labels:['Cap. Giro LP (saldo)','Conta Garantida (limite)','Cheque Especial (limite)'],datasets:[{data:[67.0,19.7,13.3],backgroundColor:[B,T,'#7c3aed'],borderColor:'#050e18',borderWidth:3,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:10,font:{size:10},color:GY}},tooltip:{callbacks:{label:c=>`${c.label}: ${c.parsed.toFixed(1)}%`}}}}});
+
+// Gráfico 6: BACEN Vencimentos (barras)
+new Chart(document.getElementById('vencimentosChart'),{type:'bar',data:{labels:['≤30d','31-60','61-90','91-180','181-360','361-720','721-1080','1081-1440','1441-1800'],datasets:[{label:'R$ k',data:[5.79,9.76,9.62,28.06,52.74,93.52,77.39,57.64,6.51],backgroundColor:[T,T,GR,AM,AM,RD,'#7c3aed','#7c3aed',GY],borderRadius:5,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`R$ ${c.parsed.y.toFixed(2)}k`}}},scales:{x:{grid:{display:false},border:{display:false},ticks:{font:{size:9}}},y:{grid:{color:'rgba(255,255,255,0.05)'},border:{display:false},ticks:{callback:v=>`R$${v}k`}}}}});
+
+// Gráfico 7: CredMap emitente (barras)
+new Chart(document.getElementById('credmapChart'),{type:'bar',data:{labels:['Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26'],datasets:[{label:'Boletos Emitidos (R$MM)',data:[0,0.15,0.078,0.15,0.25,0.35],backgroundColor:[NV,GR,AM,GR,GR,GR],borderRadius:6,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`~R$ ${(c.parsed.y*1000).toFixed(0)}k`}}},scales:{x:{grid:{display:false},border:{display:false}},y:{grid:{color:'rgba(255,255,255,0.05)'},border:{display:false},min:0,max:0.4,ticks:{callback:v=>`R$${(v*1000).toFixed(0)}k`}}}}});
+
+// Nav scroll
+const tabs=document.querySelectorAll('.nav-tab');
+const _sections=[...document.querySelectorAll('section[id]')];
+function _updateNav(){const y=window.scrollY+80;let cur=_sections.length?_sections[0].id:'';for(const s of _sections){if(s.offsetTop<=y)cur=s.id;}tabs.forEach(t=>t.classList.toggle('active',t.getAttribute('href')==='#'+cur));}
+window.addEventListener('scroll',_updateNav,{passive:true});
+tabs.forEach(t=>t.addEventListener('click',e=>{e.preventDefault();const el=document.querySelector(t.getAttribute('href'));if(el){const top=el.getBoundingClientRect().top+window.scrollY-60;window.scrollTo({top,behavior:'smooth'})}}));
+</script>
+</body>
+</html>
