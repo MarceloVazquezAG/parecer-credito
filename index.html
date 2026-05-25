@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AG Antecipa — Análise de Crédito | {{EMPRESA_NOME}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{--navy:#07111e;--navy2:#0d1e30;--navy3:#132a40;--blue:#1a6cff;--blue2:#3d87ff;--blue-pale:#0d2444;--teal:#00c9a7;--teal2:#00e6be;--teal-pale:#002e28;--amber:#f59e0b;--amber2:#fbbf24;--amber-pale:#2d1f04;--red:#ef4444;--red2:#f87171;--red-pale:#2c0a0a;--green:#22c55e;--green2:#4ade80;--green-pale:#052010;--gray1:#8b98a8;--gray2:#b0bec8;--gray3:#d4dde6;--line:rgba(255,255,255,0.06);--line2:rgba(255,255,255,0.12);--bg:#050e18;--surface:#0a1828;--surface2:#0f2035;--surface3:#152540;--text:#e8f0f8;--text2:#a8bece;--gold:#f0c040;--r-sm:6px;--r-md:10px;--r-lg:16px;--r-xl:22px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;opacity:.4}
+h1,h2,h3,h4{font-family:'Syne',sans-serif;letter-spacing:-.02em}
+code,.mono{font-family:'DM Mono',monospace}
+.container{max-width:1400px;margin:0 auto;padding:0 32px}
+.hero{position:relative;overflow:hidden;padding:0;background:linear-gradient(160deg,#091828 0%,#050e18 60%);border-bottom:1px solid var(--line2)}
+.hero-grid{display:grid;grid-template-columns:1fr 420px;min-height:340px;align-items:stretch}
+.hero-left{padding:56px 48px 48px;position:relative;z-index:2}
+.hero-right{background:var(--surface);border-left:1px solid var(--line2);padding:40px 36px;display:flex;flex-direction:column;justify-content:center;gap:14px;position:relative}
+.hero-right::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,108,255,.04) 0%,transparent 60%);pointer-events:none}
+.logo-badge{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:6px 14px;border-radius:var(--r-sm);margin-bottom:24px}
+.hero h1{font-size:clamp(32px,5vw,52px);font-weight:800;color:#fff;line-height:1.05;margin-bottom:10px}
+.hero h1 span{color:var(--teal)}
+.hero-subtitle{font-size:14px;color:var(--gray1);margin-bottom:28px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:20px}
+.meta-item{display:flex;flex-direction:column;gap:2px}
+.meta-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray1)}
+.meta-value{font-family:'DM Mono',monospace;font-size:12px;color:var(--text2)}
+.verdict-panel{background:linear-gradient(135deg,#1c3a1c 0%,#0d2a14 100%);border:1px solid rgba(34,197,94,.25);border-radius:var(--r-lg);padding:20px 22px}
+.verdict-panel.warn{background:linear-gradient(135deg,#2d1f04 0%,#1a1200 100%);border-color:rgba(245,158,11,.25)}
+.verdict-panel.danger{background:linear-gradient(135deg,#2c0a0a 0%,#1a0505 100%);border-color:rgba(239,68,68,.25)}
+.verdict-label{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--green2);margin-bottom:4px;font-weight:500}
+.verdict-panel.warn .verdict-label{color:var(--amber2)}
+.verdict-panel.danger .verdict-label{color:var(--red2)}
+.verdict-main{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--green2);margin-bottom:6px}
+.verdict-panel.warn .verdict-main{color:var(--amber2)}
+.verdict-panel.danger .verdict-main{color:var(--red2)}
+.verdict-sub{font-size:12px;color:rgba(74,222,128,.6)}
+.verdict-panel.warn .verdict-sub{color:rgba(251,191,36,.6)}
+.verdict-panel.danger .verdict-sub{color:rgba(248,113,113,.6)}
+.risk-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:100px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+.risk-moderate{background:rgba(245,158,11,.15);color:var(--amber2);border:1px solid rgba(245,158,11,.3)}
+.risk-low{background:rgba(34,197,94,.12);color:var(--green2);border:1px solid rgba(34,197,94,.25)}
+.risk-high{background:rgba(239,68,68,.12);color:var(--red2);border:1px solid rgba(239,68,68,.25)}
+.risk-ok{background:rgba(0,201,167,.1);color:var(--teal2);border:1px solid rgba(0,201,167,.2)}
+.risk-info{background:rgba(26,108,255,.12);color:var(--blue2);border:1px solid rgba(26,108,255,.25)}
+.risk-warn{background:rgba(245,158,11,.1);color:var(--amber);border:1px solid rgba(245,158,11,.2)}
+.limit-box{background:var(--blue-pale);border:1px solid rgba(26,108,255,.25);border-radius:var(--r-md);padding:16px 18px}
+.limit-amount{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--blue2);line-height:1;margin-bottom:4px}
+.limit-label{font-size:11px;color:var(--gray1);text-transform:uppercase;letter-spacing:.08em}
+.hero-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.12}
+.orb1{width:500px;height:500px;background:var(--blue);top:-150px;left:-100px}
+.orb2{width:300px;height:300px;background:var(--teal);bottom:-80px;right:150px}
+.nav-bar{position:sticky;top:0;z-index:100;background:rgba(5,14,24,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--line2);padding:0 32px}
+.nav-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;overflow-x:auto;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-tab{flex-shrink:0;padding:14px 20px;font-size:12px;font-weight:500;color:var(--gray1);cursor:pointer;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap;text-transform:uppercase;letter-spacing:.06em;text-decoration:none;display:block}
+.nav-tab:hover{color:var(--text2)}
+.nav-tab.active{color:var(--blue2);border-bottom-color:var(--blue)}
+main{padding:48px 0 80px}
+.section{margin-bottom:56px}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--line2)}
+.section-num{width:32px;height:32px;background:var(--blue);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:#fff;flex-shrink:0}
+.section-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#fff}
+.section-sub{font-size:12px;color:var(--gray1);margin-left:auto}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:32px}
+.kpi-card{background:var(--surface);border:1px solid var(--line2);border-radius:var(--r-lg);padding:20px 22px;position:relative;overflow:hidden;transition:border-color .2s,transform .2s}
+.kpi-card:hover{border-color:var(--line);transform:translateY(-1px)}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent,var(--blue))}
+.kpi-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray1);margin-bottom:8px;font-weight:500}
+.kpi-value{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--accent,var(--blue2));line-height:1;margin-bottom:4px}
+.kpi-sub{font-size:11px;color:var(--gray1)}
+.status-table{width:100%;border-collapse:collapse;border-radius:var(--r-lg);overflow:hidden}
+.status-table th{background:var(--surface3);padding:11px 16px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray1);font-weight:600;border-bottom:1px solid var(--line2)}
+.status-table td{padding:11px 16px;font-size:13px;border-bottom:1px solid var(--line);vertical-align:middle}
+.status-table tr:last-child td{border-bottom:none}
+.status-table tr:nth-child(even) td{background:rgba(255,255,255,.015)}
+.status-table tr:hover td{background:rgba(26,108,255,.04)}
+.dim{color:var(--text);font-weight:500}
+.val{color:var(--text2)}
+.chart-wrap{background:var(--surface);border:1px solid var(--line2);border-radius:var(--r-lg);padding:24px}
+.chart-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:4px}
+.chart-desc{font-size:11px;color:var(--gray1);margin-bottom:20px}
+.charts-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.charts-3col{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:24px}
+.gauge-wrap{display:flex;flex-direction:column;align-items:center;padding:8px 0}
+.gauge-svg{width:180px;height:100px;overflow:visible}
+.gauge-score{font-family:'Syne',sans-serif;font-size:40px;font-weight:800;color:var(--green2);text-align:center;line-height:1;margin-top:-8px}
+.gauge-label{font-size:11px;color:var(--gray1);text-align:center;margin-top:4px}
+.risk-matrix{display:flex;flex-direction:column;gap:10px}
+.risk-row{display:grid;grid-template-columns:90px 1fr;gap:14px;align-items:start;background:var(--surface);border:1px solid var(--line2);border-radius:var(--r-md);padding:14px 16px;transition:border-color .2s}
+.risk-row:hover{border-color:var(--line)}
+.risk-row.high{border-left:3px solid var(--red)}
+.risk-row.med{border-left:3px solid var(--amber)}
+.risk-row.low{border-left:3px solid var(--teal)}
+.risk-level{display:flex;flex-direction:column;gap:6px}
+.risk-desc{font-size:13px;color:var(--text2);line-height:1.5}
+.risk-desc strong{color:var(--text);font-weight:500}
+.risk-mitigation{font-size:11px;color:var(--gray1);margin-top:4px;padding-top:8px;border-top:1px solid var(--line);line-height:1.5}
+.fleet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.fleet-card{background:var(--surface);border:1px solid var(--line2);border-radius:var(--r-md);padding:14px 16px;transition:border-color .2s,background .2s}
+.fleet-card:hover{border-color:rgba(26,108,255,.3);background:var(--surface2)}
+.fleet-card.highlight{border-color:rgba(26,108,255,.4);background:rgba(26,108,255,.05)}
+.fleet-plate{font-family:'DM Mono',monospace;font-size:10px;color:var(--gray1);letter-spacing:.1em;margin-bottom:6px}
+.fleet-model{font-size:13px;color:var(--text);font-weight:500;margin-bottom:2px;line-height:1.3}
+.fleet-year{font-size:11px;color:var(--gray1)}
+.fleet-value{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--teal2);margin-top:8px}
+.patrimony-bar{display:flex;align-items:center;gap:16px;background:linear-gradient(90deg,rgba(0,201,167,.08) 0%,transparent 100%);border:1px solid rgba(0,201,167,.2);border-radius:var(--r-lg);padding:20px 28px;margin-top:16px;flex-wrap:wrap}
+.patrimony-total{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--teal2)}
+.analysis-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.strength-box{background:var(--green-pale);border:1px solid rgba(34,197,94,.2);border-radius:var(--r-lg);padding:24px}
+.weakness-box{background:var(--amber-pale);border:1px solid rgba(245,158,11,.2);border-radius:var(--r-lg);padding:24px}
+.box-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.strength-box .box-title{color:var(--green2)}
+.weakness-box .box-title{color:var(--amber2)}
+.check-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.check-list li{font-size:12.5px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative}
+.check-list li::before{content:attr(data-icon);position:absolute;left:0;font-size:12px}
+.final-verdict{background:var(--navy2);border:1px solid var(--line2);border-radius:var(--r-xl);overflow:hidden;margin-bottom:32px}
+.verdict-header{background:linear-gradient(90deg,var(--navy3) 0%,#0d2035 100%);padding:24px 32px;border-bottom:1px solid var(--line2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.verdict-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+.verdict-item{padding:24px 28px;border-right:1px solid var(--line2)}
+.verdict-item:last-child{border-right:none}
+.verdict-item-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray1);margin-bottom:8px}
+.verdict-item-value{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;line-height:1.1}
+.v-moderate{color:var(--amber2)}
+.v-approve{color:var(--green2)}
+.v-refuse{color:var(--red2)}
+.v-limit{color:var(--blue2)}
+.analyst-note{background:linear-gradient(135deg,rgba(26,108,255,.06) 0%,rgba(0,201,167,.04) 100%);border:1px solid rgba(26,108,255,.2);border-radius:var(--r-xl);padding:32px 36px;position:relative;overflow:hidden;margin-top:32px}
+.analyst-note::before{content:'"';position:absolute;top:-20px;left:24px;font-size:180px;font-family:'Syne',sans-serif;color:rgba(26,108,255,.06);line-height:1;pointer-events:none}
+.analyst-note-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--blue2);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.analyst-note p{font-size:13.5px;color:var(--text2);line-height:1.8;margin-bottom:12px}
+.analyst-note p:last-child{margin-bottom:0}
+.analyst-note strong{color:var(--text);font-weight:500}
+.conditions{display:flex;flex-direction:column;gap:0;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line2)}
+.condition-row{display:grid;grid-template-columns:40px 1fr;border-bottom:1px solid var(--line);transition:background .15s}
+.condition-row:last-child{border-bottom:none}
+.condition-row:hover{background:rgba(26,108,255,.04)}
+.cond-num{background:var(--surface3);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:13px;color:var(--blue2);font-weight:500;border-right:1px solid var(--line2)}
+.cond-body{padding:14px 18px}
+.cond-title{font-size:12px;font-weight:600;color:var(--text);margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em}
+.cond-desc{font-size:12px;color:var(--text2);line-height:1.5}
+.process-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.process-card{background:var(--surface);border:1px solid var(--line2);border-radius:var(--r-md);padding:16px 18px}
+.process-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--gray1);margin-bottom:6px}
+.process-type{font-size:13px;color:var(--text);font-weight:500;margin-bottom:4px}
+.process-court{font-size:11px;color:var(--gray1)}
+.process-note{font-size:11px;color:var(--text2);margin-top:8px;padding-top:8px;border-top:1px solid var(--line);line-height:1.5}
+footer{background:var(--navy2);border-top:1px solid var(--line2);padding:24px 32px}
+.footer-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.footer-brand{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--blue2)}
+.footer-meta{font-size:11px;color:var(--gray1);text-align:right;line-height:1.6}
+.timeline{position:relative;padding-left:24px;border-left:1px solid var(--line2);display:flex;flex-direction:column;gap:20px}
+.timeline-item{position:relative}
+.timeline-dot{position:absolute;left:-29px;top:3px;width:9px;height:9px;border-radius:50%;background:var(--blue);border:2px solid var(--bg)}
+.timeline-period{font-family:'DM Mono',monospace;font-size:11px;color:var(--gray1);margin-bottom:3px}
+.timeline-name{font-size:13px;color:var(--text);font-weight:500}
+.remun-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.remun-card{background:var(--surface);border:1px solid var(--line2);border-radius:var(--r-lg);padding:18px 20px}
+.remun-type{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray1);margin-bottom:6px}
+.remun-annual{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--text);margin-bottom:4px}
+.remun-monthly{font-size:12px;color:var(--teal2);font-family:'DM Mono',monospace}
+.inline-alert{display:flex;align-items:flex-start;gap:12px;background:var(--red-pale);border:1px solid rgba(239,68,68,.25);border-radius:var(--r-md);padding:14px 16px;margin-top:12px;font-size:12.5px;color:var(--text2);line-height:1.6}
+.inline-alert.warn{background:var(--amber-pale);border-color:rgba(245,158,11,.25)}
+.inline-alert.ok{background:var(--green-pale);border-color:rgba(34,197,94,.2)}
+.inline-alert.info{background:var(--blue-pale);border-color:rgba(26,108,255,.2)}
+.alert-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--surface3);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--line2)}
+.progress-row{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.progress-header{display:flex;justify-content:space-between;align-items:baseline}
+.progress-name{font-size:12px;color:var(--text2)}
+.progress-pct{font-family:'DM Mono',monospace;font-size:12px;color:var(--text);font-weight:500}
+.progress-track{height:5px;background:var(--surface3);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;border-radius:3px;transition:width 1.2s cubic-bezier(.16,1,.3,1)}
+.pont-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pont-card{background:var(--surface);border:1px solid var(--line2);border-radius:var(--r-lg);padding:20px}
+.pont-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+@media(max-width:900px){
+  .hero-grid,.charts-2col,.charts-3col,.analysis-2col,.pont-grid{grid-template-columns:1fr}
+  .hero-right{border-left:none;border-top:1px solid var(--line2)}
+  .verdict-grid{grid-template-columns:1fr}
+  .remun-grid{grid-template-columns:1fr 1fr}
+  .hero-left{padding:36px 24px 32px}
+  .container{padding:0 16px}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     HERO
+     Preencher: EMPRESA_NOME, EMPRESA_RAZAO_SOCIAL, CNPJ,
+     DATA_BASE, REGIME_TRIBUTARIO, FONTES_DADOS,
+     RECOMENDACAO_PRINCIPAL, RISCO_TEXTO, SCORE_CREDITO,
+     STATUS_BADGE_1/2/3, LIMITE_SUGERIDO, LIMITE_OBS
+     Classe do verdict-panel: (padrão=verde) | warn=amber | danger=vermelho
+═══════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg"><div class="orb orb1"></div><div class="orb orb2"></div></div>
+  <div class="hero-grid">
+    <div class="hero-left">
+      <div class="logo-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        AG ANTECIPA — ANÁLISE DE CRÉDITO
+      </div>
+      <h1>{{EMPRESA_NOME_LINHA1}}<br><span>{{EMPRESA_NOME_LINHA2}}</span></h1>
+      <p class="hero-subtitle">{{EMPRESA_RAZAO_SOCIAL}} — Parecer Técnico Completo</p>
+      <div class="hero-meta">
+        <div class="meta-item"><span class="meta-label">CNPJ</span><span class="meta-value">{{CNPJ}}</span></div>
+        <div class="meta-item"><span class="meta-label">Data Base</span><span class="meta-value">{{DATA_BASE}}</span></div>
+        <div class="meta-item"><span class="meta-label">Regime</span><span class="meta-value">{{REGIME_TRIBUTARIO}}</span></div>
+        <div class="meta-item"><span class="meta-label">Fontes</span><span class="meta-value">{{FONTES_DADOS}}</span></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <!-- Trocar classe: (sem classe)=verde | warn=âmbar | danger=vermelho -->
+      <div class="verdict-panel {{VERDICT_PANEL_CLASS}}">
+        <div class="verdict-label">Recomendação Final</div>
+        <div class="verdict-main">{{RECOMENDACAO_PRINCIPAL}}</div>
+        <div class="verdict-sub">{{RECOMENDACAO_SUB}}</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <!-- Chips de status: risk-moderate | risk-low | risk-high | risk-ok | risk-warn | risk-info -->
+        <span class="risk-chip {{CHIP1_CLASS}}">{{CHIP1_TEXTO}}</span>
+        <span class="risk-chip {{CHIP2_CLASS}}">{{CHIP2_TEXTO}}</span>
+        <span class="risk-chip {{CHIP3_CLASS}}">{{CHIP3_TEXTO}}</span>
+      </div>
+      <div class="limit-box">
+        <div class="limit-label">Limite Sugerido Inicial</div>
+        <div class="limit-amount">{{LIMITE_SUGERIDO}}</div>
+        <div style="font-size:11px;color:var(--gray1);margin-top:4px;">{{LIMITE_OBS}}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <a href="#overview" class="nav-tab active">Visão Geral</a>
+    <a href="#financeiro" class="nav-tab">Financeiro ECF</a>
+    <a href="#serasa" class="nav-tab">Serasa</a>
+    <a href="#bacen" class="nav-tab">BACEN / SCR</a>
+    <a href="#creditbox" class="nav-tab">CreditBox</a>
+    <a href="#patrimonio" class="nav-tab">Patrimônio</a>
+    <a href="#socios" class="nav-tab">Sócios</a>
+    <a href="#riscos" class="nav-tab">Riscos</a>
+    <a href="#parecer" class="nav-tab">Parecer Final</a>
+  </div>
+</nav>
+
+<main>
+<div class="container">
+
+<!-- ═══════════════════════════════════════════════════
+     SEÇÃO 0 — DASHBOARD EXECUTIVO
+═══════════════════════════════════════════════════ -->
+<section id="overview" class="section">
+  <div class="section-header">
+    <div class="section-num" style="background:var(--surface3);border:1px solid var(--line2);font-size:16px;">◈</div>
+    <h2 class="section-title">Dashboard Executivo de Risco</h2>
+    <span class="section-sub">Base: {{DATA_BASE}}</span>
+  </div>
+  <div class="kpi-grid">
+    <!-- Accent colors: --teal | --green | --amber | --red | --blue | --blue2 -->
+    <div class="kpi-card" style="--accent:var(--teal)"><div class="kpi-label">{{KPI1_LABEL}}</div><div class="kpi-value">{{KPI1_VALOR}}</div><div class="kpi-sub">{{KPI1_SUB}}</div></div>
+    <div class="kpi-card" style="--accent:var(--green)"><div class="kpi-label">{{KPI2_LABEL}}</div><div class="kpi-value">{{KPI2_VALOR}}</div><div class="kpi-sub">{{KPI2_SUB}}</div></div>
+    <div class="kpi-card" style="--accent:var(--green)"><div class="kpi-label">{{KPI3_LABEL}}</div><div class="kpi-value" style="color:var(--green2)">{{KPI3_VALOR}}</div><div class="kpi-sub">{{KPI3_SUB}}</div></div>
+    <div class="kpi-card" style="--accent:var(--amber)"><div class="kpi-label">{{KPI4_LABEL}}</div><div class="kpi-value" style="color:var(--amber2)">{{KPI4_VALOR}}</div><div class="kpi-sub">{{KPI4_SUB}}</div></div>
+    <div class="kpi-card" style="--accent:var(--teal)"><div class="kpi-label">{{KPI5_LABEL}}</div><div class="kpi-value">{{KPI5_VALOR}}</div><div class="kpi-sub">{{KPI5_SUB}}</div></div>
+    <div class="kpi-card" style="--accent:var(--red)"><div class="kpi-label">{{KPI6_LABEL}}</div><div class="kpi-value" style="color:var(--red2)">{{KPI6_VALOR}}</div><div class="kpi-sub">{{KPI6_SUB}}</div></div>
+  </div>
+  <table class="status-table">
+    <thead><tr><th>Dimensão</th><th>Status</th><th>Classificação</th></tr></thead>
+    <tbody>
+      <!-- Chips: risk-ok | risk-high | risk-warn | risk-moderate | risk-info -->
+      <tr><td class="dim">Situação Cadastral</td><td class="val">{{STATUS_CADASTRO}}</td><td><span class="risk-chip risk-ok" style="font-size:10px;padding:4px 10px">{{STATUS_CADASTRO_CLASS}}</span></td></tr>
+      <tr><td class="dim">Regime Tributário</td><td class="val">{{STATUS_REGIME}}</td><td><span class="risk-chip risk-ok" style="font-size:10px;padding:4px 10px">POSITIVO</span></td></tr>
+      <tr><td class="dim">Serasa — Restrições</td><td class="val">{{STATUS_SERASA}}</td><td><span class="risk-chip {{STATUS_SERASA_CLASS}}" style="font-size:10px;padding:4px 10px">{{STATUS_SERASA_LABEL}}</span></td></tr>
+      <tr><td class="dim">Consultas / Fome de Crédito</td><td class="val">{{STATUS_CONSULTAS}}</td><td><span class="risk-chip {{STATUS_CONSULTAS_CLASS}}" style="font-size:10px;padding:4px 10px">{{STATUS_CONSULTAS_LABEL}}</span></td></tr>
+      <tr><td class="dim">Protestos / Cheques</td><td class="val">{{STATUS_PROTESTOS}}</td><td><span class="risk-chip {{STATUS_PROTESTOS_CLASS}}" style="font-size:10px;padding:4px 10px">{{STATUS_PROTESTOS_LABEL}}</span></td></tr>
+      <tr><td class="dim">Dívidas Públicas</td><td class="val">{{STATUS_DIVIDAS}}</td><td><span class="risk-chip {{STATUS_DIVIDAS_CLASS}}" style="font-size:10px;padding:4px 10px">{{STATUS_DIVIDAS_LABEL}}</span></td></tr>
+      <tr><td class="dim">Processos Jurídicos</td><td class="val">{{STATUS_PROCESSOS}}</td><td><span class="risk-chip {{STATUS_PROCESSOS_CLASS}}" style="font-size:10px;padding:4px 10px">{{STATUS_PROCESSOS_LABEL}}</span></td></tr>
+      <tr><td class="dim">Comportamento de Pagamento</td><td class="val">{{STATUS_PAGAMENTO}}</td><td><span class="risk-chip {{STATUS_PAGAMENTO_CLASS}}" style="font-size:10px;padding:4px 10px">{{STATUS_PAGAMENTO_LABEL}}</span></td></tr>
+      <tr><td class="dim">BACEN / SCR</td><td class="val">{{STATUS_BACEN}}</td><td><span class="risk-chip {{STATUS_BACEN_CLASS}}" style="font-size:10px;padding:4px 10px">{{STATUS_BACEN_LABEL}}</span></td></tr>
+      <tr><td class="dim">Faturamento Mensal</td><td class="val">{{STATUS_FATURAMENTO}}</td><td><span class="risk-chip risk-ok" style="font-size:10px;padding:4px 10px">ATIVO</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SEÇÃO 1 — IDENTIFICAÇÃO
+═══════════════════════════════════════════════════ -->
+<section id="cadastro" class="section">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <h2 class="section-title">Identificação do Cedente</h2>
+  </div>
+  <div class="charts-3col">
+    <table class="status-table">
+      <thead><tr><th>Campo</th><th>Informação</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Razão Social</td><td class="val">{{RAZAO_SOCIAL}}</td></tr>
+        <tr><td class="dim">CNPJ</td><td class="val mono">{{CNPJ}}</td></tr>
+        <tr><td class="dim">Situação RF</td><td class="val">{{SITUACAO_RF}}</td></tr>
+        <tr><td class="dim">Capital Social</td><td class="val">{{CAPITAL_SOCIAL}}</td></tr>
+        <tr><td class="dim">Filiais</td><td class="val">{{FILIAIS}}</td></tr>
+        <tr><td class="dim">CNAE Principal</td><td class="val">{{CNAE}}</td></tr>
+        <tr><td class="dim">Sócio(s) / Administrador(es)</td><td class="val">{{SOCIOS}}</td></tr>
+        <tr><td class="dim">Contabilidade</td><td class="val">{{CONTABILIDADE}}</td></tr>
+        <tr><td class="dim">Início Relacionamento BACEN</td><td class="val">{{INICIO_BACEN}}</td></tr>
+      </tbody>
+    </table>
+    <div class="chart-wrap">
+      <div class="chart-title">Histórico Societário</div>
+      <div class="chart-desc">{{HISTORICO_SOCIETARIO_DESC}}</div>
+      <div class="timeline">
+        <!-- Adicionar quantos itens forem necessários -->
+        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-period">{{PERIODO1}}</div><div class="timeline-name">{{NOME_PERIODO1}}</div></div>
+        <div class="timeline-item"><div class="timeline-dot" style="background:var(--teal)"></div><div class="timeline-period">{{PERIODO2}}</div><div class="timeline-name">{{NOME_PERIODO2}}</div></div>
+        <!-- Se houver mudança recente, adicionar inline-alert abaixo -->
+      </div>
+      <!-- {{ALERTA_HISTORICO_SOCIETARIO}} -->
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SEÇÃO 2 — FINANCEIRO ECF/IRPJ
+═══════════════════════════════════════════════════ -->
+<section id="financeiro" class="section">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <h2 class="section-title">Análise Financeira — ECF/IRPJ {{ANO_ECF}}</h2>
+    <span class="section-sub">Dados oficiais SPED/RFB — assinados digitalmente</span>
+  </div>
+  <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr)">
+    <div class="kpi-card" style="--accent:var(--blue)"><div class="kpi-label">Receita Bruta {{ANO_ECF}}</div><div class="kpi-value">{{RECEITA_BRUTA}}</div><div class="kpi-sub">{{RECEITA_BRUTA_VAR}}</div></div>
+    <div class="kpi-card" style="--accent:var(--teal)"><div class="kpi-label">Receita Líquida</div><div class="kpi-value">{{RECEITA_LIQUIDA}}</div><div class="kpi-sub">{{RECEITA_LIQUIDA_PCT}}% da receita bruta</div></div>
+    <div class="kpi-card" style="--accent:var(--amber)"><div class="kpi-label">Lucro Líquido</div><div class="kpi-value" style="color:var(--amber2)">{{LUCRO_LIQUIDO}}</div><div class="kpi-sub">Margem {{MARGEM_LIQUIDA}}%</div></div>
+    <div class="kpi-card" style="--accent:var(--green)"><div class="kpi-label">Patrimônio Líquido</div><div class="kpi-value" style="color:var(--green2)">{{PATRIMONIO_LIQUIDO}}</div><div class="kpi-sub">{{PATRIMONIO_LIQUIDO_OBS}}</div></div>
+  </div>
+  <div class="charts-3col">
+    <div class="chart-wrap">
+      <div class="chart-title">Evolução de Receita Bruta</div>
+      <div class="chart-desc">{{RECEITA_CHART_DESC}}</div>
+      <div style="position:relative;height:200px;width:100%"><canvas id="revenueChart" style="position:absolute;inset:0"></canvas></div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Composição do Ativo</div>
+      <div class="chart-desc">Fechamento dez/{{ANO_ECF}} — {{ATIVO_TOTAL}}</div>
+      <div style="position:relative;height:200px;width:100%"><canvas id="ativoChart" style="position:absolute;inset:0"></canvas></div>
+    </div>
+  </div>
+  <div class="charts-2col">
+    <div class="chart-wrap">
+      <div class="chart-title">Impostos Apurados — {{REGIME_TRIBUTARIO}} {{ANO_ECF}}</div>
+      <div class="chart-desc">{{IMPOSTOS_DESC}}</div>
+      <table class="status-table">
+        <thead><tr><th>Item</th><th>Valor</th></tr></thead>
+        <tbody>
+          <tr><td class="dim">Base de Cálculo IRPJ/CSLL (anual)</td><td class="val mono">{{BC_IRPJ}}</td></tr>
+          <tr><td class="dim">IRPJ apurado (alíquota 15%)</td><td class="val mono">{{IRPJ_APURADO}}</td></tr>
+          <tr><td class="dim">Adicional IRPJ (10%)</td><td><span class="risk-chip {{ADICIONAL_CLASS}}" style="font-size:10px;padding:3px 8px">{{ADICIONAL_IRPJ}}</span></td></tr>
+          <tr><td class="dim">IRPJ a pagar no fechamento</td><td><span class="risk-chip {{IRPJ_PAGAR_CLASS}}" style="font-size:10px;padding:3px 8px">{{IRPJ_PAGAR}}</span></td></tr>
+          <tr><td class="dim">Estimativas mensais</td><td class="val">{{ESTIMATIVAS}}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Remuneração dos Sócios — ECF {{ANO_ECF}}</div>
+      <div class="chart-desc">{{REMUN_DESC}}</div>
+      <div class="remun-grid">
+        <div class="remun-card"><div class="remun-type">Pró-labore</div><div class="remun-annual">{{PROLABORE_ANUAL}}</div><div class="remun-monthly">{{PROLABORE_MENSAL}}/mês</div></div>
+        <div class="remun-card"><div class="remun-type">Lucros / Dividendos</div><div class="remun-annual">{{DIVIDENDOS}}</div><div class="remun-monthly">{{DIVIDENDOS_MENSAL}}/mês</div></div>
+        <div class="remun-card" style="background:rgba(0,201,167,.08);border-color:rgba(0,201,167,.25)"><div class="remun-type">Total Real Anual</div><div class="remun-annual" style="color:var(--teal2)">{{REMUN_TOTAL_ANUAL}}</div><div class="remun-monthly" style="color:var(--teal)">{{REMUN_TOTAL_MENSAL}}/mês</div></div>
+      </div>
+      <!-- {{ALERTA_REMUN}} -->
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SEÇÃO 3 — SERASA
+═══════════════════════════════════════════════════ -->
+<section id="serasa" class="section">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <h2 class="section-title">Serasa — Análise de Comportamento</h2>
+    <span class="section-sub">Base: {{DATA_BASE}}</span>
+  </div>
+  <div class="charts-2col">
+    <div class="chart-wrap">
+      <div class="chart-title">Anotações Cadastrais</div>
+      <div class="chart-desc">Situação na data base</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--green-pale);border-radius:var(--r-sm);border:1px solid rgba(34,197,94,.15)"><span style="font-size:12px;color:var(--text2)">Pendências Financeiras</span><span class="risk-chip {{PEND_FIN_CLASS}}" style="font-size:10px;padding:3px 10px">{{PEND_FIN}}</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--green-pale);border-radius:var(--r-sm);border:1px solid rgba(34,197,94,.15)"><span style="font-size:12px;color:var(--text2)">CONCENTRE / Cheques</span><span class="risk-chip {{CONCENTRE_CLASS}}" style="font-size:10px;padding:3px 10px">{{CONCENTRE}}</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--green-pale);border-radius:var(--r-sm);border:1px solid rgba(34,197,94,.15)"><span style="font-size:12px;color:var(--text2)">Dívidas Públicas</span><span class="risk-chip {{DIV_PUB_CLASS}}" style="font-size:10px;padding:3px 10px">{{DIV_PUB}}</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--green-pale);border-radius:var(--r-sm);border:1px solid rgba(34,197,94,.15)"><span style="font-size:12px;color:var(--text2)">Situação CNPJ</span><span class="risk-chip {{CNPJ_SIT_CLASS}}" style="font-size:10px;padding:3px 10px">{{CNPJ_SIT}}</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--green-pale);border-radius:var(--r-sm);border:1px solid rgba(34,197,94,.15)"><span style="font-size:12px;color:var(--text2)">Protestos (CENPROT)</span><span class="risk-chip {{PROTESTOS_CLASS}}" style="font-size:10px;padding:3px 10px">{{PROTESTOS}}</span></div>
+      </div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Volume de Consultas</div>
+      <div class="chart-desc">{{CONSULTAS_CHART_DESC}}</div>
+      <div style="position:relative;height:240px;width:100%"><canvas id="consultasChart" style="position:absolute;inset:0"></canvas></div>
+    </div>
+  </div>
+  <!-- {{ALERTA_SERASA}} -->
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SEÇÃO 4 — BACEN / SCR
+═══════════════════════════════════════════════════ -->
+<section id="bacen" class="section">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <h2 class="section-title">BACEN / SCR — Sistema de Informações de Crédito</h2>
+    <span class="section-sub">{{MES_BACEN}}</span>
+  </div>
+  <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr)">
+    <div class="kpi-card" style="--accent:var(--amber)"><div class="kpi-label">Total a Vencer</div><div class="kpi-value" style="color:var(--amber2)">{{BACEN_TOTAL}}</div><div class="kpi-sub">{{BACEN_OPERACOES}} operações / {{BACEN_BANCOS}} bancos</div></div>
+    <div class="kpi-card" style="--accent:var(--green)"><div class="kpi-label">Vencidos</div><div class="kpi-value" style="color:var(--green2)">{{BACEN_VENCIDOS}}</div><div class="kpi-sub">{{BACEN_VENCIDOS_OBS}}</div></div>
+    <div class="kpi-card" style="--accent:var(--teal)"><div class="kpi-label">Ratio Dívida / Receita</div><div class="kpi-value" style="color:var(--teal2)">{{BACEN_RATIO}}</div><div class="kpi-sub">{{BACEN_RATIO_OBS}}</div></div>
+    <div class="kpi-card" style="--accent:var(--green)"><div class="kpi-label">Discordâncias / Judice</div><div class="kpi-value" style="color:var(--green2)">{{BACEN_DISCORDANCIAS}}</div><div class="kpi-sub">{{BACEN_PREJUIZO}}</div></div>
+  </div>
+  <div class="charts-2col">
+    <div class="chart-wrap">
+      <div class="chart-title">Carteira por Modalidade</div>
+      <div class="chart-desc">{{MODALIDADE_DESC}}</div>
+      <div style="position:relative;height:260px;width:100%"><canvas id="modalidadeChart" style="position:absolute;inset:0"></canvas></div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Cronograma de Vencimentos</div>
+      <div class="chart-desc">{{VENCIMENTOS_DESC}}</div>
+      <div style="position:relative;height:260px;width:100%"><canvas id="vencimentosChart" style="position:absolute;inset:0"></canvas></div>
+    </div>
+  </div>
+  <!-- {{ALERTA_BACEN}} -->
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SEÇÃO 5 — CREDITBOX / CREDMAP
+═══════════════════════════════════════════════════ -->
+<section id="creditbox" class="section">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <h2 class="section-title">CreditBox / CredMap — Três Visões</h2>
+  </div>
+  <div class="charts-3col">
+    <div class="chart-wrap">
+      <div class="chart-title">Faturamento Mensal Estimado (CredMap)</div>
+      <div class="chart-desc">{{FATURAMENTO_CHART_DESC}}</div>
+      <div style="position:relative;height:220px;width:100%"><canvas id="faturamentoChart" style="position:absolute;inset:0"></canvas></div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Score de Crédito — CreditBox</div>
+      <div class="chart-desc">Modelo quantitativo</div>
+      <div class="gauge-wrap" style="margin-top:20px">
+        <svg class="gauge-svg" viewBox="0 0 180 100">
+          <path d="M 20 90 A 70 70 0 0 1 160 90" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="10" stroke-linecap="round"/>
+          <!-- stroke-dashoffset: 220 = 0%, 0 = 100%. Calcular: 220 - (score/1000 * 220) -->
+          <path d="M 20 90 A 70 70 0 0 1 160 90" fill="none" stroke="{{GAUGE_COLOR}}" stroke-width="10" stroke-linecap="round" stroke-dasharray="220" stroke-dashoffset="{{GAUGE_DASHOFFSET}}"/>
+        </svg>
+        <div class="gauge-score" style="color:{{GAUGE_COLOR}}">{{SCORE_CREDITO}}</div>
+        <div class="gauge-label">de 1000 — {{SCORE_CLASSIFICACAO}}</div>
+      </div>
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--line2)">
+        <div class="progress-row"><div class="progress-header"><span class="progress-name">Faturamento anual (CredMap)</span><span class="progress-pct">{{CREDMAP_FAT}}</span></div><div class="progress-track"><div class="progress-fill" style="width:{{CREDMAP_FAT_PCT}}%;background:var(--teal)"></div></div></div>
+        <div class="progress-row"><div class="progress-header"><span class="progress-name">ILM 90d como Sacada</span><span class="progress-pct">{{ILM_SACADA}}</span></div><div class="progress-track"><div class="progress-fill" style="width:{{ILM_SACADA_PCT}}%;background:var(--green)"></div></div></div>
+        <div class="progress-row"><div class="progress-header"><span class="progress-name">Perda Efetiva Acumulada</span><span class="progress-pct">{{PERDA_EFETIVA}}</span></div><div class="progress-track"><div class="progress-fill" style="width:{{PERDA_EFETIVA_PCT}}%;background:var(--green)"></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="pont-grid">
+    <div class="pont-card">
+      <div class="pont-title">⏱ Sacados — Pontualidade de Recebimento</div>
+      <!-- Adicionar progress-row para cada mês disponível -->
+      {{PONTUALIDADE_SACADOS_ROWS}}
+      <!-- {{ALERTA_SACADOS}} -->
+    </div>
+    <div class="pont-card">
+      <div class="pont-title">✓ {{EMPRESA_NOME}} como Pagadora — Comportamento com Fornecedores</div>
+      {{PONTUALIDADE_PAGADORA_ROWS}}
+      <!-- {{ALERTA_PAGADORA}} -->
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SEÇÃO 6 — PATRIMÔNIO
+═══════════════════════════════════════════════════ -->
+<section id="patrimonio" class="section">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <h2 class="section-title">Patrimônio Executável</h2>
+  </div>
+  <div class="fleet-grid">
+    <!-- Itens de frota — usar class="fleet-card highlight" para os mais relevantes -->
+    {{FLEET_ITEMS}}
+  </div>
+  <div class="patrimony-bar">
+    <div><div style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray1);margin-bottom:4px">Total Estimado Patrimônio Executável</div><div class="patrimony-total">{{PATRIMONIO_TOTAL}}</div></div>
+    <div style="margin-left:auto;display:flex;gap:20px;flex-wrap:wrap">
+      {{PATRIMONIO_BREAKDOWN}}
+      <div><div style="font-size:10px;color:var(--gray1);margin-bottom:2px">Cobertura vs limite</div><div style="font-family:'DM Mono',monospace;color:var(--green2);font-weight:500">{{PATRIMONIO_COBERTURA}}</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SEÇÃO 7 — SÓCIOS / ADMINISTRADORES
+═══════════════════════════════════════════════════ -->
+<section id="socios" class="section">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <h2 class="section-title">Análise dos Sócios / Administradores</h2>
+  </div>
+  <div class="charts-2col">
+    <table class="status-table">
+      <thead><tr><th>Campo</th><th>Informação</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Nome</td><td class="val">{{SOCIO_NOME}}</td></tr>
+        <tr><td class="dim">CPF</td><td class="val mono">{{SOCIO_CPF}}</td></tr>
+        <tr><td class="dim">Data de Nascimento</td><td class="val">{{SOCIO_NASC}}</td></tr>
+        <tr><td class="dim">Situação CPF</td><td class="val">{{SOCIO_CPF_SIT}}</td></tr>
+        <tr><td class="dim">Renda declarada (bureaus)</td><td class="val">{{SOCIO_RENDA_BUREAU}}</td></tr>
+        <tr><td class="dim">Renda real (ECF {{ANO_ECF}})</td><td><span style="color:var(--green2);font-weight:500;font-family:'DM Mono',monospace">{{SOCIO_RENDA_REAL}}</span></td></tr>
+        <tr><td class="dim">Pessoa Politicamente Exposta</td><td><span class="risk-chip {{SOCIO_PEP_CLASS}}" style="font-size:10px;padding:3px 8px">{{SOCIO_PEP}}</span></td></tr>
+        <tr><td class="dim">Sanções / Cheques / Dívidas</td><td><span class="risk-chip {{SOCIO_SANCOES_CLASS}}" style="font-size:10px;padding:3px 8px">{{SOCIO_SANCOES}}</span></td></tr>
+        <tr><td class="dim">Participação societária</td><td class="val">{{SOCIO_PARTICIPACAO}}</td></tr>
+      </tbody>
+    </table>
+    <div class="chart-wrap">
+      <div class="chart-title">Processos Jurídicos — {{PROCESSOS_COUNT}} processo(s)</div>
+      <div class="chart-desc">{{PROCESSOS_DESC}}</div>
+      <div class="process-cards" style="grid-template-columns:1fr">
+        {{PROCESSOS_ITEMS}}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SEÇÃO 8 — MATRIZ DE RISCOS
+═══════════════════════════════════════════════════ -->
+<section id="riscos" class="section">
+  <div class="section-header">
+    <div class="section-num" style="background:var(--red)">8</div>
+    <h2 class="section-title">Matriz de Riscos Consolidada</h2>
+  </div>
+  <div class="risk-matrix">
+    <!-- Classe da risk-row: high | med | low -->
+    <!-- Chip do risco: risk-high | risk-warn | risk-ok -->
+    {{RISK_ROWS}}
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     SEÇÃO 9 — PARECER TÉCNICO FINAL
+═══════════════════════════════════════════════════ -->
+<section id="parecer" class="section">
+  <div class="section-header">
+    <div class="section-num" style="background:var(--teal)">9</div>
+    <h2 class="section-title">Parecer Técnico Final</h2>
+  </div>
+  <div class="analysis-2col">
+    <div class="strength-box">
+      <div class="box-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Pontos Fortes</div>
+      <ul class="check-list">
+        {{PONTOS_FORTES}}
+      </ul>
+    </div>
+    <div class="weakness-box">
+      <div class="box-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Pontos de Atenção</div>
+      <ul class="check-list">
+        {{PONTOS_ATENCAO}}
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Syne',sans-serif;font-size:15px;color:#fff;margin-bottom:16px">Condições para Aprovação — Ressalvas Obrigatórias</h3>
+  <div class="conditions">
+    {{CONDICOES_ITEMS}}
+  </div>
+
+  <div class="analyst-note">
+    <div class="analyst-note-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Avaliação Independente — Vale Antecipar com {{EMPRESA_NOME}}?</div>
+    {{ANALISTA_PARAGRAFOS}}
+  </div>
+
+  <div class="final-verdict" style="margin-top:32px">
+    <div class="verdict-header">
+      <div><div style="font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray1);margin-bottom:4px">Resumo Executivo para Comitê</div><div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#fff">{{EMPRESA_NOME}} — CNPJ {{CNPJ}} — {{CIDADE_UF}}</div></div>
+      <span class="risk-chip {{RISCO_FINAL_CHIP_CLASS}}" style="font-size:12px;padding:8px 18px">{{RISCO_FINAL_CHIP}}</span>
+    </div>
+    <div class="verdict-grid">
+      <div class="verdict-item"><div class="verdict-item-label">Classificação Final</div><div class="verdict-item-value {{RISCO_FINAL_CSS}}">{{RISCO_FINAL_TEXTO}}</div></div>
+      <div class="verdict-item"><div class="verdict-item-label">Recomendação</div><div class="verdict-item-value {{RECOMENDACAO_CSS}}">{{RECOMENDACAO_FINAL}}</div></div>
+      <div class="verdict-item"><div class="verdict-item-label">Limite Sugerido Inicial</div><div class="verdict-item-value v-limit">{{LIMITE_FINAL}}<br><span style="font-size:14px">{{LIMITE_FINAL_OBS}}</span></div></div>
+    </div>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-brand">AG ANTECIPA</div><div style="font-size:11px;color:var(--gray1);margin-top:3px">Análise de Crédito — Parecer Técnico</div></div>
+    <div class="footer-meta">{{FONTES_DADOS_FOOTER}}<br>Documento Confidencial — {{DATA_BASE}} — Proibida reprodução sem autorização</div>
+  </div>
+</footer>
+
+<script>
+const B='#1a6cff',B2='#3d87ff',T='#00c9a7',AM='#f59e0b',RD='#ef4444',GR='#22c55e',GY='#8b98a8',NV='#152540',WH='#e8f0f8';
+Chart.defaults.color=GY;Chart.defaults.font.family="'DM Sans',sans-serif";Chart.defaults.font.size=11;
+
+/* ── Gráfico 1: Receita Bruta (barras) ─────────────────────
+   Labels: anos/períodos | Data: valores em MM (float)
+   Exemplo: labels:['2022','2023','2024'] | data:[8.5,11.14,17.77]      */
+new Chart(document.getElementById('revenueChart'),{type:'bar',data:{labels:{{REVENUE_LABELS}},datasets:[{label:'Receita Bruta',data:{{REVENUE_DATA}},backgroundColor:[NV,NV,B],borderRadius:8,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`R$ ${c.parsed.y.toFixed(2)}MM`}}},scales:{x:{grid:{display:false},border:{display:false}},y:{grid:{color:'rgba(255,255,255,0.05)'},border:{display:false},ticks:{callback:v=>`R$${v}MM`}}}}});
+
+/* ── Gráfico 2: Composição do Ativo (donut) ────────────────
+   Labels: categorias | Data: valores em R$ mil (float)                  */
+new Chart(document.getElementById('ativoChart'),{type:'doughnut',data:{labels:{{ATIVO_LABELS}},datasets:[{data:{{ATIVO_DATA}},backgroundColor:[B,T,'#7c3aed',AM,'#ec4899'],borderColor:'#050e18',borderWidth:3,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:10,font:{size:10},color:GY}},tooltip:{callbacks:{label:c=>`R$ ${(c.parsed/1000).toFixed(2)}MM`}}}}});
+
+/* ── Gráfico 3: Consultas Serasa (barras) ──────────────────
+   Labels: meses | Data: qtd consultas | backgroundColor por risco       */
+new Chart(document.getElementById('consultasChart'),{type:'bar',data:{labels:{{CONSULTAS_LABELS}},datasets:[{label:'Consultas',data:{{CONSULTAS_DATA}},backgroundColor:{{CONSULTAS_COLORS}},borderRadius:5,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.parsed.y} consultas`}}},scales:{x:{grid:{display:false},border:{display:false},ticks:{font:{size:10}}},y:{grid:{color:'rgba(255,255,255,0.05)'},border:{display:false},min:0,max:{{CONSULTAS_MAX}}}}}});
+
+/* ── Gráfico 4: Modalidades BACEN (donut) ──────────────────
+   Labels: modalidades | Data: percentuais (float)                        */
+new Chart(document.getElementById('modalidadeChart'),{type:'doughnut',data:{labels:{{MODALIDADE_LABELS}},datasets:[{data:{{MODALIDADE_DATA}},backgroundColor:[B,T,'#7c3aed',AM,GR,GY],borderColor:'#050e18',borderWidth:3,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'bottom',labels:{boxWidth:10,padding:10,font:{size:10},color:GY}},tooltip:{callbacks:{label:c=>`${c.label}: ${c.parsed.toFixed(1)}%`}}}}});
+
+/* ── Gráfico 5: Vencimentos BACEN (barras) ─────────────────
+   Labels: faixas | Data: valores R$ MM                                   */
+new Chart(document.getElementById('vencimentosChart'),{type:'bar',data:{labels:{{VENCIMENTOS_LABELS}},datasets:[{label:'R$ MM',data:{{VENCIMENTOS_DATA}},backgroundColor:{{VENCIMENTOS_COLORS}},borderRadius:5,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`R$ ${c.parsed.y.toFixed(2)}MM`}}},scales:{x:{grid:{display:false},border:{display:false},ticks:{font:{size:9}}},y:{grid:{color:'rgba(255,255,255,0.05)'},border:{display:false},ticks:{callback:v=>`R$${v}MM`}}}}});
+
+/* ── Gráfico 6: Faturamento Mensal (linha) ─────────────────
+   Labels: meses | Data: valores R$ MM                                    */
+new Chart(document.getElementById('faturamentoChart'),{type:'line',data:{labels:{{FAT_LABELS}},datasets:[{label:'Faturamento (R$MM)',data:{{FAT_DATA}},borderColor:T,backgroundColor:'rgba(0,201,167,0.08)',borderWidth:2,fill:true,tension:0.4,pointBackgroundColor:T,pointRadius:3,pointHoverRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`~R$ ${c.parsed.y.toFixed(2)}MM`}}},scales:{x:{grid:{display:false},border:{display:false},ticks:{font:{size:10}}},y:{grid:{color:'rgba(255,255,255,0.05)'},border:{display:false},min:0,max:{{FAT_MAX}},ticks:{callback:v=>`R$${v}MM`}}}}});
+
+/* ── Nav ativa no scroll ────────────────────────────────── */
+const tabs=document.querySelectorAll('.nav-tab');
+const _sections=[...document.querySelectorAll('section[id]')];
+function _updateNav(){const y=window.scrollY+80;let cur=_sections.length?_sections[0].id:'';for(const s of _sections){if(s.offsetTop<=y)cur=s.id;}tabs.forEach(t=>t.classList.toggle('active',t.getAttribute('href')==='#'+cur));}
+window.addEventListener('scroll',_updateNav,{passive:true});
+tabs.forEach(t=>t.addEventListener('click',e=>{e.preventDefault();const el=document.querySelector(t.getAttribute('href'));if(el){const top=el.getBoundingClientRect().top+window.scrollY-60;window.scrollTo({top,behavior:'smooth'})}}));
+</script>
+</body>
+</html>
