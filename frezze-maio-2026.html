@@ -137,7 +137,49 @@ footer{text-align:center;padding:2rem;border-top:1px solid var(--border);color:v
 @media(max-width:768px){
   .kpi-grid{grid-template-columns:1fr 1fr}
   .two-col,.three-col{grid-template-columns:1fr}
+  .veredicto-grid{grid-template-columns:1fr}
 }
+
+/* ANALYST ATTRIBUTION */
+.analyst-banner{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:var(--navy2);border:1px solid rgba(59,130,246,0.2);border-radius:10px;margin-bottom:1.5rem;border-left:3px solid #3b82f6}
+.analyst-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;font-family:'Syne',sans-serif;flex-shrink:0;border:2px solid}
+.analyst-name{font-weight:700;font-size:.9rem;font-family:'Syne',sans-serif}
+.analyst-role{font-size:.72rem;color:var(--text2);font-family:'DM Mono',monospace;margin-top:.1rem}
+.analyst-tag{display:inline-block;padding:.15rem .55rem;border-radius:999px;font-size:.65rem;font-weight:600;letter-spacing:.06em;margin-left:.4rem}
+
+/* SECTION DIVIDER BANNER */
+.split-banner{background:linear-gradient(135deg,rgba(30,58,95,0.6) 0%,rgba(10,15,30,0.95) 100%);border:1px solid rgba(59,130,246,0.25);border-radius:16px;padding:2rem 2.5rem;text-align:center}
+.split-banner h2{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:#93c5fd;margin-bottom:.4rem}
+
+/* RISK DIMENSION */
+.risk-dim{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:8px;padding:.9rem 1rem;margin-bottom:.5rem}
+.risk-dim-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem}
+.risk-dim-name{font-size:.75rem;font-weight:700;font-family:'DM Mono',monospace;color:var(--text2);text-transform:uppercase;letter-spacing:.08em}
+.risk-dim-desc{font-size:.8rem;color:var(--text2);line-height:1.55}
+
+/* GUARANTEE / MONITORING ITEMS */
+.guarantee-item{display:flex;gap:.75rem;align-items:flex-start;padding:.65rem 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.guarantee-item:last-child{border-bottom:none}
+.guarantee-num{width:22px;height:22px;border-radius:50%;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.15rem}
+.guarantee-text{font-size:.83rem;color:var(--text);line-height:1.5}
+.trigger-item{display:flex;gap:.6rem;align-items:flex-start;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:.82rem;color:var(--text2)}
+.trigger-item:last-child{border-bottom:none}
+.trigger-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:.4rem}
+
+/* VEREDICTO CONJUNTO */
+.veredicto-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+.veredicto-card{background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.3);border-radius:14px;padding:1.5rem;text-align:center}
+.veredicto-card-name{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.5rem}
+.veredicto-card-verdict{font-size:1.6rem;font-weight:800;font-family:'Syne',sans-serif;color:#fca5a5;margin-bottom:.35rem}
+.veredicto-card-role{font-size:.75rem;color:var(--text2);margin-bottom:.5rem}
+.veredicto-card-sub{font-size:.78rem;color:var(--muted);line-height:1.5}
+.veredicto-unified{background:linear-gradient(135deg,rgba(239,68,68,0.12),rgba(239,68,68,0.06));border:2px solid rgba(239,68,68,0.45);border-radius:16px;padding:2rem;text-align:center;margin-top:1.25rem}
+
+/* RF SECTION OVERRIDES */
+section.rf-section .section-label{color:#60a5fa}
+section.rf-section .kpi-card{border-left-color:#3b82f6}
+.nav-sep{color:rgba(255,255,255,0.15);padding:0 .15rem;display:flex;align-items:center}
+.nav-pill.nav-rf:hover{background:rgba(59,130,246,0.1)!important;color:#93c5fd!important;border-color:rgba(59,130,246,0.3)!important}
 </style>
 </head>
 <body>
@@ -149,14 +191,15 @@ footer{text-align:center;padding:2rem;border-top:1px solid var(--border);color:v
     <div class="hero-orb o2"></div>
   </div>
   <div class="hero-content">
-    <div class="hero-badge">AG Antecipa · Análise de Crédito Empresarial · Maio/2026</div>
+    <div class="hero-badge">AG Antecipa · Parecer de Comitê · Crédito + Financeiro · Maio/2026</div>
     <h1 class="hero-title"><span class="accent">FREZZE</span><br>COMÉRCIO DE ALIMENTOS</h1>
     <div class="hero-sub">CNPJ 32.345.292/0001-90 · Barueri/SP · Armazenagem p/ Terceiros</div>
     <div class="hero-chips">
       <span class="chip danger">⛔ RECUSAR</span>
       <span class="chip">Score 150/1000 — Extremo Risco</span>
       <span class="chip">97 Protestos · R$ 2,34M</span>
-      <span class="chip">60 Processos Trabalhistas</span>
+      <span class="chip">Crédito: Marcelo Vazquez</span>
+      <span class="chip">Financeiro: Rafael Bazan</span>
     </div>
   </div>
 </header>
@@ -173,7 +216,15 @@ footer{text-align:center;padding:2rem;border-top:1px solid var(--border);color:v
     <li><a href="#patrimonio" class="nav-pill">Patrimônio</a></li>
     <li><a href="#socios" class="nav-pill">Sócios</a></li>
     <li><a href="#riscos" class="nav-pill">Riscos</a></li>
-    <li><a href="#parecer" class="nav-pill">Parecer Final</a></li>
+    <li><a href="#parecer-credito" class="nav-pill">Parecer Crédito</a></li>
+    <li class="nav-sep">·</li>
+    <li><a href="#negocio" class="nav-pill nav-rf">Mod. Negócio</a></li>
+    <li><a href="#juridico" class="nav-pill nav-rf">Análise Jur.</a></li>
+    <li><a href="#risco-dim" class="nav-pill nav-rf">Risco Detalhado</a></li>
+    <li><a href="#garantias" class="nav-pill nav-rf">Garantias</a></li>
+    <li><a href="#monitoramento" class="nav-pill nav-rf">Monitoramento</a></li>
+    <li><a href="#parecer-financeiro" class="nav-pill nav-rf">Parecer Rafael</a></li>
+    <li><a href="#veredicto" class="nav-pill nav-rf" style="background:rgba(239,68,68,0.1);color:#fca5a5;border-color:rgba(239,68,68,0.3)">Veredicto</a></li>
   </ul>
 </nav>
 
@@ -711,9 +762,16 @@ footer{text-align:center;padding:2rem;border-top:1px solid var(--border);color:v
 </section>
 
 <!-- 9. PARECER FINAL -->
-<section id="parecer">
-  <div class="section-label">Seção 9</div>
-  <h2 class="section-title">Parecer Técnico Final</h2>
+<section id="parecer-credito">
+  <div class="section-label">Seção 9 · Análise de Crédito</div>
+  <h2 class="section-title">Parecer de Crédito — Marcelo Vazquez</h2>
+  <div class="analyst-banner">
+    <div class="analyst-avatar" style="background:rgba(239,68,68,0.15);color:#ef4444;border-color:rgba(239,68,68,0.4)">MV</div>
+    <div>
+      <div class="analyst-name">Marcelo Vazquez <span class="analyst-tag" style="background:rgba(239,68,68,0.1);color:#fca5a5;border-color:rgba(239,68,68,0.3)">Analista de Crédito</span></div>
+      <div class="analyst-role">AG Antecipa · Análise de Crédito Empresarial · 25/05/2026</div>
+    </div>
+  </div>
 
   <div class="two-col" style="margin-bottom:1.25rem">
     <div class="card">
@@ -775,10 +833,351 @@ footer{text-align:center;padding:2rem;border-top:1px solid var(--border);color:v
   </div>
 </section>
 
+<!-- DIVIDER BANNER -->
+<div style="max-width:1100px;margin:0 auto;padding:2rem 2rem 0">
+  <div class="split-banner">
+    <div style="font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;font-family:'DM Mono',monospace;margin-bottom:.5rem">Complemento ao Parecer de Crédito · AG Antecipa</div>
+    <h2>ANÁLISE FINANCEIRA &amp; JURÍDICA CONSULTIVA</h2>
+    <p style="font-size:.83rem;color:var(--text2);margin-top:.5rem;max-width:600px;margin-inline:auto">Esta seção complementa e aprofunda o parecer de crédito com análise das dimensões financeira, jurídica e operacional da empresa, incluindo estrutura de garantias e plano de monitoramento detalhado.</p>
+    <p style="margin-top:.85rem;font-size:.8rem;color:#93c5fd"><strong>Analista Financeiro: Rafael Bazan</strong> · AG Antecipa · Parecer Técnico v2.0 · 25/05/2026</p>
+  </div>
+</div>
+
+<!-- RF-1. MODELO DE NEGÓCIO -->
+<section id="negocio" class="rf-section">
+  <div class="section-label">Parecer Financeiro · RF-1</div>
+  <h2 class="section-title">Modelo de Negócio</h2>
+  <div class="analyst-banner">
+    <div class="analyst-avatar" style="background:rgba(59,130,246,0.15);color:#60a5fa;border-color:rgba(59,130,246,0.35)">RB</div>
+    <div>
+      <div class="analyst-name">Rafael Bazan <span class="analyst-tag" style="background:rgba(59,130,246,0.1);color:#93c5fd;border-color:rgba(59,130,246,0.3)">Analista Financeiro</span></div>
+      <div class="analyst-role">AG Antecipa · Parecer Técnico de Crédito v2.0 · 25/05/2026</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Descrição do Modelo Operacional</div>
+      <p style="font-size:.85rem;color:var(--text2);line-height:1.75;margin-bottom:.75rem">A FREZZE atua no segmento de <strong style="color:var(--text)">logística fria e armazenagem frigorificada por conta de terceiros</strong> (CNAE 52.11-7/99), com sede operacional em Alphaville, Barueri/SP e filial operacional em São Bernardo do Campo/SP — local físico de armazenagem dos clientes.</p>
+      <p style="font-size:.85rem;color:var(--text2);line-height:1.75;margin-bottom:.75rem">Os principais clientes são empresas do setor alimentício com operações relevantes: Fazenda Futuro (proteínas vegetais), Agropacking (frutas e legumes), Panificadora Pão &amp; Arte, Top Service e Alles Indústria (carnes). O modelo gera <strong style="color:var(--text)">receitas de serviços recorrentes B2B</strong>, estruturalmente compatível com antecipação de recebíveis.</p>
+      <p style="font-size:.85rem;color:var(--text2);line-height:1.75">A presença de investidores institucionais como a <strong style="color:var(--text)">Cotidiano Aceleradora de Startups</strong> e <strong style="color:var(--text)">Orla Ventures</strong> indica que a empresa foi objeto de análise anterior por terceiros com critérios de avaliação próprios.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Elegibilidade para Antecipação de Recebíveis</div>
+      <table class="data-table">
+        <tbody>
+          <tr><td style="color:var(--text2)">Tipo de receita</td><td><span class="risk-ok">Recorrente · B2B</span></td></tr>
+          <tr><td style="color:var(--text2)">Previsibilidade do fluxo</td><td><span class="risk-warn">Média — top 5 = 61% do fat.</span></td></tr>
+          <tr><td style="color:var(--text2)">Sacados identificados</td><td><span class="risk-warn">61% nomeados · 39% anônimos</span></td></tr>
+          <tr><td style="color:var(--text2)">Ciclo médio de pgto.</td><td>B2B padrão 30–60 dias</td></tr>
+          <tr><td style="color:var(--text2)">ILM Emitente 90d</td><td><span class="risk-ok">86% — pagadores razoáveis</span></td></tr>
+          <tr><td style="color:var(--text2)">ILM Sacado 90d</td><td><span class="risk-high">20% — má pagadora de fornecedores</span></td></tr>
+          <tr><td style="color:var(--text2)">Elegibilidade estrutural</td><td><span class="risk-ok">COMPATÍVEL</span></td></tr>
+          <tr><td style="color:var(--text2)">Elegibilidade operacional</td><td><span class="risk-high">BLOQUEADA — protestos ativos</span></td></tr>
+        </tbody>
+      </table>
+      <div class="info-box" style="margin-top:.75rem">⚠ Embora o modelo de negócio seja estruturalmente compatível com antecipação de recebíveis, o volume de protestos (R$2,3M) e ações judiciais compromete a previsibilidade e segurança da operação, independentemente da qualidade estrutural dos recebíveis. Necessário validar situação fiscal dos sacados principais (Fazenda Futuro, Agropacking) antes de qualquer operação.</div>
+    </div>
+  </div>
+</section>
+
+<!-- RF-2. ANÁLISE JURÍDICA CONSULTIVA -->
+<section id="juridico" class="rf-section">
+  <div class="section-label">Parecer Financeiro · RF-2</div>
+  <h2 class="section-title">Análise Jurídica Consultiva</h2>
+  <div style="font-size:.75rem;color:var(--text2);margin-bottom:1.25rem;font-style:italic">Análise de caráter consultivo e não vinculante. Não substitui due diligence jurídica especializada. — Rafael Bazan</div>
+
+  <div class="card" style="margin-bottom:1.25rem">
+    <div class="card-title" style="color:#fca5a5">1. Protestos — CRÍTICO</div>
+    <p style="font-size:.85rem;color:var(--text2);line-height:1.75">O volume de <strong style="color:var(--text)">97 protestos, totalizando R$ 2.343.913</strong>, é o alerta jurídico mais grave desta análise. A concentração em São Bernardo do Campo (local da filial operacional) e em Barueri (sede) sugere origem em relações comerciais e fiscais locais. Os protestos mais recentes — dois grupos em maio e abril/2026, incluindo um de <strong style="color:#fca5a5">R$ 248.114</strong> — indicam que a situação está em deterioração ativa, não estabilizada.</p>
+    <p style="font-size:.85rem;color:var(--text2);line-height:1.75;margin-top:.65rem">A persistência de novos protestos em 2026 é <strong style="color:#fca5a5">incompatível com a narrativa de recuperação financeira</strong> apresentada pelo balanço de 2025. Uma empresa que fatura R$ 7,9M anuais e acumula quase R$ 2,4M em protestos apresenta, na prática, grave disfunção no cumprimento de suas obrigações comerciais.</p>
+  </div>
+
+  <div class="card" style="margin-bottom:1.25rem">
+    <div class="card-title">2. Ações Judiciais</div>
+    <table class="data-table">
+      <thead><tr><th>Natureza</th><th>Valor</th><th>Data</th><th>Comentário Rafael Bazan</th></tr></thead>
+      <tbody>
+        <tr><td><span class="risk-high">Execução Fiscal Estadual</span></td><td class="mono">R$ 66.101</td><td class="mono">Dez/2025</td><td style="color:var(--text2)">Confirma débitos com SEFAZ-SP — coerentes com obrig. tributárias LP de R$1.366k</td></tr>
+        <tr><td><span class="risk-high">Execução Fiscal Municipal</span></td><td class="mono">R$ 111.130</td><td class="mono">Set/2025</td><td style="color:var(--text2)">Débitos ISS/tributos municipais — compromete certidões negativas obrigatórias</td></tr>
+        <tr><td><span class="risk-warn">Execução Trabalhista</span></td><td class="mono">R$ 3.184</td><td class="mono">Mar/2025</td><td style="color:var(--text2)">Indica vínculos empregatícios não declarados ou rescisão irregular</td></tr>
+        <tr><td colspan="4" style="text-align:center;color:var(--text2);font-size:.75rem">+ 60 processos trabalhistas via TRT-2/SP identificados pelo CreditHub (2018–2023) — passivo contingente não dimensionado</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="two-col" style="margin-bottom:1.25rem">
+    <div class="card">
+      <div class="card-title">3. Histórico do Gestor — Risco Gestional</div>
+      <p style="font-size:.85rem;color:var(--text2);line-height:1.75;margin-bottom:.65rem">Teofanes Pedro Moreira Santos, atual Diretor, possui participação em <strong style="color:#fca5a5">três empresas baixadas no setor alimentício com protestos</strong> (Netfoods, Tiffin Foods, Bulqi). Esse padrão — múltiplas empresas de alimentos abertas e encerradas com pendências — requer análise aprofundada do histórico do gestor.</p>
+      <p style="font-size:.85rem;color:var(--text2);line-height:1.75">Adicionalmente, a <strong style="color:var(--text)">6Place Plataforma Digital de Negócios S.A.</strong> (empresa do próprio Teofanes) é simultaneamente acionista da FREZZE — conflito de interesse não declarado inicialmente. A empresa Distacado Comércio (também de Teofanes, ativa) possui 3 protestos ativos.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">4. Parcelamento Tributário &amp; Acionistas Estrangeiros</div>
+      <table class="data-table">
+        <tbody>
+          <tr><td style="color:var(--text2)">Obrig. Tributárias LP (BS 2025)</td><td class="mono negative">R$ 1.366k</td></tr>
+          <tr><td style="color:var(--text2)">Tipo presumido</td><td>PERT / REFIS / Parcel. Ordinário</td></tr>
+          <tr><td style="color:var(--text2)">Regularidade comprovada</td><td><span class="risk-high">NÃO — não apresentada</span></td></tr>
+          <tr><td style="color:var(--text2)">Risco de inadimplência</td><td>Retira regularidade fiscal imediatamente</td></tr>
+        </tbody>
+      </table>
+      <div class="info-box" style="margin-top:.75rem">⚠ <strong>YNN Ventures Ltd.</strong> (empresa estrangeira) e <strong>Guilherme Aragão</strong> (residente em Miami/EUA) são acionistas via mútuos conversíveis. Exige verificação de conformidade com a <strong>Resolução BCB nº 278/2022</strong> (registro de capital estrangeiro). Ausência desta verificação constitui risco regulatório material.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">5. Diligências Necessárias — Condição Suspensiva de Qualquer Aprovação</div>
+    <table class="data-table">
+      <thead><tr><th>#</th><th>Documento / Ação</th><th class="text-right">Prioridade</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Certidões negativas: Receita Federal (PGF+SRF), SEFAZ-SP, Prefeituras de SBC e Barueri, TRT 2ª e 15ª Regiões, TJ-SP</td><td class="text-right"><span class="risk-high">CRÍTICA</span></td></tr>
+        <tr><td>2</td><td>Regularização e comprovação de quitação/acordo formal dos 97 protestos (ao menos os 20 maiores acima de R$10k)</td><td class="text-right"><span class="risk-high">CRÍTICA</span></td></tr>
+        <tr><td>3</td><td>Relação completa dos 60 processos judiciais (CreditHub): natureza, valor, fase processual e provisão contábil</td><td class="text-right"><span class="risk-high">CRÍTICA</span></td></tr>
+        <tr><td>4</td><td>Extratos bancários dos últimos 12 meses para conciliação do faturamento declarado vs. movimentação real</td><td class="text-right"><span class="risk-high">CRÍTICA</span></td></tr>
+        <tr><td>5</td><td>Estatuto Social consolidado pós-AGE de ago/2025 + composição acionária completa com % por sócio</td><td class="text-right"><span class="risk-warn">ALTA</span></td></tr>
+        <tr><td>6</td><td>Contratos de mútuo conversível originais de todos os 7 conversores da AGE</td><td class="text-right"><span class="risk-warn">ALTA</span></td></tr>
+        <tr><td>7</td><td>Comprovação da regularidade do parcelamento tributário de R$1.366k no LP</td><td class="text-right"><span class="risk-warn">ALTA</span></td></tr>
+        <tr><td>8</td><td>Identificação completa e compliance BCB dos acionistas YNN Ventures Ltd. e Guilherme Aragão (Miami/EUA)</td><td class="text-right"><span class="risk-warn">ALTA</span></td></tr>
+        <tr><td>9</td><td>Visita presencial urgente à sede (Alameda Tocantins, 75, Alphaville) e filial (São Bernardo do Campo)</td><td class="text-right"><span class="risk-moderate">MODERADA</span></td></tr>
+        <tr><td>10</td><td>Contato direto com Fazenda Futuro e Agropacking para confirmar relacionamento, volumes e histórico de pagamento</td><td class="text-right"><span class="risk-moderate">MODERADA</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- RF-3. CLASSIFICAÇÃO DE RISCO DETALHADA -->
+<section id="risco-dim" class="rf-section">
+  <div class="section-label">Parecer Financeiro · RF-3</div>
+  <h2 class="section-title">Classificação de Risco por Dimensão — Rafael Bazan</h2>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header"><div class="risk-dim-name">Risco Financeiro</div><span class="risk-warn">MÉDIO-ALTO</span></div>
+    <div class="risk-dim-desc">Reversão em 2025 parcialmente comprovada via balanço auditado (EBITDA +R$1,25M, Lucro +R$1,13M). Entretanto, o caixa de R$33k é irrisório frente às obrigações, o endividamento bancário cresceu +93% em apenas 4 meses de 2026 e os prejuízos acumulados de R$5,85M evidenciam que o PL positivo existe exclusivamente em razão do aporte de capital de R$6,6M em ago/2025. A discrepância de R$633k entre faturamento declarado e DRE 2025 não foi explicada.</div>
+  </div>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header"><div class="risk-dim-name">Risco Operacional</div><span class="risk-moderate">MÉDIO</span></div>
+    <div class="risk-dim-desc">Sede e filial operacional identificadas (Barueri e SBC). Faturamento de R$7,9M é compatível com o porte declarado de um armazém frigorificado. Entretanto, a estrutura física e operacional não foi verificada presencialmente — visita urgente é recomendada. A margem bruta de 83,4% é excepcionalmente alta para o setor, o que pode indicar subregistro de custos ou diferença na classificação de despesas como administrativas.</div>
+  </div>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header"><div class="risk-dim-name">Risco Jurídico</div><span class="risk-high">CRÍTICO</span></div>
+    <div class="risk-dim-desc">97 protestos totalizando R$2,34M com deterioração ativa em abr–mai/2026. 3 execuções fiscais/trabalhistas somando R$180k. 60 processos trabalhistas no TRT-2/SP com passivo contingente não quantificado em balanço. Parcelamento tributário de R$1,366k sem comprovação de regularidade. Acionistas estrangeiros sem verificação de compliance BCB. Este é o principal impeditivo à aprovação da operação no estágio atual.</div>
+  </div>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header"><div class="risk-dim-name">Risco Gestional</div><span class="risk-high">ALTO</span></div>
+    <div class="risk-dim-desc">Diretor Teofanes Santos possui histórico de 3 empresas baixadas no setor alimentício com protestos associados (Netfoods, Tiffin Foods, Bulqi). Renda estimada de R$2.722/mês pelo CreditHub é inconsistente com o cargo de Diretor de empresa com R$7,9M de faturamento. Conflito de interesse: 6Place (sua empresa) é acionista da FREZZE. Participa da Distacado Comércio (ativa, 3 protestos). Este padrão serial de inadimplência empresarial é sinal de alerta gestional relevante.</div>
+  </div>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header"><div class="risk-dim-name">Risco de Fraude / Simulação</div><span class="risk-moderate">MÉDIO</span></div>
+    <div class="risk-dim-desc">O aporte de capital via conversão de mútuos está parcialmente comprovado pela AGE registrada na JUCESP (protocolo 2.836.786/25-5), o que reduz — mas não elimina — o risco de simulação. A persistência de discrepância de R$633k entre faturamento declarado e DRE requer conciliação com extratos bancários. A frequência elevada de consultas ao Serasa (44 nos últimos 12 meses) pode indicar busca intensa por crédito em múltiplas frentes simultaneamente.</div>
+  </div>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header"><div class="risk-dim-name">Risco de Concentração (Sacados)</div><span class="risk-moderate">MÉDIO</span></div>
+    <div class="risk-dim-desc">Fazenda Futuro representa 23% isolada do faturamento bruto — qualquer ruptura contratual com este cliente impacta materialmente a receita. Top 5 clientes = 61% do faturamento. Os 39% restantes (clientes C) não foram identificados, impossibilitando análise de risco da carteira de recebíveis elegíveis para antecipação. Necessário validar situação fiscal dos sacados principais antes de qualquer operação.</div>
+  </div>
+
+  <div class="card" style="margin-top:1.25rem;background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.25)">
+    <div class="card-title">Classificação Geral — v2.0</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+      <div>
+        <div style="font-size:1.4rem;font-weight:800;font-family:'Syne',sans-serif;color:#fca5a5">ALTO — NÃO RECOMENDADO</div>
+        <div style="font-size:.82rem;color:var(--text2);margin-top:.3rem">no estágio documental atual · Parecer Técnico v2.0 · Rafael Bazan</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:.75rem;color:var(--text2)">Condição para reanálise</div>
+        <div style="font-size:.82rem;color:#fcd34d;margin-top:.2rem">Certidões negativas + regularização de protestos +<br>esclarecimento dos 60 processos TRT → MÉDIO-ALTO com limite conservador</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RF-4. ESTRUTURA DE GARANTIAS -->
+<section id="garantias" class="rf-section">
+  <div class="section-label">Parecer Financeiro · RF-4</div>
+  <h2 class="section-title">Estrutura de Garantias Recomendada</h2>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Garantias Obrigatórias</div>
+      <div>
+        <div class="guarantee-item">
+          <div class="guarantee-num" style="background:rgba(239,68,68,0.15);color:#ef4444;border:1px solid rgba(239,68,68,0.3)">1</div>
+          <div class="guarantee-text"><strong>Aval solidário pessoal — Teofanes Pedro Moreira Santos</strong><br>Diretor atual e único responsável operacional identificado. Aval pessoal é condição mínima para qualquer operação.</div>
+        </div>
+        <div class="guarantee-item">
+          <div class="guarantee-num" style="background:rgba(239,68,68,0.15);color:#ef4444;border:1px solid rgba(239,68,68,0.3)">2</div>
+          <div class="guarantee-text"><strong>Aval solidário pessoal — Mariana de Paula Rago Furlan</strong><br>Acionista fundadora, ainda com participação relevante via FRZ Participações. Aval complementa a estrutura de garantias pessoais.</div>
+        </div>
+        <div class="guarantee-item">
+          <div class="guarantee-num" style="background:rgba(239,68,68,0.15);color:#ef4444;border:1px solid rgba(239,68,68,0.3)">3</div>
+          <div class="guarantee-text"><strong>Cessão fiduciária de recebíveis com aceite dos sacados</strong><br>Especialmente Fazenda Futuro (23% do fat.) e Agropacking (11%). Aceite do sacado mitiga o risco de desvio de recebíveis.</div>
+        </div>
+        <div class="guarantee-item">
+          <div class="guarantee-num" style="background:rgba(239,68,68,0.15);color:#ef4444;border:1px solid rgba(239,68,68,0.3)">4</div>
+          <div class="guarantee-text"><strong>Fundo de reserva de 15% do limite aprovado</strong><br>Superior ao padrão de 10% dado o risco elevado da operação. Retenção obrigatória durante todo o período contratual.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Garantias Complementares e Cláusulas Especiais</div>
+      <div>
+        <div class="guarantee-item">
+          <div class="guarantee-num" style="background:rgba(59,130,246,0.15);color:#60a5fa;border:1px solid rgba(59,130,246,0.3)">5</div>
+          <div class="guarantee-text"><strong>Contrato de cessão com cláusula de regresso integral</strong><br>Em caso de inadimplência do sacado, regresso automático e integral à cedente, sem carência.</div>
+        </div>
+        <div class="guarantee-item">
+          <div class="guarantee-num" style="background:rgba(59,130,246,0.15);color:#60a5fa;border:1px solid rgba(59,130,246,0.3)">6</div>
+          <div class="guarantee-text"><strong>Cláusula de não-protesto durante vigência</strong><br>Proibição contratual de contratar novos protestos durante a vigência da operação. Novo protesto acima de R$10k = vencimento antecipado automático.</div>
+        </div>
+        <div class="guarantee-item">
+          <div class="guarantee-num" style="background:rgba(59,130,246,0.15);color:#60a5fa;border:1px solid rgba(59,130,246,0.3)">7</div>
+          <div class="guarantee-text"><strong>Declaração de bens pessoais atualizada</strong><br>De Teofanes e Mariana — para fins de garantia real suplementar e acompanhamento do patrimônio dos avalistas.</div>
+        </div>
+        <div class="guarantee-item">
+          <div class="guarantee-num" style="background:rgba(59,130,246,0.15);color:#60a5fa;border:1px solid rgba(59,130,246,0.3)">8</div>
+          <div class="guarantee-text"><strong>Limite reduzido na fase inicial</strong><br>Máximo de 30% da média mensal de faturamento nos primeiros 90 dias (≈ R$192k), com revisão condicionada à performance e entrega de documentação.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RF-5. PLANO DE MONITORAMENTO -->
+<section id="monitoramento" class="rf-section">
+  <div class="section-label">Parecer Financeiro · RF-5</div>
+  <h2 class="section-title">Plano de Monitoramento Contínuo</h2>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Monitoramento Periódico</div>
+      <div>
+        <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div><div><strong style="color:var(--text)">Mensal — Consulta Serasa automatizada</strong><br>Alerta imediato se surgirem novos protestos ou negativações para FREZZE, FRZ Participações, Teofanes e Mariana.</div></div>
+        <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div><div><strong style="color:var(--text)">Mensal — Extratos bancários + declaração de faturamento</strong><br>Obrigatório por contrato. Cruzamento com emissão de boletos CredMap e movimentação bancária declarada.</div></div>
+        <div class="trigger-item"><div class="trigger-dot" style="background:#f59e0b"></div><div><strong style="color:var(--text)">Trimestral — Balancete e posição de protestos</strong><br>Acompanhar evolução do P&L, posição de protestos (em resolução ou quitados) e endividamento bancário.</div></div>
+        <div class="trigger-item"><div class="trigger-dot" style="background:#22c55e"></div><div><strong style="color:var(--text)">Semestral — Certidões negativas</strong><br>Verificação de regularidade fiscal e trabalhista em todas as esferas. Resultado positivo = revisão de limite.</div></div>
+        <div class="trigger-item"><div class="trigger-dot" style="background:#3b82f6"></div><div><strong style="color:var(--text)">90 dias — Revisita presencial</strong><br>Visita às instalações de Alphaville e São Bernardo do Campo para verificar se a situação operacional está se consolidando.</div></div>
+        <div class="trigger-item"><div class="trigger-dot" style="background:#8b5cf6"></div><div><strong style="color:var(--text)">Contínuo — Monitoramento dos sacados principais</strong><br>Situação cadastral de Fazenda Futuro e Agropacking via Serasa/Boa Vista — proteger a carteira de recebíveis elegíveis.</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Gatilhos de Revisão Imediata</div>
+      <div style="margin-bottom:.5rem;font-size:.78rem;color:var(--text2)">Qualquer um dos eventos abaixo aciona revisão imediata do limite e eventual vencimento antecipado:</div>
+      <div>
+        <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div><div><span class="risk-high">CRÍTICO</span> Novo protesto acima de R$10.000 — vencimento antecipado automático conforme cláusula contratual</div></div>
+        <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div><div><span class="risk-high">CRÍTICO</span> Nova ação judicial de qualquer natureza contra a empresa</div></div>
+        <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div><div><span class="risk-high">CRÍTICO</span> Inadimplência com sacado acima de R$30.000 não regularizada em 15 dias</div></div>
+        <div class="trigger-item"><div class="trigger-dot" style="background:#f59e0b"></div><div><span class="risk-warn">ALTO</span> Qualquer alteração societária ou de diretoria não previamente comunicada</div></div>
+        <div class="trigger-item"><div class="trigger-dot" style="background:#f59e0b"></div><div><span class="risk-warn">ALTO</span> Inadimplência no parcelamento tributário (perda da regularidade fiscal)</div></div>
+        <div class="trigger-item"><div class="trigger-dot" style="background:#f59e0b"></div><div><span class="risk-warn">ALTO</span> Queda de faturamento declarado superior a 30% vs. média dos 3 meses anteriores</div></div>
+        <div class="trigger-item"><div class="trigger-dot" style="background:#eab308"></div><div><span class="risk-moderate">MODERADO</span> Novo empréstimo bancário não previamente comunicado à AG Antecipa</div></div>
+        <div class="trigger-item"><div class="trigger-dot" style="background:#eab308"></div><div><span class="risk-moderate">MODERADO</span> Atraso no envio de extratos ou declaração de faturamento por 2 meses consecutivos</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RF-6. PARECER FINANCEIRO RAFAEL BAZAN -->
+<section id="parecer-financeiro" class="rf-section">
+  <div class="section-label">Parecer Financeiro · RF-6</div>
+  <h2 class="section-title">Parecer Financeiro Final — Rafael Bazan</h2>
+  <div class="analyst-banner">
+    <div class="analyst-avatar" style="background:rgba(59,130,246,0.15);color:#60a5fa;border-color:rgba(59,130,246,0.35)">RB</div>
+    <div>
+      <div class="analyst-name">Rafael Bazan <span class="analyst-tag" style="background:rgba(59,130,246,0.1);color:#93c5fd;border-color:rgba(59,130,246,0.3)">Analista Financeiro</span></div>
+      <div class="analyst-role">AG Antecipa · Parecer Técnico de Crédito v2.0 · 25/05/2026</div>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-bottom:1.25rem">
+    <div class="card">
+      <div class="card-title" style="color:#86efac">Fatores Positivos Identificados</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem">
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#86efac;flex-shrink:0">✓</span>Aumento de capital comprovado e registrado na JUCESP — natureza jurídica clara da conversão de mútuos</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#86efac;flex-shrink:0">✓</span>Presença de investidores institucionais (Cotidiano Aceleradora, Orla Ventures) indica due diligence prévia por terceiros</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#86efac;flex-shrink:0">✓</span>Faturamento crescente: R$5,7M (2023) → R$7,9M (2025), com 2026 em ritmo anualizado similar (~R$7,7M)</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#86efac;flex-shrink:0">✓</span>BACEN sem inadimplência — carteira bancária de R$169.854 com 100% a vencer, sem parcelas vencidas no SCR</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#86efac;flex-shrink:0">✓</span>Score FRZ Participações (740): a holding tem boa reputação de crédito, sem protestos ou negativações</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#86efac;flex-shrink:0">✓</span>Mariana: sem protestos pessoais, CPF regular — perfil pessoal moderado</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#86efac;flex-shrink:0">✓</span>Margem bruta expressiva (83,4% em 2025) e primeiro EBITDA positivo após anos de prejuízo</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:#fca5a5">Fatores Negativos Determinantes</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem">
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#fca5a5;flex-shrink:0">✗</span>97 protestos (R$2,34M) com deterioração ativa em abr–mai/2026 — incompatível com narrativa de recuperação</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#fca5a5;flex-shrink:0">✗</span>Score CreditBox 150 — classificação de extremo risco, nível máximo de probabilidade de inadimplência sistêmica</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#fca5a5;flex-shrink:0">✗</span>60 processos jurídicos (CreditHub) além das 3 ações Serasa — extensão real do passivo contingente desconhecida</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#fca5a5;flex-shrink:0">✗</span>Diretor com padrão serial de empresas encerradas com protestos no setor alimentício — risco gestional elevado</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#fca5a5;flex-shrink:0">✗</span>Endividamento bancário +93% em 4 meses — nota comercial triplicou, sugerindo nova pressão aguda de caixa</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#fca5a5;flex-shrink:0">✗</span>Acionistas estrangeiros sem compliance BCB verificado — risco regulatório material</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#fca5a5;flex-shrink:0">✗</span>Certidões negativas improváveis dado o volume de execuções fiscais e protestos — condição suspensiva de difícil cumprimento</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="analyst-note">
+    <strong>Parecer Técnico — Rafael Bazan · AG Antecipa · v2.0</strong><br><br>
+    "A documentação complementar trazida na versão 2.0 desta análise impõe uma <strong>revisão substancial e negativa</strong> do cenário originalmente avaliado. A presença de 97 protestos no valor total de R$ 2.343.913, com protestos recentes em abril e maio de 2026 em aceleração, é o fato mais relevante desta reavaliação. Uma empresa que fatura R$ 7,9 milhões anuais e acumula quase R$ 2,4 milhões em protestos apresenta, na prática, grave disfunção no cumprimento de suas obrigações comerciais — incompatível com o perfil de geração de caixa sustentável que o balanço de 2025 tentou demonstrar.<br><br>
+    O score de crédito de 150 (CreditBox — extremo risco) e os 60 processos jurídicos (CreditHub) reforçam o diagnóstico. O histórico do atual Diretor — três empresas anteriores no mesmo setor, todas baixadas com pendências — adiciona uma dimensão de risco gestional que não pode ser ignorada.<br><br>
+    Em contrapartida, a AGE de ago/2025 esclareceu parcialmente a origem do capital (mútuos conversíveis), o que reduz — mas não elimina — o risco de simulação de aporte. A presença de investidores institucionais como a Cotidiano Aceleradora sugere que a empresa foi objeto de análise anterior por terceiros. O BACEN sem inadimplência e o histórico pessoal limpo dos sócios (no âmbito pessoal) são elementos moderadamente positivos.<br><br>
+    <strong>O Comitê de Crédito da AG Antecipa NÃO DEVE APROVAR esta operação no estágio documental atual.</strong> A operação somente poderá ser reconsiderada após: (i) apresentação e análise das certidões de débito; (ii) regularização e comprovação de quitação ou acordo dos principais protestos; e (iii) esclarecimento completo do histórico jurídico do Diretor e das empresas relacionadas. Caso a empresa consiga apresentar certidões válidas e comprovar que os protestos estão em regularização, o caso poderá ser reanalisado com risco MÉDIO-ALTO e limite conservador."
+  </div>
+
+  <div class="verdict-panel danger" style="margin-top:1.25rem">
+    <div class="verdict-title">⛔ NÃO RECOMENDADO</div>
+    <div class="verdict-sub">Risco Classificado como ALTO · Parecer Técnico v2.0 · Rafael Bazan</div>
+    <div class="verdict-limit">Condição de reabertura: Certidões negativas + regularização de protestos + relação dos 60 processos TRT → Reanálise como MÉDIO-ALTO</div>
+  </div>
+</section>
+
+<!-- VEREDICTO CONJUNTO -->
+<section id="veredicto">
+  <div class="section-label">Conclusão do Comitê</div>
+  <h2 class="section-title">Veredicto Conjunto — Comitê AG Antecipa</h2>
+
+  <div class="veredicto-grid">
+    <div class="veredicto-card">
+      <div class="veredicto-card-name">Análise de Crédito</div>
+      <div style="width:48px;height:48px;border-radius:50%;background:rgba(239,68,68,0.15);border:2px solid rgba(239,68,68,0.4);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;font-family:'Syne',sans-serif;color:#ef4444;margin:0 auto .75rem">MV</div>
+      <div class="veredicto-card-verdict">⛔ RECUSAR</div>
+      <div class="veredicto-card-role">Marcelo Vazquez · Analista de Crédito</div>
+      <div class="veredicto-card-sub">Score 150/1000 · 97 protestos (R$2,34M) · ILM sacado 20% · Dívida +93% em 4 meses · Diretor com histórico de 3 empresas encerradas com pendências. Operação incompatível com o perfil de risco exigido pela AG Antecipa no estágio atual.</div>
+    </div>
+    <div class="veredicto-card">
+      <div class="veredicto-card-name">Análise Financeira &amp; Jurídica</div>
+      <div style="width:48px;height:48px;border-radius:50%;background:rgba(59,130,246,0.15);border:2px solid rgba(59,130,246,0.4);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;font-family:'Syne',sans-serif;color:#60a5fa;margin:0 auto .75rem">RB</div>
+      <div class="veredicto-card-verdict" style="color:#fca5a5">⛔ NÃO RECOMENDADO</div>
+      <div class="veredicto-card-role">Rafael Bazan · Analista Financeiro</div>
+      <div class="veredicto-card-sub">Risco Jurídico Crítico · 60 processos TRT · parcelamento tributário sem comprovação · compliance de acionistas estrangeiros ausente · deterioração ativa de protestos contradiz narrativa de recuperação. Aprovação condicionada a resolução completa de 10 condicionantes suspensivas.</div>
+    </div>
+  </div>
+
+  <div class="veredicto-unified">
+    <div style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.75rem">Decisão Unânime do Comitê de Crédito · AG Antecipa · 25/05/2026</div>
+    <div style="font-size:2rem;font-weight:800;font-family:'Syne',sans-serif;color:#fca5a5;margin-bottom:.5rem">⛔ OPERAÇÃO RECUSADA</div>
+    <div style="font-size:.9rem;color:var(--text2);margin-bottom:1rem">FREZZE Comércio de Alimentos e Armazenagem p/ Conta de Terceiros S.A. · CNPJ 32.345.292/0001-90</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;max-width:700px;margin:0 auto 1rem">
+      <div style="background:rgba(239,68,68,0.08);border-radius:8px;padding:.75rem;font-size:.78rem"><div style="color:var(--text2);margin-bottom:.2rem">Score CreditBox</div><div style="color:#fca5a5;font-weight:700">150/1.000</div></div>
+      <div style="background:rgba(239,68,68,0.08);border-radius:8px;padding:.75rem;font-size:.78rem"><div style="color:var(--text2);margin-bottom:.2rem">Protestos Ativos</div><div style="color:#fca5a5;font-weight:700">60 · R$ 1,47M+</div></div>
+      <div style="background:rgba(239,68,68,0.08);border-radius:8px;padding:.75rem;font-size:.78rem"><div style="color:var(--text2);margin-bottom:.2rem">Limite Aprovado</div><div style="color:#fca5a5;font-weight:700">R$ 0,00</div></div>
+    </div>
+    <div style="font-size:.82rem;color:#fcd34d;margin-top:.5rem">Reanálise possível após resolução das condicionantes críticas (seções RF-2 e RF-6)</div>
+    <div style="margin-top:1.25rem;display:flex;justify-content:center;gap:2rem;flex-wrap:wrap">
+      <div style="text-align:center"><div style="font-size:.7rem;color:var(--muted);margin-bottom:.3rem">Analista de Crédito</div><div style="font-size:.85rem;font-weight:600;border-top:1px solid rgba(255,255,255,0.15);padding-top:.4rem;min-width:160px">Marcelo Vazquez</div></div>
+      <div style="text-align:center"><div style="font-size:.7rem;color:var(--muted);margin-bottom:.3rem">Analista Financeiro</div><div style="font-size:.85rem;font-weight:600;border-top:1px solid rgba(255,255,255,0.15);padding-top:.4rem;min-width:160px">Rafael Bazan</div></div>
+    </div>
+  </div>
+</section>
+
 <footer>
-  AG Antecipa Securitizadora · Parecer de Crédito Empresarial · FREZZE Comércio de Alimentos e Armazenagem p/ Conta de Terceiros S.A. · CNPJ 32.345.292/0001-90<br>
-  Analista: Marcelo Vazquez · Data-base: 22/05/2026 · Gerado em 25/05/2026<br>
-  Fontes: BP/DRE 2022–2025 (D4Sign 27/01/2026) · Declaração Faturamento (08/05/2026) · BACEN/SCR Abr/26 · Serasa VADU · CreditBox · CreditHub · AGE 08/08/2025
+  AG Antecipa Securitizadora · Parecer de Comitê de Crédito — Crédito + Financeiro · FREZZE Comércio de Alimentos e Armazenagem p/ Conta de Terceiros S.A. · CNPJ 32.345.292/0001-90<br>
+  Analista de Crédito: Marcelo Vazquez · Analista Financeiro: Rafael Bazan · Data-base: 22/05/2026 · Gerado em 25/05/2026<br>
+  Fontes: BP/DRE 2022–2025 (D4Sign 27/01/2026) · Declaração Faturamento (08/05/2026) · BACEN/SCR Abr/26 · Serasa VADU · CreditBox · CreditHub · AGE 08/08/2025 · Parecer Técnico v2.0 (Rafael Bazan)
 </footer>
 
 <script>
