@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parecer de Crédito — FREZZE · Maio 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0a0f1e;--navy2:#111827;--blue:#1e3a5f;
+  --accent:#ef4444;--accent-dim:rgba(239,68,68,0.12);--accent-border:rgba(239,68,68,0.3);
+  --amber:#f59e0b;--red:#ef4444;--green:#22c55e;--muted:#6b7280;
+  --text:#e5e7eb;--text2:#9ca3af;--border:rgba(255,255,255,0.07);
+}
+body{background:var(--navy);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6}
+h1,h2,h3{font-family:'Syne',sans-serif}
+.mono{font-family:'DM Mono',monospace}
+
+/* HERO */
+.hero{position:relative;min-height:340px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(135deg,#0a0f1e 0%,#150608 60%,#1a0a0a 100%);border-bottom:1px solid var(--border)}
+.hero-orbs{position:absolute;inset:0;pointer-events:none}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55}
+.hero-orb.o1{width:420px;height:420px;top:-80px;left:-60px;background:radial-gradient(circle,rgba(239,68,68,0.55) 0%,transparent 70%)}
+.hero-orb.o2{width:300px;height:300px;bottom:-60px;right:80px;background:radial-gradient(circle,rgba(239,68,68,0.3) 0%,transparent 70%)}
+.hero-content{position:relative;z-index:2;text-align:center;padding:2.5rem 2rem}
+.hero-badge{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);margin-bottom:.75rem;font-family:'DM Mono',monospace}
+.hero-title{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;line-height:1.1;margin-bottom:.75rem;letter-spacing:-.02em}
+.hero-title .accent{color:var(--accent)}
+.hero-sub{color:var(--text2);font-size:.9rem;margin-bottom:1.25rem;font-family:'DM Mono',monospace}
+.hero-chips{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+.chip{padding:.3rem .85rem;border-radius:999px;font-size:.75rem;font-weight:600;letter-spacing:.04em;border:1px solid var(--border);background:rgba(255,255,255,0.06);color:var(--text2)}
+.chip.danger{background:rgba(239,68,68,0.15);border-color:rgba(239,68,68,0.4);color:#fca5a5}
+
+/* NAV */
+.sticky-nav{position:sticky;top:0;z-index:100;background:rgba(10,15,30,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.6rem 1rem;overflow-x:auto}
+.sticky-nav ul{display:flex;gap:.35rem;list-style:none;white-space:nowrap}
+.nav-pill{display:inline-block;padding:.35rem .85rem;border-radius:999px;font-size:.75rem;font-weight:600;color:var(--text2);text-decoration:none;transition:all .2s}
+.nav-pill:hover,.nav-pill.active{background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-border)}
+.nav-pill{border:1px solid transparent}
+
+/* SECTIONS */
+section{padding:3rem 2rem;max-width:1100px;margin:0 auto}
+section+section{border-top:1px solid var(--border)}
+.section-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-family:'DM Mono',monospace;margin-bottom:.4rem}
+.section-title{font-size:1.6rem;font-weight:700;margin-bottom:1.75rem}
+
+/* CARDS */
+.card{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+.card-title{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);margin-bottom:.75rem;font-family:'DM Mono',monospace}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+.kpi-card{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;border-left:3px solid var(--accent)}
+.kpi-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:.3rem;font-family:'DM Mono',monospace}
+.kpi-value{font-size:1.55rem;font-weight:700;font-family:'Syne',sans-serif;line-height:1}
+.kpi-sub{font-size:.72rem;color:var(--text2);margin-top:.25rem}
+
+/* STATUS TABLE */
+.status-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.status-table th{text-align:left;padding:.6rem 1rem;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--border);font-family:'DM Mono',monospace}
+.status-table td{padding:.65rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04)}
+.status-table tr:hover td{background:rgba(255,255,255,0.02)}
+
+/* RISK CHIPS */
+.risk-ok{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(34,197,94,0.15);color:#86efac;border:1px solid rgba(34,197,94,0.3)}
+.risk-high{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(239,68,68,0.15);color:#fca5a5;border:1px solid rgba(239,68,68,0.3)}
+.risk-warn{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(245,158,11,0.15);color:#fcd34d;border:1px solid rgba(245,158,11,0.3)}
+.risk-moderate{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(234,179,8,0.12);color:#fde68a;border:1px solid rgba(234,179,8,0.3)}
+.risk-info{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(59,130,246,0.15);color:#93c5fd;border:1px solid rgba(59,130,246,0.3)}
+.risk-low{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(34,197,94,0.1);color:#6ee7b7;border:1px solid rgba(34,197,94,0.2)}
+
+/* TABLE */
+.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.data-table th{text-align:left;padding:.55rem .85rem;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-weight:500}
+.data-table td{padding:.55rem .85rem;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text)}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:rgba(255,255,255,0.02)}
+.text-right{text-align:right}
+.text-center{text-align:center}
+.negative{color:#fca5a5}
+.positive{color:#86efac}
+.bold{font-weight:600}
+
+/* CHART */
+.chart-wrap{position:relative;height:220px}
+
+/* GAUGE */
+.gauge-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem}
+.gauge-svg{width:160px;height:90px;overflow:visible}
+.gauge-label{font-size:1.8rem;font-weight:700;font-family:'Syne',sans-serif;text-anchor:middle;dominant-baseline:middle}
+.gauge-sub{font-size:.65rem;text-anchor:middle;fill:var(--text2)}
+.gauge-score-label{font-size:.75rem;color:var(--text2);margin-top:.4rem;text-align:center}
+
+/* PROGRESS */
+.progress-item{margin-bottom:.75rem}
+.progress-label{display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:.3rem;color:var(--text2)}
+.progress-track{height:7px;background:rgba(255,255,255,0.07);border-radius:999px;overflow:hidden}
+.progress-fill{height:100%;border-radius:999px}
+
+/* RISK MATRIX */
+.risk-row{display:grid;grid-template-columns:80px 1fr auto;gap:1rem;align-items:center;padding:.7rem 1rem;border-radius:8px;margin-bottom:.45rem;background:rgba(255,255,255,0.02);border:1px solid var(--border)}
+.risk-level{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-family:'DM Mono',monospace}
+.risk-level.high{color:#fca5a5}
+.risk-level.medium{color:#fcd34d}
+.risk-level.low{color:#86efac}
+.risk-desc{font-size:.82rem;color:var(--text)}
+
+/* VERDICT */
+.verdict-panel{border-radius:14px;padding:1.75rem 2rem;border:1px solid;margin-top:1.5rem;text-align:center}
+.verdict-panel.danger{background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.35)}
+.verdict-title{font-size:1.4rem;font-weight:700;font-family:'Syne',sans-serif;margin-bottom:.4rem}
+.verdict-panel.danger .verdict-title{color:#fca5a5}
+.verdict-sub{font-size:.85rem;color:var(--text2);margin-bottom:1rem}
+.verdict-limit{font-size:1rem;font-weight:600;color:var(--text);margin-top:.75rem}
+
+/* ANALYST NOTE */
+.analyst-note{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;padding:1.25rem 1.5rem;font-size:.85rem;line-height:1.7;color:var(--text2);margin-top:1.25rem}
+.analyst-note strong{color:var(--text)}
+
+/* FOOTER */
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);color:var(--muted);font-size:.75rem;font-family:'DM Mono',monospace}
+
+/* TIMELINE */
+.timeline{list-style:none;padding-left:1.2rem;border-left:2px solid var(--accent-border)}
+.timeline li{position:relative;padding:.4rem 0 .4rem 1rem;font-size:.82rem;color:var(--text2)}
+.timeline li::before{content:'';position:absolute;left:-5px;top:.75rem;width:8px;height:8px;border-radius:50%;background:var(--accent);border:2px solid var(--navy2)}
+.timeline li strong{color:var(--text);display:block}
+
+/* INFO BOX */
+.info-box{background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:1rem 1.25rem;font-size:.83rem;color:#fca5a5;margin-top:1rem}
+
+@media(max-width:768px){
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .two-col,.three-col{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-orbs">
+    <div class="hero-orb o1"></div>
+    <div class="hero-orb o2"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">AG Antecipa · Análise de Crédito Empresarial · Maio/2026</div>
+    <h1 class="hero-title"><span class="accent">FREZZE</span><br>COMÉRCIO DE ALIMENTOS</h1>
+    <div class="hero-sub">CNPJ 32.345.292/0001-90 · Barueri/SP · Armazenagem p/ Terceiros</div>
+    <div class="hero-chips">
+      <span class="chip danger">⛔ RECUSAR</span>
+      <span class="chip">Score 150/1000 — Extremo Risco</span>
+      <span class="chip">97 Protestos · R$ 2,34M</span>
+      <span class="chip">60 Processos Trabalhistas</span>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="sticky-nav">
+  <ul>
+    <li><a href="#dashboard" class="nav-pill active">Dashboard</a></li>
+    <li><a href="#identificacao" class="nav-pill">Identificação</a></li>
+    <li><a href="#financeiro" class="nav-pill">Financeiro</a></li>
+    <li><a href="#serasa" class="nav-pill">Serasa</a></li>
+    <li><a href="#bacen" class="nav-pill">BACEN / SCR</a></li>
+    <li><a href="#creditbox" class="nav-pill">CreditBox</a></li>
+    <li><a href="#patrimonio" class="nav-pill">Patrimônio</a></li>
+    <li><a href="#socios" class="nav-pill">Sócios</a></li>
+    <li><a href="#riscos" class="nav-pill">Riscos</a></li>
+    <li><a href="#parecer" class="nav-pill">Parecer Final</a></li>
+  </ul>
+</nav>
+
+<!-- 0. DASHBOARD -->
+<section id="dashboard">
+  <div class="section-label">Seção 0</div>
+  <h2 class="section-title">Dashboard Executivo</h2>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Faturamento 2025</div>
+      <div class="kpi-value">R$ 7,96M</div>
+      <div class="kpi-sub">+4,8% vs. 2024 · DRE auditada</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">EBITDA 2025</div>
+      <div class="kpi-value positive">R$ 1,25M</div>
+      <div class="kpi-sub">Margem 18,1% · 1º ano positivo</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Dívida Bancária Abr/26</div>
+      <div class="kpi-value negative">R$ 833k</div>
+      <div class="kpi-sub">+93% vs. dez/25 (era R$ 432k)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Protestos CENPROT</div>
+      <div class="kpi-value negative">R$ 2,34M</div>
+      <div class="kpi-sub">97 total · 60 ativos não pagos</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Sumário de Status — Data-base Mai/2026</div>
+    <table class="status-table">
+      <thead><tr><th>Indicador</th><th>Resultado</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Situação CNPJ (RF)</td><td>ATIVA · desde 03/01/2019</td><td><span class="risk-ok">REGULAR</span></td></tr>
+        <tr><td>Score CreditBox</td><td>150 / 1.000</td><td><span class="risk-high">EXTREMO RISCO</span></td></tr>
+        <tr><td>Protestos (CENPROT / Serasa)</td><td>97 títulos · R$ 2.343.913 · 60 não baixados</td><td><span class="risk-high">CRÍTICO</span></td></tr>
+        <tr><td>Ações Judiciais (Serasa)</td><td>3 ações · R$ 180.416 (fiscal + trabalhista)</td><td><span class="risk-high">ALERTA</span></td></tr>
+        <tr><td>Processos Trabalhistas (CreditHub)</td><td>60 processos ativos — TRT 2ª Região/SP</td><td><span class="risk-high">CRÍTICO</span></td></tr>
+        <tr><td>Inadimplência BACEN/SCR</td><td>R$ 0,00 vencido — carteira 100% a vencer</td><td><span class="risk-ok">NADA CONSTA</span></td></tr>
+        <tr><td>Cheques Sem Fundo</td><td>Nada consta em todos os bureaus</td><td><span class="risk-ok">NADA CONSTA</span></td></tr>
+        <tr><td>Sanções (CEIS / CNEP / OFAC)</td><td>Nada consta</td><td><span class="risk-ok">NADA CONSTA</span></td></tr>
+        <tr><td>Patrimônio Líquido 2025</td><td>R$ 774k (revertido via aporte de capital R$ 6,6M)</td><td><span class="risk-warn">ATENÇÃO</span></td></tr>
+        <tr><td>Crescimento de Receita</td><td>+45% em 4 anos (2022→2025)</td><td><span class="risk-ok">POSITIVO</span></td></tr>
+        <tr><td>Recomendação AG Antecipa</td><td>Não aprovado no estágio documental atual</td><td><span class="risk-high">⛔ RECUSAR</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 1. IDENTIFICAÇÃO -->
+<section id="identificacao">
+  <div class="section-label">Seção 1</div>
+  <h2 class="section-title">Identificação do Cedente</h2>
+
+  <div class="two-col" style="margin-bottom:1.25rem">
+    <div class="card">
+      <div class="card-title">Dados Cadastrais</div>
+      <table class="data-table">
+        <tbody>
+          <tr><td class="text-right" style="color:var(--text2);width:42%">Razão Social</td><td class="bold">Frezze Com. Alimentos e Armaz. p/ Conta de Terceiros S.A.</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">Nome Fantasia</td><td>FREZZE ALIMENTOS</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">CNPJ Matriz</td><td class="mono">32.345.292/0001-90</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">CNPJ Filial</td><td class="mono">32.345.292/0002-71</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">NIRE</td><td class="mono">35.300.644.247</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">Fundação</td><td>31/07/2018 (7 anos)</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">Tipo Jurídico</td><td>Sociedade Anônima Fechada</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">CNAE</td><td>52.11-7/99 — Depósito p/ Terceiros</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">Capital Social</td><td>R$ 6.621.679,17 (pós AGE ago/2025)</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">Tributação</td><td>Lucro Presumido (est.)</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">Sede</td><td>Al. Tocantins, 75 — Conj. 810, Alphaville, Barueri/SP</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">Filial Operacional</td><td>R. Makita Brasil, 300 — Câmaras 5 e 6, SBC/SP</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">Diretor Atual</td><td>Teofanes Pedro Moreira Santos — CPF 398.970.908-94</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">Contato</td><td class="mono">(11) 3647-8355</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">Fontes de Dados</td><td>BP/DRE 2022–2025, BACEN Abr/26, Serasa, CreditBox, CreditHub, AGE 08/08/2025</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Histórico Societário</div>
+      <ul class="timeline">
+        <li><strong>Jul/2018 — Constituição</strong>Como armazém geral para alimentos, com sede em São Paulo. Início operacional em São Bernardo do Campo/SP.</li>
+        <li><strong>2021 — Primeiros investidores</strong>Entrada de Orla Ventures (R$ 50k) e Cotidiano Aceleradora de Startups (R$ 75k) via contratos de mútuo conversível. Fundação da holding FRZ Participações Ltda. por Mariana de Paula Rago Furlan.</li>
+        <li><strong>2022 — Rodada de investimento</strong>Mútuos conversíveis com Guilherme Aragão (R$ 100k), Rafael Duton (R$ 50k) e Leandro Bassoi (R$ 50k). Início do crescimento de receita acima de R$ 5M/ano.</li>
+        <li><strong>2023 — Novo investidor</strong>Alexandre Colombo (advogado/RJ) aporta R$ 200k via mútuo conversível. Acumulam-se processos trabalhistas contra Frezze e MKR Carga (parceira de operações).</li>
+        <li><strong>Ago/2025 — AGE de reestruturação</strong>Conversão de R$ 650k em ações para 7 investidores (366 ações ord.). Capital social vai a R$ 6.621.679. Mariana renúncia à diretoria. Teofanes Santos eleito Diretor com mandato até mai/2028.</li>
+        <li><strong>2025 — 1º exercício lucrativo</strong>EBITDA de R$ 1,25M e Lucro Líquido de R$ 1,13M após 3 anos consecutivos de prejuízo (total acumulado: -R$ 5,85M).</li>
+        <li><strong>Abr–Mai/2026 — Deterioração jurídica</strong>Novos protestos (R$ 360k+ em abr/mai) mesmo após narrativa de recuperação. Dívida bancária sobe +93% em 4 meses.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Estrutura Acionária (pós AGE 08/08/2025)</div>
+    <table class="data-table">
+      <thead><tr><th>Acionista</th><th>Tipo</th><th>Investimento</th><th>Ações</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td>FRZ Participações Ltda. (Mariana de Paula Rago)</td><td>PJ — Holding</td><td>Fundadora</td><td>Ordinárias (majoritária)</td><td><span class="risk-warn">Ex-Diretora</span></td></tr>
+        <tr><td>6Place Plataforma Digital de Negócios S.A.</td><td>PJ — vinculada ao Diretor Teofanes</td><td>Fundadora</td><td>Ordinárias</td><td><span class="risk-high">Conflito de interesse</span></td></tr>
+        <tr><td>Alexandre Colombo (Leblon/RJ)</td><td>PF — Advogado</td><td>R$ 200.000</td><td>100 ord.</td><td>Mútuo abr/2023</td></tr>
+        <tr><td>Fabio Prada Ferreira (Miami/EUA)</td><td>PF — Estrangeiro residente</td><td>R$ 125.000</td><td>78 ord.</td><td><span class="risk-warn">Compliance cambial</span></td></tr>
+        <tr><td>Guilherme Aragão (Weston/EUA)</td><td>PF — Estrangeiro residente</td><td>R$ 100.000</td><td>50 ord.</td><td><span class="risk-warn">Compliance cambial</span></td></tr>
+        <tr><td>Cotidiano Aceleradora de Startups S/A (Brasília/DF)</td><td>PJ — Aceleradora</td><td>R$ 75.000</td><td>63 ord.</td><td>Aceleração mai/2021</td></tr>
+        <tr><td>Rafael Duton Alves / Leandro Bassoi / Orla Ventures</td><td>PF / PJ</td><td>R$ 50k cada</td><td>25 ord. cada</td><td>Mútuos 2022</td></tr>
+        <tr><td>YNN Ventures Ltd.</td><td>PJ Estrangeira</td><td>Fundadora</td><td>Não quantificado</td><td><span class="risk-high">Sem compliance BCB verificado</span></td></tr>
+        <tr><td>Uffizi Participações / Leonardo Cabral / Elton Soares</td><td>Misto</td><td>Fundadores</td><td>Não quantificado</td><td>Composição % não divulgada</td></tr>
+      </tbody>
+    </table>
+    <div class="info-box" style="margin-top:.75rem">⚠ Composição acionária em % por acionista não foi fornecida. Estatuto social consolidado pós-AGE não entregue. Contratos de mútuo originais de 4 dos 7 conversores ausentes na documentação.</div>
+  </div>
+</section>
+
+<!-- 2. FINANCEIRO -->
+<section id="financeiro">
+  <div class="section-label">Seção 2</div>
+  <h2 class="section-title">Análise Financeira — BP e DRE 2022–2025</h2>
+
+  <div class="two-col" style="margin-bottom:1.25rem">
+    <div class="card">
+      <div class="card-title">Receita Bruta Anual (R$ M)</div>
+      <div class="chart-wrap"><canvas id="revenueChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Composição do Ativo — Dez/2025 (R$ mil)</div>
+      <div class="chart-wrap"><canvas id="ativoChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1.25rem">
+    <div class="card-title">DRE Consolidado (R$ mil)</div>
+    <table class="data-table">
+      <thead><tr><th>Item</th><th class="text-right">2022</th><th class="text-right">2023</th><th class="text-right">2024</th><th class="text-right">2025</th><th class="text-right">Var. 24→25</th></tr></thead>
+      <tbody>
+        <tr><td>Receita Bruta de Serviços</td><td class="text-right mono">5.472</td><td class="text-right mono">5.697</td><td class="text-right mono">7.595</td><td class="text-right mono bold">7.958</td><td class="text-right mono positive">+4,8%</td></tr>
+        <tr><td style="color:var(--text2)">(-) Impostos sobre serviços</td><td class="text-right mono negative">(641)</td><td class="text-right mono negative">(647)</td><td class="text-right mono negative">(1.084)</td><td class="text-right mono negative">(1.062)</td><td class="text-right mono">-2,0%</td></tr>
+        <tr><td class="bold">Receita Líquida</td><td class="text-right mono bold">4.831</td><td class="text-right mono bold">5.050</td><td class="text-right mono bold">6.511</td><td class="text-right mono bold">6.883</td><td class="text-right mono positive">+5,7%</td></tr>
+        <tr><td style="color:var(--text2)">(-) Custos Diretos</td><td class="text-right mono negative">(2.529)</td><td class="text-right mono negative">(1.447)</td><td class="text-right mono negative">(2.296)</td><td class="text-right mono negative">(1.141)</td><td class="text-right mono positive">-50,3%</td></tr>
+        <tr><td class="bold">Lucro Bruto</td><td class="text-right mono bold">2.302</td><td class="text-right mono bold">3.603</td><td class="text-right mono bold">4.215</td><td class="text-right mono bold positive">5.742</td><td class="text-right mono positive">+36,2%</td></tr>
+        <tr><td style="color:var(--text2)">(-) Desp. Administrativas</td><td class="text-right mono negative">(3.172)</td><td class="text-right mono negative">(2.336)</td><td class="text-right mono negative">(3.996)</td><td class="text-right mono negative">(4.205)</td><td class="text-right mono">+5,2%</td></tr>
+        <tr><td style="color:var(--text2)">(-) Desp. com Vendas</td><td class="text-right mono negative">(19)</td><td class="text-right mono negative">(2.263)</td><td class="text-right mono negative">(1.356)</td><td class="text-right mono negative">(288)</td><td class="text-right mono positive">-78,8%</td></tr>
+        <tr><td class="bold">EBITDA</td><td class="text-right mono negative bold">(1.318)</td><td class="text-right mono negative bold">(1.712)</td><td class="text-right mono negative bold">(1.564)</td><td class="text-right mono positive bold">1.249</td><td class="text-right mono positive">—</td></tr>
+        <tr><td style="color:var(--text2)">(-) Resultado Financeiro</td><td class="text-right mono negative">(128)</td><td class="text-right mono negative">(240)</td><td class="text-right mono negative">(576)</td><td class="text-right mono negative">(105)</td><td class="text-right mono positive">-81,8%</td></tr>
+        <tr><td class="bold">Resultado Líquido</td><td class="text-right mono negative bold">(1.450)</td><td class="text-right mono negative bold">(1.959)</td><td class="text-right mono negative bold">(2.153)</td><td class="text-right mono positive bold">1.131</td><td class="text-right mono positive">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Balanço Patrimonial — Dez/2025 (R$ mil)</div>
+      <table class="data-table">
+        <thead><tr><th>Item</th><th class="text-right">Dez/2024</th><th class="text-right">Dez/2025</th></tr></thead>
+        <tbody>
+          <tr><td class="bold">Ativo Circulante</td><td class="text-right mono">1.866</td><td class="text-right mono bold">2.558</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Disponível</td><td class="text-right mono">36</td><td class="text-right mono negative">33</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Clientes</td><td class="text-right mono">908</td><td class="text-right mono">1.240</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Tributos a Recuperar</td><td class="text-right mono">447</td><td class="text-right mono">690</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Outros Créditos</td><td class="text-right mono">475</td><td class="text-right mono">595</td></tr>
+          <tr><td class="bold">Ativo Não Circulante</td><td class="text-right mono">721</td><td class="text-right mono bold">1.104</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Empréstimos a Receber LP</td><td class="text-right mono">214</td><td class="text-right mono">357</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Imobilizado e Intangível</td><td class="text-right mono">490</td><td class="text-right mono">645</td></tr>
+          <tr><td class="bold">TOTAL DO ATIVO</td><td class="text-right mono bold">2.587</td><td class="text-right mono bold">3.662</td></tr>
+          <tr><td class="bold">Passivo Circulante</td><td class="text-right mono negative">3.292</td><td class="text-right mono positive bold">1.267</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Empréstimos CP</td><td class="text-right mono">191</td><td class="text-right mono">405</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Fornecedores</td><td class="text-right mono">457</td><td class="text-right mono">502</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Obrig. Trab. / Tributárias</td><td class="text-right mono negative">1.540</td><td class="text-right mono positive">180</td></tr>
+          <tr><td class="bold">Passivo Não Circulante</td><td class="text-right mono">3.393</td><td class="text-right mono">1.621</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Obrig. Tributárias LP</td><td class="text-right mono">169</td><td class="text-right mono negative">1.366</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Partes Relacionadas LP</td><td class="text-right mono negative">3.183</td><td class="text-right mono positive">228</td></tr>
+          <tr><td class="bold">Patrimônio Líquido</td><td class="text-right mono negative bold">(4.098)</td><td class="text-right mono positive bold">774</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Capital Social</td><td class="text-right mono">10</td><td class="text-right mono positive">6.622</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">(-) Prejuízos Acumulados</td><td class="text-right mono negative">(6.979)</td><td class="text-right mono negative">(5.848)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Indicadores Financeiros</div>
+      <table class="data-table">
+        <thead><tr><th>Indicador</th><th class="text-right">2024</th><th class="text-right">2025</th><th class="text-right">Status</th></tr></thead>
+        <tbody>
+          <tr><td>Liquidez Corrente (AC/PC)</td><td class="text-right mono negative">0,57</td><td class="text-right mono positive bold">2,02</td><td class="text-right"><span class="risk-ok">BOA</span></td></tr>
+          <tr><td>Liquidez Imediata</td><td class="text-right mono">0,01</td><td class="text-right mono negative">0,03</td><td class="text-right"><span class="risk-high">CRÍTICA</span></td></tr>
+          <tr><td>Margem Bruta</td><td class="text-right mono">64,7%</td><td class="text-right mono positive bold">83,4%</td><td class="text-right"><span class="risk-ok">FORTE</span></td></tr>
+          <tr><td>Margem EBITDA</td><td class="text-right mono negative">-24,0%</td><td class="text-right mono positive bold">18,1%</td><td class="text-right"><span class="risk-ok">BOA</span></td></tr>
+          <tr><td>Margem Líquida</td><td class="text-right mono negative">-33,1%</td><td class="text-right mono positive bold">16,4%</td><td class="text-right"><span class="risk-ok">BOA</span></td></tr>
+          <tr><td>End. Bancário / Receita</td><td class="text-right mono">2,5%</td><td class="text-right mono">5,4%</td><td class="text-right"><span class="risk-warn">ATENÇÃO</span></td></tr>
+          <tr><td>End. Total (PT/AT)</td><td class="text-right mono negative">258%</td><td class="text-right mono positive bold">79%</td><td class="text-right"><span class="risk-warn">MODERADO</span></td></tr>
+          <tr><td>Prejuízos Acumulados</td><td class="text-right mono negative">(6.979)</td><td class="text-right mono negative">(5.848)</td><td class="text-right"><span class="risk-high">CRÍTICO</span></td></tr>
+          <tr><td>Disponível / Dívida Bancária</td><td class="text-right mono">—</td><td class="text-right mono negative">3,9%</td><td class="text-right"><span class="risk-high">CRÍTICO</span></td></tr>
+          <tr><td>Crescimento Receita 4 anos</td><td class="text-right mono">—</td><td class="text-right mono positive">+45,4%</td><td class="text-right"><span class="risk-ok">POSITIVO</span></td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:1rem">
+        <div class="card-title">Faturamento Mensal Declarado 2026 (jan–abr)</div>
+        <table class="data-table">
+          <thead><tr><th>Mês</th><th class="text-right">2025</th><th class="text-right">2026</th><th class="text-right">Var.</th></tr></thead>
+          <tbody>
+            <tr><td>Janeiro</td><td class="text-right mono">379.504</td><td class="text-right mono positive">625.628</td><td class="text-right mono positive">+64,8%</td></tr>
+            <tr><td>Fevereiro</td><td class="text-right mono">542.457</td><td class="text-right mono positive">729.383</td><td class="text-right mono positive">+34,5%</td></tr>
+            <tr><td>Março</td><td class="text-right mono">603.200</td><td class="text-right mono">606.435</td><td class="text-right mono">+0,5%</td></tr>
+            <tr><td>Abril</td><td class="text-right mono">657.533</td><td class="text-right mono negative">595.431</td><td class="text-right mono negative">-9,4%</td></tr>
+            <tr><td class="bold">Média jan–abr</td><td class="text-right mono bold">545.674</td><td class="text-right mono positive bold">639.219</td><td class="text-right mono positive bold">+17,2%</td></tr>
+          </tbody>
+        </table>
+        <div class="info-box">⚠ Discrepância de R$ 633k entre faturamento declarado (R$ 7.325k) e DRE 2025 (R$ 7.958k). Recomenda-se cruzamento com extratos bancários.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. SERASA -->
+<section id="serasa">
+  <div class="section-label">Seção 3</div>
+  <h2 class="section-title">Serasa — Comportamento de Crédito</h2>
+
+  <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:1.25rem">
+    <div class="kpi-card"><div class="kpi-label">Protestos Total</div><div class="kpi-value negative">97</div><div class="kpi-sub">R$ 2.343.913 · out/21–mai/26</div></div>
+    <div class="kpi-card"><div class="kpi-label">Protestos Ativos</div><div class="kpi-value negative">60</div><div class="kpi-sub">R$ 1,47M estimado não baixado</div></div>
+    <div class="kpi-card"><div class="kpi-label">Ações Judiciais</div><div class="kpi-value negative">3</div><div class="kpi-sub">R$ 180.416 total</div></div>
+    <div class="kpi-card"><div class="kpi-label">PEFIN</div><div class="kpi-value">1</div><div class="kpi-sub">R$ 284 · Gimba Supri · fev/2026</div></div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Consultas ao Serasa — últimos 13 meses</div>
+      <div class="chart-wrap"><canvas id="consultasChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Anotações Cadastrais — FREZZE (CNPJ 32.345.292)</div>
+      <table class="data-table">
+        <thead><tr><th>Tipo</th><th>Detalhe</th><th class="text-right">Valor</th></tr></thead>
+        <tbody>
+          <tr><td><span class="risk-high">PEFIN</span></td><td>Duplicata — GIMBA SUPRI — Contrato 101276362B — fev/2026</td><td class="text-right mono">R$ 284</td></tr>
+          <tr><td><span class="risk-high">Ação Fiscal Est.</span></td><td>Exec. Fiscal — 1ª Vara SP — Vara 01 — dez/2025</td><td class="text-right mono">R$ 66.101</td></tr>
+          <tr><td><span class="risk-high">Ação Fiscal Mun.</span></td><td>Exec. Fiscal Municipal — 1ª Vara SP — set/2025</td><td class="text-right mono">R$ 111.130</td></tr>
+          <tr><td><span class="risk-warn">Ação Trabalhista</span></td><td>Exec. Jud. Trabalhista — TRT — mar/2025</td><td class="text-right mono">R$ 3.184</td></tr>
+          <tr><td><span class="risk-high">Protestos</span></td><td>97 ocorrências · out/2021 a mai/2026 · Cartório SBC/SP e Barueri/SP</td><td class="text-right mono negative">R$ 2.343.913</td></tr>
+          <tr><td><span class="risk-ok">Cheques</span></td><td>Nenhuma ocorrência registrada</td><td class="text-right mono">R$ 0</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:1rem">
+        <div class="card-title">Protestos Recentes (mai/2026)</div>
+        <table class="data-table">
+          <thead><tr><th>Data</th><th class="text-right">Valor</th><th>Baixado?</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">12/05/2026</td><td class="text-right mono negative">R$ 248.114,88</td><td><span class="risk-high">NÃO</span></td></tr>
+            <tr><td class="mono">12/05/2026</td><td class="text-right mono negative">R$ 99.090,23</td><td><span class="risk-high">NÃO</span></td></tr>
+            <tr><td class="mono">12/05/2026</td><td class="text-right mono negative">R$ 53.850,59</td><td><span class="risk-high">NÃO</span></td></tr>
+            <tr><td class="mono">12/05/2026</td><td class="text-right mono negative">R$ 41.262,22</td><td><span class="risk-high">NÃO</span></td></tr>
+            <tr><td class="mono">12/05/2026</td><td class="text-right mono negative">R$ 24.606,34</td><td><span class="risk-high">NÃO</span></td></tr>
+            <tr><td class="mono">22/04/2026</td><td class="text-right mono negative">R$ 140.394,22</td><td><span class="risk-high">NÃO</span></td></tr>
+            <tr><td class="mono">22/04/2026</td><td class="text-right mono negative">R$ 92.175,61</td><td><span class="risk-high">NÃO</span></td></tr>
+            <tr><td class="mono">16/04/2026</td><td class="text-right mono negative">R$ 33.394,98</td><td><span class="risk-high">NÃO</span></td></tr>
+            <tr><td colspan="3" style="color:var(--text2);font-size:.75rem;text-align:center;padding:.5rem">+ 52 protestos anteriores · 37 com anuência/baixa confirmada</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">FRZ Participações Ltda. (CNPJ 43.314.051/0001-09) — Holding da Sócia Mariana</div>
+    <table class="data-table">
+      <tbody>
+        <tr><td style="color:var(--text2);width:200px">Score CreditBox</td><td><span class="risk-moderate">740/1000 — Risco Moderado</span></td></tr>
+        <tr><td style="color:var(--text2)">Protestos</td><td><span class="risk-ok">Nada consta</span></td></tr>
+        <tr><td style="color:var(--text2)">Ações Judiciais</td><td><span class="risk-ok">Nada consta</span></td></tr>
+        <tr><td style="color:var(--text2)">PEFIN / REFIN</td><td><span class="risk-ok">Nada consta</span></td></tr>
+        <tr><td style="color:var(--text2)">Situação CNPJ</td><td><span class="risk-ok">ATIVA — desde 27/08/2021</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 4. BACEN -->
+<section id="bacen">
+  <div class="section-label">Seção 4</div>
+  <h2 class="section-title">BACEN / SCR — Exposição Bancária</h2>
+
+  <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:1.25rem">
+    <div class="kpi-card"><div class="kpi-label">Carteira Ativa</div><div class="kpi-value">R$ 170k</div><div class="kpi-sub">Data-base: Abr/2026</div></div>
+    <div class="kpi-card"><div class="kpi-label">Vencidos</div><div class="kpi-value positive">R$ 0</div><div class="kpi-sub">Zero inadimplência no SCR</div></div>
+    <div class="kpi-card"><div class="kpi-label">Nº Instituições</div><div class="kpi-value">5</div><div class="kpi-sub">8 operações ativas</div></div>
+    <div class="kpi-card"><div class="kpi-label">Dívida Declarada</div><div class="kpi-value negative">R$ 833k</div><td class="kpi-sub">Abr/2026 (vs. R$432k dez/25)</td></div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Carteira por Modalidade (BACEN Abr/26 — R$)</div>
+      <div class="chart-wrap"><canvas id="modalidadeChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Cronograma de Vencimentos — Carteira BACEN (R$ mil)</div>
+      <div class="chart-wrap"><canvas id="vencimentosChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Endividamento Bancário Declarado vs. BACEN (Abr/2026)</div>
+    <table class="data-table">
+      <thead><tr><th>Credor / Modalidade</th><th class="text-right">Dez/2025</th><th class="text-right">Abr/2026</th><th class="text-right">Var.</th><th class="text-right">Fonte</th></tr></thead>
+      <tbody>
+        <tr><td>Caixa Econômica Federal</td><td class="text-right mono">72.000</td><td class="text-right mono">69.000</td><td class="text-right mono positive">-4%</td><td class="text-right mono" style="color:var(--text2)">Declarado</td></tr>
+        <tr><td>Santander — Conta Garantida</td><td class="text-right mono">97.000</td><td class="text-right mono">119.000</td><td class="text-right mono negative">+23%</td><td class="text-right mono" style="color:var(--text2)">Declarado</td></tr>
+        <tr><td>Nota Comercial</td><td class="text-right mono">263.000</td><td class="text-right mono negative bold">645.000</td><td class="text-right mono negative bold">+145%</td><td class="text-right mono" style="color:var(--text2)">Declarado</td></tr>
+        <tr><td>Cheque Especial (BACEN)</td><td class="text-right mono">—</td><td class="text-right mono">43.388</td><td class="text-right mono">—</td><td class="text-right mono" style="color:var(--text2)">BACEN/SCR</td></tr>
+        <tr><td>Outros Empréstimos (BACEN)</td><td class="text-right mono">—</td><td class="text-right mono">122.146</td><td class="text-right mono">—</td><td class="text-right mono" style="color:var(--text2)">BACEN/SCR</td></tr>
+        <tr><td class="bold">TOTAL DECLARADO</td><td class="text-right mono bold">432.000</td><td class="text-right mono negative bold">833.000</td><td class="text-right mono negative bold">+93%</td><td></td></tr>
+      </tbody>
+    </table>
+    <div class="info-box">⚠ A Nota Comercial disparou +145% em apenas 4 meses. Crescimento da dívida bancária +93% no mesmo período contradiz a narrativa de melhora operacional apresentada no BP 2025.</div>
+  </div>
+</section>
+
+<!-- 5. CREDITBOX -->
+<section id="creditbox">
+  <div class="section-label">Seção 5</div>
+  <h2 class="section-title">CreditBox / CredMap</h2>
+
+  <div class="three-col" style="margin-bottom:1.25rem">
+    <div class="card">
+      <div class="card-title">Score CreditBox</div>
+      <div class="gauge-wrap">
+        <svg class="gauge-svg" viewBox="0 0 160 90">
+          <path d="M 20 80 A 60 60 0 0 1 140 80" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="14" stroke-linecap="round"/>
+          <path d="M 20 80 A 60 60 0 0 1 140 80" fill="none" stroke="#ef4444" stroke-width="14" stroke-linecap="round"
+            stroke-dasharray="220" stroke-dashoffset="187"/>
+          <text x="80" y="72" class="gauge-label" fill="#ef4444">150</text>
+          <text x="80" y="86" class="gauge-sub">/1000</text>
+        </svg>
+        <div class="gauge-score-label"><span class="risk-high">EXTREMO RISCO</span></div>
+        <div style="font-size:.75rem;color:var(--text2);margin-top:.4rem;text-align:center">Maior probabilidade de inadimplência severa<br>segundo metodologia CreditBox</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">ILM (Índice de Liquidez no Mercado)</div>
+      <div style="padding:.5rem 0">
+        <div class="progress-item">
+          <div class="progress-label"><span>ILM 30d — Como Emitente</span><span>90%</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:90%;background:#22c55e"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>ILM 60d — Como Emitente</span><span>86%</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:86%;background:#22c55e"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>ILM 90d — Como Emitente</span><span>86%</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:86%;background:#22c55e"></div></div>
+        </div>
+        <div style="height:.75rem;border-top:1px solid var(--border);margin:.5rem 0"></div>
+        <div class="progress-item">
+          <div class="progress-label"><span>ILM 30d — Como Sacado</span><span style="color:#ef4444">14%</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:14%;background:#ef4444"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>ILM 60d — Como Sacado</span><span style="color:#ef4444">16%</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:16%;background:#ef4444"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>ILM 90d — Como Sacado</span><span style="color:#ef4444">20%</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:20%;background:#ef4444"></div></div>
+        </div>
+      </div>
+      <div class="info-box" style="margin-top:.5rem;font-size:.75rem">⚠ ILM como Sacado de apenas 20% em 90d significa que a FREZZE paga apenas 1 em cada 5 boletos em dia quando é devedora de outras empresas.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Pontualidade como Emitente (% pontual)</div>
+      <table class="data-table">
+        <thead><tr><th>Mês</th><th class="text-right">% Pontual</th><th class="text-right">Status</th></tr></thead>
+        <tbody>
+          <tr><td>Abr/2026</td><td class="text-right mono positive">96%</td><td class="text-right"><span class="risk-ok">BOM</span></td></tr>
+          <tr><td>Mar/2026</td><td class="text-right mono positive">92%</td><td class="text-right"><span class="risk-ok">BOM</span></td></tr>
+          <tr><td>Fev/2026</td><td class="text-right mono negative">10%</td><td class="text-right"><span class="risk-high">CRÍTICO</span></td></tr>
+          <tr><td>Jan/2026</td><td class="text-right mono">80%</td><td class="text-right"><span class="risk-warn">ATENÇÃO</span></td></tr>
+          <tr><td>Dez/2025</td><td class="text-right mono">86%</td><td class="text-right"><span class="risk-ok">BOM</span></td></tr>
+          <tr><td>Nov/2025</td><td class="text-right mono negative">70%</td><td class="text-right"><span class="risk-warn">ATENÇÃO</span></td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:.75rem">
+        <div class="card-title">Pontualidade como Sacada (% pontual)</div>
+        <table class="data-table">
+          <tbody>
+            <tr><td>Abr/2026</td><td class="text-right mono negative">46%</td><td class="text-right"><span class="risk-high">CRÍTICO</span></td></tr>
+            <tr><td>Mar/2026</td><td class="text-right mono negative">20%</td><td class="text-right"><span class="risk-high">CRÍTICO</span></td></tr>
+            <tr><td>Fev/2026</td><td class="text-right mono">50%</td><td class="text-right"><span class="risk-warn">ATENÇÃO</span></td></tr>
+            <tr><td>Jan/2026</td><td class="text-right mono negative">28%</td><td class="text-right"><span class="risk-high">CRÍTICO</span></td></tr>
+            <tr><td>Dez/2025</td><td class="text-right mono negative">20%</td><td class="text-right"><span class="risk-high">CRÍTICO</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Faturamento Mensal — Emissão de Boletos CredMap (R$ M) · Mai/2025 – Abr/2026</div>
+    <div class="chart-wrap" style="height:200px"><canvas id="fatChart"></canvas></div>
+  </div>
+
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Curva ABC de Clientes (declaração 16/02/2026)</div>
+    <table class="data-table">
+      <thead><tr><th>Rank</th><th>Cliente</th><th>CNPJ</th><th class="text-right">% Fat.</th><th class="text-right">Classe</th></tr></thead>
+      <tbody>
+        <tr><td>1º</td><td class="bold">Fazenda Futuro Produtos Alimentícios S.A.</td><td class="mono">31.207.049/0001-43</td><td class="text-right mono negative bold">23%</td><td class="text-right"><span class="risk-high">CONCENTRAÇÃO</span></td></tr>
+        <tr><td>2º</td><td>Agropacking Comércio de Frutas e Legumes Ltda.</td><td class="mono">15.766.541/0002-83</td><td class="text-right mono">11%</td><td class="text-right"><span class="risk-warn">A</span></td></tr>
+        <tr><td>3º</td><td>Panificadora e Confeitaria Pão &amp; Arte</td><td class="mono">03.095.111/0001-17</td><td class="text-right mono">10%</td><td class="text-right"><span class="risk-warn">A</span></td></tr>
+        <tr><td>4º</td><td>Top Service Distrib. de Produtos de Consumo</td><td class="mono">20.023.288/0001-27</td><td class="text-right mono">9%</td><td class="text-right"><span class="risk-info">B</span></td></tr>
+        <tr><td>5º</td><td>Alles Indústria e Comércio de Carnes e Derivados</td><td class="mono">97.316.293/0004-03</td><td class="text-right mono">8%</td><td class="text-right"><span class="risk-info">B</span></td></tr>
+        <tr><td>—</td><td style="color:var(--text2)">Demais clientes (C)</td><td>—</td><td class="text-right mono">39%</td><td class="text-right"><span class="risk-low">C</span></td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:.6rem;font-size:.78rem;color:var(--text2)">Top 5 clientes representam <strong style="color:#fca5a5">61% do faturamento</strong>. Fazenda Futuro isolada = 23% — risco de concentração relevante.</div>
+  </div>
+</section>
+
+<!-- 6. PATRIMÔNIO -->
+<section id="patrimonio">
+  <div class="section-label">Seção 6</div>
+  <h2 class="section-title">Patrimônio Executável</h2>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:1rem;padding:.5rem 0">
+      <div style="font-size:2.5rem;opacity:.4">🏗</div>
+      <div>
+        <div style="font-weight:600;font-size:1rem;margin-bottom:.3rem">Sem informações de patrimônio declarado</div>
+        <div style="color:var(--text2);font-size:.85rem">Nenhum laudo de avaliação de imóveis ou relação de frota vehicular foi fornecido na documentação entregue. O balanço patrimonial registra Imobilizado e Intangível de R$ 645k (dez/2025), porém sem detalhamento dos ativos componentes. Em caso de aprovação futura, exigir declaração de bens com laudos de avaliação.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. SÓCIOS -->
+<section id="socios">
+  <div class="section-label">Seção 7</div>
+  <h2 class="section-title">Sócios / Administradores</h2>
+
+  <div class="two-col" style="margin-bottom:1.25rem">
+    <div class="card">
+      <div class="card-title">Teofanes Pedro Moreira Santos — Diretor Atual</div>
+      <table class="data-table">
+        <tbody>
+          <tr><td style="color:var(--text2);width:140px">CPF</td><td class="mono">398.970.908-94</td></tr>
+          <tr><td style="color:var(--text2)">Nascimento</td><td>02/10/1992 (34 anos)</td></tr>
+          <tr><td style="color:var(--text2)">Estado Civil</td><td>Solteiro</td></tr>
+          <tr><td style="color:var(--text2)">Endereço</td><td>R. Barão de Atibaia, 390, Apto 202, Campinas/SP</td></tr>
+          <tr><td style="color:var(--text2)">Situação CPF</td><td><span class="risk-ok">REGULAR</span></td></tr>
+          <tr><td style="color:var(--text2)">PEP / Sanções</td><td><span class="risk-ok">Não / Nada consta</span></td></tr>
+          <tr><td style="color:var(--text2)">Serasa Pessoal</td><td><span class="risk-ok">NADA CONSTA</span></td></tr>
+          <tr><td style="color:var(--text2)">BACEN Pessoal</td><td>R$ 155.220 a vencer — <span class="risk-ok">zero inadimplência</span></td></tr>
+          <tr><td style="color:var(--text2)">Renda Estimada</td><td><span class="risk-high">R$ 2.722/mês — inconsistente com cargo</span></td></tr>
+          <tr><td style="color:var(--text2)">Cargo</td><td>Diretor — eleito AGE 08/08/2025 (mandato até mai/2028)</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:1rem">
+        <div class="card-title">Empresas Vinculadas — Teofanes</div>
+        <table class="data-table">
+          <thead><tr><th>Empresa</th><th>Situação</th><th class="text-right">Protestos</th></tr></thead>
+          <tbody>
+            <tr><td>FREZZE COM. ALIMENTOS E ARMAZ. S.A.</td><td><span class="risk-ok">ATIVA</span></td><td class="text-right mono negative">7 (empresa)</td></tr>
+            <tr><td>Distacado Comércio e Distribuição de Alimentos Ltda.</td><td><span class="risk-ok">ATIVA</span></td><td class="text-right mono negative">3</td></tr>
+            <tr><td>6Place Plataforma Digital de Negócios S.A.</td><td><span class="risk-ok">ATIVA</span></td><td class="text-right mono negative">1</td></tr>
+            <tr><td>Netfoods Tecnologia e Serviços Ltda.</td><td><span class="risk-high">BAIXADA</span></td><td class="text-right mono">0</td></tr>
+            <tr><td>Tiffin Foods Ltda.</td><td><span class="risk-high">BAIXADA</span></td><td class="text-right mono negative">1</td></tr>
+            <tr><td>Bulqi Comércio de Produtos Alimentícios Ltda.</td><td><span class="risk-high">BAIXADA</span></td><td class="text-right mono negative">2</td></tr>
+          </tbody>
+        </table>
+        <div class="info-box" style="margin-top:.5rem;font-size:.75rem">⚠ Diretor com histórico de 3 empresas baixadas no setor alimentício, todas com protestos. Conflito de interesse: 6Place (empresa de Teofanes) é também acionista da FREZZE.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Mariana de Paula Rago Furlan — Via FRZ Participações (Ex-Diretora)</div>
+      <table class="data-table">
+        <tbody>
+          <tr><td style="color:var(--text2);width:140px">CPF</td><td class="mono">300.439.898-29</td></tr>
+          <tr><td style="color:var(--text2)">Nascimento</td><td>30/05/1980 (46 anos)</td></tr>
+          <tr><td style="color:var(--text2)">Estado Civil</td><td>Casada — Comunhão Parcial de Bens</td></tr>
+          <tr><td style="color:var(--text2)">Endereço</td><td>Av. Angélica, 688, Conj. 1009, Santa Cecília, SP</td></tr>
+          <tr><td style="color:var(--text2)">Situação CPF</td><td><span class="risk-ok">REGULAR</span></td></tr>
+          <tr><td style="color:var(--text2)">PEP / Sanções</td><td><span class="risk-ok">Não / Nada consta</span></td></tr>
+          <tr><td style="color:var(--text2)">Serasa PEFIN</td><td><span class="risk-warn">R$ 24.159 — Duplicata LS Interbank — mar/2026</span></td></tr>
+          <tr><td style="color:var(--text2)">Ação Judicial</td><td><span class="risk-warn">R$ 122.664 — Fiscal Municipal SP — abr/2026</span></td></tr>
+          <tr><td style="color:var(--text2)">BACEN Pessoal</td><td>R$ 147.808 a vencer — <span class="risk-ok">zero inadimplência</span></td></tr>
+          <tr><td style="color:var(--text2)">Renda Estimada</td><td>R$ 5.968/mês (CreditHub)</td></tr>
+          <tr><td style="color:var(--text2)">Cargo</td><td>Renunciou em 08/08/2025 — controla FRZ Participações (100%)</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:1rem">
+        <div class="card-title">Empresas Vinculadas — Mariana</div>
+        <table class="data-table">
+          <thead><tr><th>Empresa</th><th>Situação</th><th class="text-right">Protestos</th></tr></thead>
+          <tbody>
+            <tr><td>FRZ Participações Ltda.</td><td><span class="risk-ok">ATIVA</span></td><td class="text-right mono">0</td></tr>
+            <tr><td>Assessorato Viagens e Turismo Ltda.</td><td><span class="risk-ok">ATIVA</span></td><td class="text-right mono">0</td></tr>
+            <tr><td>Assessorato Viagens Sorriso Ltda.</td><td><span class="risk-ok">ATIVA</span></td><td class="text-right mono">0</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Processos Jurídicos Relevantes — FREZZE (empresa) — TRT 2ª Região/SP (amostra)</div>
+    <table class="data-table">
+      <thead><tr><th>Nº Processo</th><th>Tipo</th><th>Tribunal</th><th>Polo</th><th>Outros Réus</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">1000143-47.2023.5.02.0466</td><td>Trabalhista</td><td>TRT-2/SP</td><td><span class="risk-high">Passivo</span></td><td>MKR Carga e Descarga Eireli</td></tr>
+        <tr><td class="mono">1000149-48.2023.5.02.0468</td><td>Trabalhista</td><td>TRT-2/SP</td><td><span class="risk-high">Passivo</span></td><td>MKR Carga e Descarga Eireli</td></tr>
+        <tr><td class="mono">1000250-88.2023.5.02.0467</td><td>Trabalhista</td><td>TRT-2/SP</td><td><span class="risk-high">Passivo</span></td><td>MKR Carga e Descarga Eireli</td></tr>
+        <tr><td class="mono">1001415-76.2023.5.02.0466</td><td>Trabalhista</td><td>TRT-2/SP</td><td><span class="risk-high">Passivo</span></td><td>MKR Carga e Descarga Eireli</td></tr>
+        <tr><td class="mono">1024850-58.2023.8.26.0564</td><td>Cível</td><td>TJ-SP</td><td><span class="risk-high">Parte</span></td><td>RGF Indústria, Comércio e Distribuição</td></tr>
+        <tr><td class="mono">1509250-56.2023.8.26.0299</td><td>Cível</td><td>TJ-SP</td><td><span class="risk-high">Parte</span></td><td>Luiz Guilherme B. Taddeo (Adv.)</td></tr>
+        <tr><td colspan="5" style="text-align:center;color:var(--text2);font-size:.75rem;padding:.6rem">60 processos trabalhistas identificados (TRT-2/SP) — todos de 2018–2023 · Maioria envolve MKR Carga e Descarga como co-réu (terceirização de mão de obra)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 8. RISCOS -->
+<section id="riscos">
+  <div class="section-label">Seção 8</div>
+  <h2 class="section-title">Matriz de Riscos Consolidada</h2>
+
+  <div class="risk-row"><div class="risk-level high">CRÍTICO</div><div class="risk-desc"><strong>Score CreditBox 150/1000</strong> — Classificação "Extremo Risco": maior faixa de probabilidade de inadimplência severa do sistema CreditBox.</div><span class="risk-high">BLOQUEANTE</span></div>
+  <div class="risk-row"><div class="risk-level high">CRÍTICO</div><div class="risk-desc"><strong>97 protestos (60 ativos) — R$ 2.343.913</strong> — Títulos cartorários não baixados recentes (abr–mai/2026 com R$ 740k+). Incompatível com narrativa de recuperação financeira.</div><span class="risk-high">BLOQUEANTE</span></div>
+  <div class="risk-row"><div class="risk-level high">CRÍTICO</div><div class="risk-desc"><strong>60 processos trabalhistas ativos — TRT 2ª Região/SP</strong> — Maioria do período 2022–2023 envolvendo terceirização de mão de obra (MKR Carga). Passivo trabalhista não quantificado em balanço.</div><span class="risk-high">BLOQUEANTE</span></div>
+  <div class="risk-row"><div class="risk-level high">ALTO</div><div class="risk-desc"><strong>Diretor com histórico de 3 empresas baixadas com protestos</strong> — Netfoods, Tiffin Foods e Bulqi, todas no setor alimentício. Conflito de interesse: 6Place (sua empresa) é acionista da FREZZE.</div><span class="risk-high">ALERTA</span></div>
+  <div class="risk-row"><div class="risk-level high">ALTO</div><div class="risk-desc"><strong>Dívida bancária +93% em 4 meses</strong> — Nota Comercial saltou +145% (R$263k→R$645k). Caixa disponível de apenas R$33k frente a R$2,34M em protestos e R$833k em dívida bancária.</div><span class="risk-high">ALERTA</span></div>
+  <div class="risk-row"><div class="risk-level high">ALTO</div><div class="risk-desc"><strong>ILM como Sacado apenas 20% (90 dias)</strong> — FREZZE paga apenas 1 em cada 5 boletos em dia quando é devedora de fornecedores/parceiros. Indica má gestão de passivo operacional.</div><span class="risk-high">ALERTA</span></div>
+  <div class="risk-row"><div class="risk-level medium">MÉDIO</div><div class="risk-desc"><strong>PL positivo sustentado por aporte vs. prejuízos acumulados de R$5,85M</strong> — O patrimônio líquido de R$774k só existe porque o capital social foi injetado em R$6,6M em ago/2025. Sem o aporte, PL seria negativo em -R$5,85M.</div><span class="risk-warn">MONITORAR</span></div>
+  <div class="risk-row"><div class="risk-level medium">MÉDIO</div><div class="risk-desc"><strong>Discrepância R$633k entre DRE e faturamento declarado 2025</strong> — DRE registra R$7.958k; declaração mensal soma R$7.325k. Diferença de 8,6% sem justificativa apresentada.</div><span class="risk-warn">MONITORAR</span></div>
+  <div class="risk-row"><div class="risk-level medium">MÉDIO</div><div class="risk-desc"><strong>Acionistas estrangeiros sem compliance verificado</strong> — YNN Ventures Ltd., Guilherme Aragão (Miami/EUA) e Fabio Prada (Miami/EUA). Resolução BCB nº 278/2022 exige verificação de capital estrangeiro.</div><span class="risk-warn">PENDENTE</span></div>
+  <div class="risk-row"><div class="risk-level medium">MÉDIO</div><div class="risk-desc"><strong>Concentração de clientes: Fazenda Futuro = 23% da receita</strong> — Qualquer ruptura contratual com o principal cliente impacta materialmente o faturamento.</div><span class="risk-warn">MONITORAR</span></div>
+</section>
+
+<!-- 9. PARECER FINAL -->
+<section id="parecer">
+  <div class="section-label">Seção 9</div>
+  <h2 class="section-title">Parecer Técnico Final</h2>
+
+  <div class="two-col" style="margin-bottom:1.25rem">
+    <div class="card">
+      <div class="card-title" style="color:#86efac">Pontos Favoráveis</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem">
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#86efac;flex-shrink:0">✓</span>Primeiro exercício lucrativo em 2025 (EBITDA +R$1,25M, lucro líquido +R$1,13M)</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#86efac;flex-shrink:0">✓</span>Crescimento de receita de 45% em 4 anos (2022→2025)</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#86efac;flex-shrink:0">✓</span>Margem bruta de 83,4% em 2025 — modelo de negócio asset-light com boa geração operacional</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#86efac;flex-shrink:0">✓</span>Zero inadimplência no BACEN/SCR (empresa e sócios)</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#86efac;flex-shrink:0">✓</span>Nenhum cheque sem fundo em todos os bureaus</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#86efac;flex-shrink:0">✓</span>ILM como emitente 86% em 90d — sacados pagam razoavelmente</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#86efac;flex-shrink:0">✓</span>Liquidez corrente de 2,02 (vs. 0,57 em 2024)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:#fca5a5">Pontos Críticos</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem">
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#fca5a5;flex-shrink:0">✗</span>Score CreditBox 150/1000 — pior faixa de risco do sistema</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#fca5a5;flex-shrink:0">✗</span>97 protestos (60 ativos) no valor de R$2,34M — com novos protestos em abr/mai 2026</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#fca5a5;flex-shrink:0">✗</span>60 processos trabalhistas ativos no TRT-2/SP — passivo não provisionado</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#fca5a5;flex-shrink:0">✗</span>Dívida bancária +93% em apenas 4 meses (jan–abr/2026)</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#fca5a5;flex-shrink:0">✗</span>ILM como sacado: apenas 20% — FREZZE é mau pagadora de fornecedores</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#fca5a5;flex-shrink:0">✗</span>Diretor com 3 empresas anteriores encerradas com pendências</li>
+        <li style="font-size:.83rem;display:flex;gap:.5rem;align-items:flex-start"><span style="color:#fca5a5;flex-shrink:0">✗</span>Caixa de R$33k frente a R$2,34M em protestos pendentes</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1.25rem">
+    <div class="card-title">Condicionantes para Reanálise</div>
+    <table class="data-table">
+      <thead><tr><th>#</th><th>Exigência</th><th class="text-right">Prioridade</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Regularização ou acordo formal dos 60 protestos ativos mais relevantes (acima de R$10k)</td><td class="text-right"><span class="risk-high">CRÍTICA</span></td></tr>
+        <tr><td>2</td><td>Certidões negativas de débito: Receita Federal, SEFAZ-SP, Prefeituras de SBC e Barueri</td><td class="text-right"><span class="risk-high">CRÍTICA</span></td></tr>
+        <tr><td>3</td><td>Relação completa dos 60 processos trabalhistas com status atualizado e valores de risco</td><td class="text-right"><span class="risk-high">CRÍTICA</span></td></tr>
+        <tr><td>4</td><td>Extratos bancários dos últimos 6 meses (todas as contas ativas)</td><td class="text-right"><span class="risk-high">CRÍTICA</span></td></tr>
+        <tr><td>5</td><td>Comprovação de regularidade do parcelamento tributário LP (R$ 1.366k no BP)</td><td class="text-right"><span class="risk-warn">ALTA</span></td></tr>
+        <tr><td>6</td><td>Estatuto social consolidado pós-AGE com % de participação de cada acionista</td><td class="text-right"><span class="risk-warn">ALTA</span></td></tr>
+        <tr><td>7</td><td>Compliance para acionistas estrangeiros: YNN Ventures, Guilherme Aragão e Fabio Prada</td><td class="text-right"><span class="risk-warn">ALTA</span></td></tr>
+        <tr><td>8</td><td>Contratos originais de mútuo conversível de todos os 7 conversores da AGE ago/2025</td><td class="text-right"><span class="risk-moderate">MODERADA</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="analyst-note">
+    <strong>Nota do Analista (Maio/2026)</strong><br><br>
+    A FREZZE apresenta uma narrativa financeira de <em>turnaround</em> com real substância: o exercício de 2025 foi o primeiro lucrativo em 4 anos de operação, com receita crescendo consistentemente acima de R$7,9M e margem bruta excepcional de 83,4%. A reestruturação societária de agosto de 2025 — convertendo R$650k de dívida em capital — e a liquidez corrente que saltou para 2,02 demonstram esforço formal de regularização.<br><br>
+    Contudo, o quadro extracontábil contradiz a narrativa positiva de forma material. Os 97 protestos — totalizando R$2,34M, com 60 títulos ainda não baixados e novos protestos emitidos em abril e maio de 2026 — não são compatíveis com a imagem de empresa em recuperação. O score CreditBox de 150/1000 (extremo risco) e o ILM como sacado de apenas 20% confirmam que a FREZZE, na prática de mercado, é reconhecida como mau pagadora. Os 60 processos trabalhistas ativos no TRT-2/SP adicionam passivo contingente não dimensionado no balanço.<br><br>
+    A rápida elevação da dívida bancária (+93% em apenas 4 meses de 2026, com a Nota Comercial triplicando de R$263k para R$645k) é o sinal de alerta mais recente e preocupante: sugere que a liquidez gerada pelo aporte de capital de ago/2025 já foi consumida, e a empresa está novamente sob pressão de caixa — enquanto os protestos continuam crescendo.<br><br>
+    O Comitê de Crédito da AG Antecipa <strong>não deve aprovar</strong> operação de antecipação de recebíveis com a FREZZE no estágio documental atual. A operação poderá ser reanalisada como MÉDIO-ALTO somente após apresentação de certidões negativas, regularização das pendências cartoriais, relação completa dos processos trabalhistas e extratos bancários dos últimos 6 meses. Em caso de reabertura, o limite inicial não deveria exceder 25% da média mensal de faturamento (≈ R$160k), com prazo máximo de 45 dias e retenção de 20%.
+  </div>
+
+  <div class="verdict-panel danger">
+    <div class="verdict-title">⛔ RECUSAR</div>
+    <div class="verdict-sub">Risco Crítico · Score 150/1000 · 97 Protestos · Não Recomendado no Estágio Atual</div>
+    <div class="verdict-limit">Limite sugerido: <strong>R$ 0 (suspensão até regularização das condicionantes críticas)</strong></div>
+    <div style="margin-top:.75rem;font-size:.8rem;color:#fca5a5">Reanalisar somente após: regularização dos 60 protestos ativos + certidões negativas + relação dos 60 processos TRT</div>
+  </div>
+</section>
+
+<footer>
+  AG Antecipa Securitizadora · Parecer de Crédito Empresarial · FREZZE Comércio de Alimentos e Armazenagem p/ Conta de Terceiros S.A. · CNPJ 32.345.292/0001-90<br>
+  Analista: Marcelo Vazquez · Data-base: 22/05/2026 · Gerado em 25/05/2026<br>
+  Fontes: BP/DRE 2022–2025 (D4Sign 27/01/2026) · Declaração Faturamento (08/05/2026) · BACEN/SCR Abr/26 · Serasa VADU · CreditBox · CreditHub · AGE 08/08/2025
+</footer>
+
+<script>
+Chart.defaults.color = '#9ca3af';
+Chart.defaults.borderColor = 'rgba(255,255,255,0.06)';
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+
+// 1. Receita Bruta
+new Chart(document.getElementById('revenueChart'), {
+  type: 'bar',
+  data: {
+    labels: ['2022','2023','2024','2025'],
+    datasets: [{
+      label: 'Receita Bruta (R$ M)',
+      data: [5.472, 5.697, 7.595, 7.958],
+      backgroundColor: ['rgba(239,68,68,0.35)','rgba(239,68,68,0.5)','rgba(239,68,68,0.65)','rgba(239,68,68,0.85)'],
+      borderColor: '#ef4444', borderWidth: 1, borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => 'R$ ' + c.parsed.y.toFixed(2) + 'M' } } },
+    scales: {
+      y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { callback: v => 'R$' + v + 'M' } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// 2. Composição Ativo
+new Chart(document.getElementById('ativoChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Clientes','Tributos a Rec.','Outros Créditos','Imobilizado','Empréstimos LP','Disponível','Outros NC'],
+    datasets: [{
+      data: [1240, 690, 595, 645, 357, 33, 102],
+      backgroundColor: ['#ef4444','#f59e0b','#f97316','#3b82f6','#8b5cf6','#22c55e','#06b6d4'],
+      borderWidth: 0
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'right', labels: { boxWidth: 11, font: { size: 10 }, padding: 8 } },
+      tooltip: { callbacks: { label: c => c.label + ': R$' + c.parsed + 'k (' + (c.parsed/3662*100).toFixed(1) + '%)' } }
+    }
+  }
+});
+
+// 3. Consultas Serasa
+const consultaColors = [
+  '#ef4444','#ef4444','#ef4444','#22c55e','#f59e0b',
+  '#ef4444','#22c55e','#f59e0b','#f59e0b','#22c55e','#f59e0b','#f59e0b','#f59e0b'
+];
+new Chart(document.getElementById('consultasChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Mai/25','Jun/25','Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26','Abr/26','Mai/26'],
+    datasets: [{
+      label: 'Consultas',
+      data: [11,19,10,4,7,18,5,8,6,4,9,7,5],
+      backgroundColor: consultaColors, borderRadius: 3
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { stepSize: 5 } },
+      x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+    }
+  }
+});
+
+// 4. BACEN Modalidade
+new Chart(document.getElementById('modalidadeChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Cheque Especial','Outros Empréstimos','Cartão de Crédito'],
+    datasets: [{
+      data: [43.388, 122.146, 4.320],
+      backgroundColor: ['#ef4444','#f59e0b','#3b82f6'],
+      borderWidth: 0
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'bottom', labels: { boxWidth: 11, font: { size: 10 } } },
+      tooltip: { callbacks: { label: c => c.label + ': R$ ' + c.parsed.toLocaleString('pt-BR', {minimumFractionDigits:0}) } }
+    }
+  }
+});
+
+// 5. BACEN Vencimentos
+new Chart(document.getElementById('vencimentosChart'), {
+  type: 'bar',
+  data: {
+    labels: ['≤30d','31-60d','61-90d','91-180d','181-360d','361-720d','721-1080d'],
+    datasets: [{
+      label: 'R$ mil',
+      data: [49.830, 1.046, 3.305, 13.867, 24.237, 61.841, 15.727],
+      backgroundColor: ['#ef4444','#f97316','#f59e0b','#eab308','#22c55e','#14b8a6','#3b82f6'],
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => 'R$ ' + c.parsed.y.toFixed(1) + 'k' } } },
+    scales: {
+      y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { callback: v => 'R$' + v + 'k' } },
+      x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+    }
+  }
+});
+
+// 6. Faturamento CredMap
+new Chart(document.getElementById('fatChart'), {
+  type: 'line',
+  data: {
+    labels: ['Mai/25','Jun/25','Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26','Abr/26'],
+    datasets: [{
+      label: 'Faturamento (R$ M)',
+      data: [0.716, 0.640, 0.575, 0.603, 0.502, 0.535, 0.780, 0.791, 0.626, 0.729, 0.606, 0.595],
+      borderColor: '#ef4444', backgroundColor: 'rgba(239,68,68,0.1)',
+      fill: true, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#ef4444'
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => 'R$ ' + c.parsed.y.toFixed(3) + 'M' } } },
+    scales: {
+      y: { grid: { color: 'rgba(255,255,255,0.05)' }, min: 0, max: 1.0, ticks: { callback: v => 'R$' + v + 'M' } },
+      x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+    }
+  }
+});
+
+// Smooth scroll nav
+document.querySelectorAll('.nav-pill').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
+    a.classList.add('active');
+    document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
