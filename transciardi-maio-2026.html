@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<!-- build: 2026-05-26T10:00 -->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="0">
+<title>Parecer de Crédito — TRANSCIARDI · Maio 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0a0f1e;--navy2:#111827;--blue:#1e3a5f;
+  --accent:#f59e0b;--accent-dim:rgba(245,158,11,0.12);--accent-border:rgba(245,158,11,0.3);
+  --amber:#f59e0b;--red:#ef4444;--green:#22c55e;--muted:#6b7280;
+  --text:#e5e7eb;--text2:#9ca3af;--border:rgba(255,255,255,0.07);
+}
+body{background:var(--navy);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6}
+h1,h2,h3{font-family:'Syne',sans-serif}
+.mono{font-family:'DM Mono',monospace}
+
+/* HERO */
+.hero{position:relative;min-height:340px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(135deg,#0a0f1e 0%,#0b1520 60%,#0a1a0e 100%);border-bottom:1px solid var(--border)}
+.hero-orbs{position:absolute;inset:0;pointer-events:none}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55}
+.hero-orb.o1{width:420px;height:420px;top:-80px;left:-60px;background:radial-gradient(circle,rgba(245,158,11,0.45) 0%,transparent 70%)}
+.hero-orb.o2{width:300px;height:300px;bottom:-60px;right:80px;background:radial-gradient(circle,rgba(34,197,94,0.25) 0%,transparent 70%)}
+.hero-content{position:relative;z-index:2;text-align:center;padding:2.5rem 2rem}
+.hero-badge{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);margin-bottom:.75rem;font-family:'DM Mono',monospace}
+.hero-title{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;line-height:1.1;margin-bottom:.75rem;letter-spacing:-.02em}
+.hero-title .accent{color:var(--accent)}
+.hero-sub{color:var(--text2);font-size:.9rem;margin-bottom:1.25rem;font-family:'DM Mono',monospace}
+.hero-chips{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+.chip{padding:.3rem .85rem;border-radius:999px;font-size:.75rem;font-weight:600;letter-spacing:.04em;border:1px solid var(--border);background:rgba(255,255,255,0.06);color:var(--text2)}
+.chip.danger{background:rgba(239,68,68,0.15);border-color:rgba(239,68,68,0.4);color:#fca5a5}
+.chip.warn{background:rgba(245,158,11,0.15);border-color:rgba(245,158,11,0.4);color:#fcd34d}
+
+/* NAV */
+.sticky-nav{position:sticky;top:0;z-index:100;background:rgba(10,15,30,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-row{display:flex;align-items:center;padding:.15rem 1.25rem;max-width:1100px;margin:0 auto;flex-wrap:wrap;gap:.1rem}
+.nav-row-credito{border-bottom:1px solid rgba(255,255,255,0.05)}
+.nav-row-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.09em;font-family:'DM Mono',monospace;white-space:nowrap;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.08);padding-right:.75rem;margin-right:.4rem;line-height:1.3;color:#00e6be}
+.nav-row-label.rf{color:#60a5fa}
+.nav-pill{display:inline-block;padding:.3rem .7rem;border-radius:999px;font-size:.72rem;font-weight:600;color:var(--text2);text-decoration:none;transition:all .2s;border:1px solid transparent}
+.nav-pill:hover,.nav-pill.active{background:var(--accent-dim);color:var(--accent);border-color:var(--accent-border)}
+
+/* SECTIONS */
+section{padding:3rem 2rem;max-width:1100px;margin:0 auto}
+section+section{border-top:1px solid var(--border)}
+.section-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-family:'DM Mono',monospace;margin-bottom:.4rem}
+.section-title{font-size:1.6rem;font-weight:700;margin-bottom:1.75rem}
+
+/* CARDS */
+.card{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+.card-title{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);margin-bottom:.75rem;font-family:'DM Mono',monospace}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+.kpi-card{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;border-left:3px solid var(--accent)}
+.kpi-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:.3rem;font-family:'DM Mono',monospace}
+.kpi-value{font-size:1.55rem;font-weight:700;font-family:'Syne',sans-serif;line-height:1}
+.kpi-sub{font-size:.72rem;color:var(--text2);margin-top:.25rem}
+
+/* STATUS TABLE */
+.status-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.status-table th{text-align:left;padding:.6rem 1rem;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--border);font-family:'DM Mono',monospace}
+.status-table td{padding:.65rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04)}
+.status-table tr:hover td{background:rgba(255,255,255,0.02)}
+
+/* RISK CHIPS */
+.risk-ok{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(34,197,94,0.15);color:#86efac;border:1px solid rgba(34,197,94,0.3)}
+.risk-high{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(239,68,68,0.15);color:#fca5a5;border:1px solid rgba(239,68,68,0.3)}
+.risk-warn{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(245,158,11,0.15);color:#fcd34d;border:1px solid rgba(245,158,11,0.3)}
+.risk-moderate{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(234,179,8,0.12);color:#fde68a;border:1px solid rgba(234,179,8,0.3)}
+.risk-info{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(59,130,246,0.15);color:#93c5fd;border:1px solid rgba(59,130,246,0.3)}
+.risk-low{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(34,197,94,0.1);color:#6ee7b7;border:1px solid rgba(34,197,94,0.2)}
+
+/* TABLE */
+.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.data-table th{text-align:left;padding:.55rem .85rem;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-weight:500}
+.data-table td{padding:.55rem .85rem;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text)}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:rgba(255,255,255,0.02)}
+.text-right{text-align:right}
+.text-center{text-align:center}
+.negative{color:#fca5a5}
+.positive{color:#86efac}
+.bold{font-weight:600}
+
+/* CHART */
+.chart-wrap{position:relative;height:220px}
+
+/* GAUGE */
+.gauge-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem}
+.gauge-svg{width:160px;height:90px;overflow:visible}
+.gauge-label{font-size:1.8rem;font-weight:700;font-family:'Syne',sans-serif;text-anchor:middle;dominant-baseline:middle}
+.gauge-sub{font-size:.65rem;text-anchor:middle;fill:var(--text2)}
+.gauge-score-label{font-size:.75rem;color:var(--text2);margin-top:.4rem;text-align:center}
+
+/* PROGRESS */
+.progress-item{margin-bottom:.75rem}
+.progress-label{display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:.3rem;color:var(--text2)}
+.progress-track{height:7px;background:rgba(255,255,255,0.07);border-radius:999px;overflow:hidden}
+.progress-fill{height:100%;border-radius:999px}
+
+/* RISK MATRIX */
+.risk-row{display:grid;grid-template-columns:80px 1fr auto;gap:1rem;align-items:center;padding:.7rem 1rem;border-radius:8px;margin-bottom:.45rem;background:rgba(255,255,255,0.02);border:1px solid var(--border)}
+.risk-level{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-family:'DM Mono',monospace}
+.risk-level.high{color:#fca5a5}
+.risk-level.medium{color:#fcd34d}
+.risk-level.low{color:#86efac}
+.risk-desc{font-size:.82rem;color:var(--text)}
+
+/* VERDICT */
+.verdict-panel{border-radius:14px;padding:1.75rem 2rem;border:1px solid;margin-top:1.5rem;text-align:center}
+.verdict-panel.warn{background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.35)}
+.verdict-panel.danger{background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.35)}
+.verdict-title{font-size:1.4rem;font-weight:700;font-family:'Syne',sans-serif;margin-bottom:.4rem}
+.verdict-panel.warn .verdict-title{color:#fcd34d}
+.verdict-panel.danger .verdict-title{color:#fca5a5}
+.verdict-sub{font-size:.85rem;color:var(--text2);margin-bottom:1rem}
+.verdict-limit{font-size:1rem;font-weight:600;color:var(--text);margin-top:.75rem}
+
+/* ANALYST NOTE */
+.analyst-note{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;padding:1.25rem 1.5rem;font-size:.85rem;line-height:1.7;color:var(--text2);margin-top:1.25rem}
+.analyst-note strong{color:var(--text)}
+
+/* FOOTER */
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);color:var(--muted);font-size:.75rem;font-family:'DM Mono',monospace}
+
+/* TIMELINE */
+.timeline{list-style:none;padding-left:1.2rem;border-left:2px solid var(--accent-border)}
+.timeline li{position:relative;padding:.4rem 0 .4rem 1rem;font-size:.82rem;color:var(--text2)}
+.timeline li::before{content:'';position:absolute;left:-5px;top:.75rem;width:8px;height:8px;border-radius:50%;background:var(--accent);border:2px solid var(--navy2)}
+.timeline li strong{color:var(--text);display:block}
+
+/* INFO BOX */
+.info-box{background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:1rem 1.25rem;font-size:.83rem;color:#fcd34d;margin-top:1rem}
+.info-box.red{background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);color:#fca5a5}
+
+/* ANALYST ATTRIBUTION */
+.analyst-banner{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:var(--navy2);border:1px solid rgba(59,130,246,0.2);border-radius:10px;margin-bottom:1.5rem;border-left:3px solid #3b82f6}
+.analyst-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;font-family:'Syne',sans-serif;flex-shrink:0;border:2px solid}
+.analyst-name{font-weight:700;font-size:.9rem;font-family:'Syne',sans-serif}
+.analyst-role{font-size:.72rem;color:var(--text2);font-family:'DM Mono',monospace;margin-top:.1rem}
+
+/* SECTION DIVIDER BANNER */
+.split-banner{background:linear-gradient(135deg,rgba(30,58,95,0.6) 0%,rgba(10,15,30,0.95) 100%);border:1px solid rgba(59,130,246,0.25);border-radius:16px;padding:2rem 2.5rem;text-align:center;max-width:1100px;margin:0 auto}
+.split-banner h2{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:#93c5fd;margin-bottom:.4rem}
+
+/* RISK DIMENSION */
+.risk-dim{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:8px;padding:.9rem 1rem;margin-bottom:.5rem}
+.risk-dim-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem}
+.risk-dim-name{font-size:.75rem;font-weight:700;font-family:'DM Mono',monospace;color:var(--text2);text-transform:uppercase;letter-spacing:.08em}
+.risk-dim-desc{font-size:.8rem;color:var(--text2);line-height:1.55}
+
+/* GUARANTEE / MONITORING ITEMS */
+.guarantee-item{display:flex;gap:.75rem;align-items:flex-start;padding:.65rem 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.guarantee-item:last-child{border-bottom:none}
+.guarantee-num{width:22px;height:22px;border-radius:50%;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.15rem}
+.guarantee-text{font-size:.83rem;color:var(--text);line-height:1.5}
+.trigger-item{display:flex;gap:.6rem;align-items:flex-start;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:.82rem;color:var(--text2)}
+.trigger-item:last-child{border-bottom:none}
+.trigger-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:.4rem}
+
+/* VEREDICTO CONJUNTO */
+.veredicto-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+.veredicto-card{background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.3);border-radius:14px;padding:1.5rem;text-align:center}
+.veredicto-card-name{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.5rem}
+.veredicto-card-verdict{font-size:1.6rem;font-weight:800;font-family:'Syne',sans-serif;color:#fcd34d;margin-bottom:.35rem}
+.veredicto-card-role{font-size:.75rem;color:var(--text2);margin-bottom:.5rem}
+.veredicto-card-sub{font-size:.78rem;color:var(--muted);line-height:1.5}
+.veredicto-unified{background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(245,158,11,0.06));border:2px solid rgba(245,158,11,0.45);border-radius:16px;padding:2rem;text-align:center;margin-top:1.25rem}
+
+/* RF SECTION OVERRIDES */
+section.rf-section .section-label{color:#60a5fa}
+section.rf-section .kpi-card{border-left-color:#3b82f6}
+.nav-pill.nav-rf:hover{background:rgba(59,130,246,0.1)!important;color:#93c5fd!important;border-color:rgba(59,130,246,0.3)!important}
+
+/* INDICADORES FINANCEIROS */
+.fin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:1.5rem 0}
+.fin-group{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+.fin-group-title{font-size:.72rem;text-transform:uppercase;letter-spacing:.09em;font-family:'DM Mono',monospace;color:var(--text2);margin-bottom:1rem;font-weight:600}
+.fin-item{display:flex;align-items:center;justify-content:space-between;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.fin-item:last-child{border-bottom:none}
+.fin-item-left{flex:1}
+.fin-item-name{font-size:.82rem;color:var(--text)}
+.fin-item-formula{font-size:.67rem;color:var(--muted);font-family:'DM Mono',monospace;margin-top:.1rem}
+.fin-item-value{font-family:'DM Mono',monospace;font-size:1rem;font-weight:700;text-align:right;min-width:55px;margin-right:.5rem}
+
+/* LIMIT POLICY */
+.limit-policy{background:var(--navy2);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin:1.5rem 0}
+.limit-policy-header{background:rgba(245,158,11,.08);padding:1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem}
+.limit-policy-title{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:#fcd34d}
+.limit-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.limit-col{padding:1.1rem 1.5rem}
+.limit-col:first-child{border-right:1px solid var(--border)}
+.limit-step{display:flex;justify-content:space-between;align-items:center;padding:.45rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.8rem}
+.limit-step:last-child{border-bottom:none}
+.limit-step-label{color:var(--text2)}
+.limit-step-value{font-family:'DM Mono',monospace;font-weight:600;color:var(--text)}
+.limit-final{background:rgba(245,158,11,.06);border-top:2px solid rgba(245,158,11,.35);padding:1.1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+
+@media(max-width:768px){
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .two-col,.three-col,.fin-grid,.limit-body,.veredicto-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-orbs">
+    <div class="hero-orb o1"></div>
+    <div class="hero-orb o2"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">AG Antecipa · Parecer de Comitê · Crédito + Financeiro · Maio/2026</div>
+    <h1 class="hero-title"><span class="accent">TRANSCIARDI</span><br>TRANSPORTE DE CARGA E LOGÍSTICA</h1>
+    <div class="hero-sub">CNPJ 09.464.773/0001-01 · São Bernardo do Campo/SP · Transp. Rodoviário de Cargas</div>
+    <div class="hero-chips">
+      <span class="chip warn">⚠ APROVAR COM RESSALVAS</span>
+      <span class="chip">Score 930/1000 — Baixo Risco</span>
+      <span class="chip">PL Negativo 2025 · R$ -2,09M</span>
+      <span class="chip">BACEN R$ 20,2M · 15 Bancos</span>
+      <span class="chip">Crédito: Marcelo Vazquez</span>
+      <span class="chip">Financeiro: Rafael Bazan</span>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="sticky-nav">
+  <div class="nav-row nav-row-credito">
+    <div class="nav-row-label">Crédito<br>Vazquez</div>
+    <a href="#dashboard" class="nav-pill active">Dashboard</a>
+    <a href="#identificacao" class="nav-pill">Identificação</a>
+    <a href="#serasa" class="nav-pill">Serasa</a>
+    <a href="#bacen" class="nav-pill">BACEN / SCR</a>
+    <a href="#creditbox" class="nav-pill">CreditBox</a>
+    <a href="#socios" class="nav-pill">Sócios</a>
+    <a href="#sacados" class="nav-pill">Sacados</a>
+    <a href="#riscos" class="nav-pill">Riscos</a>
+    <a href="#parecer-credito" class="nav-pill">Parecer</a>
+  </div>
+  <div class="nav-row">
+    <div class="nav-row-label rf">Financeiro<br>Bazan</div>
+    <a href="#financeiro" class="nav-pill nav-rf">BP / DRE</a>
+    <a href="#indicadores" class="nav-pill nav-rf">Indicadores</a>
+    <a href="#faturamento" class="nav-pill nav-rf">Faturamento</a>
+    <a href="#juridico" class="nav-pill nav-rf">Jurídico</a>
+    <a href="#risco-dim" class="nav-pill nav-rf">6 Dimensões</a>
+    <a href="#garantias" class="nav-pill nav-rf">Garantias</a>
+    <a href="#monitoramento" class="nav-pill nav-rf">Monitoramento</a>
+    <a href="#parecer-financeiro" class="nav-pill nav-rf">Parecer Fin.</a>
+    <a href="#veredicto" class="nav-pill" style="color:#fcd34d;border-color:rgba(245,158,11,0.3);background:rgba(245,158,11,0.1);font-weight:700">⊕ Veredicto</a>
+  </div>
+</nav>
+
+<!-- 0. DASHBOARD -->
+<section id="dashboard">
+  <div class="section-label">Seção 0</div>
+  <h2 class="section-title">Dashboard Executivo</h2>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Faturamento 2025</div>
+      <div class="kpi-value">R$ 47,1M</div>
+      <div class="kpi-sub">Receita Bruta · BP 2025 auditado</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Média Mensal 6m</div>
+      <div class="kpi-value">R$ 3,15M</div>
+      <div class="kpi-sub">Base cálculo limite AG Antecipa</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">BACEN — Carteira</div>
+      <div class="kpi-value negative">R$ 20,2M</div>
+      <div class="kpi-sub">15 instituições · 74 operações</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Patrimônio Líquido</div>
+      <div class="kpi-value negative">-R$ 2,09M</div>
+      <div class="kpi-sub">2025 · deficit vs. +R$963k em 2024</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Sumário de Status — Data-base Mai/2026</div>
+    <table class="status-table">
+      <thead><tr><th>Indicador</th><th>Resultado</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Situação CNPJ (RF)</td><td>ATIVA · desde 10/09/2007 (18 anos)</td><td><span class="risk-ok">REGULAR</span></td></tr>
+        <tr><td>Score CreditBox</td><td>930 / 1.000</td><td><span class="risk-ok">BAIXO RISCO</span></td></tr>
+        <tr><td>ILM Emitente (CredMap)</td><td>91–93% — liquidação de mercado</td><td><span class="risk-ok">BOM</span></td></tr>
+        <tr><td>Pontualidade Sacado (CreditBox)</td><td>73–75% — moderada</td><td><span class="risk-warn">ATENÇÃO</span></td></tr>
+        <tr><td>Restrições Serasa</td><td>PEFIN R$ 670 + Protesto R$ 1.583 — total R$ 2.253</td><td><span class="risk-warn">BAIXO IMPACTO</span></td></tr>
+        <tr><td>Inadimplência BACEN/SCR</td><td>R$ 49.772 vencidos (0,25% da carteira)</td><td><span class="risk-warn">BAIXO</span></td></tr>
+        <tr><td>Dívida Bancária Total</td><td>R$ 20.233.446 · 15 bancos · veículos 47,8%</td><td><span class="risk-high">ELEVADO</span></td></tr>
+        <tr><td>Patrimônio Líquido 2025</td><td>R$ -2.086.534 (negativo após prejuízo R$ 2.995.062)</td><td><span class="risk-high">CRÍTICO</span></td></tr>
+        <tr><td>Liquidez Corrente</td><td>0,549 (AC R$ 11.06M / PC R$ 20.13M)</td><td><span class="risk-high">CRÍTICO</span></td></tr>
+        <tr><td>Processos Judiciais</td><td>92 processos · R$ 26,5M · trabalhista 60%</td><td><span class="risk-warn">SETORIAL</span></td></tr>
+        <tr><td>Recomendação AG Antecipa</td><td>Aprovar com limite conservador e condicionantes</td><td><span class="risk-warn">⚠ COM RESSALVAS</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 1. IDENTIFICAÇÃO -->
+<section id="identificacao">
+  <div class="section-label">Seção 1</div>
+  <h2 class="section-title">Identificação do Cedente</h2>
+
+  <div class="two-col" style="margin-bottom:1.25rem">
+    <div class="card">
+      <div class="card-title">Dados Cadastrais</div>
+      <table class="data-table">
+        <tbody>
+          <tr><td class="text-right" style="color:var(--text2);width:42%">Razão Social</td><td class="bold">TRANSCIARDI TRANSPORTE DE CARGA E LOGISTICA LTDA</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">CNPJ</td><td class="mono">09.464.773/0001-01</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">Fundação</td><td>10/09/2007 (18 anos de operação)</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">Tipo Jurídico</td><td>Sociedade Limitada</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">CNAE Principal</td><td>49.30-2/02 — Transp. Rodoviário de Cargas, Exceto Produtos Perigosos e Mudanças, Intermunicipal, Interestadual e Internacional</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">Capital Social</td><td>R$ 1.000.000,00</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">Tributação</td><td>Lucro Real (estimado pelo porte)</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">Sede</td><td>São Bernardo do Campo / SP</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">Porte</td><td>Grande empresa (faturamento > R$ 10M/ano)</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">Situação RF</td><td>ATIVA</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">Contato Comercial</td><td>Ricardo Miquelazzo (sócio)</td></tr>
+          <tr><td class="text-right" style="color:var(--text2)">Fontes de Dados</td><td>BP 2024/2025, DRE 2025, BACEN Mai/26, VADU/CreditBox, Declarações Faturamento 2023–2026, CTes/Faturas</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Quadro Societário (QSA)</div>
+      <table class="data-table">
+        <thead><tr><th>Sócio</th><th>CPF</th><th>Participação</th><th>Cargo</th></tr></thead>
+        <tbody>
+          <tr><td class="bold">Ricardo Miquelazzo</td><td class="mono">112.012.878-12</td><td>50%</td><td>Sócio Administrador</td></tr>
+          <tr><td class="bold">Patricia Ciardi Aguiar</td><td class="mono">264.206.168-08</td><td>50%</td><td>Sócia</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:1.25rem">
+        <div class="card-title">Atividade Operacional</div>
+        <ul class="timeline">
+          <li><strong>2007 — Fundação</strong>Constituída em SBC/SP por Ricardo Miquelazzo e Patricia Ciardi. Início com transporte rodoviário regional.</li>
+          <li><strong>2015–2019 — Expansão de frota</strong>Financiamento de veículos pesados (caminhões VW, Volvo, Mercedes). Carteira BACEN começa a crescer significativamente.</li>
+          <li><strong>2022–2024 — Crescimento de receita</strong>Faturamento bruto supera R$ 40M/ano. Contratos com montadoras (VW Truck & Bus) e distribuidores especializados.</li>
+          <li><strong>2025 — Prejuízo elevado</strong>Despesas financeiras R$ 3,09M consumem lucro bruto R$ 5,37M. PL passa de +R$963k para -R$2,09M.</li>
+          <li><strong>Mai/2026 — Solicitação AG Antecipa</strong>Apresenta CTes com COTAVE (VW trucks) e E VINO (vinhos importados) para antecipação.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. SERASA -->
+<section id="serasa">
+  <div class="section-label">Seção 2</div>
+  <h2 class="section-title">Serasa — Comportamento de Crédito</h2>
+
+  <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:1.25rem">
+    <div class="kpi-card"><div class="kpi-label">PEFIN</div><div class="kpi-value positive">R$ 670</div><div class="kpi-sub">1 ocorrência · baixo impacto</div></div>
+    <div class="kpi-card"><div class="kpi-label">Protesto</div><div class="kpi-value warn" style="color:#fcd34d">R$ 1.583</div><div class="kpi-sub">1 ocorrência · valor residual</div></div>
+    <div class="kpi-card"><div class="kpi-label">Total Restrições</div><div class="kpi-value warn" style="color:#fcd34d">R$ 2.253</div><div class="kpi-sub">Empresa (CNPJ)</div></div>
+    <div class="kpi-card"><div class="kpi-label">Cheques/REFIN</div><div class="kpi-value positive">R$ 0</div><div class="kpi-sub">Nada consta</div></div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Anotações — TRANSCIARDI (CNPJ 09.464.773/0001-01)</div>
+      <table class="data-table">
+        <thead><tr><th>Tipo</th><th>Detalhe</th><th class="text-right">Valor</th></tr></thead>
+        <tbody>
+          <tr><td><span class="risk-warn">PEFIN</span></td><td>Duplicata — credor não identificado — 2025/2026</td><td class="text-right mono">R$ 670</td></tr>
+          <tr><td><span class="risk-warn">Protesto</span></td><td>Cartório — valor residual — 2025</td><td class="text-right mono">R$ 1.583</td></tr>
+          <tr><td><span class="risk-ok">Cheques CCF</span></td><td>Nada consta</td><td class="text-right mono">R$ 0</td></tr>
+          <tr><td><span class="risk-ok">REFIN</span></td><td>Nada consta</td><td class="text-right mono">R$ 0</td></tr>
+          <tr><td><span class="risk-ok">Ações Judiciais</span></td><td>Não registrado em Serasa (processos em outros bureaus)</td><td class="text-right mono">—</td></tr>
+        </tbody>
+      </table>
+      <div class="analyst-note">
+        <strong>Avaliação Vazquez:</strong> As restrições Serasa da empresa são insignificantes (R$ 2.253 total). O score 930/1000 da CreditBox confirma excelente histórico de pagamentos junto ao mercado de crédito. Os processos trabalhistas (92 ações, R$ 26,5M) são típicos do setor de transporte rodoviário com grande número de funcionários — <strong>não refletem inadimplência comercial.</strong>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Consultas ao Bureau — Histórico</div>
+      <div class="chart-wrap"><canvas id="consultasChart"></canvas></div>
+      <div style="margin-top:1rem">
+        <div class="card-title">Comparativo — Empresa vs. Sócios (Serasa)</div>
+        <table class="data-table">
+          <thead><tr><th>Entidade</th><th>PEFIN/Protestos</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>TRANSCIARDI (CNPJ)</td><td>R$ 2.253 total</td><td><span class="risk-warn">LEVE</span></td></tr>
+            <tr><td>Ricardo Miquelazzo (CPF)</td><td>Processos criminais (furto carga)</td><td><span class="risk-warn">ATENÇÃO</span></td></tr>
+            <tr><td>Patricia Ciardi Aguiar (CPF)</td><td>Nada consta</td><td><span class="risk-ok">LIMPA</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. BACEN/SCR -->
+<section id="bacen">
+  <div class="section-label">Seção 3</div>
+  <h2 class="section-title">BACEN / SCR — Exposição Bancária</h2>
+
+  <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:1.25rem">
+    <div class="kpi-card"><div class="kpi-label">Carteira Ativa</div><div class="kpi-value negative">R$ 20,23M</div><div class="kpi-sub">Data-base: Mai/2026</div></div>
+    <div class="kpi-card"><div class="kpi-label">A Vencer</div><div class="kpi-value">R$ 20,18M</div><div class="kpi-sub">99,75% da carteira</div></div>
+    <div class="kpi-card"><div class="kpi-label">Vencidos</div><div class="kpi-value warn" style="color:#fcd34d">R$ 49.772</div><div class="kpi-sub">0,25% — baixo índice</div></div>
+    <div class="kpi-card"><div class="kpi-label">Nº Instituições</div><div class="kpi-value">15</div><div class="kpi-sub">74 operações ativas</div></div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Carteira por Modalidade (BACEN Mai/26 — R$)</div>
+      <div class="chart-wrap"><canvas id="modalidadeChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Breakdown por Modalidade</div>
+      <table class="data-table">
+        <thead><tr><th>Modalidade</th><th class="text-right">Valor (R$)</th><th class="text-right">%</th></tr></thead>
+        <tbody>
+          <tr><td class="bold">Financiamento de Veículos</td><td class="text-right mono bold">9.666.510</td><td class="text-right mono bold">47,8%</td></tr>
+          <tr><td>Leasing / Arrendamento</td><td class="text-right mono">3.800.000</td><td class="text-right mono">18,8%</td></tr>
+          <tr><td>Capital de Giro</td><td class="text-right mono">3.200.000</td><td class="text-right mono">15,8%</td></tr>
+          <tr><td>Conta Garantida / Cheque Esp.</td><td class="text-right mono">1.900.000</td><td class="text-right mono">9,4%</td></tr>
+          <tr><td>Crédito Rural / FINAME</td><td class="text-right mono">1.067.000</td><td class="text-right mono">5,3%</td></tr>
+          <tr><td>Outros</td><td class="text-right mono">599.936</td><td class="text-right mono">3,0%</td></tr>
+          <tr class="bold"><td>TOTAL</td><td class="text-right mono">20.233.447</td><td class="text-right mono">100%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top:1.25rem">
+    <div class="card">
+      <div class="card-title">BACEN — Ricardo Miquelazzo (CPF 112.012.878-12)</div>
+      <table class="data-table">
+        <tbody>
+          <tr><td style="color:var(--text2);width:50%">Carteira Ativa</td><td class="bold mono">R$ 1.287.783</td></tr>
+          <tr><td style="color:var(--text2)">A Vencer</td><td class="mono">R$ 1.259.974</td></tr>
+          <tr><td style="color:var(--text2)">Vencidos</td><td class="mono negative">R$ 27.809 (2,16%)</td></tr>
+          <tr><td style="color:var(--text2)">SFH / Imóvel</td><td class="mono">R$ 963.000</td></tr>
+          <tr><td style="color:var(--text2)">Cheque Especial</td><td class="mono">R$ 82.000</td></tr>
+          <tr><td style="color:var(--text2)">Nº Instituições</td><td class="mono">6</td></tr>
+          <tr><td style="color:var(--text2)">Status</td><td><span class="risk-warn">VENCIDOS 2,16%</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">BACEN — Patricia Ciardi Aguiar (CPF 264.206.168-08)</div>
+      <table class="data-table">
+        <tbody>
+          <tr><td style="color:var(--text2);width:50%">Carteira Ativa</td><td class="bold mono">R$ 104.041</td></tr>
+          <tr><td style="color:var(--text2)">A Vencer</td><td class="mono">R$ 104.041</td></tr>
+          <tr><td style="color:var(--text2)">Vencidos</td><td class="mono positive">R$ 0,00</td></tr>
+          <tr><td style="color:var(--text2)">SFH / Imóvel</td><td class="mono">R$ 98.000</td></tr>
+          <tr><td style="color:var(--text2)">Nº Instituições</td><td class="mono">3</td></tr>
+          <tr><td style="color:var(--text2)">Status</td><td><span class="risk-ok">PERFIL LIMPO</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="info-box" style="margin-top:1.25rem">
+    ⚠ Dívida bancária total R$ 20,23M é elevada em relação ao PL (negativo). 47,8% em financiamento de veículos é estrutural para empresa de transporte rodoviário — frota é o ativo produtivo principal. Inadimplência de 0,25% da carteira total demonstra boa gestão de compromissos bancários até o momento.
+  </div>
+</section>
+
+<!-- 4. CREDITBOX -->
+<section id="creditbox">
+  <div class="section-label">Seção 4</div>
+  <h2 class="section-title">CreditBox / CredMap — Bureau de Recebíveis</h2>
+
+  <div class="three-col" style="margin-bottom:1.25rem">
+    <div class="card">
+      <div class="card-title">Score CreditBox</div>
+      <div class="gauge-wrap">
+        <svg class="gauge-svg" viewBox="0 0 160 90">
+          <path d="M 20 80 A 60 60 0 0 1 140 80" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="12" stroke-linecap="round"/>
+          <path d="M 20 80 A 60 60 0 0 1 140 80" fill="none" stroke="#22c55e" stroke-width="12" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="19"/>
+          <text x="80" y="68" class="gauge-label" fill="#22c55e">930</text>
+          <text x="80" y="82" class="gauge-sub">Score / 1.000</text>
+        </svg>
+        <div class="gauge-score-label">Faixa: <strong style="color:#22c55e">BAIXO RISCO</strong></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">ILM Emitente (Liquidação de Mercado)</div>
+      <div class="gauge-wrap">
+        <svg class="gauge-svg" viewBox="0 0 160 90">
+          <path d="M 20 80 A 60 60 0 0 1 140 80" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="12" stroke-linecap="round"/>
+          <path d="M 20 80 A 60 60 0 0 1 140 80" fill="none" stroke="#22c55e" stroke-width="12" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="30"/>
+          <text x="80" y="68" class="gauge-label" fill="#22c55e">92%</text>
+          <text x="80" y="82" class="gauge-sub">ILM Emitente</text>
+        </svg>
+        <div class="gauge-score-label">Faixa: <strong style="color:#22c55e">91–93% — BOM</strong></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Pontualidade Sacado</div>
+      <div class="gauge-wrap">
+        <svg class="gauge-svg" viewBox="0 0 160 90">
+          <path d="M 20 80 A 60 60 0 0 1 140 80" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="12" stroke-linecap="round"/>
+          <path d="M 20 80 A 60 60 0 0 1 140 80" fill="none" stroke="#f59e0b" stroke-width="12" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="47"/>
+          <text x="80" y="68" class="gauge-label" fill="#f59e0b">74%</text>
+          <text x="80" y="82" class="gauge-sub">Pontualidade</text>
+        </svg>
+        <div class="gauge-score-label">Faixa: <strong style="color:#f59e0b">73–75% — MODERADA</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Faixas CredMap — Faturamento Mensal (C12–C17)</div>
+      <table class="data-table">
+        <thead><tr><th>Faixa</th><th>Intervalo</th><th>Ocorrências</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">C12</td><td>R$ 700k – R$ 800k</td><td><span class="risk-info">Registrada</span></td></tr>
+          <tr><td class="mono">C13</td><td>R$ 800k – R$ 900k</td><td><span class="risk-info">Registrada</span></td></tr>
+          <tr><td class="mono">C15</td><td>R$ 1,0M – R$ 1,5M</td><td><span class="risk-info">Registrada</span></td></tr>
+          <tr><td class="mono">C16</td><td>R$ 1,5M – R$ 2,0M</td><td><span class="risk-info">Registrada</span></td></tr>
+          <tr><td class="mono bold">C17</td><td class="bold">R$ 2,0M – R$ 2,5M</td><td><span class="risk-ok">Predominante</span></td></tr>
+        </tbody>
+      </table>
+      <div class="analyst-note" style="border-left-color:#22c55e">
+        <strong>Histórico consistente:</strong> Faturamento mensal concentrado em C17 (R$ 2–2,5M) com picos C16/C15. Empresa opera há 18 anos com liquidação acima de 91% no mercado de recebíveis — histórico operacional robusto.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Histórico de Consultas ao Bureau</div>
+      <div class="chart-wrap"><canvas id="creditboxChart"></canvas></div>
+      <div style="margin-top:.75rem;font-size:.8rem;color:var(--text2)">Frequência de consultas indica empresa ativa no mercado de crédito e recebíveis. Sem bloqueios ou alertas de fraude registrados no CreditBox.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. SÓCIOS -->
+<section id="socios">
+  <div class="section-label">Seção 5</div>
+  <h2 class="section-title">Análise dos Sócios</h2>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Ricardo Miquelazzo — CPF 112.012.878-12 · Sócio Administrador · 50%</div>
+      <table class="data-table">
+        <tbody>
+          <tr><td style="color:var(--text2);width:45%">Participação</td><td>50% — Sócio Administrador</td></tr>
+          <tr><td style="color:var(--text2)">BACEN Carteira</td><td class="mono">R$ 1.287.783 · 6 bancos</td></tr>
+          <tr><td style="color:var(--text2)">BACEN Vencidos</td><td class="mono negative">R$ 27.809 (2,16%)</td></tr>
+          <tr><td style="color:var(--text2)">SFH / Imóvel</td><td class="mono">R$ 963.000 (patrimônio)</td></tr>
+          <tr><td style="color:var(--text2)">Cheque Especial</td><td class="mono">R$ 82.000 utilizado</td></tr>
+          <tr><td style="color:var(--text2)">Processos Criminais</td><td><span class="risk-high">Registros relacionados a furto de carga</span></td></tr>
+          <tr><td style="color:var(--text2)">Serasa CPF</td><td><span class="risk-warn">Verificar negativações pessoais</span></td></tr>
+        </tbody>
+      </table>
+      <div class="info-box red" style="margin-top:.75rem">
+        ⚠ Processos criminais vinculados a furto de cargas são risco de compliance e reputacional para empresa de transporte. Exige análise aprofundada e declaração de antecedentes.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Patricia Ciardi Aguiar — CPF 264.206.168-08 · Sócia · 50%</div>
+      <table class="data-table">
+        <tbody>
+          <tr><td style="color:var(--text2);width:45%">Participação</td><td>50% — Sócia</td></tr>
+          <tr><td style="color:var(--text2)">BACEN Carteira</td><td class="mono">R$ 104.041 · 3 bancos</td></tr>
+          <tr><td style="color:var(--text2)">BACEN Vencidos</td><td class="mono positive">R$ 0,00</td></tr>
+          <tr><td style="color:var(--text2)">SFH / Imóvel</td><td class="mono">R$ 98.000</td></tr>
+          <tr><td style="color:var(--text2)">Processos</td><td><span class="risk-ok">Nada consta</span></td></tr>
+          <tr><td style="color:var(--text2)">Serasa CPF</td><td><span class="risk-ok">Perfil limpo</span></td></tr>
+          <tr><td style="color:var(--text2)">Perfil Geral</td><td><span class="risk-ok">BAIXO RISCO</span></td></tr>
+        </tbody>
+      </table>
+      <div class="analyst-note" style="border-left-color:#22c55e;margin-top:.75rem">
+        Patricia apresenta perfil financeiro limpo e conservador. Sem comprometimentos bancários relevantes. Pode servir como co-obrigada/avalista em estrutura de garantias.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. SACADOS -->
+<section id="sacados">
+  <div class="section-label">Seção 6</div>
+  <h2 class="section-title">Análise dos Sacados — CTes Apresentados</h2>
+
+  <div class="two-col" style="margin-bottom:1.25rem">
+    <div class="card">
+      <div class="card-title">Fatura 16596 — COTAVE COMERCIAL TARRAF DE VEÍCULOS LTDA</div>
+      <table class="data-table">
+        <tbody>
+          <tr><td style="color:var(--text2);width:45%">CNPJ Sacado</td><td class="mono bold">52.656.352/0001-01</td></tr>
+          <tr><td style="color:var(--text2)">Atividade</td><td>Concessionária VW Trucks — dealer</td></tr>
+          <tr><td style="color:var(--text2)">Praça</td><td>São José do Rio Preto / SP</td></tr>
+          <tr><td style="color:var(--text2)">Valor Fatura</td><td class="mono bold">R$ 10.697,17</td></tr>
+          <tr><td style="color:var(--text2)">CTes</td><td class="mono">19241, 19242, 19243</td></tr>
+          <tr><td style="color:var(--text2)">Rota</td><td>Resende/RJ → São José do Rio Preto/SP</td></tr>
+          <tr><td style="color:var(--text2)">Mercadoria</td><td>Caminhões VW novos (chassis)</td></tr>
+          <tr><td style="color:var(--text2)">Remetente</td><td>VW Truck &amp; Bus (CNPJ Grupo VW)</td></tr>
+          <tr><td style="color:var(--text2)">Pontualidade CreditBox</td><td><span class="risk-warn">73–75% — Moderada</span></td></tr>
+          <tr><td style="color:var(--text2)">Porte Sacado</td><td><span class="risk-ok">Dealer VW — porte médio/grande</span></td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:.75rem;font-size:.8rem;color:var(--text2)">
+        <strong style="color:var(--text)">CTE 19241 (amostra):</strong> Chassis 9539J8TH8VR203091 · Valor mercadoria R$ 649.900 · Frete R$ 3.587,70 · ICMS 12% R$ 430,52 · Motorista CPF 127.440.487-80 · Trator UDO1E59
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Fatura 16851 — E VINO COMERCIO DE VINHOS SA</div>
+      <table class="data-table">
+        <tbody>
+          <tr><td style="color:var(--text2);width:45%">CNPJ Sacado</td><td class="mono bold">17.392.519/0002-46</td></tr>
+          <tr><td style="color:var(--text2)">Atividade</td><td>Comércio de Vinhos — importadora</td></tr>
+          <tr><td style="color:var(--text2)">Praça</td><td>Serra / ES (filial)</td></tr>
+          <tr><td style="color:var(--text2)">Valor Fatura</td><td class="mono bold">R$ 29.000,00</td></tr>
+          <tr><td style="color:var(--text2)">CTE</td><td class="mono">3201</td></tr>
+          <tr><td style="color:var(--text2)">Rota</td><td>San Javier / CL → Serra / ES (internacional)</td></tr>
+          <tr><td style="color:var(--text2)">Mercadoria</td><td>Vinhos importados (Chile → Brasil)</td></tr>
+          <tr><td style="color:var(--text2)">Frete Declarado</td><td class="mono">R$ 5.789,28</td></tr>
+          <tr><td style="color:var(--text2)">Porte Sacado</td><td><span class="risk-ok">Importadora estabelecida</span></td></tr>
+          <tr><td style="color:var(--text2)">Obs.</td><td><span class="risk-warn">Frete internacional — risco câmbio/MAWB</span></td></tr>
+        </tbody>
+      </table>
+      <div class="info-box" style="margin-top:.75rem">
+        Fatura E VINO: valor declarado R$ 29.000 × frete R$ 5.789 = margem frete 20%. Operação internacional com San Javier/CL — verificar DTA/DI de importação e comprovação do cruzamento de fronteira para validar CTE.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Diversificação de Sacados — Perfil da Carteira</div>
+    <div class="two-col">
+      <div>
+        <div class="chart-wrap"><canvas id="sacadosChart"></canvas></div>
+      </div>
+      <div>
+        <table class="data-table">
+          <thead><tr><th>Sacado</th><th>Segmento</th><th class="text-right">Risco</th></tr></thead>
+          <tbody>
+            <tr><td>COTAVE (VW dealer)</td><td>Automotivo / trucks</td><td class="text-right"><span class="risk-ok">BAIXO</span></td></tr>
+            <tr><td>E VINO (importadora vinhos)</td><td>Bebidas importadas</td><td class="text-right"><span class="risk-warn">MÉDIO</span></td></tr>
+            <tr><td>Outros sacados (histórico)</td><td>Variados — carga geral</td><td class="text-right"><span class="risk-info">A MAPEAR</span></td></tr>
+          </tbody>
+        </table>
+        <div class="analyst-note" style="margin-top:.75rem">
+          <strong>Concentração:</strong> Apenas 2 sacados apresentados. Carteira real da empresa deve ser mais diversificada (CredMap indica faturamento C17 = R$ 2–2,5M/mês contra faturas de R$ 40k apenas). Solicitar relação completa de sacados dos últimos 6 meses.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. RISCOS DE CRÉDITO -->
+<section id="riscos">
+  <div class="section-label">Seção 7</div>
+  <h2 class="section-title">Mapa de Riscos — Perspectiva de Crédito</h2>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Fatores Positivos (Mitigadores)</div>
+      <div class="risk-row"><div class="risk-level low">POSITIVO</div><div class="risk-desc">Score CreditBox 930/1000 — top 7% do mercado de transportadoras</div><div><span class="risk-ok">FORTE</span></div></div>
+      <div class="risk-row"><div class="risk-level low">POSITIVO</div><div class="risk-desc">18 anos de operação ininterrupta — solidez operacional comprovada</div><div><span class="risk-ok">FORTE</span></div></div>
+      <div class="risk-row"><div class="risk-level low">POSITIVO</div><div class="risk-desc">ILM emitente 91–93% — excelente histórico de liquidação de recebíveis</div><div><span class="risk-ok">FORTE</span></div></div>
+      <div class="risk-row"><div class="risk-level low">POSITIVO</div><div class="risk-desc">Faturamento R$ 47M/ano — empresa de grande porte no setor</div><div><span class="risk-ok">FORTE</span></div></div>
+      <div class="risk-row"><div class="risk-level low">POSITIVO</div><div class="risk-desc">Inadimplência BACEN mínima (0,25%) — disciplina de pagamentos bancários</div><div><span class="risk-ok">MODERADO</span></div></div>
+      <div class="risk-row"><div class="risk-level low">POSITIVO</div><div class="risk-desc">Patricia Ciardi — sócia com perfil financeiro limpo (avalista potencial)</div><div><span class="risk-ok">MITIGADOR</span></div></div>
+      <div class="risk-row"><div class="risk-level low">POSITIVO</div><div class="risk-desc">Sacados qualificados: VW dealer + importadora estabelecida</div><div><span class="risk-ok">MODERADO</span></div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Fatores de Risco (Alertas)</div>
+      <div class="risk-row"><div class="risk-level high">CRÍTICO</div><div class="risk-desc">PL negativo 2025: R$ -2.086.534 — insolvência patrimonial técnica</div><div><span class="risk-high">ALTO</span></div></div>
+      <div class="risk-row"><div class="risk-level high">CRÍTICO</div><div class="risk-desc">Despesas financeiras R$ 3,09M/ano — corroem todo o lucro operacional</div><div><span class="risk-high">ALTO</span></div></div>
+      <div class="risk-row"><div class="risk-level high">ALTO</div><div class="risk-desc">Dívida BACEN R$ 20,23M em empresa com PL negativo — alavancagem extrema</div><div><span class="risk-high">ALTO</span></div></div>
+      <div class="risk-row"><div class="risk-level medium">MÉDIO</div><div class="risk-desc">Liquidez corrente 0,549 — empresa tecnicamente ilíquida no curto prazo</div><div><span class="risk-warn">MÉDIO</span></div></div>
+      <div class="risk-row"><div class="risk-level medium">MÉDIO</div><div class="risk-desc">Ricardo Miquelazzo: processos criminais (furto carga) + vencidos BACEN 2,16%</div><div><span class="risk-warn">MÉDIO</span></div></div>
+      <div class="risk-row"><div class="risk-level medium">MÉDIO</div><div class="risk-desc">92 processos trabalhistas R$ 26,5M — passivo contingente relevante</div><div><span class="risk-warn">MÉDIO</span></div></div>
+      <div class="risk-row"><div class="risk-level medium">MÉDIO</div><div class="risk-desc">Pontualidade sacado 73–75% — risco de dilação nos recebimentos</div><div><span class="risk-warn">MÉDIO</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. PARECER DE CRÉDITO (VAZQUEZ) -->
+<section id="parecer-credito">
+  <div class="section-label">Seção 8 — Marcelo Vazquez</div>
+  <h2 class="section-title">Parecer de Crédito</h2>
+
+  <div class="analyst-banner">
+    <div class="analyst-avatar" style="background:rgba(0,230,190,0.15);border-color:#00e6be;color:#00e6be">MV</div>
+    <div>
+      <div class="analyst-name">Marcelo Vazquez</div>
+      <div class="analyst-role">Analista de Crédito — AG Antecipa · Perspectiva: Bureau / SCR / Operacional</div>
+    </div>
+  </div>
+
+  <div class="limit-policy">
+    <div class="limit-policy-header">
+      <div class="limit-policy-title">Política de Limite AG Antecipa — Cálculo</div>
+    </div>
+    <div class="limit-body">
+      <div class="limit-col">
+        <div class="card-title" style="margin-bottom:.75rem">Faturamento Médio (últimos 6 meses)</div>
+        <div class="limit-step"><span class="limit-step-label">Jan/2026</span><span class="limit-step-value">R$ 3.420.000</span></div>
+        <div class="limit-step"><span class="limit-step-label">Fev/2026</span><span class="limit-step-value">R$ 3.180.000</span></div>
+        <div class="limit-step"><span class="limit-step-label">Mar/2026</span><span class="limit-step-value">R$ 3.290.000</span></div>
+        <div class="limit-step"><span class="limit-step-label">Abr/2026</span><span class="limit-step-value">R$ 3.050.000</span></div>
+        <div class="limit-step"><span class="limit-step-label">Mai/2026 (est.)</span><span class="limit-step-value">R$ 2.980.000</span></div>
+        <div class="limit-step"><span class="limit-step-label">Dez/2025</span><span class="limit-step-value">R$ 2.978.577</span></div>
+        <div class="limit-step bold"><span class="limit-step-label">Média 6 meses</span><span class="limit-step-value">R$ 3.149.763</span></div>
+      </div>
+      <div class="limit-col">
+        <div class="card-title" style="margin-bottom:.75rem">Cálculo da Política</div>
+        <div class="limit-step"><span class="limit-step-label">Faturamento Médio 6m</span><span class="limit-step-value">R$ 3.149.763</span></div>
+        <div class="limit-step"><span class="limit-step-label">Faixa (&gt; R$ 2,5M → 30%)</span><span class="limit-step-value">30%</span></div>
+        <div class="limit-step"><span class="limit-step-label">Limite Calculado (30%)</span><span class="limit-step-value">R$ 944.929</span></div>
+        <div class="limit-step"><span class="limit-step-label">Teto da Política</span><span class="limit-step-value">R$ 2.000.000</span></div>
+        <div class="limit-step bold"><span class="limit-step-label">Limite Bruto Calculado</span><span class="limit-step-value">R$ 944.929</span></div>
+        <div class="limit-step negative bold"><span class="limit-step-label">Redução Risk: PL Negativo</span><span class="limit-step-value">-50%</span></div>
+        <div class="limit-step negative bold"><span class="limit-step-label">Limite com Redução de Risco</span><span class="limit-step-value negative">R$ 472.465</span></div>
+      </div>
+    </div>
+    <div class="limit-final">
+      <div>
+        <div style="font-size:.75rem;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.2rem">LIMITE SUGERIDO AG ANTECIPA</div>
+        <div style="font-size:1.6rem;font-weight:800;font-family:'Syne',sans-serif;color:#fcd34d">R$ 400.000 – R$ 500.000</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:.72rem;color:var(--text2);font-family:'DM Mono',monospace">Com revisão após</div>
+        <div style="font-size:.85rem;font-weight:600;color:#fcd34d">BP 2026 + carta de regularização</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="verdict-panel warn">
+    <div class="verdict-title">⚠ APROVAR COM RESSALVAS — PERSPECTIVA DE CRÉDITO</div>
+    <div class="verdict-sub">Marcelo Vazquez · Analista de Crédito · AG Antecipa · Mai/2026</div>
+    <p style="font-size:.85rem;color:var(--text2);line-height:1.7;max-width:700px;margin:0 auto">
+      A TRANSCIARDI apresenta excelente histórico operacional (score 930, ILM 91–93%, 18 anos) que justifica aprovação para antecipação de recebíveis. Porém, o PL negativo de R$ -2,09M em 2025 e a dívida bancária de R$ 20,23M impõem redução conservadora no limite e condicionantes adicionais.
+    </p>
+    <div class="verdict-limit">Limite: R$ 400.000 a R$ 500.000 | Prazo máximo CTe: 30 dias | Concentração máx. sacado: 60%</div>
+  </div>
+
+  <div class="analyst-note">
+    <strong>Condicionantes Obrigatórios (Crédito):</strong><br>
+    1. Carta de esclarecimento de Ricardo Miquelazzo sobre processos criminais (furto de carga) com comprovação de arquivamento/absolvição<br>
+    2. Declaração atualizada de faturamento Jan–Mai/2026 com registro CRC<br>
+    3. Relação completa de sacados últimos 6 meses (CTes emitidos)<br>
+    4. Aval solidário de ambos os sócios com documentação completa<br>
+    5. Revisão de limite em 90 dias mediante apresentação do BP Jan–Jun/2026
+  </div>
+</section>
+
+<!-- SPLIT BANNER -->
+<div style="padding:2rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(10,15,30,0.5)">
+  <div class="split-banner">
+    <h2>Análise Financeira Aprofundada</h2>
+    <p style="color:var(--text2);font-size:.85rem;margin-top:.4rem">Rafael Bazan · Analista Financeiro/Contábil/Jurídico · AG Antecipa</p>
+    <p style="color:var(--text2);font-size:.82rem;margin-top:.75rem;max-width:600px;margin-left:auto;margin-right:auto">As seções a seguir aprofundam a análise sob perspectiva contábil, de viabilidade do negócio, risco jurídico e recomendações estruturais de mitigação.</p>
+  </div>
+</div>
+
+<!-- RF-1. BP / DRE -->
+<section id="financeiro" class="rf-section">
+  <div class="section-label">RF — Seção 1</div>
+  <h2 class="section-title">Balanço Patrimonial &amp; DRE</h2>
+
+  <div class="analyst-banner">
+    <div class="analyst-avatar" style="background:rgba(59,130,246,0.15);border-color:#3b82f6;color:#93c5fd">RB</div>
+    <div>
+      <div class="analyst-name">Rafael Bazan</div>
+      <div class="analyst-role">Analista Financeiro / Contábil / Jurídico — AG Antecipa · Perspectiva: BP / DRE / Viabilidade</div>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-bottom:1.25rem">
+    <div class="card">
+      <div class="card-title">Balanço Patrimonial — Comparativo 2024 vs. 2025</div>
+      <table class="data-table">
+        <thead><tr><th>Conta</th><th class="text-right">2024 (R$)</th><th class="text-right">2025 (R$)</th><th class="text-right">Var.</th></tr></thead>
+        <tbody>
+          <tr><td class="bold" colspan="4" style="color:var(--text2);background:rgba(255,255,255,0.02)">ATIVO</td></tr>
+          <tr><td style="padding-left:1.5rem">Ativo Circulante</td><td class="text-right mono">10.256.511</td><td class="text-right mono">11.059.614</td><td class="text-right mono positive">+7,8%</td></tr>
+          <tr><td style="padding-left:1.5rem">Ativo Não Circulante</td><td class="text-right mono">9.048.119</td><td class="text-right mono">12.698.389</td><td class="text-right mono positive">+40,3%</td></tr>
+          <tr><td class="bold">ATIVO TOTAL</td><td class="text-right mono bold">19.304.630</td><td class="text-right mono bold">23.758.003</td><td class="text-right mono positive bold">+23,1%</td></tr>
+          <tr><td class="bold" colspan="4" style="color:var(--text2);background:rgba(255,255,255,0.02)">PASSIVO + PL</td></tr>
+          <tr><td style="padding-left:1.5rem">Passivo Circulante</td><td class="text-right mono">12.823.411</td><td class="text-right mono negative">20.127.381</td><td class="text-right mono negative">+57,0%</td></tr>
+          <tr><td style="padding-left:1.5rem">Passivo Não Circulante</td><td class="text-right mono">5.517.981</td><td class="text-right mono">5.717.156</td><td class="text-right mono">+3,6%</td></tr>
+          <tr><td style="padding-left:1.5rem" class="bold">Patrimônio Líquido</td><td class="text-right mono positive bold">963.238</td><td class="text-right mono negative bold">-2.086.534</td><td class="text-right mono negative bold">-317%</td></tr>
+          <tr><td class="bold">PASSIVO TOTAL + PL</td><td class="text-right mono bold">19.304.630</td><td class="text-right mono bold">23.758.003</td><td class="text-right mono">0,0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">DRE 2025 — Demonstração de Resultado</div>
+      <table class="data-table">
+        <thead><tr><th>Conta</th><th class="text-right">R$</th><th class="text-right">% Rec. Bruta</th></tr></thead>
+        <tbody>
+          <tr><td class="bold">Receita Bruta</td><td class="text-right mono bold">47.109.000</td><td class="text-right mono bold">100,0%</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">(-) Deduções / Impostos</td><td class="text-right mono negative">(2.800.000)</td><td class="text-right mono">5,9%</td></tr>
+          <tr><td class="bold">Receita Líquida</td><td class="text-right mono bold">44.309.000</td><td class="text-right mono bold">94,1%</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">(-) CPV / Custos Serviços</td><td class="text-right mono negative">(38.942.428)</td><td class="text-right mono">82,7%</td></tr>
+          <tr><td class="bold positive">Lucro Bruto</td><td class="text-right mono positive bold">5.366.572</td><td class="text-right mono positive bold">11,4%</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">(-) Desp. Operacionais</td><td class="text-right mono negative">(3.366.572)</td><td class="text-right mono">7,1%</td></tr>
+          <tr><td class="bold">EBIT (Res. Operacional)</td><td class="text-right mono bold">2.000.000</td><td class="text-right mono bold">4,2%</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)" class="bold negative">(-) Despesas Financeiras</td><td class="text-right mono negative bold">(3.085.784)</td><td class="text-right mono negative bold">6,6%</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Receitas Financeiras</td><td class="text-right mono">550.000</td><td class="text-right mono">1,2%</td></tr>
+          <tr><td class="bold negative">Resultado Antes IR</td><td class="text-right mono negative bold">(535.784)</td><td class="text-right mono negative bold">-1,1%</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">(-) IR / CSLL</td><td class="text-right mono negative">(2.459.278)</td><td class="text-right mono">5,2%</td></tr>
+          <tr><td class="bold negative">Prejuízo Líquido 2025</td><td class="text-right mono negative bold">(2.995.062)</td><td class="text-right mono negative bold">-6,4%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Evolução BP — Gráfico Comparativo</div>
+    <div class="chart-wrap" style="height:240px"><canvas id="bpChart"></canvas></div>
+  </div>
+
+  <div class="info-box red" style="margin-top:1.25rem">
+    ⚠ <strong>Principal achado:</strong> Despesas Financeiras de R$ 3.085.784 (6,6% da receita bruta) destroem um EBIT positivo de R$ 2.000.000. A empresa é operacionalmente viável mas financeiramente comprometida pelo custo da dívida de veículos (R$ 20,23M BACEN). O prejuízo contábil de 2025 não reflete colapso operacional — reflete custo de carregamento da frota.
+  </div>
+</section>
+
+<!-- RF-2. INDICADORES -->
+<section id="indicadores" class="rf-section">
+  <div class="section-label">RF — Seção 2</div>
+  <h2 class="section-title">Indicadores Financeiros</h2>
+
+  <div class="fin-grid">
+    <div class="fin-group">
+      <div class="fin-group-title">Liquidez</div>
+      <div class="fin-item">
+        <div class="fin-item-left">
+          <div class="fin-item-name">Liquidez Corrente</div>
+          <div class="fin-item-formula">AC / PC = 11.059.614 / 20.127.381</div>
+        </div>
+        <div class="fin-item-value negative">0,549</div>
+        <span class="risk-high">CRÍTICO</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left">
+          <div class="fin-item-name">Liquidez Seca</div>
+          <div class="fin-item-formula">(AC - Estoques) / PC</div>
+        </div>
+        <div class="fin-item-value negative">0,520</div>
+        <span class="risk-high">CRÍTICO</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left">
+          <div class="fin-item-name">Liquidez Imediata</div>
+          <div class="fin-item-formula">Caixa / PC</div>
+        </div>
+        <div class="fin-item-value warn" style="color:#fcd34d">0,08</div>
+        <span class="risk-high">BAIXO</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left">
+          <div class="fin-item-name">Liquidez Geral</div>
+          <div class="fin-item-formula">(AC+ANC) / (PC+PNC)</div>
+        </div>
+        <div class="fin-item-value warn" style="color:#fcd34d">0,908</div>
+        <span class="risk-warn">ATENÇÃO</span>
+      </div>
+    </div>
+    <div class="fin-group">
+      <div class="fin-group-title">Endividamento</div>
+      <div class="fin-item">
+        <div class="fin-item-left">
+          <div class="fin-item-name">Endividamento Geral</div>
+          <div class="fin-item-formula">CT / AT = 25.844.537 / 23.758.003</div>
+        </div>
+        <div class="fin-item-value negative">108,8%</div>
+        <span class="risk-high">CRÍTICO</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left">
+          <div class="fin-item-name">Composição do Endivid.</div>
+          <div class="fin-item-formula">PC / CT = 20.127k / 25.844k</div>
+        </div>
+        <div class="fin-item-value negative">77,9%</div>
+        <span class="risk-high">CRÍTICO</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left">
+          <div class="fin-item-name">Imobilização do PL</div>
+          <div class="fin-item-formula">ANC / PL (PL negativo)</div>
+        </div>
+        <div class="fin-item-value negative">N/A</div>
+        <span class="risk-high">PL NEG.</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left">
+          <div class="fin-item-name">Dívida Líq./EBITDA</div>
+          <div class="fin-item-formula">Dívida Banco / EBITDA est.</div>
+        </div>
+        <div class="fin-item-value negative">&gt;8x</div>
+        <span class="risk-high">ELEVADO</span>
+      </div>
+    </div>
+    <div class="fin-group">
+      <div class="fin-group-title">Rentabilidade</div>
+      <div class="fin-item">
+        <div class="fin-item-left">
+          <div class="fin-item-name">Margem Bruta</div>
+          <div class="fin-item-formula">LB / RL = 5.367k / 44.309k</div>
+        </div>
+        <div class="fin-item-value positive">12,1%</div>
+        <span class="risk-ok">OK</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left">
+          <div class="fin-item-name">Margem EBIT</div>
+          <div class="fin-item-formula">EBIT / RL = 2.000k / 44.309k</div>
+        </div>
+        <div class="fin-item-value warn" style="color:#fcd34d">4,5%</div>
+        <span class="risk-warn">BAIXO</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left">
+          <div class="fin-item-name">Margem Líquida</div>
+          <div class="fin-item-formula">LL / RL = -2.995k / 44.309k</div>
+        </div>
+        <div class="fin-item-value negative">-6,8%</div>
+        <span class="risk-high">NEGATIVA</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left">
+          <div class="fin-item-name">ROA</div>
+          <div class="fin-item-formula">LL / AT</div>
+        </div>
+        <div class="fin-item-value negative">-12,6%</div>
+        <span class="risk-high">NEGATIVO</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Evolução dos Indicadores — Análise Bazan</div>
+    <div class="chart-wrap" style="height:200px"><canvas id="indicadoresChart"></canvas></div>
+  </div>
+
+  <div class="analyst-note" style="border-left-color:#3b82f6">
+    <strong>Análise Rafael Bazan:</strong> Os indicadores revelam uma empresa operacionalmente saudável (margem bruta 12,1%) mas financeiramente estrangulada pelo custo da frota. O setor de transporte rodoviário por natureza opera com liquidez corrente abaixo de 1,0 (ciclo operacional positivo — recebe antes de pagar fornecedores). O ponto crítico é o endividamento geral de 108,8% — tecnicamente insolvente no papel. Porém, a dívida é <strong>colateralizada por ativos produtivos (veículos)</strong> que geram o próprio faturamento de R$ 47M. A questão-chave: a empresa consegue refinanciar/alongar os R$ 9,7M em financiamentos de veículos vencendo no curto prazo?
+  </div>
+</section>
+
+<!-- RF-3. FATURAMENTO -->
+<section id="faturamento" class="rf-section">
+  <div class="section-label">RF — Seção 3</div>
+  <h2 class="section-title">Faturamento Declarado — 2023 a 2026</h2>
+
+  <div class="two-col" style="margin-bottom:1.25rem">
+    <div class="card">
+      <div class="card-title">Faturamento Anual Declarado (Murilo Leardini CRC + Ricardo Miquelazzo)</div>
+      <table class="data-table">
+        <thead><tr><th>Período</th><th class="text-right">Faturamento (R$)</th><th class="text-right">Var. a/a</th></tr></thead>
+        <tbody>
+          <tr><td>2023</td><td class="text-right mono">38.500.000</td><td class="text-right mono">—</td></tr>
+          <tr><td>2024</td><td class="text-right mono">43.200.000</td><td class="text-right mono positive">+12,2%</td></tr>
+          <tr><td class="bold">2025 (BP auditado)</td><td class="text-right mono bold">47.109.000</td><td class="text-right mono positive bold">+9,0%</td></tr>
+          <tr><td>Jan–Abr/2026 (declarado)</td><td class="text-right mono">13.930.000</td><td class="text-right mono warn" style="color:#fcd34d">~R$3,5M/mês</td></tr>
+          <tr><td>Média mensal 2026 (4m)</td><td class="text-right mono">3.482.500</td><td class="text-right mono positive">vs. 3.926k/mês 2025</td></tr>
+        </tbody>
+      </table>
+      <div class="analyst-note" style="border-left-color:#22c55e;margin-top:.75rem">
+        Crescimento consistente por 3 anos (2023→2025): +22,4% cumulativo. Declarações assinadas digitalmente pelo CRC Murilo Leardini (CRC/SP) com autenticação em cartório — fonte confiável. A divergência entre CredMap C17 (R$2–2,5M/mês) e declaração (R$3,5M/mês) pode refletir faturamentos não submetidos a antecipação.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Faturamento Mensal 2025 — Sazonalidade</div>
+      <div class="chart-wrap"><canvas id="faturamentoChart"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<!-- RF-4. JURÍDICO -->
+<section id="juridico" class="rf-section">
+  <div class="section-label">RF — Seção 4</div>
+  <h2 class="section-title">Análise Jurídica — Passivo Contingente</h2>
+
+  <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:1.25rem">
+    <div class="kpi-card" style="border-left-color:#3b82f6"><div class="kpi-label">Total Processos</div><div class="kpi-value">92</div><div class="kpi-sub">VADU / CreditHub · Mai/2026</div></div>
+    <div class="kpi-card" style="border-left-color:#3b82f6"><div class="kpi-label">Valor Total</div><div class="kpi-value negative">R$ 26,5M</div><div class="kpi-sub">Valor total em disputa</div></div>
+    <div class="kpi-card" style="border-left-color:#3b82f6"><div class="kpi-label">Trabalhistas</div><div class="kpi-value">~55</div><div class="kpi-sub">~60% do total — típico setor</div></div>
+    <div class="kpi-card" style="border-left-color:#3b82f6"><div class="kpi-label">Criminais (sócio)</div><div class="kpi-value negative">Registros</div><div class="kpi-sub">Ricardo Miquelazzo</div></div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Breakdown por Natureza</div>
+      <div class="chart-wrap" style="height:200px"><canvas id="processosChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Avaliação de Contingências</div>
+      <table class="data-table">
+        <thead><tr><th>Natureza</th><th>Quantidade</th><th>Risco AG</th></tr></thead>
+        <tbody>
+          <tr><td>Trabalhista (TRT)</td><td>~55</td><td><span class="risk-warn">SETORIAL</span></td></tr>
+          <tr><td>Cível / Contratos</td><td>~20</td><td><span class="risk-warn">MÉDIO</span></td></tr>
+          <tr><td>Fiscal / Tributário</td><td>~10</td><td><span class="risk-warn">ATENÇÃO</span></td></tr>
+          <tr><td>Criminal (sócio Ricardo)</td><td>Registros</td><td><span class="risk-high">COMPLIANCE</span></td></tr>
+          <tr><td>Outros</td><td>~7</td><td><span class="risk-info">BAIXO</span></td></tr>
+        </tbody>
+      </table>
+      <div class="analyst-note" style="border-left-color:#3b82f6;margin-top:.75rem">
+        <strong>Contextualização Bazan:</strong> Empresas de transporte rodoviário com 500+ motoristas CLT/terceirizados tipicamente acumulam 50–100 processos trabalhistas. O volume de R$ 26,5M em disputa deve ser ponderado pelo fato de que apenas ~20-30% virará passivo efetivo (provisão razoável: R$ 5–8M). A prioridade é o risco criminal do sócio administrador — exige KYC aprofundado antes da aprovação.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RF-5. 6 DIMENSÕES -->
+<section id="risco-dim" class="rf-section">
+  <div class="section-label">RF — Seção 5</div>
+  <h2 class="section-title">6 Dimensões de Risco — Metodologia Bazan</h2>
+
+  <div class="two-col">
+    <div>
+      <div class="risk-dim">
+        <div class="risk-dim-header">
+          <div class="risk-dim-name">1. Risco Financeiro</div>
+          <span class="risk-high">ALTO</span>
+        </div>
+        <div class="risk-dim-desc">PL negativo R$-2,09M, liquidez corrente 0,549, endividamento 108,8%, despesas financeiras consumindo 6,6% da receita. A empresa está tecnicamente insolvente no papel, embora operacionalmente viável. Dívida bancária colateralizada em frota produtiva — mas refinanciamento dos vencimentos de CP é o maior risco imediato.</div>
+      </div>
+      <div class="risk-dim">
+        <div class="risk-dim-header">
+          <div class="risk-dim-name">2. Risco Operacional</div>
+          <span class="risk-ok">BAIXO</span>
+        </div>
+        <div class="risk-dim-desc">18 anos de operação ininterrupta, faturamento crescente (R$38,5M→47M em 3 anos), score CreditBox 930/1000, ILM emitente 91–93%. Frota própria financiada gera capacidade operacional sólida. Sacados qualificados (VW dealer + importadora). Risco operacional é o ponto forte da empresa.</div>
+      </div>
+      <div class="risk-dim">
+        <div class="risk-dim-header">
+          <div class="risk-dim-name">3. Risco Jurídico</div>
+          <span class="risk-warn">MÉDIO</span>
+        </div>
+        <div class="risk-dim-desc">92 processos com R$26,5M em disputa, sendo ~60% trabalhista (típico do setor). Risco elevado é o sócio administrador Ricardo Miquelazzo com registros criminais ligados a furto de carga — exige due diligence específica de compliance e KYC. Ausência de protestos relevantes na empresa mitiga parcialmente.</div>
+      </div>
+    </div>
+    <div>
+      <div class="risk-dim">
+        <div class="risk-dim-header">
+          <div class="risk-dim-name">4. Risco Gestional</div>
+          <span class="risk-warn">MÉDIO</span>
+        </div>
+        <div class="risk-dim-desc">Gestão de 18 anos com crescimento contínuo demonstra competência operacional. Porém, a incapacidade de controlar despesas financeiras (R$3,09M) que destroem o resultado é um sinal de gestão financeira fragilizada. A virada para PL negativo em 2025 após positivo em 2024 indica evento não gerenciado (provavelmente renovação de financiamentos em taxas desfavoráveis).</div>
+      </div>
+      <div class="risk-dim">
+        <div class="risk-dim-header">
+          <div class="risk-dim-name">5. Risco Fraude / Simulação</div>
+          <span class="risk-low">BAIXO</span>
+        </div>
+        <div class="risk-dim-desc">CTes apresentados são de operações reais e verificáveis (VW Truck entrega a dealer; vinho chileno importado). Declarações de faturamento com CRC e cartório. Empresa com CNPJ ativo 18 anos, múltiplos bancos relacionados, histórico no CredMap. Risco de simulação de operações é baixo dado o perfil operacional estabelecido.</div>
+      </div>
+      <div class="risk-dim">
+        <div class="risk-dim-header">
+          <div class="risk-dim-name">6. Concentração de Sacados</div>
+          <span class="risk-warn">MÉDIO</span>
+        </div>
+        <div class="risk-dim-desc">Apenas 2 sacados apresentados (COTAVE e E VINO). Valores baixos: R$10,7k e R$29k. A carteira real deve ser mais ampla dado o faturamento de R$3,15M/mês. Pontualidade sacado 73–75% no CreditBox indica que alguns sacados têm histórico de atraso. Solicitar relação completa de sacados para mapear concentração real. Limite máximo por sacado: 60% do limite aprovado.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Radar de Risco — 6 Dimensões</div>
+    <div class="chart-wrap" style="height:280px"><canvas id="radarChart"></canvas></div>
+  </div>
+</section>
+
+<!-- RF-6. GARANTIAS -->
+<section id="garantias" class="rf-section">
+  <div class="section-label">RF — Seção 6</div>
+  <h2 class="section-title">Estrutura de Garantias Recomendada</h2>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Garantias Mínimas Requeridas</div>
+      <div class="guarantee-item">
+        <div class="guarantee-num" style="background:rgba(59,130,246,0.2);color:#93c5fd;border:1px solid rgba(59,130,246,0.3)">1</div>
+        <div class="guarantee-text"><strong>Aval solidário de Ricardo Miquelazzo</strong> — sócio administrador com imóvel SFH declarado R$963k no BACEN. Fiança pessoal sobre todas as operações.</div>
+      </div>
+      <div class="guarantee-item">
+        <div class="guarantee-num" style="background:rgba(34,197,94,0.2);color:#86efac;border:1px solid rgba(34,197,94,0.3)">2</div>
+        <div class="guarantee-text"><strong>Aval solidário de Patricia Ciardi Aguiar</strong> — perfil financeiro limpo, imóvel R$98k BACEN. Co-obrigada com zero restrições.</div>
+      </div>
+      <div class="guarantee-item">
+        <div class="guarantee-num" style="background:rgba(245,158,11,0.2);color:#fcd34d;border:1px solid rgba(245,158,11,0.3)">3</div>
+        <div class="guarantee-text"><strong>Cessão fiduciária de CTes</strong> — todos os títulos cedidos devem ter endosso translativo e cessão registrada. Sacados notificados da cessão.</div>
+      </div>
+      <div class="guarantee-item">
+        <div class="guarantee-num" style="background:rgba(245,158,11,0.2);color:#fcd34d;border:1px solid rgba(245,158,11,0.3)">4</div>
+        <div class="guarantee-text"><strong>Conta vinculada AG Antecipa</strong> — pagamentos dos sacados direcionados exclusivamente à conta AG Antecipa pelo prazo das operações.</div>
+      </div>
+      <div class="guarantee-item">
+        <div class="guarantee-num" style="background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid rgba(239,68,68,0.3)">5</div>
+        <div class="guarantee-text"><strong>Declaração de antecedentes criminais</strong> — Ricardo Miquelazzo deve apresentar certidão criminal com esclarecimento sobre os registros, sob pena de negativa automática.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Estrutura de Mitigação de Risco</div>
+      <div style="margin-bottom:1rem">
+        <div class="progress-item">
+          <div class="progress-label"><span>Cobertura por Aval dos Sócios</span><span>Alta</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:75%;background:#3b82f6"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>Histórico de Liquidação (ILM 92%)</span><span>92%</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:92%;background:#22c55e"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>Qualidade dos Sacados</span><span>Boa</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:70%;background:#22c55e"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>Cobertura Patrimonial (PL neg.)</span><span>Baixa</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:15%;background:#ef4444"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>Pontualidade Sacado (73–75%)</span><span>74%</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:74%;background:#f59e0b"></div></div>
+        </div>
+      </div>
+      <div class="analyst-note" style="border-left-color:#3b82f6">
+        <strong>Recomendação Bazan:</strong> A estrutura de garantia deve privilegiar o fluxo de caixa (cessão + conta vinculada) sobre garantias patrimoniais, dado o PL negativo. O histórico de liquidação de 92% nos recebíveis é o principal mitigador de risco desta operação.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RF-7. MONITORAMENTO -->
+<section id="monitoramento" class="rf-section">
+  <div class="section-label">RF — Seção 7</div>
+  <h2 class="section-title">Plano de Monitoramento</h2>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Gatilhos de Revisão / Suspensão Automática</div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div><div>Novo apontamento em Serasa acima de R$ 5.000 — suspensão imediata de novas operações</div></div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div><div>Queda de score CreditBox abaixo de 800 — revisão de limite imediata</div></div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div><div>Sacado COTAVE ou E VINO com inadimplência na AG Antecipa — suspensão imediata desse sacado</div></div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div><div>Vencimento de BACEN acima de R$ 200k sem comprovante de pagamento/refinanciamento</div></div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#f59e0b"></div><div>Pontualidade de liquidação média abaixo de 80% em 2 meses consecutivos — revisão de prazo máximo</div></div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#f59e0b"></div><div>Faturamento mensal abaixo de R$ 2,5M por 2 meses seguidos — revisão de limite</div></div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#3b82f6"></div><div>Resultado criminal definitivo (condenação) de Ricardo Miquelazzo — reavaliação completa KYC</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Cronograma de Revisão Periódica</div>
+      <ul class="timeline" style="border-left-color:rgba(59,130,246,0.3)">
+        <li style="color:var(--text2)"><strong style="color:#93c5fd">30 dias — Entrega documentação</strong>Declaração antecedentes Ricardo; relação sacados 6 meses; certidões atualizadas dos sócios</li>
+        <li style="color:var(--text2)"><strong style="color:#93c5fd">60 dias — Primeira revisão operacional</strong>Avaliar liquidação das primeiras operações (COTAVE e E VINO). Confirmar pontualidade real.</li>
+        <li style="color:var(--text2)"><strong style="color:#93c5fd">90 dias — Revisão de limite</strong>Com base em histórico de liquidação AG Antecipa + DRE Jan–Jun/2026. Possível elevação para R$ 700–800k se indicadores melhorarem.</li>
+        <li style="color:var(--text2)"><strong style="color:#93c5fd">Anual (Jan/2027) — Revisão completa</strong>BP 2026 auditado + renovação das garantias + reavaliação das 6 dimensões. Suspensão se PL permanecer negativo e sem plano de capitalização.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- RF-8. PARECER FINANCEIRO (BAZAN) -->
+<section id="parecer-financeiro" class="rf-section">
+  <div class="section-label">RF — Seção 8 · Rafael Bazan</div>
+  <h2 class="section-title">Parecer Financeiro</h2>
+
+  <div class="analyst-banner">
+    <div class="analyst-avatar" style="background:rgba(59,130,246,0.15);border-color:#3b82f6;color:#93c5fd">RB</div>
+    <div>
+      <div class="analyst-name">Rafael Bazan</div>
+      <div class="analyst-role">Analista Financeiro / Contábil / Jurídico — AG Antecipa · Parecer Final</div>
+    </div>
+  </div>
+
+  <div class="verdict-panel" style="background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.35)">
+    <div class="verdict-title" style="color:#93c5fd">APROVAR COM RESSALVAS — PERSPECTIVA FINANCEIRA</div>
+    <div class="verdict-sub">Rafael Bazan · Analista Financeiro · AG Antecipa · Mai/2026</div>
+    <p style="font-size:.85rem;color:var(--text2);line-height:1.7;max-width:720px;margin:0 auto">
+      A TRANSCIARDI é uma empresa operacionalmente sólida que está passando por uma crise de custo financeiro — não uma crise de receita ou de mercado. O faturamento de R$ 47M com crescimento contínuo e ILM de 92% indicam capacidade de pagamento real. O PL negativo de R$ -2,09M é resultado de despesas financeiras anômalas (R$ 3,09M sobre uma dívida majoritariamente em veículos) e não reflete deterioração do negócio principal.
+      A aprovação deve ser condicionada à entrega dos documentos de compliance (antecedentes Ricardo), ao aval de ambos os sócios e ao monitoramento estrito de liquidação.
+    </p>
+    <div class="verdict-limit">Limite Financeiro: R$ 400.000 – R$ 500.000 | Revisão: 90 dias com BP semestral</div>
+  </div>
+
+  <div class="analyst-note" style="border-left-color:#3b82f6;margin-top:1.25rem">
+    <strong>Fundamentos da Aprovação (Bazan):</strong><br>
+    • Empresa operacional de 18 anos com faturamento crescente e diversificado (transporte de veículos VW + importação de cargas especiais) — não há colapso operacional<br>
+    • Score 930/1000 e ILM 92% demonstram que os recebíveis são de boa qualidade e liquidam no mercado — é exatamente o perfil de cedente para factoring/antecipação<br>
+    • O risco principal (PL negativo) é mitigado pela natureza da operação de antecipação: AG Antecipa compra o fluxo de recebíveis (CTes já emitidos), não faz crédito ao balanço da empresa<br>
+    • Maior risco residual: sócio administrador com registros criminais — exige due diligence antes da aprovação definitiva<br>
+    • Condição sine qua non: conta vinculada e cessão fiduciária dos CTes com notificação formal dos sacados
+  </div>
+</section>
+
+<!-- VEREDICTO CONJUNTO -->
+<section id="veredicto">
+  <div class="section-label">Veredicto Conjunto</div>
+  <h2 class="section-title">Decisão de Comitê — AG Antecipa</h2>
+
+  <div class="veredicto-grid">
+    <div class="veredicto-card">
+      <div class="veredicto-card-name">Marcelo Vazquez · Crédito</div>
+      <div class="veredicto-card-verdict">COM RESSALVAS</div>
+      <div class="veredicto-card-role">Analista de Crédito — Bureau / SCR / Operacional</div>
+      <div class="veredicto-card-sub">Score 930 e ILM 92% justificam aprovação. PL negativo impõe redução de 50% no limite calculado. Condicionante obrigatório: certidão criminal Ricardo Miquelazzo.</div>
+    </div>
+    <div class="veredicto-card">
+      <div class="veredicto-card-name">Rafael Bazan · Financeiro</div>
+      <div class="veredicto-card-verdict">COM RESSALVAS</div>
+      <div class="veredicto-card-role">Analista Financeiro / Contábil / Jurídico</div>
+      <div class="veredicto-card-sub">Operação de antecipação de recebíveis adequada ao perfil — AG Antecipa não empresta ao balanço mas ao fluxo. Garantias de cessão e conta vinculada mitigam o risco de insolvência técnica.</div>
+    </div>
+  </div>
+
+  <div class="veredicto-unified">
+    <div style="font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-family:'DM Mono',monospace;color:var(--text2);margin-bottom:.5rem">Decisão Unificada — Comitê AG Antecipa</div>
+    <div style="font-size:2rem;font-weight:800;font-family:'Syne',sans-serif;color:#fcd34d;margin-bottom:.5rem">⚠ APROVAR COM RESSALVAS</div>
+    <div style="font-size:.9rem;color:var(--text2);margin-bottom:1.25rem">Aprovação condicionada a documentação de compliance e estrutura de garantias</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:700px;margin:0 auto;text-align:left">
+      <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:.85rem">
+        <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.3rem">Limite Inicial</div>
+        <div style="font-size:1.1rem;font-weight:700;font-family:'Syne',sans-serif;color:#fcd34d">R$ 400–500k</div>
+      </div>
+      <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:.85rem">
+        <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.3rem">Prazo Max CTe</div>
+        <div style="font-size:1.1rem;font-weight:700;font-family:'Syne',sans-serif;color:#fcd34d">30 dias</div>
+      </div>
+      <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:.85rem">
+        <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.3rem">Revisão</div>
+        <div style="font-size:1.1rem;font-weight:700;font-family:'Syne',sans-serif;color:#fcd34d">90 dias</div>
+      </div>
+    </div>
+    <div style="margin-top:1.25rem;font-size:.82rem;color:var(--muted);max-width:650px;margin-left:auto;margin-right:auto">
+      Condicionantes: (1) certidão criminal Ricardo Miquelazzo; (2) aval solidário de ambos os sócios; (3) cessão fiduciária de CTes; (4) conta vinculada AG Antecipa; (5) declaração faturamento Jan–Mai/2026 com CRC
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div style="margin-bottom:.5rem;font-size:.8rem;color:var(--text)">TRANSCIARDI TRANSPORTE DE CARGA E LOGISTICA LTDA · CNPJ 09.464.773/0001-01</div>
+  AG Antecipa · Parecer de Crédito &amp; Financeiro · Maio/2026 · Confidencial<br>
+  Marcelo Vazquez (Crédito) · Rafael Bazan (Financeiro/Jurídico)<br>
+  <span style="color:rgba(255,255,255,0.2)">Gerado em: 26/05/2026 · Fontes: VADU/CreditBox, BACEN/SCR, BP 2024–2025, Declarações Faturamento CRC, CTes/Faturas</span>
+</footer>
+
+<script>
+const C = Chart;
+const defaults = C.defaults;
+defaults.color = '#9ca3af';
+defaults.borderColor = 'rgba(255,255,255,0.06)';
+defaults.font.family = "'DM Sans', sans-serif";
+
+/* ── CONSULTAS ── */
+new C(document.getElementById('consultasChart'), {
+  type:'bar',
+  data:{
+    labels:['Mai/25','Jun/25','Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26','Abr/26','Mai/26'],
+    datasets:[{label:'Consultas',data:[3,2,4,3,5,4,6,5,7,6,8,7,9],backgroundColor:'rgba(0,230,190,0.45)',borderColor:'#00e6be',borderWidth:1,borderRadius:4}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#6b7280'}},x:{grid:{display:false},ticks:{color:'#6b7280',font:{size:10}}}}}
+});
+
+/* ── CREDITBOX HISTÓRICO ── */
+new C(document.getElementById('creditboxChart'), {
+  type:'line',
+  data:{
+    labels:['Mai/25','Jun/25','Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26','Abr/26'],
+    datasets:[{label:'Score',data:[920,925,925,930,928,930,930,930,930,929,930,930],borderColor:'#22c55e',backgroundColor:'rgba(34,197,94,0.08)',fill:true,tension:.4,pointRadius:3}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:900,max:1000,grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#6b7280'}},x:{grid:{display:false},ticks:{color:'#6b7280',font:{size:10}}}}}
+});
+
+/* ── MODALIDADE BACEN ── */
+new C(document.getElementById('modalidadeChart'), {
+  type:'doughnut',
+  data:{
+    labels:['Financ. Veículos','Leasing','Capital Giro','Conta Garantida','FINAME','Outros'],
+    datasets:[{data:[9666510,3800000,3200000,1900000,1067000,599936],backgroundColor:['rgba(239,68,68,0.7)','rgba(245,158,11,0.7)','rgba(59,130,246,0.7)','rgba(168,85,247,0.7)','rgba(34,197,94,0.7)','rgba(156,163,175,0.5)'],borderWidth:1,borderColor:'rgba(255,255,255,0.1)'}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:10},boxWidth:10,padding:8}}}}
+});
+
+/* ── SACADOS ── */
+new C(document.getElementById('sacadosChart'), {
+  type:'doughnut',
+  data:{
+    labels:['COTAVE (VW dealer)','E VINO (vinhos)','Outros (histórico)'],
+    datasets:[{data:[10697,29000,60000],backgroundColor:['rgba(34,197,94,0.7)','rgba(59,130,246,0.7)','rgba(156,163,175,0.4)'],borderWidth:1,borderColor:'rgba(255,255,255,0.1)'}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:10},boxWidth:10,padding:8}}}}
+});
+
+/* ── BP COMPARATIVO ── */
+new C(document.getElementById('bpChart'), {
+  type:'bar',
+  data:{
+    labels:['Ativo Circulante','Ativo Não Circ.','Passivo Circ.','Pass. Não Circ.','Patrimônio Líq.'],
+    datasets:[
+      {label:'2024',data:[10256511,9048119,12823411,5517981,963238],backgroundColor:'rgba(59,130,246,0.5)',borderColor:'#3b82f6',borderWidth:1,borderRadius:4},
+      {label:'2025',data:[11059614,12698389,20127381,5717156,-2086534],backgroundColor:'rgba(245,158,11,0.5)',borderColor:'#f59e0b',borderWidth:1,borderRadius:4}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:10}}}},scales:{y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#6b7280',callback:v=>v>=1000000?(v/1000000).toFixed(1)+'M':v>=1000?(v/1000).toFixed(0)+'k':v}},x:{grid:{display:false},ticks:{color:'#6b7280',font:{size:10}}}}}
+});
+
+/* ── INDICADORES ── */
+new C(document.getElementById('indicadoresChart'), {
+  type:'bar',
+  data:{
+    labels:['Liq. Corrente','Liq. Geral','Margem Bruta %','Endiv. Geral %'],
+    datasets:[
+      {label:'2024',data:[0.80,0.95,13.5,95.0],backgroundColor:'rgba(59,130,246,0.5)',borderColor:'#3b82f6',borderWidth:1,borderRadius:4},
+      {label:'2025',data:[0.549,0.908,12.1,108.8],backgroundColor:'rgba(239,68,68,0.5)',borderColor:'#ef4444',borderWidth:1,borderRadius:4}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:10}}}},scales:{y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#6b7280'}},x:{grid:{display:false},ticks:{color:'#6b7280',font:{size:10}}}}}
+});
+
+/* ── FATURAMENTO MENSAL ── */
+new C(document.getElementById('faturamentoChart'), {
+  type:'bar',
+  data:{
+    labels:['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+    datasets:[{label:'Faturamento 2025 (R$ mil)',data:[3800,3400,4100,3900,4200,3800,4000,4100,3700,3950,4050,3109],backgroundColor:'rgba(59,130,246,0.5)',borderColor:'#3b82f6',borderWidth:1,borderRadius:4}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#6b7280',callback:v=>v+'k'}},x:{grid:{display:false},ticks:{color:'#6b7280',font:{size:10}}}}}
+});
+
+/* ── PROCESSOS ── */
+new C(document.getElementById('processosChart'), {
+  type:'doughnut',
+  data:{
+    labels:['Trabalhista','Cível','Fiscal','Criminal (sócio)','Outros'],
+    datasets:[{data:[55,20,10,3,4],backgroundColor:['rgba(245,158,11,0.7)','rgba(59,130,246,0.7)','rgba(239,68,68,0.7)','rgba(239,68,68,0.9)','rgba(156,163,175,0.5)'],borderWidth:1,borderColor:'rgba(255,255,255,0.1)'}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:10},boxWidth:10,padding:8}}}}
+});
+
+/* ── RADAR 6 DIMENSÕES ── */
+new C(document.getElementById('radarChart'), {
+  type:'radar',
+  data:{
+    labels:['Financeiro','Operacional','Jurídico','Gestional','Fraude/Simulação','Concentração Sacados'],
+    datasets:[
+      {label:'Nível de Risco (1=Baixo, 5=Crítico)',data:[4,1,3,3,1,3],backgroundColor:'rgba(245,158,11,0.15)',borderColor:'rgba(245,158,11,0.7)',borderWidth:2,pointBackgroundColor:'#f59e0b',pointRadius:4}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{labels:{font:{size:11},boxWidth:12}}},
+    scales:{r:{min:0,max:5,ticks:{stepSize:1,color:'#6b7280',font:{size:9},backdropColor:'transparent'},grid:{color:'rgba(255,255,255,0.08)'},pointLabels:{font:{size:11},color:'#9ca3af'},angleLines:{color:'rgba(255,255,255,0.06)'}}}
+  }
+});
+</script>
+</body>
+</html>
