@@ -247,7 +247,6 @@ section.rf-section .kpi-card{border-left-color:#3b82f6}
     <div class="nav-row-label">Crédito<br>Vazquez</div>
     <a href="#dashboard" class="nav-pill active">Dashboard</a>
     <a href="#identificacao" class="nav-pill">Identificação</a>
-    <a href="#financeiro" class="nav-pill">Financeiro</a>
     <a href="#serasa" class="nav-pill">Serasa</a>
     <a href="#bacen" class="nav-pill">BACEN / SCR</a>
     <a href="#creditbox" class="nav-pill">CreditBox</a>
@@ -259,6 +258,7 @@ section.rf-section .kpi-card{border-left-color:#3b82f6}
   <!-- Linha 2 — Análise Financeira · Rafael Bazan -->
   <div class="nav-row">
     <div class="nav-row-label rf">Financeiro<br>Bazan</div>
+    <a href="#financeiro" class="nav-pill nav-rf">BP / DRE</a>
     <a href="#docs" class="nav-pill nav-rf">Docs</a>
     <a href="#negocio" class="nav-pill nav-rf">Mod. Negócio</a>
     <a href="#juridico" class="nav-pill nav-rf">Análise Jurídica</a>
@@ -380,177 +380,6 @@ section.rf-section .kpi-card{border-left-color:#3b82f6}
     <div class="info-box" style="margin-top:.75rem">⚠ Composição acionária em % por acionista não foi fornecida. Estatuto social consolidado pós-AGE não entregue. Contratos de mútuo originais de 4 dos 7 conversores ausentes na documentação.</div>
   </div>
 </section>
-
-<!-- 2. FINANCEIRO -->
-<section id="financeiro">
-  <div class="section-label">Seção 2</div>
-  <h2 class="section-title">Análise Financeira — BP e DRE 2022–2025</h2>
-
-  <div class="two-col" style="margin-bottom:1.25rem">
-    <div class="card">
-      <div class="card-title">Receita Bruta Anual (R$ M)</div>
-      <div class="chart-wrap"><canvas id="revenueChart"></canvas></div>
-    </div>
-    <div class="card">
-      <div class="card-title">Composição do Ativo — Dez/2025 (R$ mil)</div>
-      <div class="chart-wrap"><canvas id="ativoChart"></canvas></div>
-    </div>
-  </div>
-
-  <div class="card" style="margin-bottom:1.25rem">
-    <div class="card-title">DRE Consolidado (R$ mil)</div>
-    <table class="data-table">
-      <thead><tr><th>Item</th><th class="text-right">2022</th><th class="text-right">2023</th><th class="text-right">2024</th><th class="text-right">2025</th><th class="text-right">Var. 24→25</th></tr></thead>
-      <tbody>
-        <tr><td>Receita Bruta de Serviços</td><td class="text-right mono">5.472</td><td class="text-right mono">5.697</td><td class="text-right mono">7.595</td><td class="text-right mono bold">7.958</td><td class="text-right mono positive">+4,8%</td></tr>
-        <tr><td style="color:var(--text2)">(-) Impostos sobre serviços</td><td class="text-right mono negative">(641)</td><td class="text-right mono negative">(647)</td><td class="text-right mono negative">(1.084)</td><td class="text-right mono negative">(1.062)</td><td class="text-right mono">-2,0%</td></tr>
-        <tr><td class="bold">Receita Líquida</td><td class="text-right mono bold">4.831</td><td class="text-right mono bold">5.050</td><td class="text-right mono bold">6.511</td><td class="text-right mono bold">6.883</td><td class="text-right mono positive">+5,7%</td></tr>
-        <tr><td style="color:var(--text2)">(-) Custos Diretos</td><td class="text-right mono negative">(2.529)</td><td class="text-right mono negative">(1.447)</td><td class="text-right mono negative">(2.296)</td><td class="text-right mono negative">(1.141)</td><td class="text-right mono positive">-50,3%</td></tr>
-        <tr><td class="bold">Lucro Bruto</td><td class="text-right mono bold">2.302</td><td class="text-right mono bold">3.603</td><td class="text-right mono bold">4.215</td><td class="text-right mono bold positive">5.742</td><td class="text-right mono positive">+36,2%</td></tr>
-        <tr><td style="color:var(--text2)">(-) Desp. Administrativas</td><td class="text-right mono negative">(3.172)</td><td class="text-right mono negative">(2.336)</td><td class="text-right mono negative">(3.996)</td><td class="text-right mono negative">(4.205)</td><td class="text-right mono">+5,2%</td></tr>
-        <tr><td style="color:var(--text2)">(-) Desp. com Vendas</td><td class="text-right mono negative">(19)</td><td class="text-right mono negative">(2.263)</td><td class="text-right mono negative">(1.356)</td><td class="text-right mono negative">(288)</td><td class="text-right mono positive">-78,8%</td></tr>
-        <tr><td class="bold">EBITDA</td><td class="text-right mono negative bold">(1.318)</td><td class="text-right mono negative bold">(1.712)</td><td class="text-right mono negative bold">(1.564)</td><td class="text-right mono positive bold">1.249</td><td class="text-right mono positive">—</td></tr>
-        <tr><td style="color:var(--text2)">(-) Resultado Financeiro</td><td class="text-right mono negative">(128)</td><td class="text-right mono negative">(240)</td><td class="text-right mono negative">(576)</td><td class="text-right mono negative">(105)</td><td class="text-right mono positive">-81,8%</td></tr>
-        <tr><td class="bold">Resultado Líquido</td><td class="text-right mono negative bold">(1.450)</td><td class="text-right mono negative bold">(1.959)</td><td class="text-right mono negative bold">(2.153)</td><td class="text-right mono positive bold">1.131</td><td class="text-right mono positive">—</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="two-col">
-    <div class="card">
-      <div class="card-title">Balanço Patrimonial — Dez/2025 (R$ mil)</div>
-      <table class="data-table">
-        <thead><tr><th>Item</th><th class="text-right">Dez/2024</th><th class="text-right">Dez/2025</th></tr></thead>
-        <tbody>
-          <tr><td class="bold">Ativo Circulante</td><td class="text-right mono">1.866</td><td class="text-right mono bold">2.558</td></tr>
-          <tr><td style="padding-left:1.5rem;color:var(--text2)">Disponível</td><td class="text-right mono">36</td><td class="text-right mono negative">33</td></tr>
-          <tr><td style="padding-left:1.5rem;color:var(--text2)">Clientes</td><td class="text-right mono">908</td><td class="text-right mono">1.240</td></tr>
-          <tr><td style="padding-left:1.5rem;color:var(--text2)">Tributos a Recuperar</td><td class="text-right mono">447</td><td class="text-right mono">690</td></tr>
-          <tr><td style="padding-left:1.5rem;color:var(--text2)">Outros Créditos</td><td class="text-right mono">475</td><td class="text-right mono">595</td></tr>
-          <tr><td class="bold">Ativo Não Circulante</td><td class="text-right mono">721</td><td class="text-right mono bold">1.104</td></tr>
-          <tr><td style="padding-left:1.5rem;color:var(--text2)">Empréstimos a Receber LP</td><td class="text-right mono">214</td><td class="text-right mono">357</td></tr>
-          <tr><td style="padding-left:1.5rem;color:var(--text2)">Imobilizado e Intangível</td><td class="text-right mono">490</td><td class="text-right mono">645</td></tr>
-          <tr><td class="bold">TOTAL DO ATIVO</td><td class="text-right mono bold">2.587</td><td class="text-right mono bold">3.662</td></tr>
-          <tr><td class="bold">Passivo Circulante</td><td class="text-right mono negative">3.292</td><td class="text-right mono positive bold">1.267</td></tr>
-          <tr><td style="padding-left:1.5rem;color:var(--text2)">Empréstimos CP</td><td class="text-right mono">191</td><td class="text-right mono">405</td></tr>
-          <tr><td style="padding-left:1.5rem;color:var(--text2)">Fornecedores</td><td class="text-right mono">457</td><td class="text-right mono">502</td></tr>
-          <tr><td style="padding-left:1.5rem;color:var(--text2)">Obrig. Trab. / Tributárias</td><td class="text-right mono negative">1.540</td><td class="text-right mono positive">180</td></tr>
-          <tr><td class="bold">Passivo Não Circulante</td><td class="text-right mono">3.393</td><td class="text-right mono">1.621</td></tr>
-          <tr><td style="padding-left:1.5rem;color:var(--text2)">Obrig. Tributárias LP</td><td class="text-right mono">169</td><td class="text-right mono negative">1.366</td></tr>
-          <tr><td style="padding-left:1.5rem;color:var(--text2)">Partes Relacionadas LP</td><td class="text-right mono negative">3.183</td><td class="text-right mono positive">228</td></tr>
-          <tr><td class="bold">Patrimônio Líquido</td><td class="text-right mono negative bold">(4.098)</td><td class="text-right mono positive bold">774</td></tr>
-          <tr><td style="padding-left:1.5rem;color:var(--text2)">Capital Social</td><td class="text-right mono">10</td><td class="text-right mono positive">6.622</td></tr>
-          <tr><td style="padding-left:1.5rem;color:var(--text2)">(-) Prejuízos Acumulados</td><td class="text-right mono negative">(6.979)</td><td class="text-right mono negative">(5.848)</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="card">
-      <div class="card-title">Indicadores Financeiros — Balanço Dez/2025</div>
-      <div class="fin-grid">
-        <!-- LIQUIDEZ -->
-        <div class="fin-group">
-          <div class="fin-group-title">Indicadores de Liquidez</div>
-          <div class="fin-item">
-            <div class="fin-item-left"><div class="fin-item-name">Liquidez Corrente</div><div class="fin-item-formula">AC ÷ PC</div></div>
-            <div class="fin-item-value" style="color:#86efac">2,02</div>
-            <span class="risk-ok">BOA</span>
-          </div>
-          <div class="fin-item">
-            <div class="fin-item-left"><div class="fin-item-name">Liquidez Seca</div><div class="fin-item-formula">(AC − Estoques) ÷ PC</div></div>
-            <div class="fin-item-value" style="color:#86efac">2,02</div>
-            <span class="risk-ok">BOA</span>
-          </div>
-          <div class="fin-item">
-            <div class="fin-item-left"><div class="fin-item-name">Liquidez Imediata</div><div class="fin-item-formula">Disponível ÷ PC</div></div>
-            <div class="fin-item-value" style="color:#fca5a5">0,03</div>
-            <span class="risk-high">CRÍTICA</span>
-          </div>
-          <div class="fin-item">
-            <div class="fin-item-left"><div class="fin-item-name">Liquidez Geral</div><div class="fin-item-formula">(AC + RLP) ÷ (PC + PNC)</div></div>
-            <div class="fin-item-value" style="color:#fcd34d">1,01</div>
-            <span class="risk-warn">ATENÇÃO</span>
-          </div>
-        </div>
-        <!-- ENDIVIDAMENTO -->
-        <div class="fin-group">
-          <div class="fin-group-title">Indicadores de Endividamento</div>
-          <div class="fin-item">
-            <div class="fin-item-left"><div class="fin-item-name">Endividamento Geral</div><div class="fin-item-formula">(PC + PNC) ÷ Ativo Total</div></div>
-            <div class="fin-item-value" style="color:#fca5a5">78,9%</div>
-            <span class="risk-high">ALTO</span>
-          </div>
-          <div class="fin-item">
-            <div class="fin-item-left"><div class="fin-item-name">Composição do Endividamento</div><div class="fin-item-formula">PC ÷ (PC + PNC)</div></div>
-            <div class="fin-item-value" style="color:#86efac">43,9%</div>
-            <span class="risk-ok">OK — mais LP</span>
-          </div>
-          <div class="fin-item">
-            <div class="fin-item-left"><div class="fin-item-name">Imobilização do PL</div><div class="fin-item-formula">Imobilizado ÷ PL</div></div>
-            <div class="fin-item-value" style="color:#86efac">83,3%</div>
-            <span class="risk-ok">SAUDÁVEL</span>
-          </div>
-          <div class="fin-item">
-            <div class="fin-item-left"><div class="fin-item-name">Disponível ÷ Dívida Bancária</div><div class="fin-item-formula">Caixa ÷ Empréstimos CP</div></div>
-            <div class="fin-item-value" style="color:#fca5a5">8,1%</div>
-            <span class="risk-high">CRÍTICO</span>
-          </div>
-        </div>
-        <!-- RENTABILIDADE -->
-        <div class="fin-group">
-          <div class="fin-group-title">Indicadores de Rentabilidade</div>
-          <div class="fin-item">
-            <div class="fin-item-left"><div class="fin-item-name">ROE — Retorno sobre PL</div><div class="fin-item-formula">Lucro Líquido ÷ PL</div></div>
-            <div class="fin-item-value" style="color:#fcd34d">146,1%</div>
-            <span class="risk-warn">PL ARTIFICIAL</span>
-          </div>
-          <div class="fin-item">
-            <div class="fin-item-left"><div class="fin-item-name">ROA — Retorno sobre Ativos</div><div class="fin-item-formula">Lucro Líquido ÷ Ativo Total</div></div>
-            <div class="fin-item-value" style="color:#86efac">30,9%</div>
-            <span class="risk-ok">FORTE</span>
-          </div>
-          <div class="fin-item">
-            <div class="fin-item-left"><div class="fin-item-name">Margem Bruta</div><div class="fin-item-formula">Lucro Bruto ÷ Receita Líquida</div></div>
-            <div class="fin-item-value" style="color:#fcd34d">83,4%</div>
-            <span class="risk-warn">SUSPEITA</span>
-          </div>
-          <div class="fin-item">
-            <div class="fin-item-left"><div class="fin-item-name">Margem Líquida</div><div class="fin-item-formula">Lucro Líquido ÷ Receita Líquida</div></div>
-            <div class="fin-item-value" style="color:#86efac">16,4%</div>
-            <span class="risk-ok">BOA</span>
-          </div>
-        </div>
-      </div>
-      <div class="info-box" style="font-size:.78rem">
-        <strong>⚠ ROE de 146% e ROA de 30,9% parecem excepcionais, mas o PL de R$774k é artificialmente baixo devido ao aporte de conversão de mútuos em ago/2025 (R$6,6M de capital versus R$5,85M de prejuízos acumulados). O indicador real de eficiência é o ROA — 30,9% é sólido para um armazém frigorificado, mas precisa ser confirmado em pelo menos 2 exercícios consecutivos para ser considerado estrutural.</strong>
-      </div>
-      <div style="margin-top:1rem">
-        <div class="card-title">Faturamento Mensal Declarado 2026 (jan–abr)</div>
-        <table class="data-table">
-          <thead><tr><th>Mês</th><th class="text-right">2025</th><th class="text-right">2026</th><th class="text-right">Var.</th></tr></thead>
-          <tbody>
-            <tr><td>Janeiro</td><td class="text-right mono">379.504</td><td class="text-right mono positive">625.628</td><td class="text-right mono positive">+64,8%</td></tr>
-            <tr><td>Fevereiro</td><td class="text-right mono">542.457</td><td class="text-right mono positive">729.383</td><td class="text-right mono positive">+34,5%</td></tr>
-            <tr><td>Março</td><td class="text-right mono">603.200</td><td class="text-right mono">606.435</td><td class="text-right mono">+0,5%</td></tr>
-            <tr><td>Abril</td><td class="text-right mono">657.533</td><td class="text-right mono negative">595.431</td><td class="text-right mono negative">-9,4%</td></tr>
-            <tr><td class="bold">Média jan–abr</td><td class="text-right mono bold">545.674</td><td class="text-right mono positive bold">639.219</td><td class="text-right mono positive bold">+17,2%</td></tr>
-          </tbody>
-        </table>
-        <div class="info-box">⚠ Discrepância de R$ 633k entre faturamento declarado (R$ 7.325k) e DRE 2025 (R$ 7.958k). Recomenda-se cruzamento com extratos bancários.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-  <div class="card" style="margin-top:1.25rem">
-    <div class="card-title" style="color:#fcd34d">Análise de Faturamento — Posicionamento do Analista Financeiro</div>
-    <div class="analyst-note" style="margin-top:0;border-left-color:#f59e0b">
-      <strong>Credibilidade:</strong> O faturamento bruto de R$7,96M em 2025 é compatível com o porte de um armazém frigorificado de médio porte com duas unidades operacionais (Barueri e São Bernardo do Campo). Entretanto, a margem bruta de <strong style="color:#fca5a5">83,4%</strong> é significativamente acima do benchmark do setor (logística e armazenagem: 30–55%), o que pode indicar <strong>subregistro de custos diretos</strong> — reclassificação indevida de despesas operacionais como administrativas. Essa anomalia requer análise detalhada dos critérios de classificação contábil utilizados pelo contador responsável.<br><br>
-      <strong>Crescimento:</strong> A taxa de crescimento de +45,4% em 4 anos (2022→2025) é saudável e alinhada ao porte e à narrativa de expansão. Contudo, janeiro/2026 apresentou +64,8% sobre o mesmo mês de 2025 — variação que, isolada, é <strong style="color:#fca5a5">suspeita</strong>, especialmente diante da piora simultânea nos protestos e no score de crédito. Crescimento acelerado de receita combinado com deterioração da saúde financeira é padrão típico de pressão de caixa.<br><br>
-      <strong>Inconsistência:</strong> Há discrepância de <strong style="color:#fca5a5">R$633.024</strong> entre o faturamento declarado na declaração de mai/2026 (R$7.325k) e a Receita Bruta da DRE 2025 (R$7.958k). Essa diferença não foi explicada — pode ser diferença de competência, ajuste de notas canceladas ou subdeclaração ao credor. Cruzamento obrigatório com extratos bancários dos últimos 12 meses.<br><br>
-      <strong>Concentração:</strong> Fazenda Futuro representa ~23% do faturamento bruto estimado; Agropacking ~11%. Os 5 maiores sacados concentram ~61% da receita — risco de concentração médio-alto para uma operação de antecipação. Qualquer ruptura contratual com os dois maiores clientes impacta materialmente a carteira de recebíveis elegíveis.<br><br>
-      <strong>Conclusão:</strong> O faturamento é <em>plausível em volume</em>, mas apresenta três sinalizações de atenção que impedem a validação plena: (1) margem bruta atípica para o setor, (2) discrepância entre declaração e DRE e (3) aceleração de receita simultânea à deterioração dos protestos. Cruzamento com extratos bancários é condição suspensiva crítica.
-    </div>
-  </div>
 
 <!-- 3. SERASA -->
 <section id="serasa">
@@ -992,6 +821,184 @@ section.rf-section .kpi-card{border-left-color:#3b82f6}
     <p style="margin-top:.85rem;font-size:.8rem;color:#93c5fd"><strong>Analista Financeiro: Rafael Bazan</strong> · AG Antecipa · Parecer Técnico v2.0 · 25/05/2026</p>
   </div>
 </div>
+
+<!-- RF: FINANCEIRO (BP / DRE) -->
+<section id="financeiro" class="rf-section">
+  <div class="section-label">Parecer Financeiro · BP/DRE</div>
+  <h2 class="section-title">Análise Financeira — BP e DRE 2022–2025</h2>
+  <div class="analyst-banner" style="margin-bottom:1.25rem">
+    <div class="analyst-avatar" style="background:rgba(59,130,246,0.15);color:#60a5fa;border-color:rgba(59,130,246,0.35)">RB</div>
+    <div>
+      <div class="analyst-name">Rafael Bazan <span class="analyst-tag" style="background:rgba(59,130,246,0.1);color:#93c5fd;border-color:rgba(59,130,246,0.3)">Analista Financeiro</span></div>
+      <div class="analyst-role">AG Antecipa · Análise de Balanço e DRE · 25/05/2026</div>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-bottom:1.25rem">
+    <div class="card">
+      <div class="card-title">Receita Bruta Anual (R$ M)</div>
+      <div class="chart-wrap"><canvas id="revenueChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Composição do Ativo — Dez/2025 (R$ mil)</div>
+      <div class="chart-wrap"><canvas id="ativoChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1.25rem">
+    <div class="card-title">DRE Consolidado (R$ mil)</div>
+    <table class="data-table">
+      <thead><tr><th>Item</th><th class="text-right">2022</th><th class="text-right">2023</th><th class="text-right">2024</th><th class="text-right">2025</th><th class="text-right">Var. 24→25</th></tr></thead>
+      <tbody>
+        <tr><td>Receita Bruta de Serviços</td><td class="text-right mono">5.472</td><td class="text-right mono">5.697</td><td class="text-right mono">7.595</td><td class="text-right mono bold">7.958</td><td class="text-right mono positive">+4,8%</td></tr>
+        <tr><td style="color:var(--text2)">(-) Impostos sobre serviços</td><td class="text-right mono negative">(641)</td><td class="text-right mono negative">(647)</td><td class="text-right mono negative">(1.084)</td><td class="text-right mono negative">(1.062)</td><td class="text-right mono">-2,0%</td></tr>
+        <tr><td class="bold">Receita Líquida</td><td class="text-right mono bold">4.831</td><td class="text-right mono bold">5.050</td><td class="text-right mono bold">6.511</td><td class="text-right mono bold">6.883</td><td class="text-right mono positive">+5,7%</td></tr>
+        <tr><td style="color:var(--text2)">(-) Custos Diretos</td><td class="text-right mono negative">(2.529)</td><td class="text-right mono negative">(1.447)</td><td class="text-right mono negative">(2.296)</td><td class="text-right mono negative">(1.141)</td><td class="text-right mono positive">-50,3%</td></tr>
+        <tr><td class="bold">Lucro Bruto</td><td class="text-right mono bold">2.302</td><td class="text-right mono bold">3.603</td><td class="text-right mono bold">4.215</td><td class="text-right mono bold positive">5.742</td><td class="text-right mono positive">+36,2%</td></tr>
+        <tr><td style="color:var(--text2)">(-) Desp. Administrativas</td><td class="text-right mono negative">(3.172)</td><td class="text-right mono negative">(2.336)</td><td class="text-right mono negative">(3.996)</td><td class="text-right mono negative">(4.205)</td><td class="text-right mono">+5,2%</td></tr>
+        <tr><td style="color:var(--text2)">(-) Desp. com Vendas</td><td class="text-right mono negative">(19)</td><td class="text-right mono negative">(2.263)</td><td class="text-right mono negative">(1.356)</td><td class="text-right mono negative">(288)</td><td class="text-right mono positive">-78,8%</td></tr>
+        <tr><td class="bold">EBITDA</td><td class="text-right mono negative bold">(1.318)</td><td class="text-right mono negative bold">(1.712)</td><td class="text-right mono negative bold">(1.564)</td><td class="text-right mono positive bold">1.249</td><td class="text-right mono positive">—</td></tr>
+        <tr><td style="color:var(--text2)">(-) Resultado Financeiro</td><td class="text-right mono negative">(128)</td><td class="text-right mono negative">(240)</td><td class="text-right mono negative">(576)</td><td class="text-right mono negative">(105)</td><td class="text-right mono positive">-81,8%</td></tr>
+        <tr><td class="bold">Resultado Líquido</td><td class="text-right mono negative bold">(1.450)</td><td class="text-right mono negative bold">(1.959)</td><td class="text-right mono negative bold">(2.153)</td><td class="text-right mono positive bold">1.131</td><td class="text-right mono positive">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Balanço Patrimonial — Dez/2025 (R$ mil)</div>
+      <table class="data-table">
+        <thead><tr><th>Item</th><th class="text-right">Dez/2024</th><th class="text-right">Dez/2025</th></tr></thead>
+        <tbody>
+          <tr><td class="bold">Ativo Circulante</td><td class="text-right mono">1.866</td><td class="text-right mono bold">2.558</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Disponível</td><td class="text-right mono">36</td><td class="text-right mono negative">33</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Clientes</td><td class="text-right mono">908</td><td class="text-right mono">1.240</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Tributos a Recuperar</td><td class="text-right mono">447</td><td class="text-right mono">690</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Outros Créditos</td><td class="text-right mono">475</td><td class="text-right mono">595</td></tr>
+          <tr><td class="bold">Ativo Não Circulante</td><td class="text-right mono">721</td><td class="text-right mono bold">1.104</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Empréstimos a Receber LP</td><td class="text-right mono">214</td><td class="text-right mono">357</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Imobilizado e Intangível</td><td class="text-right mono">490</td><td class="text-right mono">645</td></tr>
+          <tr><td class="bold">TOTAL DO ATIVO</td><td class="text-right mono bold">2.587</td><td class="text-right mono bold">3.662</td></tr>
+          <tr><td class="bold">Passivo Circulante</td><td class="text-right mono negative">3.292</td><td class="text-right mono positive bold">1.267</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Empréstimos CP</td><td class="text-right mono">191</td><td class="text-right mono">405</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Fornecedores</td><td class="text-right mono">457</td><td class="text-right mono">502</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Obrig. Trab. / Tributárias</td><td class="text-right mono negative">1.540</td><td class="text-right mono positive">180</td></tr>
+          <tr><td class="bold">Passivo Não Circulante</td><td class="text-right mono">3.393</td><td class="text-right mono">1.621</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Obrig. Tributárias LP</td><td class="text-right mono">169</td><td class="text-right mono negative">1.366</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Partes Relacionadas LP</td><td class="text-right mono negative">3.183</td><td class="text-right mono positive">228</td></tr>
+          <tr><td class="bold">Patrimônio Líquido</td><td class="text-right mono negative bold">(4.098)</td><td class="text-right mono positive bold">774</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">Capital Social</td><td class="text-right mono">10</td><td class="text-right mono positive">6.622</td></tr>
+          <tr><td style="padding-left:1.5rem;color:var(--text2)">(-) Prejuízos Acumulados</td><td class="text-right mono negative">(6.979)</td><td class="text-right mono negative">(5.848)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Indicadores Financeiros — Balanço Dez/2025</div>
+      <div class="fin-grid">
+        <!-- LIQUIDEZ -->
+        <div class="fin-group">
+          <div class="fin-group-title">Indicadores de Liquidez</div>
+          <div class="fin-item">
+            <div class="fin-item-left"><div class="fin-item-name">Liquidez Corrente</div><div class="fin-item-formula">AC ÷ PC</div></div>
+            <div class="fin-item-value" style="color:#86efac">2,02</div>
+            <span class="risk-ok">BOA</span>
+          </div>
+          <div class="fin-item">
+            <div class="fin-item-left"><div class="fin-item-name">Liquidez Seca</div><div class="fin-item-formula">(AC − Estoques) ÷ PC</div></div>
+            <div class="fin-item-value" style="color:#86efac">2,02</div>
+            <span class="risk-ok">BOA</span>
+          </div>
+          <div class="fin-item">
+            <div class="fin-item-left"><div class="fin-item-name">Liquidez Imediata</div><div class="fin-item-formula">Disponível ÷ PC</div></div>
+            <div class="fin-item-value" style="color:#fca5a5">0,03</div>
+            <span class="risk-high">CRÍTICA</span>
+          </div>
+          <div class="fin-item">
+            <div class="fin-item-left"><div class="fin-item-name">Liquidez Geral</div><div class="fin-item-formula">(AC + RLP) ÷ (PC + PNC)</div></div>
+            <div class="fin-item-value" style="color:#fcd34d">1,01</div>
+            <span class="risk-warn">ATENÇÃO</span>
+          </div>
+        </div>
+        <!-- ENDIVIDAMENTO -->
+        <div class="fin-group">
+          <div class="fin-group-title">Indicadores de Endividamento</div>
+          <div class="fin-item">
+            <div class="fin-item-left"><div class="fin-item-name">Endividamento Geral</div><div class="fin-item-formula">(PC + PNC) ÷ Ativo Total</div></div>
+            <div class="fin-item-value" style="color:#fca5a5">78,9%</div>
+            <span class="risk-high">ALTO</span>
+          </div>
+          <div class="fin-item">
+            <div class="fin-item-left"><div class="fin-item-name">Composição do Endividamento</div><div class="fin-item-formula">PC ÷ (PC + PNC)</div></div>
+            <div class="fin-item-value" style="color:#86efac">43,9%</div>
+            <span class="risk-ok">OK — mais LP</span>
+          </div>
+          <div class="fin-item">
+            <div class="fin-item-left"><div class="fin-item-name">Imobilização do PL</div><div class="fin-item-formula">Imobilizado ÷ PL</div></div>
+            <div class="fin-item-value" style="color:#86efac">83,3%</div>
+            <span class="risk-ok">SAUDÁVEL</span>
+          </div>
+          <div class="fin-item">
+            <div class="fin-item-left"><div class="fin-item-name">Disponível ÷ Dívida Bancária</div><div class="fin-item-formula">Caixa ÷ Empréstimos CP</div></div>
+            <div class="fin-item-value" style="color:#fca5a5">8,1%</div>
+            <span class="risk-high">CRÍTICO</span>
+          </div>
+        </div>
+        <!-- RENTABILIDADE -->
+        <div class="fin-group">
+          <div class="fin-group-title">Indicadores de Rentabilidade</div>
+          <div class="fin-item">
+            <div class="fin-item-left"><div class="fin-item-name">ROE — Retorno sobre PL</div><div class="fin-item-formula">Lucro Líquido ÷ PL</div></div>
+            <div class="fin-item-value" style="color:#fcd34d">146,1%</div>
+            <span class="risk-warn">PL ARTIFICIAL</span>
+          </div>
+          <div class="fin-item">
+            <div class="fin-item-left"><div class="fin-item-name">ROA — Retorno sobre Ativos</div><div class="fin-item-formula">Lucro Líquido ÷ Ativo Total</div></div>
+            <div class="fin-item-value" style="color:#86efac">30,9%</div>
+            <span class="risk-ok">FORTE</span>
+          </div>
+          <div class="fin-item">
+            <div class="fin-item-left"><div class="fin-item-name">Margem Bruta</div><div class="fin-item-formula">Lucro Bruto ÷ Receita Líquida</div></div>
+            <div class="fin-item-value" style="color:#fcd34d">83,4%</div>
+            <span class="risk-warn">SUSPEITA</span>
+          </div>
+          <div class="fin-item">
+            <div class="fin-item-left"><div class="fin-item-name">Margem Líquida</div><div class="fin-item-formula">Lucro Líquido ÷ Receita Líquida</div></div>
+            <div class="fin-item-value" style="color:#86efac">16,4%</div>
+            <span class="risk-ok">BOA</span>
+          </div>
+        </div>
+      </div>
+      <div class="info-box" style="font-size:.78rem">
+        <strong>⚠ ROE de 146% e ROA de 30,9% parecem excepcionais, mas o PL de R$774k é artificialmente baixo devido ao aporte de conversão de mútuos em ago/2025 (R$6,6M de capital versus R$5,85M de prejuízos acumulados). O indicador real de eficiência é o ROA — 30,9% é sólido para um armazém frigorificado, mas precisa ser confirmado em pelo menos 2 exercícios consecutivos para ser considerado estrutural.</strong>
+      </div>
+      <div style="margin-top:1rem">
+        <div class="card-title">Faturamento Mensal Declarado 2026 (jan–abr)</div>
+        <table class="data-table">
+          <thead><tr><th>Mês</th><th class="text-right">2025</th><th class="text-right">2026</th><th class="text-right">Var.</th></tr></thead>
+          <tbody>
+            <tr><td>Janeiro</td><td class="text-right mono">379.504</td><td class="text-right mono positive">625.628</td><td class="text-right mono positive">+64,8%</td></tr>
+            <tr><td>Fevereiro</td><td class="text-right mono">542.457</td><td class="text-right mono positive">729.383</td><td class="text-right mono positive">+34,5%</td></tr>
+            <tr><td>Março</td><td class="text-right mono">603.200</td><td class="text-right mono">606.435</td><td class="text-right mono">+0,5%</td></tr>
+            <tr><td>Abril</td><td class="text-right mono">657.533</td><td class="text-right mono negative">595.431</td><td class="text-right mono negative">-9,4%</td></tr>
+            <tr><td class="bold">Média jan–abr</td><td class="text-right mono bold">545.674</td><td class="text-right mono positive bold">639.219</td><td class="text-right mono positive bold">+17,2%</td></tr>
+          </tbody>
+        </table>
+        <div class="info-box">⚠ Discrepância de R$ 633k entre faturamento declarado (R$ 7.325k) e DRE 2025 (R$ 7.958k). Recomenda-se cruzamento com extratos bancários.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title" style="color:#fcd34d">Análise de Faturamento — Posicionamento do Analista Financeiro</div>
+    <div class="analyst-note" style="margin-top:0;border-left-color:#f59e0b">
+      <strong>Credibilidade:</strong> O faturamento bruto de R$7,96M em 2025 é compatível com o porte de um armazém frigorificado de médio porte com duas unidades operacionais (Barueri e São Bernardo do Campo). Entretanto, a margem bruta de <strong style="color:#fca5a5">83,4%</strong> é significativamente acima do benchmark do setor (logística e armazenagem: 30–55%), o que pode indicar <strong>subregistro de custos diretos</strong> — reclassificação indevida de despesas operacionais como administrativas. Essa anomalia requer análise detalhada dos critérios de classificação contábil utilizados pelo contador responsável.<br><br>
+      <strong>Crescimento:</strong> A taxa de crescimento de +45,4% em 4 anos (2022→2025) é saudável e alinhada ao porte e à narrativa de expansão. Contudo, janeiro/2026 apresentou +64,8% sobre o mesmo mês de 2025 — variação que, isolada, é <strong style="color:#fca5a5">suspeita</strong>, especialmente diante da piora simultânea nos protestos e no score de crédito. Crescimento acelerado de receita combinado com deterioração da saúde financeira é padrão típico de pressão de caixa.<br><br>
+      <strong>Inconsistência:</strong> Há discrepância de <strong style="color:#fca5a5">R$633.024</strong> entre o faturamento declarado na declaração de mai/2026 (R$7.325k) e a Receita Bruta da DRE 2025 (R$7.958k). Essa diferença não foi explicada — pode ser diferença de competência, ajuste de notas canceladas ou subdeclaração ao credor. Cruzamento obrigatório com extratos bancários dos últimos 12 meses.<br><br>
+      <strong>Concentração:</strong> Fazenda Futuro representa ~23% do faturamento bruto estimado; Agropacking ~11%. Os 5 maiores sacados concentram ~61% da receita — risco de concentração médio-alto para uma operação de antecipação. Qualquer ruptura contratual com os dois maiores clientes impacta materialmente a carteira de recebíveis elegíveis.<br><br>
+      <strong>Conclusão:</strong> O faturamento é <em>plausível em volume</em>, mas apresenta três sinalizações de atenção que impedem a validação plena: (1) margem bruta atípica para o setor, (2) discrepância entre declaração e DRE e (3) aceleração de receita simultânea à deterioração dos protestos. Cruzamento com extratos bancários é condição suspensiva crítica.
+    </div>
+  </div>
 
 <!-- RF-0. VALIDAÇÃO DOCUMENTAL -->
 <section id="docs" class="rf-section">
