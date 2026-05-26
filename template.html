@@ -54,10 +54,12 @@ code,.mono{font-family:'DM Mono',monospace}
 .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.12}
 .orb1{width:500px;height:500px;background:var(--blue);top:-150px;left:-100px}
 .orb2{width:300px;height:300px;background:var(--teal);bottom:-80px;right:150px}
-.nav-bar{position:sticky;top:0;z-index:100;background:rgba(5,14,24,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--line2);padding:0 32px}
-.nav-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;overflow-x:auto;scrollbar-width:none}
-.nav-inner::-webkit-scrollbar{display:none}
-.nav-tab{flex-shrink:0;padding:14px 20px;font-size:12px;font-weight:500;color:var(--gray1);cursor:pointer;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap;text-transform:uppercase;letter-spacing:.06em;text-decoration:none;display:block}
+.nav-bar{position:sticky;top:0;z-index:100;background:rgba(5,14,24,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--line2)}
+.nav-row{display:flex;align-items:center;max-width:1400px;margin:0 auto;padding:0 20px}
+.nav-row-credito{border-bottom:1px solid var(--line)}
+.nav-row-label{font-size:9px;text-transform:uppercase;letter-spacing:.1em;font-family:'DM Mono',monospace;padding:0 12px 0 0;white-space:nowrap;flex-shrink:0;border-right:1px solid var(--line2);margin-right:4px;line-height:1.3;color:var(--teal2)}
+.nav-row-label.rf{color:var(--blue2)}
+.nav-tab{flex-shrink:0;padding:9px 13px;font-size:11px;font-weight:500;color:var(--gray1);cursor:pointer;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap;text-transform:uppercase;letter-spacing:.05em;text-decoration:none;display:block}
 .nav-tab:hover{color:var(--text2)}
 .nav-tab.active{color:var(--blue2);border-bottom-color:var(--blue)}
 main{padding:48px 0 80px}
@@ -280,9 +282,11 @@ section.rf-section .section-header .section-num{background:var(--blue)}
 </section>
 
 <nav class="nav-bar">
-  <div class="nav-inner">
-    <!-- Análise de Crédito — Marcelo Vazquez -->
+  <!-- Linha 1 — Análise de Crédito · Marcelo Vazquez -->
+  <div class="nav-row nav-row-credito">
+    <div class="nav-row-label">Crédito<br>{{ANALISTA_CREDITO_SOBRENOME}}</div>
     <a href="#overview" class="nav-tab active">Visão Geral</a>
+    <a href="#cadastro" class="nav-tab">Identificação</a>
     <a href="#financeiro" class="nav-tab">Financeiro ECF</a>
     <a href="#serasa" class="nav-tab">Serasa</a>
     <a href="#bacen" class="nav-tab">BACEN / SCR</a>
@@ -290,17 +294,18 @@ section.rf-section .section-header .section-num{background:var(--blue)}
     <a href="#patrimonio" class="nav-tab">Patrimônio</a>
     <a href="#socios" class="nav-tab">Sócios</a>
     <a href="#riscos" class="nav-tab">Riscos</a>
-    <a href="#parecer-credito" class="nav-tab">Parecer Crédito</a>
-    <!-- Divisor -->
-    <span class="nav-sep">·</span>
-    <!-- Análise Financeira — Rafael Bazan -->
+    <a href="#parecer-credito" class="nav-tab">Parecer</a>
+  </div>
+  <!-- Linha 2 — Análise Financeira · Rafael Bazan -->
+  <div class="nav-row">
+    <div class="nav-row-label rf">Financeiro<br>{{ANALISTA_FINANCEIRO_SOBRENOME}}</div>
     <a href="#negocio" class="nav-tab nav-rf">Mod. Negócio</a>
-    <a href="#juridico" class="nav-tab nav-rf">Análise Jur.</a>
+    <a href="#juridico" class="nav-tab nav-rf">Análise Jurídica</a>
     <a href="#risco-dim" class="nav-tab nav-rf">Risco Detalhado</a>
     <a href="#garantias" class="nav-tab nav-rf">Garantias</a>
     <a href="#monitoramento" class="nav-tab nav-rf">Monitoramento</a>
-    <a href="#parecer-financeiro" class="nav-tab nav-rf">Parecer {{ANALISTA_FINANCEIRO_SOBRENOME}}</a>
-    <a href="#veredicto" class="nav-tab nav-rf" style="color:var(--red2)">Veredicto</a>
+    <a href="#parecer-financeiro" class="nav-tab nav-rf">Parecer Financeiro</a>
+    <a href="#veredicto" class="nav-tab nav-rf" style="color:var(--red2);font-weight:700">⊕ Veredicto</a>
   </div>
 </nav>
 

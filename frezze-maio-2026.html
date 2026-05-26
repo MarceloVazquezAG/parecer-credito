@@ -35,11 +35,13 @@ h1,h2,h3{font-family:'Syne',sans-serif}
 .chip.danger{background:rgba(239,68,68,0.15);border-color:rgba(239,68,68,0.4);color:#fca5a5}
 
 /* NAV */
-.sticky-nav{position:sticky;top:0;z-index:100;background:rgba(10,15,30,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.6rem 1rem;overflow-x:auto}
-.sticky-nav ul{display:flex;gap:.35rem;list-style:none;white-space:nowrap}
-.nav-pill{display:inline-block;padding:.35rem .85rem;border-radius:999px;font-size:.75rem;font-weight:600;color:var(--text2);text-decoration:none;transition:all .2s}
-.nav-pill:hover,.nav-pill.active{background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-border)}
-.nav-pill{border:1px solid transparent}
+.sticky-nav{position:sticky;top:0;z-index:100;background:rgba(10,15,30,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-row{display:flex;align-items:center;padding:.15rem 1.25rem;max-width:1100px;margin:0 auto}
+.nav-row-credito{border-bottom:1px solid rgba(255,255,255,0.05)}
+.nav-row-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.09em;font-family:'DM Mono',monospace;white-space:nowrap;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.08);padding-right:.75rem;margin-right:.4rem;line-height:1.3;color:#00e6be}
+.nav-row-label.rf{color:#60a5fa}
+.nav-pill{display:inline-block;padding:.3rem .7rem;border-radius:999px;font-size:.72rem;font-weight:600;color:var(--text2);text-decoration:none;transition:all .2s;border:1px solid transparent}
+.nav-pill:hover,.nav-pill.active{background:var(--accent-dim);color:var(--accent);border-color:var(--accent-border)}
 
 /* SECTIONS */
 section{padding:3rem 2rem;max-width:1100px;margin:0 auto}
@@ -206,26 +208,31 @@ section.rf-section .kpi-card{border-left-color:#3b82f6}
 
 <!-- NAV -->
 <nav class="sticky-nav">
-  <ul>
-    <li><a href="#dashboard" class="nav-pill active">Dashboard</a></li>
-    <li><a href="#identificacao" class="nav-pill">Identificação</a></li>
-    <li><a href="#financeiro" class="nav-pill">Financeiro</a></li>
-    <li><a href="#serasa" class="nav-pill">Serasa</a></li>
-    <li><a href="#bacen" class="nav-pill">BACEN / SCR</a></li>
-    <li><a href="#creditbox" class="nav-pill">CreditBox</a></li>
-    <li><a href="#patrimonio" class="nav-pill">Patrimônio</a></li>
-    <li><a href="#socios" class="nav-pill">Sócios</a></li>
-    <li><a href="#riscos" class="nav-pill">Riscos</a></li>
-    <li><a href="#parecer-credito" class="nav-pill">Parecer Crédito</a></li>
-    <li class="nav-sep">·</li>
-    <li><a href="#negocio" class="nav-pill nav-rf">Mod. Negócio</a></li>
-    <li><a href="#juridico" class="nav-pill nav-rf">Análise Jur.</a></li>
-    <li><a href="#risco-dim" class="nav-pill nav-rf">Risco Detalhado</a></li>
-    <li><a href="#garantias" class="nav-pill nav-rf">Garantias</a></li>
-    <li><a href="#monitoramento" class="nav-pill nav-rf">Monitoramento</a></li>
-    <li><a href="#parecer-financeiro" class="nav-pill nav-rf">Parecer Rafael</a></li>
-    <li><a href="#veredicto" class="nav-pill nav-rf" style="background:rgba(239,68,68,0.1);color:#fca5a5;border-color:rgba(239,68,68,0.3)">Veredicto</a></li>
-  </ul>
+  <!-- Linha 1 — Análise de Crédito · Marcelo Vazquez -->
+  <div class="nav-row nav-row-credito">
+    <div class="nav-row-label">Crédito<br>Vazquez</div>
+    <a href="#dashboard" class="nav-pill active">Dashboard</a>
+    <a href="#identificacao" class="nav-pill">Identificação</a>
+    <a href="#financeiro" class="nav-pill">Financeiro</a>
+    <a href="#serasa" class="nav-pill">Serasa</a>
+    <a href="#bacen" class="nav-pill">BACEN / SCR</a>
+    <a href="#creditbox" class="nav-pill">CreditBox</a>
+    <a href="#patrimonio" class="nav-pill">Patrimônio</a>
+    <a href="#socios" class="nav-pill">Sócios</a>
+    <a href="#riscos" class="nav-pill">Riscos</a>
+    <a href="#parecer-credito" class="nav-pill">Parecer</a>
+  </div>
+  <!-- Linha 2 — Análise Financeira · Rafael Bazan -->
+  <div class="nav-row">
+    <div class="nav-row-label rf">Financeiro<br>Bazan</div>
+    <a href="#negocio" class="nav-pill nav-rf">Mod. Negócio</a>
+    <a href="#juridico" class="nav-pill nav-rf">Análise Jurídica</a>
+    <a href="#risco-dim" class="nav-pill nav-rf">Risco Detalhado</a>
+    <a href="#garantias" class="nav-pill nav-rf">Garantias</a>
+    <a href="#monitoramento" class="nav-pill nav-rf">Monitoramento</a>
+    <a href="#parecer-financeiro" class="nav-pill nav-rf">Parecer Financeiro</a>
+    <a href="#veredicto" class="nav-pill" style="color:#fca5a5;border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.1);font-weight:700">⊕ Veredicto</a>
+  </div>
 </nav>
 
 <!-- 0. DASHBOARD -->
