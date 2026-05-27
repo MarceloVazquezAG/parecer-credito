@@ -174,8 +174,12 @@ section:last-child{border-bottom:none}
 
 /* DOCS */
 .doc-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.doc-item{display:flex;align-items:center;gap:9px;padding:8px 11px;background:var(--surface);border:1px solid var(--line2);border-radius:var(--r-sm);font-size:12px;color:var(--text2)}
-.doc-ico{width:24px;height:24px;border-radius:var(--r-sm);background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.doc-item{display:flex;align-items:center;gap:9px;padding:8px 11px;background:var(--surface);border:1px solid var(--line2);border-radius:var(--r-sm);font-size:12px;color:var(--text2);text-decoration:none}
+a.doc-item{cursor:pointer;transition:border-color .15s,background .15s,transform .12s}
+a.doc-item:hover{border-color:rgba(245,158,11,.5);background:rgba(245,158,11,.07);color:var(--amber2);transform:translateY(-1px)}
+a.doc-item:hover .doc-ico{background:rgba(245,158,11,.15)}
+a.doc-item:active{transform:translateY(0)}
+.doc-ico{width:24px;height:24px;border-radius:var(--r-sm);background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;transition:background .15s}
 
 /* PROPOSAL */
 .prop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:36px}
@@ -850,41 +854,46 @@ section:last-child{border-bottom:none}
     <div>
       <p class="card-eyebrow" style="margin-bottom:12px">Documentos Financeiros</p>
       <div class="doc-grid">
-        <div class="doc-item"><div class="doc-ico">📄</div>Faturamento Jan–Abr/2026 (assinado)</div>
-        <div class="doc-item"><div class="doc-ico">📄</div>Faturamento 2025 (assinado)</div>
-        <div class="doc-item"><div class="doc-ico">📄</div>Faturamento 2024</div>
-        <div class="doc-item"><div class="doc-ico">📊</div>Balancete Jan–Abr/2026 (assinado)</div>
-        <div class="doc-item"><div class="doc-ico">📊</div>DRE Consolidado Abr/2026 (assinado)</div>
-        <div class="doc-item"><div class="doc-ico">📊</div>Balanço Patrimonial 2025</div>
-        <div class="doc-item"><div class="doc-ico">📊</div>DRE 2025 (assinado)</div>
-        <div class="doc-item"><div class="doc-ico">📊</div>Balanço Patrimonial 2024 (assinado)</div>
-        <div class="doc-item"><div class="doc-ico">📊</div>DRE 2024 (assinado)</div>
-        <div class="doc-item"><div class="doc-ico">📊</div>Balanço + DRE 2023</div>
-        <div class="doc-item"><div class="doc-ico">💼</div>IRPF 2025/2026 — Guilherme Camargo</div>
-        <div class="doc-item"><div class="doc-ico">💼</div>IRPF 2025 — Mariana Camargo</div>
-        <div class="doc-item"><div class="doc-ico">💼</div>IRPF 2026 — Alexandre Camargo</div>
-        <div class="doc-item"><div class="doc-ico">🪪</div>RG — Guilherme Camargo</div>
-        <div class="doc-item"><div class="doc-ico">🪪</div>Documentos — Mariana Camargo</div>
-        <div class="doc-item"><div class="doc-ico">📋</div>Aditivos contratuais TEX (março)</div>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/Assinado%20Faturamento%2004-2026.pdf" target="_blank" rel="noopener"><div class="doc-ico">📄</div>Faturamento Jan–Abr/2026 (assinado)</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/Assinado%20Faturamento%202025.pdf" target="_blank" rel="noopener"><div class="doc-ico">📄</div>Faturamento 2025 (assinado)</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/Faturamento%202024.pdf" target="_blank" rel="noopener"><div class="doc-ico">📄</div>Faturamento 2024</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/2023%20Faturamento%20TexQuimica.pdf" target="_blank" rel="noopener"><div class="doc-ico">📄</div>Faturamento 2023</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/Assinado%20Balancete%20Consolidado%2004-2026.pdf" target="_blank" rel="noopener"><div class="doc-ico">📊</div>Balancete Jan–Abr/2026 (assinado)</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/012025%20at%C3%A9%20122025%20Balancete.pdf" target="_blank" rel="noopener"><div class="doc-ico">📊</div>Balancete Jan–Dez 2025</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/Assinado%20DRE%20Consolidado%2004-2026.pdf" target="_blank" rel="noopener"><div class="doc-ico">📊</div>DRE Consolidado Abr/2026 (assinado)</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/2025%20Balan%C3%A7o%20Patrimonial.pdf" target="_blank" rel="noopener"><div class="doc-ico">📊</div>Balanço Patrimonial 2025</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/2025%20DRE%20ass.pdf" target="_blank" rel="noopener"><div class="doc-ico">📊</div>DRE 2025 (assinado)</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/2024%20Balan%C3%A7o%20ass.pdf" target="_blank" rel="noopener"><div class="doc-ico">📊</div>Balanço Patrimonial 2024 (assinado)</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/2024%20DRE%20ass.pdf" target="_blank" rel="noopener"><div class="doc-ico">📊</div>DRE 2024 (assinado)</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/2023%20Balan%C3%A7o%20Patrim%C3%B4nial_assinado.pdf" target="_blank" rel="noopener"><div class="doc-ico">📊</div>Balanço 2023 (assinado)</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/Tex%20Quimica%202023%20Dre.pdf" target="_blank" rel="noopener"><div class="doc-ico">📊</div>DRE 2023</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/Declara%C3%A7%C3%A3o%20IR%20Guilherme.pdf" target="_blank" rel="noopener"><div class="doc-ico">💼</div>IRPF — Guilherme Camargo (A)</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/IR%20242025%20guilherme%20.pdf" target="_blank" rel="noopener"><div class="doc-ico">💼</div>IRPF — Guilherme Camargo (B)</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/Declara%C3%A7%C3%A3o%20IR%20MARINA.pdf" target="_blank" rel="noopener"><div class="doc-ico">💼</div>IRPF — Mariana Camargo</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/Alexandre%20-%2018477400814-IRPF-2026-2025-origi-imagem-declaracao.pdf" target="_blank" rel="noopener"><div class="doc-ico">💼</div>IRPF 2026 — Alexandre Camargo</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/RG%20Guilherme%20Camargo.jpg" target="_blank" rel="noopener"><div class="doc-ico">🪪</div>RG — Guilherme Camargo</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/Documentos%20Mariana%20Camargo.pdf" target="_blank" rel="noopener"><div class="doc-ico">🪪</div>Documentos — Mariana Camargo</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/ADITIVOS%20TEX%2010-03%20-%2017-0%2003.pdf" target="_blank" rel="noopener"><div class="doc-ico">📋</div>Aditivos contratuais TEX (março)</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/2%C2%AA%20via%20da%20fatura%20-1.pdf" target="_blank" rel="noopener"><div class="doc-ico">🧾</div>2ª via da fatura</a>
       </div>
     </div>
 
     <div>
       <p class="card-eyebrow" style="margin-bottom:12px">Consultas Realizadas</p>
       <div class="doc-grid">
-        <div class="doc-item"><div class="doc-ico">🔍</div>Serasa — TEX QUIMICA (CNPJ)</div>
-        <div class="doc-item"><div class="doc-ico">🔍</div>Serasa — Guilherme Camargo</div>
-        <div class="doc-item"><div class="doc-ico">🔍</div>Serasa — Mariana Camargo</div>
-        <div class="doc-item"><div class="doc-ico">🔍</div>Serasa — Alexandre Camargo</div>
-        <div class="doc-item"><div class="doc-ico">🏦</div>BACEN/SCR — TEX QUIMICA</div>
-        <div class="doc-item"><div class="doc-ico">🏦</div>BACEN/SCR — Guilherme Camargo</div>
-        <div class="doc-item"><div class="doc-ico">🏦</div>BACEN/SCR — Mariana Camargo</div>
-        <div class="doc-item"><div class="doc-ico">🏦</div>BACEN/SCR — Alexandre Camargo</div>
-        <div class="doc-item"><div class="doc-ico">📋</div>CreditBox — TEX QUIMICA</div>
-        <div class="doc-item"><div class="doc-ico">📋</div>CreditHub — TEX QUIMICA</div>
-        <div class="doc-item"><div class="doc-ico">📋</div>CreditHub — Guilherme Camargo</div>
-        <div class="doc-item"><div class="doc-ico">📋</div>CreditHub — Mariana Camargo</div>
-        <div class="doc-item"><div class="doc-ico">📋</div>CreditHub — Alexandre Camargo</div>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/consultas/SERASA%20-%20TEX%20QUIMICA.pdf" target="_blank" rel="noopener"><div class="doc-ico">🔍</div>Serasa — TEX QUIMICA</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/consultas/SERASA%20-%20GUILHERME.pdf" target="_blank" rel="noopener"><div class="doc-ico">🔍</div>Serasa — Guilherme Camargo</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/consultas/SERASA%20-%20MARIANA.pdf" target="_blank" rel="noopener"><div class="doc-ico">🔍</div>Serasa — Mariana Camargo</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/consultas/SERASA%20-%20ALEXANDRE.pdf" target="_blank" rel="noopener"><div class="doc-ico">🔍</div>Serasa — Alexandre Camargo</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/consultas/BACEN%20-%20TEX%20QUIMICA.pdf" target="_blank" rel="noopener"><div class="doc-ico">🏦</div>BACEN/SCR — TEX QUIMICA</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/consultas/BACEN%20-%20GUILHERME.pdf" target="_blank" rel="noopener"><div class="doc-ico">🏦</div>BACEN/SCR — Guilherme Camargo</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/consultas/BACEN%20-%20MARIANA.pdf" target="_blank" rel="noopener"><div class="doc-ico">🏦</div>BACEN/SCR — Mariana Camargo</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/consultas/BACEN%20-ALEXANDRE.pdf" target="_blank" rel="noopener"><div class="doc-ico">🏦</div>BACEN/SCR — Alexandre Camargo</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/consultas/CREDITBOX%20-%20%20TEX%20QUIMICA.pdf" target="_blank" rel="noopener"><div class="doc-ico">📋</div>CreditBox — TEX QUIMICA</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/consultas/CREDITHUB%20-%20TEX%20QUIMICA.pdf" target="_blank" rel="noopener"><div class="doc-ico">📋</div>CreditHub — TEX QUIMICA</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/consultas/CREDITHUB%20-%20GUILHERME.pdf" target="_blank" rel="noopener"><div class="doc-ico">📋</div>CreditHub — Guilherme Camargo</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/consultas/CREDITHUB%20-%20MARIANA.pdf" target="_blank" rel="noopener"><div class="doc-ico">📋</div>CreditHub — Mariana Camargo</a>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/consultas/CREDITHUB%20-%20ALEXANDRE.pdf" target="_blank" rel="noopener"><div class="doc-ico">📋</div>CreditHub — Alexandre Camargo</a>
       </div>
     </div>
   </div>
@@ -893,7 +902,7 @@ section:last-child{border-bottom:none}
     <div>
       <p class="card-eyebrow" style="margin-bottom:12px">Pareceres Técnicos</p>
       <div class="doc-grid" style="grid-template-columns:1fr">
-        <div class="doc-item"><div class="doc-ico">📝</div>Análise de Crédito — AG Antecipa (Mai/2026)</div>
+        <a class="doc-item" href="docs/tex-quimica-maio-2026/Analise%20Credito%20TexQuimica.docx" target="_blank" rel="noopener"><div class="doc-ico">📝</div>Análise de Crédito — AG Antecipa (Mai/2026)</a>
         <div class="doc-item"><div class="doc-ico">🎙️</div>Reunião comercial gravada — tldv.io (22/05/2026) — Pedro + Guilherme</div>
       </div>
     </div>
