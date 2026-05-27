@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comitê de Crédito — {{EMPRESA_NOME}}</title>
+  <!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║         TEMPLATE — COMITÊ DE CRÉDITO — AG ANTECIPA          ║
+  ║                                                              ║
+  ║  Substitua todos os campos {{VARIAVEL}} pelos dados reais.   ║
+  ║                                                              ║
+  ║  Badges disponíveis:                                         ║
+  ║   · badge-aprovado      → fundo verde                        ║
+  ║   · badge-condicionado  → fundo amarelo                      ║
+  ║   · badge-negado        → fundo vermelho                     ║
+  ║                                                              ║
+  ║  Classes de status em tabelas:                               ║
+  ║   · status-ok           → texto verde                        ║
+  ║   · status-atencao      → texto amarelo                      ║
+  ║   · status-risco        → texto vermelho                     ║
+  ╚══════════════════════════════════════════════════════════════╝
+  -->
+  <style>
+    /* === RESET & BASE === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: #ebebeb;
+      color: #1a1a1a;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* === PÁGINA === */
+    .page {
+      width: 1440px;
+      min-height: 900px;
+      background: #fff;
+      margin: 28px auto;
+      padding: 56px 72px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+      page-break-after: always;
+    }
+
+    /* === TIPOGRAFIA === */
+    .page-title {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .page-subtitle {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      letter-spacing: -0.3px;
+    }
+
+    .card-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 12px;
+    }
+
+    /* === LAYOUTS === */
+    .two-col   { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+    .four-col  { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .five-col  { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+
+    /* === KPI CARDS === */
+    .kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; margin-bottom: 44px; }
+
+    .kpi-card {
+      text-align: center;
+      padding: 22px 14px;
+      border-radius: 10px;
+      background: #fafafa;
+      border: 1px solid #e8e8e8;
+    }
+
+    .kpi-value {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.05;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .kpi-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: #555;
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: #999;
+      margin-top: 5px;
+    }
+
+    /* === BADGES DE RECOMENDAÇÃO === */
+    .recommendation-badge {
+      display: inline-block;
+      padding: 5px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    .badge-aprovado     { background: #d4edda; color: #155724; }
+    .badge-condicionado { background: #fff3cd; color: #856404; }
+    .badge-negado       { background: #f8d7da; color: #721c24; }
+
+    /* === INFO BLOCK === */
+    .info-block { margin-bottom: 24px; }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 9px;
+      font-size: 13px;
+    }
+
+    .info-item .label {
+      font-weight: 600;
+      color: #333;
+      min-width: 170px;
+      flex-shrink: 0;
+    }
+
+    .info-item .value { color: #555; }
+
+    /* === SCORE VISUAL === */
+    .score-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 16px 20px;
+      background: #fafafa;
+      border: 1px solid #e8e8e8;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    .score-number {
+      font-size: 42px;
+      font-weight: 800;
+      min-width: 80px;
+      text-align: center;
+      line-height: 1;
+    }
+
+    .score-bar-wrap { flex: 1; }
+
+    .score-bar-bg {
+      height: 10px;
+      border-radius: 5px;
+      background: linear-gradient(to right, #dc3545 0%, #fd7e14 25%, #ffc107 50%, #28a745 75%, #198754 100%);
+      position: relative;
+      margin-bottom: 5px;
+    }
+
+    .score-marker {
+      position: absolute;
+      top: -5px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #1a1a1a;
+      border: 3px solid #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+      transform: translateX(-50%);
+    }
+
+    .score-ticks {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: #aaa;
+    }
+
+    /* === TABELAS === */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+
+    .data-table th {
+      background: #1a1a1a;
+      color: #fff;
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .data-table td {
+      padding: 9px 14px;
+      border-bottom: 1px solid #f0f0f0;
+      vertical-align: top;
+    }
+
+    .data-table tr:hover td { background: #fafafa; }
+
+    .status-ok      { color: #155724; font-weight: 600; }
+    .status-atencao { color: #856404; font-weight: 600; }
+    .status-risco   { color: #721c24; font-weight: 600; }
+
+    /* === COMPLIANCE CARDS === */
+    .compliance-card {
+      padding: 14px 16px;
+      border-radius: 8px;
+      border: 1px solid #e8e8e8;
+      background: #fafafa;
+    }
+
+    .compliance-card .entity {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #999;
+      margin-bottom: 5px;
+    }
+
+    .compliance-card .result { font-size: 13px; font-weight: 600; }
+    .compliance-card .detail { font-size: 11px; color: #888; margin-top: 4px; }
+
+    .result-ok      { color: #155724; }
+    .result-alert   { color: #856404; }
+    .result-risk    { color: #721c24; }
+
+    /* === ALERTAS JURÍDICOS === */
+    .legal-alert {
+      padding: 13px 16px;
+      border-radius: 6px;
+      border-left: 4px solid #ffc107;
+      background: #fffbf0;
+      margin-bottom: 10px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .legal-alert.clear  { border-left-color: #28a745; background: #f0faf4; }
+    .legal-alert.risk   { border-left-color: #dc3545; background: #fff5f5; }
+
+    .legal-alert ul { padding-left: 16px; margin-top: 6px; font-size: 12px; }
+
+    /* === PROPOSTA === */
+    .proposal-card {
+      text-align: center;
+      padding: 30px 16px;
+      border-radius: 12px;
+      background: #1a1a1a;
+      color: #fff;
+    }
+
+    .proposal-value {
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+
+    .proposal-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #aaa;
+      font-weight: 600;
+    }
+
+    /* === CONDICIONANTES === */
+    .conditions-list { list-style: none; counter-reset: cond; }
+
+    .conditions-list li {
+      counter-increment: cond;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 11px 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 13px;
+      color: #444;
+    }
+
+    .conditions-list li::before {
+      content: counter(cond);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #1a1a1a;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* === VOTAÇÃO === */
+    .vote-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+
+    .vote-table th {
+      padding: 10px 16px;
+      background: #f5f5f5;
+      text-align: left;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: #666;
+    }
+
+    .vote-table td { padding: 12px 16px; border-bottom: 1px solid #f0f0f0; }
+
+    .vote-badge {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .vote-aprovado   { background: #d4edda; color: #155724; }
+    .vote-negado     { background: #f8d7da; color: #721c24; }
+    .vote-abstencao  { background: #e2e3e5; color: #495057; }
+
+    /* === DOCUMENTOS === */
+    .doc-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+
+    .doc-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #555;
+      padding: 7px 10px;
+      background: #fafafa;
+      border-radius: 6px;
+      border: 1px solid #eee;
+    }
+
+    /* === BOX AUXILIARES === */
+    .box {
+      background: #fafafa;
+      border: 1px solid #e8e8e8;
+      border-radius: 10px;
+      padding: 18px 20px;
+    }
+
+    .cobertura-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      font-size: 13px;
+    }
+
+    .cobertura-row.total {
+      border-top: 1px solid #ddd;
+      margin-top: 4px;
+      padding-top: 10px;
+      font-weight: 700;
+    }
+
+    /* === SEPARADOR === */
+    .sep { border: none; border-top: 1px solid #eee; margin: 32px 0; }
+
+    /* === DECISÃO FINAL === */
+    .decision-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 28px;
+      background: #f5f5f5;
+      border-radius: 12px;
+      margin-top: 24px;
+    }
+
+    /* === PRINT === */
+    @media print {
+      body  { background: #fff; }
+      .page { box-shadow: none; margin: 0; page-break-after: always; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PÁGINA 1 — PERFIL CORPORATIVO
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="page">
+
+  <!-- Cabeçalho com recomendação -->
+  <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:36px;">
+    <div>
+      <h1 class="page-title">Comitê de Crédito — {{EMPRESA_NOME}}</h1>
+      <p class="page-subtitle">{{SETOR}} | {{CIDADE}}, {{UF}} | CNPJ com {{ANOS_ATIVIDADE}} anos de atividade</p>
+    </div>
+    <div style="text-align:right;">
+      <span class="recommendation-badge badge-condicionado">{{RECOMENDACAO}}</span>
+      <div style="font-size:11px; color:#999; margin-top:6px;">Data do Comitê: {{DATA_COMITE}}</div>
+    </div>
+  </div>
+
+  <!-- KPIs principais -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-value">{{FATURAMENTO_MEDIO}}</div>
+      <div class="kpi-label">Faturamento Médio Mensal</div>
+      <div class="kpi-sub">{{FATURAMENTO_BASE}}</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">{{CUSTO_FIXO}}</div>
+      <div class="kpi-label">Custo Fixo Mensal</div>
+      <div class="kpi-sub">{{CUSTO_FIXO_COMPOSICAO}}</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">{{ENDIVIDAMENTO_BANCARIO}}</div>
+      <div class="kpi-label">Endividamento Bancário</div>
+      <div class="kpi-sub">{{ENDIVIDAMENTO_MODALIDADES}}</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">{{PRAZO_MEDIO}}</div>
+      <div class="kpi-label">Prazo Médio (PM)</div>
+      <div class="kpi-sub">{{PRAZO_MEDIO_SUB}}</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">{{COLABORADORES}}</div>
+      <div class="kpi-label">Colaboradores</div>
+      <div class="kpi-sub">{{COLABORADORES_SUB}}</div>
+    </div>
+  </div>
+
+  <!-- Corpo da página -->
+  <div class="two-col">
+    <!-- Esquerda: Perfil + Modelo de Negócio -->
+    <div>
+      <p class="card-title">Perfil Corporativo</p>
+      <div class="info-block">
+        <div class="info-item"><span class="label">Grupo Econômico:</span><span class="value">{{GRUPO_ECONOMICO}}</span></div>
+        <div class="info-item"><span class="label">CNPJ(s):</span><span class="value">{{CNPJS}}</span></div>
+        <div class="info-item"><span class="label">Localização:</span><span class="value">{{LOCALIZACAO_COMPLETA}}</span></div>
+        <div class="info-item"><span class="label">Setor / CNAE:</span><span class="value">{{SETOR_CNAE}}</span></div>
+        <div class="info-item"><span class="label">Regime Tributário:</span><span class="value">{{REGIME_TRIBUTARIO}}</span></div>
+        <div class="info-item"><span class="label">Estrutura Societária:</span><span class="value">{{ESTRUTURA_SOCIETARIA}}</span></div>
+        <div class="info-item"><span class="label">Situação Cadastral:</span><span class="value">{{SITUACAO_CADASTRAL}}</span></div>
+      </div>
+
+      <p class="card-title" style="margin-top:20px;">Modelo de Negócio</p>
+      <div class="info-block">
+        <div class="info-item"><span class="label">Serviços / Produtos:</span><span class="value">{{SERVICOS}}</span></div>
+        <div class="info-item"><span class="label">Principais Clientes:</span><span class="value">{{CLIENTES_PRINCIPAIS}}</span></div>
+        <div class="info-item"><span class="label">Nicho / Mercado-Alvo:</span><span class="value">{{NICHO}}</span></div>
+        <div class="info-item"><span class="label">Ticket Médio:</span><span class="value">{{TICKET_MEDIO}}</span></div>
+        <div class="info-item"><span class="label">Concentração de Sacado:</span><span class="value">{{CONCENTRACAO_SACADO}}</span></div>
+      </div>
+    </div>
+
+    <!-- Direita: Estrutura Operacional + Cobertura -->
+    <div>
+      <p class="card-title">Estrutura Operacional</p>
+      <div class="info-block">
+        <div class="info-item"><span class="label">Aluguel:</span><span class="value">{{ALUGUEL}}/mês</span></div>
+        <div class="info-item"><span class="label">Folha CLT:</span><span class="value">{{FOLHA_CLT}}/mês</span></div>
+        <div class="info-item"><span class="label">Folha PJ:</span><span class="value">{{FOLHA_PJ}}/mês</span></div>
+        <div class="info-item"><span class="label">Outros Custos Fixos:</span><span class="value">{{OUTROS_FIXOS}}/mês</span></div>
+      </div>
+
+      <p class="card-title" style="margin-top:20px;">Cobertura Operacional Estimada</p>
+      <div class="box">
+        <div class="cobertura-row">
+          <span>Faturamento Médio Mensal</span>
+          <strong>{{FATURAMENTO_MEDIO}}</strong>
+        </div>
+        <div class="cobertura-row">
+          <span style="color:#888;">(−) Custo Fixo Total</span>
+          <strong style="color:#888;">{{CUSTO_FIXO}}</strong>
+        </div>
+        <div class="cobertura-row total">
+          <span>Margem Operacional Estimada</span>
+          <strong style="color:{{COR_MARGEM}};">{{MARGEM_OPERACIONAL}} ({{MARGEM_PCT}})</strong>
+        </div>
+        <div style="margin-top:10px; font-size:11px; color:#999;">
+          O custo fixo representa {{CUSTO_SOBRE_FAT}}% do faturamento médio. Cobertura do endividamento bancário: <strong>{{COBERTURA_VEZES}}x</strong>.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page 1 -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PÁGINA 2 — ANÁLISE FINANCEIRA
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <h2 class="section-title">Análise Financeira</h2>
+
+  <!-- Resumo Executivo -->
+  <p class="card-title" style="margin-bottom:12px;">Resumo Executivo — Leitura Rápida</p>
+  <table class="data-table" style="margin-bottom:36px;">
+    <thead>
+      <tr>
+        <th style="width:22%;">Indicador</th>
+        <th>Resultado</th>
+        <th style="width:18%;">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Empresa</td>
+        <td>{{EMPRESA_NOME}} — {{EMPRESA_STATUS_DESC}}</td>
+        <td class="status-ok">✓ Ativa</td>
+      </tr>
+      <tr>
+        <td>Situação Cadastral</td>
+        <td>{{SITUACAO_CADASTRAL_DESC}}</td>
+        <td class="status-ok">✓ Regular</td>
+      </tr>
+      <tr>
+        <td>Score CreditBox</td>
+        <td>{{SCORE_CREDITBOX}} — {{SCORE_CLASSE}}</td>
+        <td class="{{SCORE_STATUS_CLASS}}">{{SCORE_STATUS_LABEL}}</td>
+      </tr>
+      <tr>
+        <td>Restrições (Empresa)</td>
+        <td>{{RESTRICOES_EMPRESA_DESC}}</td>
+        <td class="{{RESTRICOES_CLASS}}">{{RESTRICOES_LABEL}}</td>
+      </tr>
+      <tr>
+        <td>BACEN/SCR — Carteira</td>
+        <td>{{BACEN_CARTEIRA_DESC}}</td>
+        <td class="{{BACEN_STATUS_CLASS}}">{{BACEN_STATUS_LABEL}}</td>
+      </tr>
+      <tr>
+        <td>Processos Judiciais</td>
+        <td>{{PROCESSOS_RESUMO}}</td>
+        <td class="{{PROCESSOS_CLASS}}">{{PROCESSOS_LABEL}}</td>
+      </tr>
+      <tr>
+        <td>Cobertura Custo Fixo</td>
+        <td>{{COBERTURA_DESC}}</td>
+        <td class="{{COBERTURA_CLASS}}">{{COBERTURA_LABEL}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- DRE + Balanço -->
+  <div class="two-col">
+    <div>
+      <p class="card-title">DRE Simplificado — Consolidado (R$)</p>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Conta</th>
+            <th>{{ANO_1}}</th>
+            <th>{{ANO_2}}</th>
+            <th>Var. %</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Receita Bruta</td><td>{{RB_A1}}</td><td>{{RB_A2}}</td><td>{{RB_VAR}}</td></tr>
+          <tr><td>(−) Deduções / Impostos</td><td>{{DED_A1}}</td><td>{{DED_A2}}</td><td>{{DED_VAR}}</td></tr>
+          <tr><td><strong>Receita Líquida</strong></td><td><strong>{{RL_A1}}</strong></td><td><strong>{{RL_A2}}</strong></td><td>{{RL_VAR}}</td></tr>
+          <tr><td>(−) CPV / CSS</td><td>{{CPV_A1}}</td><td>{{CPV_A2}}</td><td>{{CPV_VAR}}</td></tr>
+          <tr><td>(−) Despesas Operacionais</td><td>{{DOPEX_A1}}</td><td>{{DOPEX_A2}}</td><td>{{DOPEX_VAR}}</td></tr>
+          <tr><td><strong>EBITDA</strong></td><td><strong>{{EBITDA_A1}}</strong></td><td><strong>{{EBITDA_A2}}</strong></td><td><strong>{{EBITDA_VAR}}</strong></td></tr>
+          <tr><td>Resultado Líquido</td><td>{{RL_LIQ_A1}}</td><td>{{RL_LIQ_A2}}</td><td>{{RL_LIQ_VAR}}</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <p class="card-title">Balanço Patrimonial — Consolidado (R$)</p>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Conta</th>
+            <th>{{ANO_1}}</th>
+            <th>{{ANO_2}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Ativo Total</strong></td><td><strong>{{AT_A1}}</strong></td><td><strong>{{AT_A2}}</strong></td></tr>
+          <tr><td>Ativo Circulante</td><td>{{AC_A1}}</td><td>{{AC_A2}}</td></tr>
+          <tr><td>Ativo Não Circulante</td><td>{{ANC_A1}}</td><td>{{ANC_A2}}</td></tr>
+          <tr><td><strong>Passivo Total</strong></td><td><strong>{{PT_A1}}</strong></td><td><strong>{{PT_A2}}</strong></td></tr>
+          <tr><td>Passivo Circulante</td><td>{{PC_A1}}</td><td>{{PC_A2}}</td></tr>
+          <tr><td>Passivo Não Circulante</td><td>{{PNC_A1}}</td><td>{{PNC_A2}}</td></tr>
+          <tr><td><strong>Patrimônio Líquido</strong></td><td><strong>{{PL_A1}}</strong></td><td><strong>{{PL_A2}}</strong></td></tr>
+          <tr><td>Liquidez Corrente</td><td>{{LC_A1}}</td><td>{{LC_A2}}</td></tr>
+          <tr><td>Endividamento (P/A)</td><td>{{ENDIV_A1}}%</td><td>{{ENDIV_A2}}%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /page 2 -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PÁGINA 3 — ANÁLISE DE RISCO E PARECERES
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <h2 class="section-title">Análise de Risco e Pareceres</h2>
+
+  <div class="two-col" style="margin-bottom:32px;">
+
+    <!-- Score de crédito visual -->
+    <div>
+      <p class="card-title">Score de Crédito — Empresas</p>
+
+      <div style="font-size:12px; color:#777; margin-bottom:6px;">{{EMPRESA_1_NOME}} — CNPJ {{EMPRESA_1_CNPJ}}</div>
+      <div class="score-row">
+        <div>
+          <div class="score-number">{{SCORE_EMP1}}</div>
+          <div style="font-size:10px; color:#999; text-align:center; margin-top:2px;">CreditBox</div>
+        </div>
+        <div class="score-bar-wrap">
+          <div class="score-bar-bg">
+            <!-- left = (score / 1000) * 100 % -->
+            <div class="score-marker" style="left:{{SCORE_EMP1_PCT}}%;"></div>
+          </div>
+          <div class="score-ticks">
+            <span>0</span><span>Risco Alto</span><span>Moderado</span><span>Baixo</span><span>1000</span>
+          </div>
+        </div>
+        <span class="recommendation-badge {{SCORE_EMP1_BADGE}}">{{SCORE_EMP1_CLASSE}}</span>
+      </div>
+
+      <div style="font-size:12px; color:#777; margin-bottom:6px; margin-top:4px;">{{EMPRESA_2_NOME}} — CNPJ {{EMPRESA_2_CNPJ}}</div>
+      <div class="score-row">
+        <div>
+          <div class="score-number">{{SCORE_EMP2}}</div>
+          <div style="font-size:10px; color:#999; text-align:center; margin-top:2px;">CreditBox</div>
+        </div>
+        <div class="score-bar-wrap">
+          <div class="score-bar-bg">
+            <div class="score-marker" style="left:{{SCORE_EMP2_PCT}}%;"></div>
+          </div>
+          <div class="score-ticks">
+            <span>0</span><span>Risco Alto</span><span>Moderado</span><span>Baixo</span><span>1000</span>
+          </div>
+        </div>
+        <span class="recommendation-badge {{SCORE_EMP2_BADGE}}">{{SCORE_EMP2_CLASSE}}</span>
+      </div>
+    </div>
+
+    <!-- Serasa / restrições -->
+    <div>
+      <p class="card-title">Restrições — Serasa / Órgãos de Proteção</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div class="compliance-card">
+          <div class="entity">{{EMPRESA_1_NOME_CURTO}}</div>
+          <div class="result {{SERASA_EMP1_CLASS}}">{{SERASA_EMP1}}</div>
+          <div class="detail">{{SERASA_EMP1_DETALHE}}</div>
+        </div>
+        <div class="compliance-card">
+          <div class="entity">{{EMPRESA_2_NOME_CURTO}}</div>
+          <div class="result {{SERASA_EMP2_CLASS}}">{{SERASA_EMP2}}</div>
+          <div class="detail">{{SERASA_EMP2_DETALHE}}</div>
+        </div>
+        <div class="compliance-card">
+          <div class="entity">{{SOCIO_1_NOME}} (CPF)</div>
+          <div class="result {{SERASA_SOC1_CLASS}}">{{SERASA_SOC1}}</div>
+          <div class="detail">{{SERASA_SOC1_DETALHE}}</div>
+        </div>
+        <div class="compliance-card">
+          <div class="entity">{{SOCIO_2_NOME}} (CPF)</div>
+          <div class="result {{SERASA_SOC2_CLASS}}">{{SERASA_SOC2}}</div>
+          <div class="detail">{{SERASA_SOC2_DETALHE}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BACEN / SCR -->
+  <p class="card-title" style="margin-bottom:10px;">BACEN / SCR — Exposição Bancária Consolidada</p>
+  <table class="data-table" style="margin-bottom:32px;">
+    <thead>
+      <tr>
+        <th>Entidade</th>
+        <th>Crédito a Vencer</th>
+        <th>Crédito Vencido</th>
+        <th>Total Carteira</th>
+        <th>Adimplência</th>
+        <th>Observação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{EMPRESA_1_NOME}}</td>
+        <td>{{BACEN_EMP1_VENCER}}</td>
+        <td>{{BACEN_EMP1_VENCIDO}}</td>
+        <td>{{BACEN_EMP1_TOTAL}}</td>
+        <td class="{{BACEN_EMP1_ADIMPL_CLASS}}">{{BACEN_EMP1_ADIMPL}}</td>
+        <td>{{BACEN_EMP1_OBS}}</td>
+      </tr>
+      <tr>
+        <td>{{EMPRESA_2_NOME}}</td>
+        <td>{{BACEN_EMP2_VENCER}}</td>
+        <td>{{BACEN_EMP2_VENCIDO}}</td>
+        <td>{{BACEN_EMP2_TOTAL}}</td>
+        <td class="{{BACEN_EMP2_ADIMPL_CLASS}}">{{BACEN_EMP2_ADIMPL}}</td>
+        <td>{{BACEN_EMP2_OBS}}</td>
+      </tr>
+      <tr>
+        <td>{{SOCIO_1_NOME}}</td>
+        <td>{{BACEN_SOC1_VENCER}}</td>
+        <td>{{BACEN_SOC1_VENCIDO}}</td>
+        <td>{{BACEN_SOC1_TOTAL}}</td>
+        <td class="{{BACEN_SOC1_ADIMPL_CLASS}}">{{BACEN_SOC1_ADIMPL}}</td>
+        <td>{{BACEN_SOC1_OBS}}</td>
+      </tr>
+      <tr>
+        <td>{{SOCIO_2_NOME}}</td>
+        <td>{{BACEN_SOC2_VENCER}}</td>
+        <td>{{BACEN_SOC2_VENCIDO}}</td>
+        <td>{{BACEN_SOC2_TOTAL}}</td>
+        <td class="{{BACEN_SOC2_ADIMPL_CLASS}}">{{BACEN_SOC2_ADIMPL}}</td>
+        <td>{{BACEN_SOC2_OBS}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pareceres Jurídico + Financeiro -->
+  <div class="two-col">
+    <div>
+      <p class="card-title">Parecer Jurídico</p>
+
+      <div class="legal-alert clear">
+        <strong>{{EMPRESA_1_NOME}}</strong> — {{JURIDICO_EMP1_STATUS}}
+        <div style="font-size:12px; margin-top:2px;">{{JURIDICO_EMP1_DETALHE}}</div>
+      </div>
+
+      <!-- Repetir bloco abaixo para cada empresa com ocorrências -->
+      <div class="legal-alert">
+        <strong>{{EMPRESA_2_NOME}}</strong> — {{JURIDICO_EMP2_QTD}} ação(ões) trabalhista(s)
+        <ul>
+          <li>{{PROCESSO_1_NUM}} — R$ {{PROCESSO_1_VALOR}} — {{PROCESSO_1_FASE}}</li>
+          <li>{{PROCESSO_2_NUM}} — R$ {{PROCESSO_2_VALOR}} — {{PROCESSO_2_FASE}}</li>
+          <!-- Adicionar mais processos conforme necessário -->
+        </ul>
+      </div>
+
+      <div class="legal-alert clear" style="margin-top:0;">
+        <strong>Sócios</strong> — {{JURIDICO_SOCIOS_STATUS}}
+      </div>
+    </div>
+
+    <div>
+      <p class="card-title">Parecer Financeiro — Síntese</p>
+      <div class="box" style="font-size:13px; line-height:1.7;">
+        <div style="margin-bottom:12px;">
+          <span class="recommendation-badge {{PARECER_FIN_BADGE}}">{{PARECER_FIN_RECOMENDACAO}}</span>
+        </div>
+        <p style="margin-bottom:10px; color:#333;">{{PARECER_FIN_TEXTO}}</p>
+        <p style="font-size:12px; color:#666;"><strong>Pontos de Atenção:</strong><br>{{PARECER_FIN_ATENCAO}}</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page 3 -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PÁGINA 4 — DOCUMENTAÇÃO E COMPLIANCE
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <h2 class="section-title">Documentação e Compliance</h2>
+
+  <div class="two-col" style="margin-bottom:32px;">
+    <div>
+      <p class="card-title">Documentos Financeiros Recebidos</p>
+      <ul class="doc-list">
+        <li>📄 Faturamento — {{EMPRESA_1_NOME}} (assinado)</li>
+        <li>📄 Faturamento — {{EMPRESA_2_NOME}} (assinado)</li>
+        <li>📊 Balanço {{ANO_1}} — {{EMPRESA_1_NOME}}</li>
+        <li>📊 Balanço {{ANO_2}} — {{EMPRESA_1_NOME}}</li>
+        <li>📊 DRE {{ANO_2}} — {{EMPRESA_1_NOME}}</li>
+        <li>📊 Balanço {{ANO_1}} — {{EMPRESA_2_NOME}}</li>
+        <li>📊 Balanço {{ANO_2}} — {{EMPRESA_2_NOME}}</li>
+        <li>📊 DRE {{ANO_2}} — {{EMPRESA_2_NOME}}</li>
+        <!-- Adicionar outros documentos conforme necessário -->
+      </ul>
+    </div>
+
+    <div>
+      <p class="card-title">Consultas Realizadas</p>
+      <ul class="doc-list">
+        <li>🔍 Serasa — {{EMPRESA_1_NOME}}</li>
+        <li>🔍 Serasa — {{EMPRESA_2_NOME}}</li>
+        <li>🔍 Serasa — {{SOCIO_1_NOME}} (CPF)</li>
+        <li>🔍 Serasa — {{SOCIO_2_NOME}} (CPF)</li>
+        <li>🏦 BACEN/SCR — {{EMPRESA_1_NOME}}</li>
+        <li>🏦 BACEN/SCR — {{EMPRESA_2_NOME}}</li>
+        <li>🏦 BACEN/SCR — {{SOCIO_1_NOME}}</li>
+        <li>🏦 BACEN/SCR — {{SOCIO_2_NOME}}</li>
+        <li>📋 Credmap — {{EMPRESA_1_NOME}}</li>
+        <li>📋 Credmap — {{EMPRESA_2_NOME}}</li>
+        <li>💼 IRPF {{ANO_IR}} — {{SOCIO_1_NOME}}</li>
+        <li>💼 IRPF {{ANO_IR}} — {{SOCIO_2_NOME}}</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <div class="two-col">
+    <div>
+      <p class="card-title">Pareceres Técnicos</p>
+      <ul class="doc-list" style="grid-template-columns:1fr;">
+        <li>📝 Análise de Crédito — AG Antecipa ({{DATA_ANALISE_CREDITO}})</li>
+        <li>⚖️ Parecer Jurídico ({{DATA_PARECER_JUR}})</li>
+        <li>💹 Parecer Financeiro — Rafael Bazan ({{DATA_PARECER_FIN}})</li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="card-title">Credmap — Scores Consolidados</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+        <div style="text-align:center; padding:22px 12px; background:#fafafa; border:1px solid #e8e8e8; border-radius:10px;">
+          <div style="font-size:36px; font-weight:800; color:{{COR_SCORE_EMP1}}; line-height:1;">{{CREDMAP_EMP1}}</div>
+          <div style="font-size:10px; text-transform:uppercase; letter-spacing:0.5px; color:#777; margin-top:6px;">{{EMPRESA_1_NOME_CURTO}}</div>
+          <div style="font-size:11px; color:#888; margin-top:2px;">{{CREDMAP_EMP1_CLASSE}}</div>
+        </div>
+        <div style="text-align:center; padding:22px 12px; background:#fafafa; border:1px solid #e8e8e8; border-radius:10px;">
+          <div style="font-size:36px; font-weight:800; color:{{COR_SCORE_EMP2}}; line-height:1;">{{CREDMAP_EMP2}}</div>
+          <div style="font-size:10px; text-transform:uppercase; letter-spacing:0.5px; color:#777; margin-top:6px;">{{EMPRESA_2_NOME_CURTO}}</div>
+          <div style="font-size:11px; color:#888; margin-top:2px;">{{CREDMAP_EMP2_CLASSE}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page 4 -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PÁGINA 5 — PROPOSTA COMERCIAL E DELIBERAÇÃO
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <h2 class="section-title">Proposta Comercial</h2>
+
+  <!-- KPIs da Proposta -->
+  <div class="four-col" style="margin-bottom:40px;">
+    <div class="proposal-card">
+      <div class="proposal-value">{{LIMITE_PROPOSTO}}</div>
+      <div class="proposal-label">Limite Proposto</div>
+    </div>
+    <div class="proposal-card">
+      <div class="proposal-value">{{TAXA_NET}}</div>
+      <div class="proposal-label">Taxa Solicitada (Net)</div>
+    </div>
+    <div class="proposal-card">
+      <div class="proposal-value">{{PRAZO_OPERACAO}}</div>
+      <div class="proposal-label">Prazo / PM</div>
+    </div>
+    <div class="proposal-card">
+      <div class="proposal-value">{{PRODUTO}}</div>
+      <div class="proposal-label">Produto / Modalidade</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <!-- Condicionantes -->
+    <div>
+      <p class="card-title" style="margin-bottom:10px;">Condicionantes da Aprovação</p>
+      <ol class="conditions-list">
+        <li>{{CONDICAO_1}}</li>
+        <li>{{CONDICAO_2}}</li>
+        <li>{{CONDICAO_3}}</li>
+        <!-- Adicionar <li>{{CONDICAO_N}}</li> conforme necessário -->
+      </ol>
+    </div>
+
+    <!-- Garantias + Monitoramento -->
+    <div>
+      <p class="card-title">Garantias</p>
+      <div class="box" style="margin-bottom:20px;">
+        <div class="info-item"><span class="label">Tipo de Garantia:</span><span class="value">{{GARANTIA_TIPO}}</span></div>
+        <div class="info-item"><span class="label">Sacados Aprovados:</span><span class="value">{{SACADOS_APROVADOS}}</span></div>
+        <div class="info-item"><span class="label">Aval / Fiança:</span><span class="value">{{AVAL}}</span></div>
+        <div class="info-item"><span class="label">Outras Garantias:</span><span class="value">{{OUTRAS_GARANTIAS}}</span></div>
+      </div>
+
+      <p class="card-title">Monitoramento</p>
+      <div class="box" style="font-size:13px; color:#444;">
+        <div style="margin-bottom:8px;">📅 Revisão de limite: <strong>{{REVISAO_LIMITE}}</strong></div>
+        <div style="margin-bottom:8px;">📊 Atualização Serasa / BACEN: <strong>{{ATUALIZACAO_CONSULTAS}}</strong></div>
+        <div>📁 Atualização documental: <strong>{{ATUALIZACAO_DOCS}}</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- Deliberação do Comitê -->
+  <p class="card-title" style="margin-bottom:12px;">Deliberação do Comitê</p>
+  <table class="vote-table" style="margin-bottom:24px;">
+    <thead>
+      <tr>
+        <th>Membro</th>
+        <th>Cargo / Função</th>
+        <th>Voto</th>
+        <th>Observação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{MEMBRO_1}}</td>
+        <td>{{CARGO_1}}</td>
+        <td><span class="vote-badge {{VOTO_1_CLASS}}">{{VOTO_1}}</span></td>
+        <td>{{OBS_VOTO_1}}</td>
+      </tr>
+      <tr>
+        <td>{{MEMBRO_2}}</td>
+        <td>{{CARGO_2}}</td>
+        <td><span class="vote-badge {{VOTO_2_CLASS}}">{{VOTO_2}}</span></td>
+        <td>{{OBS_VOTO_2}}</td>
+      </tr>
+      <tr>
+        <td>{{MEMBRO_3}}</td>
+        <td>{{CARGO_3}}</td>
+        <td><span class="vote-badge {{VOTO_3_CLASS}}">{{VOTO_3}}</span></td>
+        <td>{{OBS_VOTO_3}}</td>
+      </tr>
+      <!-- Adicionar linhas conforme número de membros -->
+    </tbody>
+  </table>
+
+  <!-- Barra de Decisão Final -->
+  <div class="decision-bar">
+    <div>
+      <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.5px; color:#777; margin-bottom:6px;">Decisão Final do Comitê</div>
+      <span class="recommendation-badge badge-condicionado" style="font-size:15px; padding:8px 24px;">{{DECISAO_FINAL}}</span>
+    </div>
+    <div style="text-align:right; font-size:13px; color:#555;">
+      <div>Data da Reunião: <strong>{{DATA_REUNIAO}}</strong></div>
+      <div style="margin-top:4px;">Próxima Revisão: <strong>{{PROXIMA_REVISAO}}</strong></div>
+      <div style="margin-top:4px; font-size:11px; color:#999;">Válido até: <strong>{{VALIDADE_LIMITE}}</strong></div>
+    </div>
+  </div>
+
+</div><!-- /page 5 -->
+
+</body>
+</html>
