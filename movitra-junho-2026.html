@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<!-- build: 2026-06-03T09:30 -->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+<title>Parecer de Crédito — MOVITRA · Junho 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0a0f1e;--navy2:#111827;--blue:#1e3a5f;
+  --accent:#00b894;--accent-dim:rgba(0,184,148,0.12);--accent-border:rgba(0,184,148,0.3);
+  --amber:#f59e0b;--red:#ef4444;--green:#22c55e;--muted:#6b7280;
+  --text:#e5e7eb;--text2:#9ca3af;--border:rgba(255,255,255,0.07);
+}
+body{background:var(--navy);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6}
+h1,h2,h3{font-family:'Syne',sans-serif}
+.mono{font-family:'DM Mono',monospace}
+.hero{position:relative;min-height:340px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(135deg,#0a0f1e 0%,#051a14 60%,#071e1a 100%);border-bottom:1px solid var(--border)}
+.hero-orbs{position:absolute;inset:0;pointer-events:none}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55}
+.hero-orb.o1{width:420px;height:420px;top:-80px;left:-60px;background:radial-gradient(circle,rgba(0,184,148,0.45) 0%,transparent 70%)}
+.hero-orb.o2{width:300px;height:300px;bottom:-60px;right:80px;background:radial-gradient(circle,rgba(0,184,148,0.25) 0%,transparent 70%)}
+.hero-content{position:relative;z-index:2;text-align:center;padding:2.5rem 2rem}
+.hero-badge{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);margin-bottom:.75rem;font-family:'DM Mono',monospace}
+.hero-title{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;line-height:1.1;margin-bottom:.75rem;letter-spacing:-.02em}
+.hero-title .accent{color:var(--accent)}
+.hero-sub{color:var(--text2);font-size:.9rem;margin-bottom:1.25rem;font-family:'DM Mono',monospace}
+.hero-chips{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+.chip{padding:.3rem .85rem;border-radius:999px;font-size:.75rem;font-weight:600;letter-spacing:.04em;border:1px solid var(--border);background:rgba(255,255,255,0.06);color:var(--text2)}
+.chip.ok{background:rgba(0,184,148,0.15);border-color:rgba(0,184,148,0.4);color:#6ee7b7}
+.chip.warn{background:rgba(245,158,11,0.15);border-color:rgba(245,158,11,0.4);color:#fcd34d}
+.chip.danger{background:rgba(239,68,68,0.15);border-color:rgba(239,68,68,0.4);color:#fca5a5}
+.sticky-nav{position:sticky;top:0;z-index:100;background:rgba(10,15,30,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-row{display:flex;align-items:center;padding:.15rem 1.25rem;max-width:1100px;margin:0 auto;flex-wrap:wrap;gap:.1rem}
+.nav-row-credito{border-bottom:1px solid rgba(255,255,255,0.05)}
+.nav-row-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.09em;font-family:'DM Mono',monospace;white-space:nowrap;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.08);padding-right:.75rem;margin-right:.4rem;line-height:1.3;color:#00e6be}
+.nav-row-label.rf{color:#60a5fa}
+.nav-pill{display:inline-block;padding:.3rem .7rem;border-radius:999px;font-size:.72rem;font-weight:600;color:var(--text2);text-decoration:none;transition:all .2s;border:1px solid transparent}
+.nav-pill:hover,.nav-pill.active{background:var(--accent-dim);color:var(--accent);border-color:var(--accent-border)}
+.nav-pill.nav-rf:hover{background:rgba(59,130,246,0.1)!important;color:#93c5fd!important;border-color:rgba(59,130,246,0.3)!important}
+section{padding:3rem 2rem;max-width:1100px;margin:0 auto}
+section+section{border-top:1px solid var(--border)}
+.section-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-family:'DM Mono',monospace;margin-bottom:.4rem}
+.section-title{font-size:1.6rem;font-weight:700;margin-bottom:1.75rem}
+.card{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+.card-title{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);margin-bottom:.75rem;font-family:'DM Mono',monospace}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+.kpi-card{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;border-left:3px solid var(--accent)}
+.kpi-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:.3rem;font-family:'DM Mono',monospace}
+.kpi-value{font-size:1.55rem;font-weight:700;font-family:'Syne',sans-serif;line-height:1}
+.kpi-sub{font-size:.72rem;color:var(--text2);margin-top:.25rem}
+.status-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.status-table th{text-align:left;padding:.6rem 1rem;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--border);font-family:'DM Mono',monospace}
+.status-table td{padding:.65rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04)}
+.status-table tr:hover td{background:rgba(255,255,255,0.02)}
+.risk-ok{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(34,197,94,0.15);color:#86efac;border:1px solid rgba(34,197,94,0.3)}
+.risk-high{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(239,68,68,0.15);color:#fca5a5;border:1px solid rgba(239,68,68,0.3)}
+.risk-warn{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(245,158,11,0.15);color:#fcd34d;border:1px solid rgba(245,158,11,0.3)}
+.risk-moderate{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(234,179,8,0.12);color:#fde68a;border:1px solid rgba(234,179,8,0.3)}
+.risk-info{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(59,130,246,0.15);color:#93c5fd;border:1px solid rgba(59,130,246,0.3)}
+.risk-low{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(34,197,94,0.1);color:#6ee7b7;border:1px solid rgba(34,197,94,0.2)}
+.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.data-table th{text-align:left;padding:.55rem .85rem;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-weight:500}
+.data-table td{padding:.55rem .85rem;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text)}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:rgba(255,255,255,0.02)}
+.text-right{text-align:right}.text-center{text-align:center}
+.negative{color:#fca5a5}.positive{color:#86efac}.bold{font-weight:600}
+.chart-wrap{position:relative;height:220px}
+.gauge-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem}
+.gauge-svg{width:160px;height:90px;overflow:visible}
+.gauge-label{font-size:1.8rem;font-weight:700;font-family:'Syne',sans-serif;text-anchor:middle;dominant-baseline:middle}
+.gauge-sub{font-size:.65rem;text-anchor:middle;fill:var(--text2)}
+.gauge-score-label{font-size:.75rem;color:var(--text2);margin-top:.4rem;text-align:center}
+.progress-item{margin-bottom:.75rem}
+.progress-label{display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:.3rem;color:var(--text2)}
+.progress-track{height:7px;background:rgba(255,255,255,0.07);border-radius:999px;overflow:hidden}
+.progress-fill{height:100%;border-radius:999px}
+.risk-row{display:grid;grid-template-columns:80px 1fr auto;gap:1rem;align-items:center;padding:.7rem 1rem;border-radius:8px;margin-bottom:.45rem;background:rgba(255,255,255,0.02);border:1px solid var(--border)}
+.risk-level{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-family:'DM Mono',monospace}
+.risk-level.high{color:#fca5a5}.risk-level.medium{color:#fcd34d}.risk-level.low{color:#86efac}
+.risk-desc{font-size:.82rem;color:var(--text)}
+.verdict-panel{border-radius:14px;padding:1.75rem 2rem;border:1px solid;margin-top:1.5rem;text-align:center}
+.verdict-panel.ok{background:rgba(0,184,148,0.08);border-color:rgba(0,184,148,0.35)}
+.verdict-panel.warn{background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.35)}
+.verdict-panel.danger{background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.35)}
+.verdict-title{font-size:1.4rem;font-weight:700;font-family:'Syne',sans-serif;margin-bottom:.4rem}
+.verdict-panel.ok .verdict-title{color:#6ee7b7}
+.verdict-panel.warn .verdict-title{color:#fcd34d}
+.verdict-panel.danger .verdict-title{color:#fca5a5}
+.verdict-sub{font-size:.85rem;color:var(--text2);margin-bottom:1rem}
+.verdict-limit{font-size:1rem;font-weight:600;color:var(--text);margin-top:.75rem}
+.analyst-note{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;padding:1.25rem 1.5rem;font-size:.85rem;line-height:1.7;color:var(--text2);margin-top:1.25rem}
+.analyst-note strong{color:var(--text)}
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);color:var(--muted);font-size:.75rem;font-family:'DM Mono',monospace}
+.timeline{list-style:none;padding-left:1.2rem;border-left:2px solid var(--accent-border)}
+.timeline li{position:relative;padding:.4rem 0 .4rem 1rem;font-size:.82rem;color:var(--text2)}
+.timeline li::before{content:'';position:absolute;left:-5px;top:.75rem;width:8px;height:8px;border-radius:50%;background:var(--accent);border:2px solid var(--navy2)}
+.timeline li strong{color:var(--text);display:block}
+.info-box{background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:1rem 1.25rem;font-size:.83rem;color:#fcd34d;margin-top:1rem}
+.analyst-banner{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:var(--navy2);border:1px solid rgba(0,184,148,0.2);border-radius:10px;margin-bottom:1.5rem;border-left:3px solid var(--accent)}
+.analyst-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;font-family:'Syne',sans-serif;flex-shrink:0;border:2px solid}
+.analyst-name{font-weight:700;font-size:.9rem;font-family:'Syne',sans-serif}
+.analyst-role{font-size:.72rem;color:var(--text2);font-family:'DM Mono',monospace;margin-top:.1rem}
+.analyst-tag{display:inline-block;padding:.15rem .55rem;border-radius:999px;font-size:.65rem;font-weight:600;letter-spacing:.06em;margin-left:.4rem}
+.split-banner{background:linear-gradient(135deg,rgba(30,58,95,0.6) 0%,rgba(10,15,30,0.95) 100%);border:1px solid rgba(59,130,246,0.25);border-radius:16px;padding:2rem 2.5rem;text-align:center;margin:2rem auto;max-width:1100px}
+.split-banner h2{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:#93c5fd;margin-bottom:.4rem}
+.risk-dim{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:8px;padding:.9rem 1rem;margin-bottom:.5rem}
+.risk-dim-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem}
+.risk-dim-name{font-size:.75rem;font-weight:700;font-family:'DM Mono',monospace;color:var(--text2);text-transform:uppercase;letter-spacing:.08em}
+.risk-dim-desc{font-size:.8rem;color:var(--text2);line-height:1.55}
+.guarantee-item{display:flex;gap:.75rem;align-items:flex-start;padding:.65rem 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.guarantee-item:last-child{border-bottom:none}
+.guarantee-num{width:22px;height:22px;border-radius:50%;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.15rem}
+.guarantee-text{font-size:.83rem;color:var(--text);line-height:1.5}
+.trigger-item{display:flex;gap:.6rem;align-items:flex-start;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:.82rem;color:var(--text2)}
+.trigger-item:last-child{border-bottom:none}
+.trigger-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:.4rem}
+.veredicto-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+.veredicto-card{background:rgba(0,184,148,0.07);border:1px solid rgba(0,184,148,0.3);border-radius:14px;padding:1.5rem;text-align:center}
+.veredicto-card-name{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.5rem}
+.veredicto-card-verdict{font-size:1.6rem;font-weight:800;font-family:'Syne',sans-serif;color:#6ee7b7;margin-bottom:.35rem}
+.veredicto-card-verdict.warn{color:#fcd34d}
+.veredicto-card-role{font-size:.75rem;color:var(--text2);margin-bottom:.5rem}
+.veredicto-card-sub{font-size:.78rem;color:var(--muted);line-height:1.5}
+.veredicto-unified{background:linear-gradient(135deg,rgba(0,184,148,0.12),rgba(0,184,148,0.06));border:2px solid rgba(0,184,148,0.45);border-radius:16px;padding:2rem;text-align:center;margin-top:1.25rem}
+.veredicto-unified.warn{background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(245,158,11,0.06));border-color:rgba(245,158,11,0.45)}
+section.rf-section .section-label{color:#60a5fa}
+section.rf-section .kpi-card{border-left-color:#3b82f6}
+.analyst-banner.rf{border-left-color:#3b82f6;border-color:rgba(59,130,246,0.2)}
+.nav-sep{color:rgba(255,255,255,0.15);padding:0 .15rem;display:flex;align-items:center}
+.fin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:1.5rem 0}
+.fin-group{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+.fin-group-title{font-size:.72rem;text-transform:uppercase;letter-spacing:.09em;font-family:'DM Mono',monospace;color:var(--text2);margin-bottom:1rem;font-weight:600}
+.fin-item{display:flex;align-items:center;justify-content:space-between;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.fin-item:last-child{border-bottom:none}
+.fin-item-left{flex:1}
+.fin-item-name{font-size:.82rem;color:var(--text)}
+.fin-item-formula{font-size:.67rem;color:var(--muted);font-family:'DM Mono',monospace;margin-top:.1rem}
+.fin-item-value{font-family:'DM Mono',monospace;font-size:1rem;font-weight:700;text-align:right;min-width:55px;margin-right:.5rem}
+.doc-table{width:100%;border-collapse:collapse;font-size:.8rem}
+.doc-table th{text-align:left;padding:.55rem .9rem;font-size:.67rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--border);font-family:'DM Mono',monospace}
+.doc-table th.text-center{text-align:center}
+.doc-table td{padding:.6rem .9rem;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+.doc-table td.text-center{text-align:center}
+.doc-ok{color:#86efac;font-weight:700}.doc-miss{color:#fca5a5;font-weight:700}.doc-warn{color:#fcd34d;font-weight:700}.doc-na{color:var(--muted)}
+.limit-policy{background:var(--navy2);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin:1.5rem 0}
+.limit-policy-header{background:rgba(0,184,148,.08);padding:1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem}
+.limit-policy-title{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:#6ee7b7}
+.limit-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.limit-col{padding:1.1rem 1.5rem}
+.limit-col:first-child{border-right:1px solid var(--border)}
+.limit-step{display:flex;justify-content:space-between;align-items:center;padding:.45rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.8rem}
+.limit-step:last-child{border-bottom:none}
+.limit-step-label{color:var(--text2)}
+.limit-step-value{font-family:'DM Mono',monospace;font-weight:600;color:var(--text)}
+.limit-final{background:rgba(0,184,148,.06);border-top:2px solid rgba(0,184,148,.35);padding:1.1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+.map-card{background:var(--navy2);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.map-card iframe{width:100%;height:280px;border:none;display:block}
+.map-card-footer{padding:.75rem 1rem;font-size:.78rem;color:var(--text2);border-top:1px solid var(--border);display:flex;gap:1rem;flex-wrap:wrap}
+.map-card-footer a{color:var(--accent);text-decoration:none;font-size:.75rem}
+.map-card-footer a:hover{text-decoration:underline}
+@media(max-width:768px){.kpi-grid{grid-template-columns:1fr 1fr}.two-col,.three-col,.fin-grid,.limit-body{grid-template-columns:1fr}.veredicto-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-orbs">
+    <div class="hero-orb o1"></div>
+    <div class="hero-orb o2"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">AG Antecipa · Parecer de Comite · Credito + Financeiro · Junho/2026</div>
+    <h1 class="hero-title"><span class="accent">MOVITRA</span><br>LOCACAO E ENGENHARIA</h1>
+    <div class="hero-sub">CNPJ 38.448.292/0001-00 · Capivari/SP · Locacao de Maquinas e Engenharia Industrial</div>
+    <div class="hero-chips">
+      <span class="chip ok">APROVAR COM RESSALVAS</span>
+      <span class="chip">Score 740/1000 — Risco Moderado</span>
+      <span class="chip ok">Serasa: Nada Consta</span>
+      <span class="chip ok">BACEN: Sem Vencidos</span>
+      <span class="chip">Credito: Marcelo Vazquez</span>
+      <span class="chip">Financeiro: Rafael Bazan</span>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="sticky-nav">
+  <div class="nav-row nav-row-credito">
+    <span class="nav-row-label">Credito · MV</span>
+    <a href="#dashboard" class="nav-pill">Dashboard</a>
+    <a href="#identificacao" class="nav-pill">Identificacao</a>
+    <a href="#serasa" class="nav-pill">Serasa</a>
+    <a href="#bacen" class="nav-pill">BACEN/SCR</a>
+    <a href="#creditbox" class="nav-pill">CreditBox</a>
+    <a href="#patrimonio" class="nav-pill">Patrimonio</a>
+    <a href="#socios" class="nav-pill">Socios</a>
+    <a href="#riscos" class="nav-pill">Riscos</a>
+    <a href="#parecer-credito" class="nav-pill">Parecer</a>
+  </div>
+  <div class="nav-row">
+    <span class="nav-row-label rf">Financeiro · RB</span>
+    <a href="#financeiro" class="nav-pill nav-rf">BP/DRE</a>
+    <a href="#docs" class="nav-pill nav-rf">Docs</a>
+    <a href="#negocio" class="nav-pill nav-rf">Mod.Negocio</a>
+    <a href="#juridico" class="nav-pill nav-rf">Juridico</a>
+    <a href="#risco-dim" class="nav-pill nav-rf">Risco 6D</a>
+    <a href="#garantias" class="nav-pill nav-rf">Garantias</a>
+    <a href="#monitoramento" class="nav-pill nav-rf">Monitoramento</a>
+    <a href="#parecer-financeiro" class="nav-pill nav-rf">Par. Financeiro</a>
+    <a href="#veredicto" class="nav-pill nav-rf">Veredicto</a>
+  </div>
+</nav>
+
+<!-- DASHBOARD -->
+<section id="dashboard">
+  <div class="section-label">Analise de Credito · Marcelo Vazquez</div>
+  <h2 class="section-title">Dashboard Executivo</h2>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Score CreditBox</div>
+      <div class="kpi-value" style="color:#fcd34d">740</div>
+      <div class="kpi-sub">/ 1.000 · Risco Moderado</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Fat. Medio 6m</div>
+      <div class="kpi-value" style="color:#6ee7b7">R$685k</div>
+      <div class="kpi-sub">Consistente · 12 meses declarados</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Serasa / Protestos</div>
+      <div class="kpi-value" style="color:#6ee7b7">R$0</div>
+      <div class="kpi-sub">Nada Consta · Limpar</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Limite Sugerido</div>
+      <div class="kpi-value" style="color:#6ee7b7">R$800k</div>
+      <div class="kpi-sub">Ate R$800.000 · c/ garantias</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Status dos Bureaus</div>
+    <table class="status-table">
+      <thead><tr><th>Bureau</th><th>Consulta</th><th>Resultado</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>CreditBox / VADU</td><td>03/06/2026</td><td>Score 740 · Risco Moderado</td><td><span class="risk-moderate">MODERADO</span></td></tr>
+        <tr><td>CredMap / Nuclea (Emitente)</td><td>03/06/2026</td><td>ILM 97-100% · Fat. R$22-25k/mes boletos</td><td><span class="risk-ok">OK</span></td></tr>
+        <tr><td>CredMap / Nuclea (Sacado)</td><td>03/06/2026</td><td>Carteira R$200-300k a vencer · ILM 97-100%</td><td><span class="risk-ok">OK</span></td></tr>
+        <tr><td>BACEN / SCR Empresa</td><td>Abr/2026</td><td>1 inst · 1 op · Limite R$10k · A vencer R$0</td><td><span class="risk-ok">LIMPO</span></td></tr>
+        <tr><td>BACEN / SCR Socio</td><td>Abr/2026</td><td>10 inst · 32 ops · R$197k · Sem vencidos</td><td><span class="risk-low">NORMAL</span></td></tr>
+        <tr><td>Serasa (Empresa)</td><td>28/05/2026</td><td>Nada Consta · Sem PEFIN/REFIN/Protesto</td><td><span class="risk-ok">LIMPO</span></td></tr>
+        <tr><td>Serasa (Socio CPF)</td><td>28/05/2026</td><td>Nada Consta · Sem divida vencida</td><td><span class="risk-ok">LIMPO</span></td></tr>
+        <tr><td>PGE-SP Divida Ativa</td><td>03/06/2026</td><td>Nada Consta</td><td><span class="risk-ok">LIMPO</span></td></tr>
+        <tr><td>CNDT Trabalhista</td><td>03/06/2026</td><td>Nada Consta · Val. 30/11/2026</td><td><span class="risk-ok">LIMPO</span></td></tr>
+        <tr><td>Sancoes Nacionais/Internac.</td><td>03/06/2026</td><td>CEIS/CNEP/CEPIM/OFAC/ONU: Nada Consta</td><td><span class="risk-ok">LIMPO</span></td></tr>
+        <tr><td>Processos Empresa</td><td>03/06/2026</td><td>2 processos ativos · R$32.694 · Parte ativa</td><td><span class="risk-low">BAIXO</span></td></tr>
+        <tr><td>Processos Socio</td><td>03/06/2026</td><td>10 processos (arquivados) · Civel + Penal antigos</td><td><span class="risk-warn">ATENCAO</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- IDENTIFICACAO -->
+<section id="identificacao">
+  <div class="section-label">Analise de Credito · Marcelo Vazquez</div>
+  <h2 class="section-title">Identificacao Cadastral</h2>
+
+  <!-- Card Localizacao -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">Localizacao — Av. Moises Forti 1754 · Distrito Industrial · Capivari/SP</div>
+    <div class="two-col" style="gap:1rem;margin-bottom:.75rem">
+      <div class="map-card">
+        <iframe
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFmBWY&q=Avenida+Moises+Forti+1754+Capivari+SP+Brazil&zoom=15&maptype=satellite"
+          allowfullscreen loading="lazy"
+          title="Vista Satelite MOVITRA">
+        </iframe>
+        <div class="map-card-footer">
+          <span>Vista Satelite · Distrito Industrial Honorina de Almeida Pacheco</span>
+          <a href="https://maps.google.com/?q=Av+Moises+Forti+1754+Capivari+SP" target="_blank">Abrir no Maps</a>
+        </div>
+      </div>
+      <div class="map-card">
+        <iframe
+          src="https://www.google.com/maps/embed/v1/streetview?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFmBWY&location=-22.9956,-47.5003&heading=0&pitch=0&fov=90"
+          allowfullscreen loading="lazy"
+          title="Street View MOVITRA">
+        </iframe>
+        <div class="map-card-footer">
+          <span>Street View · Capivari SP · CEP 13368-100</span>
+          <a href="https://www.google.com/maps/@-22.9956,-47.5003,3a,75y,0h,90t/data=!3m6!1e1" target="_blank">Ver Street View</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Dados Cadastrais</div>
+      <table class="data-table">
+        <tbody>
+          <tr><td class="bold" style="width:45%">Razao Social</td><td>MOVITRA LOCACAO E ENGENHARIA LTDA</td></tr>
+          <tr><td class="bold">Nome Fantasia</td><td>MOVITRA</td></tr>
+          <tr><td class="bold">CNPJ</td><td>38.448.292/0001-00</td></tr>
+          <tr><td class="bold">Abertura</td><td>14/09/2020 (5 anos e 9 meses)</td></tr>
+          <tr><td class="bold">CNAE Principal</td><td>33.21-0/00 — Instalacao maq. e equip. industriais</td></tr>
+          <tr><td class="bold">Natureza Juridica</td><td>Soc. Empresaria Limitada Unipessoal</td></tr>
+          <tr><td class="bold">Porte RF</td><td>MICRO EMPRESA</td></tr>
+          <tr><td class="bold">Capital Social</td><td>R$ 500.000,00 (apos aumento Out/2025)</td></tr>
+          <tr><td class="bold">Regime Tributario</td><td>Regime Normal — RPA (nao Simples/MEI)</td></tr>
+          <tr><td class="bold">Inscricao Estadual</td><td>253131412117 — Habilitado/SP</td></tr>
+          <tr><td class="bold">Situacao RF</td><td><span class="risk-ok">ATIVA</span> desde 14/09/2020</td></tr>
+          <tr><td class="bold">Endereco</td><td>Av. Moises Forti, 1754 — Dist. Industrial Honorina — Capivari/SP</td></tr>
+          <tr><td class="bold">Telefone</td><td>(19) 9896-7077</td></tr>
+          <tr><td class="bold">NIRE</td><td>35.234.955.782</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">CNAEs Secundarios</div>
+      <ul style="list-style:none;font-size:.8rem;color:var(--text2);line-height:2">
+        <li>41.20-4/00 — Construcao de edificios</li>
+        <li>42.21-9/02 — Redes de distribuicao de energia eletrica</li>
+        <li>42.92-8/01 — Montagem de estruturas metalicas</li>
+        <li>42.92-8/02 — Obras de montagem industrial</li>
+        <li>43.21-5/00 — Instalacao e manutencao eletrica</li>
+        <li>43.99-1/01 — Administracao de obras</li>
+        <li>43.99-1/04 — Transporte/elevacao de cargas em obras</li>
+        <li>46.73-7/00 — Com. atacadista material eletrico</li>
+        <li>49.30-2/02 — Transporte rodoviario de carga</li>
+        <li>71.12-0/00 — Servicos de engenharia</li>
+        <li>77.39-0/99 — Aluguel maquinas sem operador</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Historico Societario</div>
+    <ul class="timeline">
+      <li><strong>14/09/2020</strong> Fundacao como Empresaria Individual — Juliana Carolina da Silva (CPF 372.788.268-96) · Hortol. SP · Endereco: Rua Benedito Simeao de Camargo 66</li>
+      <li><strong>01/09/2025</strong> Transformacao em Soc. Limitada Unipessoal (JUCESP Prot. 2.816.897/25-4) — Admissao de Sandro Rogerio Alves Pereira Toledo como socio (100%)</li>
+      <li><strong>03/09/2025</strong> Saida da socia fundadora Juliana Carolina da Silva (venda total das quotas)</li>
+      <li><strong>Set/2025</strong> Aumento do capital social de R$5.000 para R$500.000 — integralizacao pelo novo socio</li>
+      <li><strong>Set/2025</strong> Alteracao de endereco para Av. Moises Forti 1754 — Capivari/SP</li>
+    </ul>
+    <div class="info-box" style="margin-top:1rem">Atencao: mudanca societaria completa em Set/2025 — empresa tem novo proprietario ha menos de 9 meses. O historico operacional anterior e de propriedade da ex-socia. A continuidade do negocio e dos contratos deve ser confirmada diretamente com o novo gestor.</div>
+  </div>
+
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Empresa Coligada — S.R. Alves Pereira Toledo Ltda</div>
+    <table class="data-table">
+      <tbody>
+        <tr><td class="bold" style="width:35%">Razao Social</td><td>S. R. ALVES PEREIRA TOLEDO LTDA</td></tr>
+        <tr><td class="bold">CNPJ</td><td>20.335.518/0001-93</td></tr>
+        <tr><td class="bold">Vinculo</td><td>Sandro Rogerio — Socio/Administrador (100%) — mesma pessoa fisica</td></tr>
+        <tr><td class="bold">Capital Social</td><td>R$ 800.000,00</td></tr>
+        <tr><td class="bold">DRE 2025</td><td>Receita Bruta R$14,1MM · Lucro Liquido R$11,4MM</td></tr>
+        <tr><td class="bold">Situacao</td><td><span class="risk-ok">Ativa</span> — Contabilidade regularizada (CRC 1SP333349)</td></tr>
+        <tr><td class="bold">Risco Contagio</td><td><span class="risk-low">BAIXO</span> — Empresa lucrativa e sem restricoes · Ambas controladas pelo mesmo CPF</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SERASA -->
+<section id="serasa">
+  <div class="section-label">Analise de Credito · Marcelo Vazquez</div>
+  <h2 class="section-title">Serasa / Bureau de Credito</h2>
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="kpi-label">PEFIN</div><div class="kpi-value positive">R$0</div><div class="kpi-sub">Nada Consta</div></div>
+    <div class="kpi-card"><div class="kpi-label">Protestos</div><div class="kpi-value positive">R$0</div><div class="kpi-sub">Nada Consta</div></div>
+    <div class="kpi-card"><div class="kpi-label">REFIN</div><div class="kpi-value positive">R$0</div><div class="kpi-sub">Nada Consta</div></div>
+    <div class="kpi-card"><div class="kpi-label">Acoes Judiciais</div><div class="kpi-value positive">R$0</div><div class="kpi-sub">Nada Consta</div></div>
+  </div>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Anotacoes</div>
+      <table class="data-table">
+        <tbody>
+          <tr><td>PEFIN</td><td class="positive bold">NADA CONSTA</td></tr>
+          <tr><td>Protesto</td><td class="positive bold">NADA CONSTA</td></tr>
+          <tr><td>REFIN</td><td class="positive bold">NADA CONSTA</td></tr>
+          <tr><td>Acoes Judiciais</td><td class="positive bold">NADA CONSTA</td></tr>
+          <tr><td>Cheques</td><td class="positive bold">NADA CONSTA</td></tr>
+          <tr><td>Divida Vencida</td><td class="positive bold">NADA CONSTA</td></tr>
+          <tr><td>Liminar</td><td class="positive bold">NAO POSSUI</td></tr>
+          <tr><td>Falencia/RJ</td><td class="positive bold">NADA CONSTA</td></tr>
+          <tr><td>Trabalho Escravo</td><td class="positive bold">NADA CONSTA</td></tr>
+          <tr><td>Ultima consulta Serasa</td><td>28/05/2026</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Consultas a Serasa — Ultimos 12 Meses</div>
+      <div class="chart-wrap"><canvas id="chartSerasa"></canvas></div>
+      <div style="font-size:.75rem;color:var(--text2);margin-top:.5rem">Pico em Mar/26 (11 consultas) indica prospeccao ativa de credito. Total ano: 42 consultas.</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Relacionamento Segmento Financeiro (Serasa)</div>
+    <table class="data-table">
+      <thead><tr><th>Empresa</th><th>Tipo</th><th>Ocorrencias</th><th>Ultima</th></tr></thead>
+      <tbody>
+        <tr><td>RNX Factoring Ltda</td><td>Factoring</td><td>2</td><td>03/10/2025</td></tr>
+        <tr><td>Banco Safra S/A</td><td>Banco</td><td>1</td><td>02/10/2025</td></tr>
+        <tr><td>FS Tatui Securitizadora S/A</td><td>Factoring</td><td>1</td><td>01/10/2025</td></tr>
+        <tr><td>Banco Santander Brasil S/A</td><td>Banco</td><td>1</td><td>29/09/2025</td></tr>
+        <tr><td>Porto Bravo Securitizadora S/A</td><td>Factoring</td><td>1</td><td>18/05/2026</td></tr>
+        <tr><td>Apex Securitizadora S/A</td><td>Factoring</td><td>1</td><td>12/05/2026</td></tr>
+        <tr><td>Banco Daycoval S/A</td><td>Banco</td><td>1</td><td>27/05/2026</td></tr>
+      </tbody>
+    </table>
+    <div class="info-box" style="background:rgba(59,130,246,.06);border-color:rgba(59,130,246,.2);color:#93c5fd">Relacionamento com 4 factorings e 3 bancos indica que a empresa ja opera antecipacao de recebiveis ativamente. Nenhuma restricao em nenhum desses relacionamentos.</div>
+  </div>
+</section>
+
+<!-- BACEN / SCR -->
+<section id="bacen">
+  <div class="section-label">Analise de Credito · Marcelo Vazquez</div>
+  <h2 class="section-title">BACEN / SCR — Sistema de Informacoes de Credito</h2>
+  <div class="two-col">
+    <div>
+      <h3 style="font-size:1rem;margin-bottom:1rem;color:var(--text2)">CNPJ — Empresa (Abr/2026)</h3>
+      <div class="kpi-grid" style="grid-template-columns:1fr 1fr">
+        <div class="kpi-card"><div class="kpi-label">Instituicoes</div><div class="kpi-value">1</div><div class="kpi-sub">1 operacao</div></div>
+        <div class="kpi-card"><div class="kpi-label">Carteira Ativa</div><div class="kpi-value positive">R$0</div><div class="kpi-sub">Limite cheque: R$10k</div></div>
+      </div>
+      <div class="card" style="margin-top:.75rem">
+        <div class="card-title">Detalhamento</div>
+        <table class="data-table">
+          <tbody>
+            <tr><td>Modalidade</td><td>Limite Cheque Especial</td></tr>
+            <tr><td>Valor</td><td>R$10.000,00</td></tr>
+            <tr><td>Carteira a Vencer</td><td class="positive">R$0,00</td></tr>
+            <tr><td>Vencidos</td><td class="positive">R$0,00</td></tr>
+            <tr><td>Prejuizo</td><td class="positive">R$0,00</td></tr>
+            <tr><td>Inicio Relac.</td><td>31/10/2025</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <h3 style="font-size:1rem;margin-bottom:1rem;color:var(--text2)">CPF — Socio Sandro Toledo (Abr/2026)</h3>
+      <div class="kpi-grid" style="grid-template-columns:1fr 1fr">
+        <div class="kpi-card"><div class="kpi-label">Instituicoes</div><div class="kpi-value">10</div><div class="kpi-sub">32 operacoes</div></div>
+        <div class="kpi-card"><div class="kpi-label">Total a Vencer</div><div class="kpi-value" style="color:#fcd34d">R$198k</div><div class="kpi-sub">0 vencidos</div></div>
+      </div>
+      <div class="card" style="margin-top:.75rem">
+        <div class="card-title">Carteira Ativa — Socio</div>
+        <table class="data-table">
+          <tbody>
+            <tr><td>Financiamento Veiculos</td><td class="text-right">R$183.369,66</td></tr>
+            <tr><td>Cartao de Credito</td><td class="text-right">R$14.355,75</td></tr>
+            <tr><td>Cartao Credito Rotativo</td><td class="text-right">R$4,96</td></tr>
+            <tr><td>Cheque Especial</td><td class="text-right">R$1,29</td></tr>
+            <tr><td class="bold">Total a Vencer</td><td class="text-right bold positive">R$197.731,66</td></tr>
+            <tr><td class="bold">Vencidos</td><td class="text-right bold positive">R$0,00</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Cronograma de Vencimentos — Socio (Financiamento Veiculos)</div>
+    <div class="chart-wrap"><canvas id="chartBacen"></canvas></div>
+    <div style="font-size:.75rem;color:var(--text2);margin-top:.5rem">Financiamento de veiculo com parcelas mensais de ~R$7k ate ~2028. Nenhum vencido. Historico de relacionamento bancario desde 2003 (23 anos).</div>
+  </div>
+</section>
+
+<!-- CREDITBOX / CREDMAP -->
+<section id="creditbox">
+  <div class="section-label">Analise de Credito · Marcelo Vazquez</div>
+  <h2 class="section-title">CreditBox / CredMap — Comportamento de Pagamento</h2>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Score CreditBox</div>
+      <div class="gauge-wrap">
+        <svg class="gauge-svg" viewBox="0 0 200 110">
+          <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="16" stroke-linecap="round"/>
+          <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#f59e0b" stroke-width="16" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="62.8"/>
+          <text x="100" y="88" class="gauge-label" fill="#f59e0b">740</text>
+          <text x="100" y="108" class="gauge-sub">/ 1.000</text>
+        </svg>
+      </div>
+      <div class="gauge-score-label">Risco Moderado · Esperado: pequena parte tera problemas</div>
+    </div>
+    <div class="card">
+      <div class="card-title">ILM — Indice de Liquidez de Mercado (Sacado)</div>
+      <div class="progress-item" style="margin-top:1rem">
+        <div class="progress-label"><span>ILM 30 dias</span><span class="positive">97%-100%</span></div>
+        <div class="progress-track"><div class="progress-fill" style="width:98%;background:#22c55e"></div></div>
+      </div>
+      <div class="progress-item">
+        <div class="progress-label"><span>ILM 60 dias</span><span class="positive">97%-100%</span></div>
+        <div class="progress-track"><div class="progress-fill" style="width:98%;background:#22c55e"></div></div>
+      </div>
+      <div class="progress-item">
+        <div class="progress-label"><span>ILM 90 dias</span><span class="positive">97%-100%</span></div>
+        <div class="progress-track"><div class="progress-fill" style="width:98%;background:#22c55e"></div></div>
+      </div>
+      <div style="font-size:.78rem;color:var(--text2);margin-top:.75rem">ILM excelente em todas as janelas. Empresa paga seus boletos com 97-100% de pontualidade. Sem perdas registradas.</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Historico de Emissao de Boletos — 12 Meses (Visao Emitente)</div>
+    <div class="chart-wrap" style="height:240px"><canvas id="chartFaturamento"></canvas></div>
+    <div style="font-size:.75rem;color:var(--text2);margin-top:.5rem">
+      Volumes emitidos (via boletos Nuclea): Mai-Out/25 ausencia de registro (A1 ~R$0) sugere que empresa operava com outros meios de cobranca. Crescimento expressivo a partir Nov/25 coincide com a entrada do novo socio. Pico em Nov/25 (B12 ~R$28-30k/mes boletos).
+    </div>
+  </div>
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Pontualidade como Sacado — Historico de Pagamento</div>
+    <table class="data-table">
+      <thead><tr><th>Mes/Ano</th><th>Pontual</th><th>1-7 dias atraso</th><th>Total</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Abr/2026</td><td class="positive">97-100%</td><td>0%</td><td>R$100-200k</td><td><span class="risk-ok">OTIMO</span></td></tr>
+        <tr><td>Mar/2026</td><td class="positive">93-95%</td><td>5-7%</td><td>R$55-100k</td><td><span class="risk-low">BOM</span></td></tr>
+        <tr><td>Fev/2026</td><td style="color:#fcd34d">85-87%</td><td>13-15%</td><td>R$100-200k</td><td><span class="risk-warn">ATENCAO</span></td></tr>
+        <tr><td>Jan/2026</td><td class="positive">97-100%</td><td>0%</td><td>R$100-200k</td><td><span class="risk-ok">OTIMO</span></td></tr>
+        <tr><td>Dez/2025</td><td class="positive">97-100%</td><td>0%</td><td>R$20-22,5k</td><td><span class="risk-ok">OTIMO</span></td></tr>
+        <tr><td>Nov/2025</td><td class="positive">95-97%</td><td>3-5%</td><td>R$55-100k</td><td><span class="risk-ok">BOM</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PATRIMONIO -->
+<section id="patrimonio">
+  <div class="section-label">Analise de Credito · Marcelo Vazquez</div>
+  <h2 class="section-title">Patrimonio e Ativos Operacionais</h2>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Perfil de Ativos — Locacao e Engenharia</div>
+      <p style="font-size:.83rem;color:var(--text2);line-height:1.7;margin-bottom:1rem">A MOVITRA atua na locacao de maquinas e equipamentos industriais e prestacao de servicos de engenharia para obras e instalacoes. O modelo de negocio requer ativos pesados (equipamentos, veiculos, ferramentas especializadas) que nao aparecem no BP simplificado (regime de caixa), pois podem estar registrados na coligada S.R. Alves ou sob regime de locacao dos proprios ativos.</p>
+      <table class="data-table">
+        <tbody>
+          <tr><td>Equipamentos de elevacao e transporte (obras)</td><td><span class="risk-info">CNAE 4399-1/04</span></td></tr>
+          <tr><td>Maquinas industriais sem operador (locacao)</td><td><span class="risk-info">CNAE 7739-0/99</span></td></tr>
+          <tr><td>Estruturas metalicas e instalacoes eletricas</td><td><span class="risk-info">CNAE 4292-8/01</span></td></tr>
+          <tr><td>Veiculos — financiamento BACEN socio R$183k</td><td><span class="risk-warn">Em finan.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Observacoes sobre Patrimonio</div>
+      <ul class="timeline">
+        <li><strong>BP Simplificado (regime caixa)</strong>Empresa registrou apenas saldo em caixa e obrigacoes tributarias. Ausencia de ativo imobilizado no BP indica contabilidade em regime de prestacao de servicos (nao manufatura).</li>
+        <li><strong>Acumulacao de Caixa</strong>Em 2024: AT=R$277k (todo caixa) · LL=R$6,6MM todos distribuidos ao socio. Em 2025 (coligada): AT=R$2,1MM com PL=R$1,6MM — forte capitalizacao.</li>
+        <li><strong>Sede — Dist. Industrial</strong>Endereco em distrito industrial de Capivari confirma atividade produtiva/industrial compativel com o objeto social. Imagens satelite mostram area industrial organizada.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIOS -->
+<section id="socios">
+  <div class="section-label">Analise de Credito · Marcelo Vazquez</div>
+  <h2 class="section-title">Quadro Societario e Perfil dos Socios</h2>
+  <div class="card">
+    <div class="card-title">Sandro Rogerio Alves Pereira Toledo — Socio-Administrador (100%)</div>
+    <div class="two-col">
+      <table class="data-table">
+        <tbody>
+          <tr><td class="bold" style="width:40%">CPF</td><td>308.688.528-99</td></tr>
+          <tr><td class="bold">Nascimento</td><td>29/10/1981 (44 anos)</td></tr>
+          <tr><td class="bold">Estado Civil</td><td>Divorciado</td></tr>
+          <tr><td class="bold">Participacao</td><td>100% — Socio-Administrador</td></tr>
+          <tr><td class="bold">Entrada na MOVITRA</td><td>01/09/2025 (JUCESP)</td></tr>
+          <tr><td class="bold">Mandato</td><td>Indeterminado · Administracao isolada</td></tr>
+          <tr><td class="bold">PEP (COAF)</td><td class="positive">NADA CONSTA</td></tr>
+          <tr><td class="bold">Sancoes Internac.</td><td class="positive">NADA CONSTA</td></tr>
+          <tr><td class="bold">Serasa CPF</td><td class="positive">NADA CONSTA (28/05/2026)</td></tr>
+          <tr><td class="bold">Empresas (mesmo CPF)</td><td>2 empresas · Capital total R$800k</td></tr>
+        </tbody>
+      </table>
+      <div>
+        <div class="card-title" style="margin-bottom:.75rem">Processos Judiciais — Pessoa Fisica</div>
+        <table class="data-table">
+          <tbody>
+            <tr><td>Total processos</td><td class="text-right bold">10</td></tr>
+            <tr><td>Direito Civil</td><td class="text-right">7 (70%) — ultimo 2022</td></tr>
+            <tr><td>Direito Penal</td><td class="text-right">3 (30%) — ultimo 2018</td></tr>
+            <tr><td>Valor total</td><td class="text-right">R$133.786,99</td></tr>
+            <tr><td>Parte Passiva</td><td class="text-right">4 processos arquivados</td></tr>
+            <tr><td>Status</td><td class="text-right"><span class="risk-warn">ATENCAO</span></td></tr>
+          </tbody>
+        </table>
+        <div class="info-box">Processos todos antigos (2010-2022) e com status de ARQUIVAMENTO DEFINITIVO na maioria. Classes incluem: Busca e Apreensao Alienacao Fiduciaria, Estelionato (arquivado), Execucao de Titulo Extrajudicial. Nenhum processo recente (2023-2026) registrado.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RISCOS -->
+<section id="riscos">
+  <div class="section-label">Analise de Credito · Marcelo Vazquez</div>
+  <h2 class="section-title">Matriz de Riscos</h2>
+  <div class="risk-row"><span class="risk-level medium">MEDIO</span><span class="risk-desc">Mudanca societaria recente (Set/2025) — historico de gestao do novo socio na empresa e inferior a 1 ano.</span><span class="risk-warn">Gestao</span></div>
+  <div class="risk-row"><span class="risk-level medium">MEDIO</span><span class="risk-desc">PL da MOVITRA era R$5.000 em 2024 — toda a lucratividade foi distribuida. Capitalizacao baixa no CNPJ cedente.</span><span class="risk-warn">Capital</span></div>
+  <div class="risk-row"><span class="risk-level medium">MEDIO</span><span class="risk-desc">Processos penais (arquivados) e civis antigos no CPF do socio — estelionato e alienacao fiduciaria historicos.</span><span class="risk-warn">Juridico</span></div>
+  <div class="risk-row"><span class="risk-level medium">MEDIO</span><span class="risk-desc">Concentracao de sacados nao identificados — carteira a vencer R$200-300k mas sacados nao divulgados para analise.</span><span class="risk-warn">Sacados</span></div>
+  <div class="risk-row"><span class="risk-level low">BAIXO</span><span class="risk-desc">Faturamento estavel de R$650-700k/mes por 12+ meses consecutivos — consistencia operacional elevada.</span><span class="risk-ok">Faturamento</span></div>
+  <div class="risk-row"><span class="risk-level low">BAIXO</span><span class="risk-desc">Serasa completamente limpo: sem PEFIN, protesto, REFIN, acoes judiciais, cheques ou divida vencida.</span><span class="risk-ok">Serasa</span></div>
+  <div class="risk-row"><span class="risk-level low">BAIXO</span><span class="risk-desc">BACEN empresa sem exposicao ativa — apenas limite de cheque especial de R$10k. Sem alavancagem bancaria.</span><span class="risk-ok">BACEN</span></div>
+  <div class="risk-row"><span class="risk-level low">BAIXO</span><span class="risk-desc">Coligada S.R. Alves saudavel (LL R$11,4MM em 2025) — risco de contagio baixo, ao contrario e ativo de suporte.</span><span class="risk-ok">Coligada</span></div>
+  <div class="risk-row"><span class="risk-level low">BAIXO</span><span class="risk-desc">ILM 97-100% em 30/60/90 dias como sacado — excelente comportamento de pagamento de boletos.</span><span class="risk-ok">Pontualidade</span></div>
+</section>
+
+<!-- PARECER CREDITO -->
+<section id="parecer-credito">
+  <div class="analyst-banner">
+    <div class="analyst-avatar" style="background:rgba(0,184,148,0.15);border-color:rgba(0,184,148,0.5);color:#6ee7b7">MV</div>
+    <div>
+      <div class="analyst-name">Marcelo Vazquez <span class="analyst-tag" style="background:rgba(0,184,148,0.15);color:#6ee7b7;border:1px solid rgba(0,184,148,0.3)">Analise de Credito</span></div>
+      <div class="analyst-role">Gerente de Credito · AG Antecipa · Junho/2026</div>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-bottom:1.5rem">
+    <div class="card">
+      <div class="card-title" style="color:#86efac">Pontos Positivos</div>
+      <ul style="list-style:none;font-size:.83rem;color:var(--text2);line-height:2">
+        <li>Score 740/1000 — risco moderado, acima da media de empresas de mesmo porte</li>
+        <li>Serasa completamente limpo: zero restricoes em todas as categorias</li>
+        <li>ILM excelente (97-100%) — empresa paga seus proprios fornecedores com pontualidade</li>
+        <li>Faturamento declarado estavel: R$650-700k/mes por 12+ meses consecutivos</li>
+        <li>BACEN empresa sem exposicao ativa — baixa alavancagem bancaria</li>
+        <li>Coligada S.R. Alves Pereira com faturamento de R$14,1MM e lucro de R$11,4MM em 2025</li>
+        <li>Contabilidade assinada por CRC ativo (CRC 1SP333349) com assinatura digital ICP-Brasil</li>
+        <li>CNDT limpa (validade 30/11/2026) — sem debitos trabalhistas</li>
+        <li>Relacionamento com 4 factorings e 3 bancos — empresa ja opera mercado de capitais</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:#fcd34d">Pontos de Atencao</div>
+      <ul style="list-style:none;font-size:.83rem;color:var(--text2);line-height:2">
+        <li>Mudanca societaria completa ha apenas 9 meses — historico do novo gestor e curto</li>
+        <li>PL do CNPJ cedente era R$5.000 em 2024 (toda lucratividade distribuida)</li>
+        <li>BP simplificado — sem ativos imobilizados registrados no CNPJ 38.448.292</li>
+        <li>Processos do socio: 3 penais e 7 civis (todos arquivados/antigos — 2010-2022)</li>
+        <li>Faturamento via boletos (CredMap) muito inferior ao declarado — diferenca relevante</li>
+        <li>Sacados nao identificados individualmente para analise de concentracao e risco</li>
+        <li>Pico de 11 consultas Serasa em Mar/26 — prospeccao intensa pode indicar necessidade urgente de caixa</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Limite -->
+  <div class="limit-policy">
+    <div class="limit-policy-header">
+      <div class="limit-policy-title">Calculo do Limite — Politica AG Antecipa</div>
+    </div>
+    <div class="limit-body">
+      <div class="limit-col">
+        <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:.75rem;font-family:'DM Mono',monospace">Base de Calculo</div>
+        <div class="limit-step"><span class="limit-step-label">Set/2025</span><span class="limit-step-value">R$695.014</span></div>
+        <div class="limit-step"><span class="limit-step-label">Out/2025</span><span class="limit-step-value">R$698.145</span></div>
+        <div class="limit-step"><span class="limit-step-label">Nov/2025</span><span class="limit-step-value">R$677.201</span></div>
+        <div class="limit-step"><span class="limit-step-label">Dez/2025</span><span class="limit-step-value">R$683.789</span></div>
+        <div class="limit-step"><span class="limit-step-label">Jan/2026</span><span class="limit-step-value">R$681.549</span></div>
+        <div class="limit-step"><span class="limit-step-label">Fev/2026</span><span class="limit-step-value">R$674.021</span></div>
+        <div class="limit-step" style="margin-top:.5rem"><span class="limit-step-label" style="font-weight:700">Media 6 Meses</span><span class="limit-step-value" style="color:#6ee7b7">R$684.953</span></div>
+      </div>
+      <div class="limit-col">
+        <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:.75rem;font-family:'DM Mono',monospace">Aplicacao da Politica</div>
+        <div class="limit-step"><span class="limit-step-label">Faixa Faturamento Mensal</span><span class="limit-step-value">Acima de R$500k (>2,5MM anual)</span></div>
+        <div class="limit-step"><span class="limit-step-label">Percentual Aplicavel</span><span class="limit-step-value">30% da media mensal x 6</span></div>
+        <div class="limit-step"><span class="limit-step-label">Limite Base Calculado</span><span class="limit-step-value">R$684.953 x 30% x 6 = R$1.232.915</span></div>
+        <div class="limit-step"><span class="limit-step-label">Teto da Politica AG</span><span class="limit-step-value">R$2.000.000</span></div>
+        <div class="limit-step"><span class="limit-step-label">Reducao: Socio <1 ano</span><span class="limit-step-value negative">-35% (gestao recente)</span></div>
+        <div class="limit-step"><span class="limit-step-label">Reducao: BP simplif./PL baixo</span><span class="limit-step-value negative">-15%</span></div>
+        <div class="limit-step" style="margin-top:.5rem"><span class="limit-step-label" style="font-weight:700">Limite Pos-Ajuste</span><span class="limit-step-value" style="color:#6ee7b7">~R$800.000</span></div>
+      </div>
+    </div>
+    <div class="limit-final">
+      <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:1rem">LIMITE SUGERIDO AO COMITE</span>
+      <span style="font-size:1.6rem;font-weight:800;font-family:'Syne',sans-serif;color:#6ee7b7">R$ 800.000,00</span>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Condicoes Obrigatorias para Aprovacao</div>
+    <ul style="list-style:none;font-size:.83rem;color:var(--text2);line-height:2">
+      <li>1. Apresentacao de sacados elegíveis com CNPJ, valor e prazo para analise de concentracao</li>
+      <li>2. Assinatura de Termo de Cessao e Garantia pelo socio (pessoalmente — CPF 308.688.528-99)</li>
+      <li>3. Contrato Social atualizado da MOVITRA arquivado na JUCESP (ja disponível — Set/2025)</li>
+      <li>4. Esclarecimento sobre a diferenca entre faturamento declarado (~R$685k/mes) e emissao de boletos Nuclea (~R$25k/mes)</li>
+    </ul>
+  </div>
+
+  <div class="verdict-panel warn">
+    <div class="verdict-title">APROVAR COM RESSALVAS</div>
+    <div class="verdict-sub">MOVITRA apresenta perfil de credito moderado-positivo. Faturamento consistente, bureaus limpos e ILM excelente compensam a mudanca societaria recente e o PL baixo do CNPJ cedente. Aprovacao condicionada a apresentacao de sacados e aval do socio.</div>
+    <div class="verdict-limit">Limite: R$800.000 · Prazo medio maximo: 90 dias · Revisao em 6 meses</div>
+  </div>
+</section>
+
+<!-- SPLIT BANNER -->
+<div class="split-banner">
+  <h2>ANALISE FINANCEIRA &amp; JURIDICA CONSULTIVA</h2>
+  <p style="color:#93c5fd;font-size:.85rem;margin-top:.3rem;font-family:'DM Mono',monospace">Rafael Bazan · Consultor Financeiro e Juridico · AG Antecipa · Junho/2026</p>
+</div>
+
+<!-- FINANCEIRO BP/DRE -->
+<section id="financeiro" class="rf-section">
+  <div class="section-label">Analise Financeira · Rafael Bazan</div>
+  <h2 class="section-title">Balanco Patrimonial &amp; DRE — 2024 / 2025</h2>
+  <div class="analyst-banner rf">
+    <div class="analyst-avatar" style="background:rgba(59,130,246,0.15);border-color:rgba(59,130,246,0.5);color:#93c5fd">RB</div>
+    <div>
+      <div class="analyst-name" style="color:#93c5fd">Rafael Bazan <span class="analyst-tag" style="background:rgba(59,130,246,0.15);color:#93c5fd;border:1px solid rgba(59,130,246,0.3)">Financeiro/Juridico</span></div>
+      <div class="analyst-role">Consultor Financeiro Contabil e Juridico · AG Antecipa · Junho/2026</div>
+    </div>
+  </div>
+  <div class="info-box" style="background:rgba(59,130,246,.06);border-color:rgba(59,130,246,.2);color:#93c5fd;margin-bottom:1.5rem">
+    <strong style="color:#e5e7eb">Nota Metodologica:</strong> Os documentos contabeis fornecidos compreendem: (1) BP e DRE 2024 da MOVITRA (CNPJ 38.448.292) — exercicio da gestao anterior; (2) BP e DRE 2025 da empresa coligada S.R. Alves Pereira Toledo Ltda (CNPJ 20.335.518) — controlada pelo mesmo socio Sandro Toledo. A analise consolida ambas, evidenciando a capacidade economica do grupo.
+  </div>
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">DRE Comparativo — MOVITRA 2024 vs Coligada S.R. Alves 2025</div>
+    <table class="data-table">
+      <thead><tr><th>Linha DRE</th><th class="text-right">MOVITRA 2024</th><th class="text-right">S.R. Alves 2025</th></tr></thead>
+      <tbody>
+        <tr><td class="bold">Receita Bruta</td><td class="text-right bold">R$8.207.368</td><td class="text-right bold">R$14.134.805</td></tr>
+        <tr><td style="padding-left:1.5rem;color:var(--text2)">(-) ISS</td><td class="text-right negative">(R$410.368)</td><td class="text-right negative">(R$706.640)</td></tr>
+        <tr><td style="padding-left:1.5rem;color:var(--text2)">(-) COFINS</td><td class="text-right negative">(R$246.221)</td><td class="text-right negative">(R$424.044)</td></tr>
+        <tr><td style="padding-left:1.5rem;color:var(--text2)">(-) PIS</td><td class="text-right negative">(R$53.348)</td><td class="text-right negative">(R$91.876)</td></tr>
+        <tr><td style="padding-left:1.5rem;color:var(--text2)">(-) IRPJ/CSL</td><td class="text-right negative">(R$868.962)</td><td class="text-right negative">(R$1.513.867)</td></tr>
+        <tr><td class="bold">Receita Liquida</td><td class="text-right bold positive">R$7.497.431</td><td class="text-right bold positive">R$11.398.378</td></tr>
+        <tr><td style="padding-left:1.5rem;color:var(--text2)">(-) Despesas Admin</td><td class="text-right negative">(R$12.708)</td><td class="text-right">R$0</td></tr>
+        <tr><td class="bold">Resultado Operacional</td><td class="text-right bold positive">R$7.484.723</td><td class="text-right bold positive">R$11.398.378</td></tr>
+        <tr><td class="bold">Lucro Liquido</td><td class="text-right bold positive">R$6.615.761</td><td class="text-right bold positive">R$11.398.378</td></tr>
+        <tr><td>Margem Liquida</td><td class="text-right positive">80,6%</td><td class="text-right positive">80,6%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">Balanco Patrimonial — MOVITRA 2024 vs S.R. Alves 2025</div>
+    <table class="data-table">
+      <thead><tr><th>Conta</th><th class="text-right">MOVITRA 31/12/2024</th><th class="text-right">S.R. Alves 31/12/2025</th></tr></thead>
+      <tbody>
+        <tr><td class="bold">ATIVO TOTAL</td><td class="text-right bold">R$277.765</td><td class="text-right bold">R$2.129.046</td></tr>
+        <tr><td style="padding-left:1.5rem">AC — Caixa</td><td class="text-right">R$277.765</td><td class="text-right">R$2.129.046</td></tr>
+        <tr><td class="bold">PASSIVO TOTAL</td><td class="text-right bold">R$277.765</td><td class="text-right bold">R$2.129.046</td></tr>
+        <tr><td style="padding-left:1.5rem">PC — Obrigacoes Tributarias</td><td class="text-right negative">R$272.765</td><td class="text-right negative">R$480.690</td></tr>
+        <tr><td style="padding-left:2rem;color:var(--text2)">IRPJ a Recolher</td><td class="text-right">R$155.342</td><td class="text-right">R$275.845</td></tr>
+        <tr><td style="padding-left:2rem;color:var(--text2)">CSLL a Recolher</td><td class="text-right">R$58.083</td><td class="text-right">R$101.464</td></tr>
+        <tr><td style="padding-left:2rem;color:var(--text2)">ISS a Recolher</td><td class="text-right">R$34.301</td><td class="text-right">R$59.758</td></tr>
+        <tr><td class="bold">PATRIMONIO LIQUIDO</td><td class="text-right bold">R$5.000</td><td class="text-right bold positive">R$1.648.356</td></tr>
+        <tr><td style="padding-left:1.5rem">Capital Social</td><td class="text-right">R$5.000</td><td class="text-right">R$800.000</td></tr>
+        <tr><td style="padding-left:1.5rem">Lucros Acumulados</td><td class="text-right">R$0 (distribuidos)</td><td class="text-right positive">R$848.356</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="fin-grid">
+    <div class="fin-group">
+      <div class="fin-group-title">Liquidez — MOVITRA 2024</div>
+      <div class="fin-item">
+        <div class="fin-item-left"><div class="fin-item-name">Liquidez Corrente</div><div class="fin-item-formula">AC / PC</div></div>
+        <div class="fin-item-value" style="color:#fcd34d">1,02</div><span class="risk-warn">BAIXO</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left"><div class="fin-item-name">Liquidez Seca</div><div class="fin-item-formula">(AC-Est) / PC</div></div>
+        <div class="fin-item-value" style="color:#fcd34d">1,02</div><span class="risk-warn">BAIXO</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left"><div class="fin-item-name">Liquidez Geral</div><div class="fin-item-formula">(AC+RLP)/(PC+PNC)</div></div>
+        <div class="fin-item-value" style="color:#fcd34d">1,02</div><span class="risk-warn">MINIMO</span>
+      </div>
+    </div>
+    <div class="fin-group">
+      <div class="fin-group-title">Endividamento — MOVITRA 2024</div>
+      <div class="fin-item">
+        <div class="fin-item-left"><div class="fin-item-name">Endividamento Geral</div><div class="fin-item-formula">(PC+PNC) / AT</div></div>
+        <div class="fin-item-value" style="color:#fca5a5">98,2%</div><span class="risk-high">ALTO</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left"><div class="fin-item-name">Composicao Endiv.</div><div class="fin-item-formula">PC / (PC+PNC)</div></div>
+        <div class="fin-item-value" style="color:#fca5a5">100%</div><span class="risk-high">ALTO</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left"><div class="fin-item-name">Imobil. do PL</div><div class="fin-item-formula">Imob / PL</div></div>
+        <div class="fin-item-value" style="color:#86efac">0%</div><span class="risk-ok">OK</span>
+      </div>
+    </div>
+    <div class="fin-group">
+      <div class="fin-group-title">Rentabilidade — MOVITRA 2024</div>
+      <div class="fin-item">
+        <div class="fin-item-left"><div class="fin-item-name">Margem Liquida</div><div class="fin-item-formula">LL / RL</div></div>
+        <div class="fin-item-value" style="color:#86efac">88,2%</div><span class="risk-ok">EXCELENTE</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left"><div class="fin-item-name">ROE</div><div class="fin-item-formula">LL / PL</div></div>
+        <div class="fin-item-value" style="color:#86efac">1323x</div><span class="risk-ok">ALTO</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left"><div class="fin-item-name">ROA</div><div class="fin-item-formula">LL / AT</div></div>
+        <div class="fin-item-value" style="color:#86efac">23,8x</div><span class="risk-ok">ALTO</span>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:1.5rem">
+    <div class="card-title">Analise do Faturamento Declarado — 2024 e 2025/2026</div>
+    <div class="chart-wrap" style="height:260px"><canvas id="chartFatDeclarado"></canvas></div>
+    <div class="three-col" style="margin-top:1rem">
+      <div><div style="font-size:.72rem;text-transform:uppercase;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.3rem">Credibilidade</div><p style="font-size:.8rem;color:var(--text2);line-height:1.6">Contabilidade assinada por CRC ativo (1SP333349) com assinatura digital ZapSign/ICP-Brasil. Declaracao emitida pela consultoria 7Mais (Campinas). Credibilidade ALTA.</p></div>
+      <div><div style="font-size:.72rem;text-transform:uppercase;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.3rem">Crescimento</div><p style="font-size:.8rem;color:var(--text2);line-height:1.6">Fat. 2024: R$8,21MM (media R$684k/mes). Fat. 2025 parcial: media R$686k/mes. Crescimento praticamente nulo — operacao madura e estavel com clientes recorrentes.</p></div>
+      <div><div style="font-size:.72rem;text-transform:uppercase;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.3rem">Consistencia</div><p style="font-size:.8rem;color:var(--text2);line-height:1.6">CV de apenas 2-3% ao longo de 22 meses declarados. Nenhum mes zerado ou anomalo. Consistencia MUITO ALTA — sugere contrato(s) recorrentes de locacao.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCS -->
+<section id="docs" class="rf-section">
+  <div class="section-label">Analise Financeira · Rafael Bazan</div>
+  <h2 class="section-title">RF-0 · Qualidade Documental</h2>
+  <table class="doc-table">
+    <thead><tr><th>Documento</th><th>CNPJ</th><th class="text-center">Presente</th><th class="text-center">Assin. Digital</th><th class="text-center">CRC Ativo</th><th>Observacao</th></tr></thead>
+    <tbody>
+      <tr><td>Balanco Patrimonial 2024</td><td>38.448.292 (MOVITRA)</td><td class="text-center doc-ok">SIM</td><td class="text-center doc-ok">ZapSign/ICP</td><td class="text-center doc-ok">1SP333349</td><td>Completo · Assinaturas verificadas</td></tr>
+      <tr><td>DRE 2024</td><td>38.448.292 (MOVITRA)</td><td class="text-center doc-ok">SIM</td><td class="text-center doc-ok">ZapSign/ICP</td><td class="text-center doc-ok">1SP333349</td><td>Completo com provisoes IRPJ/CSLL</td></tr>
+      <tr><td>Balanco Patrimonial 2025</td><td>20.335.518 (Coligada)</td><td class="text-center doc-warn">COLIGADA</td><td class="text-center doc-ok">ZapSign/ICP</td><td class="text-center doc-ok">1SP333349</td><td>BP da coligada, nao da MOVITRA 2025</td></tr>
+      <tr><td>DRE 2025</td><td>20.335.518 (Coligada)</td><td class="text-center doc-warn">COLIGADA</td><td class="text-center doc-ok">ZapSign/ICP</td><td class="text-center doc-ok">1SP333349</td><td>DRE da coligada S.R. Alves 2025</td></tr>
+      <tr><td>Declaracao Faturamento 2024</td><td>38.448.292 (MOVITRA)</td><td class="text-center doc-ok">SIM</td><td class="text-center doc-ok">SIM</td><td class="text-center doc-ok">1SP333349</td><td>Jan-Dez/2024 · R$8,21MM total</td></tr>
+      <tr><td>Declaracao Faturamento 2025/26</td><td>38.448.292 (MOVITRA)</td><td class="text-center doc-ok">SIM</td><td class="text-center doc-ok">SIM</td><td class="text-center doc-ok">1SP333349</td><td>Mar/25-Fev/26 · Cobre 12 meses</td></tr>
+      <tr><td>Contrato Social (recente)</td><td>38.448.292 (MOVITRA)</td><td class="text-center doc-ok">SIM</td><td class="text-center doc-ok">ZapSign</td><td class="text-center doc-na">N/A</td><td>Reg. JUCESP 03/09/2025</td></tr>
+      <tr><td>Bacen/SCR Empresa + Socio</td><td>CNPJ + CPF</td><td class="text-center doc-ok">SIM</td><td class="text-center doc-na">N/A</td><td class="text-center doc-na">N/A</td><td>Abr/2026 · Atualizados</td></tr>
+      <tr><td>BP MOVITRA 2025 (propria)</td><td>38.448.292 (MOVITRA)</td><td class="text-center doc-miss">PENDENTE</td><td class="text-center doc-miss">—</td><td class="text-center doc-miss">—</td><td>Solicitar com aumento de capital Set/2025</td></tr>
+    </tbody>
+  </table>
+  <div class="info-box">Diligencia pendente: solicitar o BP e DRE 2025 do CNPJ 38.448.292/0001-00 (MOVITRA), que inclua o aumento de capital para R$500.000 realizado em Set/2025. Os documentos 2025 fornecidos correspondem a empresa coligada.</div>
+</section>
+
+<!-- MODELO DE NEGOCIO -->
+<section id="negocio" class="rf-section">
+  <div class="section-label">Analise Financeira · Rafael Bazan</div>
+  <h2 class="section-title">RF-1 · Modelo de Negocio e Sacados Elegíveis</h2>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">O Que a MOVITRA Faz</div>
+      <p style="font-size:.83rem;color:var(--text2);line-height:1.7;margin-bottom:1rem">A MOVITRA opera como prestadora de servicos de engenharia industrial e locacao de equipamentos para obras. Principais linhas de receita: (1) locacao de maquinas e equipamentos industriais sem operador para construtoras e industrias; (2) montagem de estruturas metalicas e instalacoes eletricas em plantas industriais; (3) administracao de obras e projetos de engenharia.</p>
+      <p style="font-size:.83rem;color:var(--text2);line-height:1.7">O modelo gera receita recorrente via contratos de locacao (pagamentos mensais regulares) e ordens de servico de engenharia. A estabilidade do faturamento (CV &lt;3% em 22 meses) confirma existencia de contratos de medio-prazo com clientes-ancora, possivelmente na industria de Capivari/Campinas.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Sacados Elegíveis para Antecipacao</div>
+      <table class="data-table">
+        <thead><tr><th>Perfil de Sacado</th><th>Elegibilidade</th><th>Risco</th></tr></thead>
+        <tbody>
+          <tr><td>Industrias manufatureiras (locacao)</td><td><span class="risk-ok">ELEGIVEL</span></td><td><span class="risk-low">BAIXO</span></td></tr>
+          <tr><td>Construtoras de grande porte</td><td><span class="risk-ok">ELEGIVEL</span></td><td><span class="risk-warn">MEDIO</span></td></tr>
+          <tr><td>Empresas de energia/utilidades</td><td><span class="risk-ok">ELEGIVEL</span></td><td><span class="risk-low">BAIXO</span></td></tr>
+          <tr><td>Orgaos publicos/prefeituras</td><td><span class="risk-warn">CONDICIONAL</span></td><td><span class="risk-moderate">MEDIO-ALTO</span></td></tr>
+          <tr><td>Micro/pequenas empresas</td><td><span class="risk-high">RESTRITO</span></td><td><span class="risk-high">ALTO</span></td></tr>
+        </tbody>
+      </table>
+      <div style="font-size:.78rem;color:var(--text2);margin-top:.75rem">Os sacados nao foram identificados individualmente. E necessario solicitar relacao dos principais clientes (5-10 maiores) para avaliacao de concentracao e risco de contraparte. Condicao obrigatoria antes da liberacao do limite.</div>
+    </div>
+  </div>
+</section>
+
+<!-- JURIDICO -->
+<section id="juridico" class="rf-section">
+  <div class="section-label">Analise Financeira · Rafael Bazan</div>
+  <h2 class="section-title">RF-2 · Analise Juridica e Tributaria</h2>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Situacao Tributaria</div>
+      <table class="data-table">
+        <tbody>
+          <tr><td>Regime Tributario</td><td>Regime Normal — RPA (nao Simples/MEI)</td></tr>
+          <tr><td>ISS</td><td>Recolhendo regularmente</td></tr>
+          <tr><td>Carga Tributaria Efetiva</td><td>~19,2% sobre Receita Bruta 2024</td></tr>
+          <tr><td>Divida Ativa SP</td><td class="positive">NADA CONSTA</td></tr>
+          <tr><td>PGFN</td><td class="doc-warn">Verificar manualmente (emissao online indisponivel)</td></tr>
+          <tr><td>CNDT Trabalhista</td><td class="positive">NEGATIVA — val. 30/11/2026</td></tr>
+          <tr><td>Sintegra/IE</td><td class="positive">Habilitado · IE 253131412117</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Processos e Pendencias</div>
+      <table class="data-table">
+        <tbody>
+          <tr><td>Processos Empresa (parte ativa)</td><td>2 · R$32.694 · Em tramitacao</td></tr>
+          <tr><td>Assunto</td><td>Inclusao Indevida em Cadastro</td></tr>
+          <tr><td>Status Empresa</td><td><span class="risk-low">BAIXO</span> — empresa e a autora</td></tr>
+          <tr><td>Processos Socio</td><td>10 processos · R$133.787 · Arquivados</td></tr>
+          <tr><td>Processos Penais Socio</td><td>3 (2010, 2017, 2018) — ARQUIVADOS DEFINITIVOS</td></tr>
+          <tr><td>Assuntos Penais</td><td>Estelionato arquivado, Carta Precatoria Criminal</td></tr>
+          <tr><td>Recuperacao Judicial</td><td class="positive">NADA CONSTA</td></tr>
+        </tbody>
+      </table>
+      <div class="info-box">Processos penais do socio estao todos com ARQUIVAMENTO DEFINITIVO — situacao resolvida. Nao ha processo ativo contra a empresa ou socio. Recomenda-se consulta ao ESAJ/TJSP para confirmar o status atual.</div>
+    </div>
+  </div>
+</section>
+
+<!-- RISCO 6 DIMENSOES -->
+<section id="risco-dim" class="rf-section">
+  <div class="section-label">Analise Financeira · Rafael Bazan</div>
+  <h2 class="section-title">RF-3 · Seis Dimensoes de Risco</h2>
+  <div class="risk-dim"><div class="risk-dim-header"><span class="risk-dim-name">1 · Dimensao Financeira</span><span class="risk-warn">MEDIO</span></div><div class="risk-dim-desc">Faturamento consistente de R$685k/mes (22 meses). Margem liquida excepcional (88%). Porem: PL da MOVITRA era apenas R$5k em 2024, toda lucratividade distribuida ao socio. O CNPJ cedente e estruturalmente subcapitalizado, embora operacionalmente lucrativo. Liquidez corrente marginal (1,02). A coligada (PL R$1,6MM) oferece suporte ao grupo.</div></div>
+  <div class="risk-dim"><div class="risk-dim-header"><span class="risk-dim-name">2 · Dimensao Operacional</span><span class="risk-low">BAIXO</span></div><div class="risk-dim-desc">Empresa em Distrito Industrial de Capivari com 5 anos de operacao. CNAEs diversificados (locacao, engenharia, montagem, energia eletrica) reduzem dependencia de um unico setor. Faturamento estabilizado sugere contratos de medio prazo. ILM excelente indica fluxo de caixa operacional saudavel. Risco de concentracao de sacados pendente de avaliacao.</div></div>
+  <div class="risk-dim"><div class="risk-dim-header"><span class="risk-dim-name">3 · Dimensao Juridica</span><span class="risk-moderate">MEDIO-ALTO</span></div><div class="risk-dim-desc">Processos penais historicos do socio (estelionato e outros — todos arquivados) geram flag juridico relevante. A empresa em si nao possui passivo judicial como parte re. Tributariamente regularizada. PGFN nao verificada online — pendencia de diligencia manual.</div></div>
+  <div class="risk-dim"><div class="risk-dim-header"><span class="risk-dim-name">4 · Dimensao Gestional</span><span class="risk-warn">MEDIO</span></div><div class="risk-dim-desc">Mudanca societaria completa ha apenas 9 meses (Set/2025). Por outro lado, o mesmo gestor tem historico de 5+ anos na coligada S.R. Alves (RB R$14MM em 2025), demonstrando capacidade gerencial comprovada. Estrutura unipessoal e risco classico de concentracao de poder.</div></div>
+  <div class="risk-dim"><div class="risk-dim-header"><span class="risk-dim-name">5 · Dimensao Fraude / Simulacao</span><span class="risk-low">BAIXO/VERIFICAR</span></div><div class="risk-dim-desc">Faturamento declarado consistente com DRE auditada. DIVERGENCIA RELEVANTE: fat. declarado ~R$685k/mes vs. emissao boletos Nuclea ~R$25k/mes. Possivel explicacao: pagamentos via TED/PIX sem boleto ou contratos de locacao com pagamento direto. Recomenda-se extrato bancario dos ultimos 3 meses para validacao.</div></div>
+  <div class="risk-dim"><div class="risk-dim-header"><span class="risk-dim-name">6 · Concentracao de Sacados</span><span class="risk-warn">MEDIO</span></div><div class="risk-dim-desc">Sacados nao identificados nos documentos. A carteira Nuclea (R$200-300k) e muito inferior ao faturamento declarado — confirma que clientes nao usam boleto Nuclea. Avaliacao de concentracao so e possivel apos apresentacao da relacao de clientes. Condicao mandatoria antes da liberacao.</div></div>
+  <div class="card" style="margin-top:1.5rem">
+    <div class="card-title">Classificacao Geral de Risco — Rafael Bazan</div>
+    <div style="display:flex;gap:2rem;align-items:center;padding:1rem 0;flex-wrap:wrap">
+      <div style="text-align:center"><div style="font-size:2.5rem;font-weight:800;font-family:'Syne',sans-serif;color:#fcd34d">B+</div><div style="font-size:.72rem;color:var(--text2);font-family:'DM Mono',monospace">CLASSIFICACAO RISCO</div></div>
+      <div style="flex:1;min-width:200px"><p style="font-size:.83rem;color:var(--text2);line-height:1.7">Empresa com perfil operacional POSITIVO (faturamento consistente, bureaus limpos, ILM excelente) mas com aspectos estruturais que exigem mitigacao (PL baixo no CNPJ cedente, gestao recente, historico penal arquivado). Classificacao B+ e compativel com aprovacao condicionada a garantias e esclarecimentos.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- GARANTIAS -->
+<section id="garantias" class="rf-section">
+  <div class="section-label">Analise Financeira · Rafael Bazan</div>
+  <h2 class="section-title">RF-4 · Garantias</h2>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title" style="color:#fca5a5">Garantias Obrigatorias</div>
+      <div class="guarantee-item"><div class="guarantee-num" style="background:#ef4444;color:#fff">1</div><div class="guarantee-text"><strong>Aval Pessoal do Socio</strong> — Sandro Rogerio Alves Pereira Toledo (CPF 308.688.528-99) deve assinar como avalista em todos os instrumentos de cessao. Responsabilidade solidaria e irretratavel.</div></div>
+      <div class="guarantee-item"><div class="guarantee-num" style="background:#ef4444;color:#fff">2</div><div class="guarantee-text"><strong>Cessao Fiduciaria dos Recebiveis</strong> — Todos os titulos antecipados devem ser cedidos fiduciariamente a AG Antecipa com notificacao formal dos sacados sobre a cessao.</div></div>
+      <div class="guarantee-item"><div class="guarantee-num" style="background:#ef4444;color:#fff">3</div><div class="guarantee-text"><strong>Fundo de Reserva 5%</strong> — Manutencao de saldo minimo de 5% da carteira em aberto em conta corrente indicada pela AG como garantia de liquidez.</div></div>
+      <div class="guarantee-item"><div class="guarantee-num" style="background:#ef4444;color:#fff">4</div><div class="guarantee-text"><strong>Lista de Sacados Aprovados</strong> — Operacoes limitadas a sacados previamente aprovados pelo comite. Vedada antecipacao de recebiveis de partes relacionadas.</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:#93c5fd">Garantias Complementares Recomendadas</div>
+      <div class="guarantee-item"><div class="guarantee-num" style="background:#3b82f6;color:#fff">A</div><div class="guarantee-text"><strong>Conta Vinculada (Escrow)</strong> — Direcionar recebimento dos sacados para conta vinculada com instrucao permanente de debito para liquidacao das operacoes.</div></div>
+      <div class="guarantee-item"><div class="guarantee-num" style="background:#3b82f6;color:#fff">B</div><div class="guarantee-text"><strong>Limite por Sacado: Max 30%</strong> — Nenhum sacado individual deve representar mais de 30% da carteira em aberto, reduzindo o risco de concentracao.</div></div>
+      <div class="guarantee-item"><div class="guarantee-num" style="background:#3b82f6;color:#fff">C</div><div class="guarantee-text"><strong>Extrato Bancario 3 Meses</strong> — Solicitar extratos dos ultimos 3 meses para validar o fluxo de caixa declarado (~R$685k/mes) versus emissao de boletos registrada no Nuclea.</div></div>
+      <div class="guarantee-item"><div class="guarantee-num" style="background:#3b82f6;color:#fff">D</div><div class="guarantee-text"><strong>Contrato de Locacao como Garantia Real</strong> — Solicitar cessao dos contratos de locacao em vigor com clausula de sub-rogacao em caso de inadimplencia da cedente.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MONITORAMENTO -->
+<section id="monitoramento" class="rf-section">
+  <div class="section-label">Analise Financeira · Rafael Bazan</div>
+  <h2 class="section-title">RF-5 · Plano de Monitoramento</h2>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Monitoramento Periodico</div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#22c55e"></div><span><strong style="color:var(--text)">Mensal:</strong> Verificacao de ILM e pontualidade CredMap. Queda abaixo de 90% desencadeia revisao imediata.</span></div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#22c55e"></div><span><strong style="color:var(--text)">Trimestral:</strong> Consulta Serasa atualizada (empresa e CPF do socio). Confirmar ausencia de novas restricoes.</span></div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#22c55e"></div><span><strong style="color:var(--text)">Semestral:</strong> Renovacao da declaracao de faturamento (nova declaracao contabil assinada pelo CRC). Revisao do limite com base nos ultimos 6 meses.</span></div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#22c55e"></div><span><strong style="color:var(--text)">Anual:</strong> BP e DRE auditados. Revisar classificacao de risco e renegociar limite com dados atualizados.</span></div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#3b82f6"></div><span><strong style="color:var(--text)">6 Meses:</strong> Solicitar BP 2025 da MOVITRA (CNPJ 38.448.292) com aumento de capital refletido para avaliar capitalizacao.</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Gatilhos de Revisao Imediata</div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div><span><strong style="color:var(--text)">URGENTE:</strong> Qualquer anotacao no Serasa (PEFIN, protesto, REFIN) — suspensao imediata de novas operacoes ate esclarecimento.</span></div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div><span><strong style="color:var(--text)">URGENTE:</strong> Sacado inadimplente acima de R$50.000 — acionar garantias e notificar cedente.</span></div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div><span><strong style="color:var(--text)">URGENTE:</strong> Alteracao societaria — exige analise completa do novo perfil.</span></div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#f59e0b"></div><span><strong style="color:var(--text)">ATENCAO:</strong> Queda no faturamento declarado superior a 20% em relacao a media historica.</span></div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#f59e0b"></div><span><strong style="color:var(--text)">ATENCAO:</strong> Novo processo judicial (empresa ou socio) acima de R$100k — avaliar impacto no risco.</span></div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#f59e0b"></div><span><strong style="color:var(--text)">ATENCAO:</strong> Concentracao de sacado unico acima de 40% da carteira — solicitar diversificacao.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARECER FINANCEIRO RB -->
+<section id="parecer-financeiro" class="rf-section">
+  <div class="section-label">Analise Financeira · Rafael Bazan</div>
+  <h2 class="section-title">RF-6 · Parecer Financeiro e Consultivo</h2>
+  <div class="analyst-banner rf">
+    <div class="analyst-avatar" style="background:rgba(59,130,246,0.15);border-color:rgba(59,130,246,0.5);color:#93c5fd">RB</div>
+    <div>
+      <div class="analyst-name" style="color:#93c5fd">Rafael Bazan <span class="analyst-tag" style="background:rgba(59,130,246,0.15);color:#93c5fd;border:1px solid rgba(59,130,246,0.3)">Parecer Financeiro</span></div>
+      <div class="analyst-role">Consultor Financeiro Contabil e Juridico · AG Antecipa · Junho/2026</div>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-bottom:1.5rem">
+    <div class="card">
+      <div class="card-title" style="color:#86efac">Aspectos Positivos</div>
+      <ul style="list-style:none;font-size:.83rem;color:var(--text2);line-height:2">
+        <li>Faturamento extraordinariamente consistente — CV &lt;3% em 22 meses consecutivos</li>
+        <li>Margem liquida de 80-88%: modelo de prestacao de servicos com baixissima estrutura de custos</li>
+        <li>Grupo economico robusto: coligada S.R. Alves com PL de R$1,6MM e LL de R$11,4MM em 2025</li>
+        <li>Contabilidade formalizada com CRC ativo, assinatura digital ICP-Brasil em todos os documentos</li>
+        <li>Empresa sem passivo trabalhista, sem divida ativa estadual e sem restricoes tributarias ativas</li>
+        <li>ILM 97-100% demonstra que a empresa honra seus compromissos financeiros com pontualidade</li>
+        <li>Relacionamento bancario diversificado (Safra, Santander, Daycoval) e com factorings ativos</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:#fca5a5">Riscos e Negativos</div>
+      <ul style="list-style:none;font-size:.83rem;color:var(--text2);line-height:2">
+        <li>CNPJ cedente subcapitalizado: PL de R$5.000 em 2024 e toda lucratividade distribuida ao socio</li>
+        <li>BP simplificado sem ativo imobilizado — nao reflete a realidade dos equipamentos operacionais</li>
+        <li>Mudanca de controle ha apenas 9 meses — historico do novo gestor na MOVITRA e muito curto</li>
+        <li>Historico de processos penais do socio (arquivados) requer acompanhamento continuado</li>
+        <li>Divergencia entre faturamento declarado (R$685k/mes) e emissao de boletos Nuclea (~R$25k/mes)</li>
+        <li>BP 2025 da MOVITRA propria nao disponibilizado — impossivel avaliar situacao patrimonial atual</li>
+        <li>PGFN nao verificavel online — pendencia de consulta manual obrigatoria</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="analyst-note">
+    <strong>Parecer de Rafael Bazan — Consultivo Financeiro e Juridico:</strong><br><br>
+    A MOVITRA Locacao e Engenharia Ltda apresenta um perfil financeiro peculiar: operacionalmente robusta e altamente rentavel (margem liquida de 88% e faturamento consistente de R$685k/mes), porem contabilmente subcapitalizada no CNPJ cedente (PL de R$5.000 em 2024). Esta estrutura e caracteristica de empresas de prestacao de servicos onde o socio opta por distribuir integralmente os lucros — pratica legal, porem que reduz o colchao de seguranca formal do CNPJ.<br><br>
+    O aspecto mais relevante e positivo e a existencia da coligada S.R. Alves Pereira Toledo Ltda, controlada pelo mesmo socio, com PL de R$1,6MM e faturamento de R$14,1MM em 2025 — o que demonstra que o grupo economico tem substancia real e que o socio tem capacidade financeira para honrar o aval pessoal exigido.<br><br>
+    A divergencia entre o faturamento declarado (R$685k/mes) e os boletos registrados no sistema Nuclea (~R$25k/mes) precisa ser esclarecida antes da liberacao do limite. A hipotese mais provavel e que os clientes pagam via TED/PIX diretamente, sem emissao de boleto — o que e comum em contratos de locacao de equipamentos industriais. A apresentacao do extrato bancario dos ultimos 3 meses e suficiente para validar esta hipotese.<br><br>
+    Os processos penais do socio (estelionato arquivado em 2018) sao um fator de atencao que deve ser registrado no cadastro da AG, mas nao sao impedimento para aprovacao dado o status de arquivamento definitivo e a antiguidade das ocorrencias (8+ anos). Recomendo aprovacao condicionada as diligencias pendentes, com limite conservador de R$800.000 e revisao em 6 meses.
+  </div>
+
+  <div class="verdict-panel warn">
+    <div class="verdict-title">APROVAR COM RESSALVAS — RAFAEL BAZAN</div>
+    <div class="verdict-sub">Empresa com solidez operacional comprovada e grupo economico forte. Aprovacao condicionada a: extrato bancario 3 meses, lista de sacados, PGFN manual e aval pessoal do socio.</div>
+    <div class="verdict-limit">Classificacao B+ · Limite: R$800.000 · Condicoes obrigatorias antes da liberacao · Revisao em 6 meses</div>
+  </div>
+</section>
+
+<!-- VEREDICTO CONJUNTO -->
+<section id="veredicto">
+  <div class="section-label">Decisao do Comite · AG Antecipa</div>
+  <h2 class="section-title">Veredicto Conjunto</h2>
+
+  <div class="veredicto-grid">
+    <div class="veredicto-card">
+      <div class="veredicto-card-name">Analista de Credito</div>
+      <div class="veredicto-card-verdict warn">APROVAR C/ RESSALVAS</div>
+      <div class="veredicto-card-role">Marcelo Vazquez · Gerente de Credito</div>
+      <div class="veredicto-card-sub">Score 740 · Serasa limpo · ILM excelente · Faturamento consistente · Mudanca societaria recente exige cautela. Limite R$800k com aval do socio.</div>
+    </div>
+    <div class="veredicto-card">
+      <div class="veredicto-card-name">Consultor Financeiro/Juridico</div>
+      <div class="veredicto-card-verdict warn">APROVAR C/ RESSALVAS</div>
+      <div class="veredicto-card-role">Rafael Bazan · Consultor</div>
+      <div class="veredicto-card-sub">Grupo economico robusto (coligada R$14MM). PL cedente baixo mas operacionalmente viavel. Historico penal arquivado requer registro. Extrato bancario obrigatorio.</div>
+    </div>
+  </div>
+
+  <div class="veredicto-unified warn">
+    <div style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.75rem">Decisao do Comite de Credito — AG Antecipa</div>
+    <div style="font-size:2rem;font-weight:800;font-family:'Syne',sans-serif;color:#fcd34d;margin-bottom:.5rem">APROVAR COM RESSALVAS</div>
+    <div style="font-size:.9rem;color:var(--text2);margin-bottom:1rem">MOVITRA LOCACAO E ENGENHARIA LTDA · CNPJ 38.448.292/0001-00 · Junho/2026</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0;text-align:left">
+      <div style="background:rgba(255,255,255,.04);padding:1rem;border-radius:10px;border:1px solid rgba(255,255,255,.08)">
+        <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.4rem">Limite Aprovado</div>
+        <div style="font-size:1.4rem;font-weight:700;font-family:'Syne',sans-serif;color:#6ee7b7">R$ 800.000</div>
+        <div style="font-size:.72rem;color:var(--muted)">Sujeito as condicoes abaixo</div>
+      </div>
+      <div style="background:rgba(255,255,255,.04);padding:1rem;border-radius:10px;border:1px solid rgba(255,255,255,.08)">
+        <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.4rem">Prazo Maximo</div>
+        <div style="font-size:1.4rem;font-weight:700;font-family:'Syne',sans-serif;color:#fcd34d">90 dias</div>
+        <div style="font-size:.72rem;color:var(--muted)">Por operacao antecipada</div>
+      </div>
+      <div style="background:rgba(255,255,255,.04);padding:1rem;border-radius:10px;border:1px solid rgba(255,255,255,.08)">
+        <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.4rem">Revisao</div>
+        <div style="font-size:1.4rem;font-weight:700;font-family:'Syne',sans-serif;color:#fcd34d">6 meses</div>
+        <div style="font-size:.72rem;color:var(--muted)">Dez/2026 — novo BP 2025</div>
+      </div>
+    </div>
+    <div style="font-size:.82rem;color:var(--text2);line-height:1.8;text-align:left;border-top:1px solid rgba(255,255,255,.07);padding-top:1rem">
+      <strong style="color:var(--text)">Condicoes Precedentes (antes da 1a operacao):</strong><br>
+      1. Extrato bancario dos ultimos 3 meses (validacao do fluxo de R$685k/mes) · 2. Lista dos 10 principais sacados (CNPJ, valor, prazo) · 3. Aval pessoal do socio Sandro Toledo (CPF 308.688.528-99) em instrumento de cessao · 4. Verificacao manual da PGFN · 5. Confirmacao da relacao de sacados elegíveis pelo comite
+    </div>
+  </div>
+
+  <!-- Assinaturas -->
+  <div class="two-col" style="margin-top:2rem">
+    <div class="card" style="text-align:center">
+      <div style="font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:2rem">Analise de Credito</div>
+      <div style="border-top:1px solid rgba(255,255,255,.2);padding-top:.75rem;margin-top:2rem">
+        <div style="font-weight:700;font-family:'Syne',sans-serif">Marcelo Vazquez</div>
+        <div style="font-size:.75rem;color:var(--text2)">Gerente de Credito · AG Antecipa</div>
+        <div style="font-size:.7rem;color:var(--muted);margin-top:.25rem;font-family:'DM Mono',monospace">Junho/2026</div>
+      </div>
+    </div>
+    <div class="card" style="text-align:center">
+      <div style="font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:2rem">Analise Financeira e Juridica</div>
+      <div style="border-top:1px solid rgba(255,255,255,.2);padding-top:.75rem;margin-top:2rem">
+        <div style="font-weight:700;font-family:'Syne',sans-serif">Rafael Bazan</div>
+        <div style="font-size:.75rem;color:var(--text2)">Consultor Financeiro Contabil e Juridico · AG Antecipa</div>
+        <div style="font-size:.7rem;color:var(--muted);margin-top:.25rem;font-family:'DM Mono',monospace">Junho/2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  AG ANTECIPA · PARECER DE COMITE · MOVITRA LOCACAO E ENGENHARIA LTDA · CNPJ 38.448.292/0001-00 · JUNHO/2026<br>
+  Documento confidencial. Elaborado por Marcelo Vazquez (Credito) e Rafael Bazan (Financeiro/Juridico).<br>
+  marcelovazquezag.github.io/parecer-credito/movitra-junho-2026.html
+</footer>
+
+<script>
+// Chart Serasa — Consultas 12 meses
+const ctxSerasa = document.getElementById('chartSerasa');
+if(ctxSerasa){
+  new Chart(ctxSerasa, {
+    type: 'bar',
+    data: {
+      labels: ['Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26','Abr/26','Mai/26','Jun/26'],
+      datasets: [{
+        label: 'Consultas Serasa',
+        data: [0,0,3,10,2,2,6,6,11,4,0,7],
+        backgroundColor: 'rgba(0,184,148,0.6)',
+        borderColor: 'rgba(0,184,148,1)',
+        borderWidth: 1,
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: '#9ca3af', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+        y: { ticks: { color: '#9ca3af', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true }
+      }
+    }
+  });
+}
+
+// Chart BACEN — Vencimentos
+const ctxBacen = document.getElementById('chartBacen');
+if(ctxBacen){
+  new Chart(ctxBacen, {
+    type: 'bar',
+    data: {
+      labels: ['Ate 30d','31-60d','61-90d','91-180d','181-360d','361-720d','721-1080d','1081-1440d'],
+      datasets: [{
+        label: 'A Vencer (R$)',
+        data: [10803, 9333, 8730, 24180, 36711, 55687, 41118, 11171],
+        backgroundColor: 'rgba(59,130,246,0.6)',
+        borderColor: 'rgba(59,130,246,1)',
+        borderWidth: 1,
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: '#9ca3af', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+        y: { ticks: { color: '#9ca3af', font: { size: 10 }, callback: v => 'R$'+Math.round(v/1000)+'k' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+      }
+    }
+  });
+}
+
+// Chart Faturamento Boletos 12 meses (CredMap)
+const ctxFat = document.getElementById('chartFaturamento');
+if(ctxFat){
+  new Chart(ctxFat, {
+    type: 'bar',
+    data: {
+      labels: ['Mai/25','Jun/25','Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26','Abr/26'],
+      datasets: [{
+        label: 'Emissao Boletos (R$)',
+        data: [250, 250, 250, 250, 18750, 18750, 28750, 1000, 2000, 2000, 2000, 23750],
+        backgroundColor: 'rgba(0,184,148,0.5)',
+        borderColor: 'rgba(0,184,148,1)',
+        borderWidth: 1,
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false },
+        tooltip: { callbacks: { label: ctx => 'R$ '+ctx.raw.toLocaleString('pt-BR') } }
+      },
+      scales: {
+        x: { ticks: { color: '#9ca3af', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+        y: { ticks: { color: '#9ca3af', font: { size: 10 }, callback: v => 'R$'+Math.round(v/1000)+'k' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+      }
+    }
+  });
+}
+
+// Chart Faturamento Declarado
+const ctxFatDecl = document.getElementById('chartFatDeclarado');
+if(ctxFatDecl){
+  new Chart(ctxFatDecl, {
+    type: 'line',
+    data: {
+      labels: ['Jan/24','Fev/24','Mar/24','Abr/24','Mai/24','Jun/24','Jul/24','Ago/24','Set/24','Out/24','Nov/24','Dez/24','Mar/25','Abr/25','Mai/25','Jun/25','Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26'],
+      datasets: [{
+        label: 'Faturamento Declarado (R$)',
+        data: [690479,679742,693785,700088,701055,698458,698459,674014,654518,658997,671760,686014,656351,686327,676984,700022,696541,700088,695015,698145,677202,683789,681550,674022],
+        borderColor: '#00b894',
+        backgroundColor: 'rgba(0,184,148,0.08)',
+        borderWidth: 2,
+        fill: true,
+        tension: 0.3,
+        pointRadius: 3,
+        pointBackgroundColor: '#00b894'
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => 'R$ '+ctx.raw.toLocaleString('pt-BR') } }
+      },
+      scales: {
+        x: { ticks: { color: '#9ca3af', font: { size: 9 }, maxRotation: 45 }, grid: { color: 'rgba(255,255,255,0.05)' } },
+        y: { ticks: { color: '#9ca3af', font: { size: 10 }, callback: v => 'R$'+Math.round(v/1000)+'k' }, grid: { color: 'rgba(255,255,255,0.05)' }, suggestedMin: 600000 }
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>
