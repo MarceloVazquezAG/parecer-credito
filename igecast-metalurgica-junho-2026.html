@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<!-- build: 2026-06-03T09:00 -->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parecer de Crédito — IGECAST METALURGICA · Junho 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0a0f1e;--navy2:#111827;--blue:#1e3a5f;
+  --accent:#ef4444;--accent-dim:rgba(239,68,68,0.12);--accent-border:rgba(239,68,68,0.3);
+  --amber:#f59e0b;--red:#ef4444;--green:#22c55e;--muted:#6b7280;
+  --text:#e5e7eb;--text2:#9ca3af;--border:rgba(255,255,255,0.07);
+}
+body{background:var(--navy);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6}
+h1,h2,h3{font-family:'Syne',sans-serif}
+.mono{font-family:'DM Mono',monospace}
+.hero{position:relative;min-height:340px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(135deg,#0a0f1e 0%,#0d1a0d 60%,#0a1a0a 100%);border-bottom:1px solid var(--border)}
+.hero-orbs{position:absolute;inset:0;pointer-events:none}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55}
+.hero-orb.o1{width:420px;height:420px;top:-80px;left:-60px;background:radial-gradient(circle,rgba(34,197,94,0.45) 0%,transparent 70%)}
+.hero-orb.o2{width:300px;height:300px;bottom:-60px;right:80px;background:radial-gradient(circle,rgba(34,197,94,0.25) 0%,transparent 70%)}
+.hero-content{position:relative;z-index:2;text-align:center;padding:2.5rem 2rem}
+.hero-badge{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);margin-bottom:.75rem;font-family:'DM Mono',monospace}
+.hero-title{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;line-height:1.1;margin-bottom:.75rem;letter-spacing:-.02em}
+.hero-title .accent{color:#22c55e}
+.hero-sub{color:var(--text2);font-size:.9rem;margin-bottom:1.25rem;font-family:'DM Mono',monospace}
+.hero-chips{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+.chip{padding:.3rem .85rem;border-radius:999px;font-size:.75rem;font-weight:600;letter-spacing:.04em;border:1px solid var(--border);background:rgba(255,255,255,0.06);color:var(--text2)}
+.chip.ok{background:rgba(34,197,94,0.15);border-color:rgba(34,197,94,0.4);color:#86efac}
+.chip.warn{background:rgba(245,158,11,0.15);border-color:rgba(245,158,11,0.4);color:#fcd34d}
+.sticky-nav{position:sticky;top:0;z-index:100;background:rgba(10,15,30,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-row{display:flex;align-items:center;padding:.15rem 1.25rem;max-width:1100px;margin:0 auto;flex-wrap:wrap;gap:.15rem}
+.nav-row-credito{border-bottom:1px solid rgba(255,255,255,0.05)}
+.nav-row-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.09em;font-family:'DM Mono',monospace;white-space:nowrap;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.08);padding-right:.75rem;margin-right:.4rem;line-height:1.3;color:#00e6be}
+.nav-row-label.rf{color:#60a5fa}
+.nav-pill{display:inline-block;padding:.3rem .7rem;border-radius:999px;font-size:.72rem;font-weight:600;color:var(--text2);text-decoration:none;transition:all .2s;border:1px solid transparent}
+.nav-pill:hover,.nav-pill.active{background:rgba(34,197,94,0.1);color:#86efac;border-color:rgba(34,197,94,0.3)}
+.nav-pill.nav-rf:hover{background:rgba(59,130,246,0.1)!important;color:#93c5fd!important;border-color:rgba(59,130,246,0.3)!important}
+section{padding:3rem 2rem;max-width:1100px;margin:0 auto}
+section+section{border-top:1px solid var(--border)}
+.section-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#22c55e;font-family:'DM Mono',monospace;margin-bottom:.4rem}
+.section-title{font-size:1.6rem;font-weight:700;margin-bottom:1.75rem}
+.card{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+.card-title{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);margin-bottom:.75rem;font-family:'DM Mono',monospace}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+.kpi-card{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;border-left:3px solid #22c55e}
+.kpi-card.warn{border-left-color:#f59e0b}
+.kpi-card.danger{border-left-color:#ef4444}
+.kpi-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:.3rem;font-family:'DM Mono',monospace}
+.kpi-value{font-size:1.55rem;font-weight:700;font-family:'Syne',sans-serif;line-height:1}
+.kpi-sub{font-size:.72rem;color:var(--text2);margin-top:.25rem}
+.status-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.status-table th{text-align:left;padding:.6rem 1rem;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--border);font-family:'DM Mono',monospace}
+.status-table td{padding:.65rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04)}
+.status-table tr:hover td{background:rgba(255,255,255,0.02)}
+.risk-ok{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(34,197,94,0.15);color:#86efac;border:1px solid rgba(34,197,94,0.3)}
+.risk-high{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(239,68,68,0.15);color:#fca5a5;border:1px solid rgba(239,68,68,0.3)}
+.risk-warn{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(245,158,11,0.15);color:#fcd34d;border:1px solid rgba(245,158,11,0.3)}
+.risk-moderate{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(234,179,8,0.12);color:#fde68a;border:1px solid rgba(234,179,8,0.3)}
+.risk-info{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(59,130,246,0.15);color:#93c5fd;border:1px solid rgba(59,130,246,0.3)}
+.risk-low{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(34,197,94,0.1);color:#6ee7b7;border:1px solid rgba(34,197,94,0.2)}
+.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.data-table th{text-align:left;padding:.55rem .85rem;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-weight:500}
+.data-table td{padding:.55rem .85rem;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text)}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:rgba(255,255,255,0.02)}
+.text-right{text-align:right}
+.text-center{text-align:center}
+.negative{color:#fca5a5}
+.positive{color:#86efac}
+.bold{font-weight:600}
+.chart-wrap{position:relative;height:220px}
+.gauge-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem}
+.gauge-svg{width:160px;height:90px;overflow:visible}
+.gauge-label{font-size:1.8rem;font-weight:700;font-family:'Syne',sans-serif;text-anchor:middle;dominant-baseline:middle}
+.gauge-sub{font-size:.65rem;text-anchor:middle;fill:var(--text2)}
+.gauge-score-label{font-size:.75rem;color:var(--text2);margin-top:.4rem;text-align:center}
+.progress-item{margin-bottom:.75rem}
+.progress-label{display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:.3rem;color:var(--text2)}
+.progress-track{height:7px;background:rgba(255,255,255,0.07);border-radius:999px;overflow:hidden}
+.progress-fill{height:100%;border-radius:999px}
+.risk-row{display:grid;grid-template-columns:80px 1fr auto;gap:1rem;align-items:center;padding:.7rem 1rem;border-radius:8px;margin-bottom:.45rem;background:rgba(255,255,255,0.02);border:1px solid var(--border)}
+.risk-level{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-family:'DM Mono',monospace}
+.risk-level.high{color:#fca5a5}
+.risk-level.medium{color:#fcd34d}
+.risk-level.low{color:#86efac}
+.risk-desc{font-size:.82rem;color:var(--text)}
+.verdict-panel{border-radius:14px;padding:1.75rem 2rem;border:1px solid;margin-top:1.5rem;text-align:center}
+.verdict-panel.ok{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.35)}
+.verdict-panel.warn{background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.35)}
+.verdict-title{font-size:1.4rem;font-weight:700;font-family:'Syne',sans-serif;margin-bottom:.4rem}
+.verdict-panel.ok .verdict-title{color:#86efac}
+.verdict-panel.warn .verdict-title{color:#fcd34d}
+.verdict-sub{font-size:.85rem;color:var(--text2);margin-bottom:1rem}
+.verdict-limit{font-size:1rem;font-weight:600;color:var(--text);margin-top:.75rem}
+.analyst-note{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-left:3px solid #22c55e;border-radius:8px;padding:1.25rem 1.5rem;font-size:.85rem;line-height:1.7;color:var(--text2);margin-top:1.25rem}
+.analyst-note strong{color:var(--text)}
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);color:var(--muted);font-size:.75rem;font-family:'DM Mono',monospace}
+.timeline{list-style:none;padding-left:1.2rem;border-left:2px solid rgba(34,197,94,0.3)}
+.timeline li{position:relative;padding:.4rem 0 .4rem 1rem;font-size:.82rem;color:var(--text2)}
+.timeline li::before{content:'';position:absolute;left:-5px;top:.75rem;width:8px;height:8px;border-radius:50%;background:#22c55e;border:2px solid var(--navy2)}
+.timeline li strong{color:var(--text);display:block}
+.info-box{background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:1rem 1.25rem;font-size:.83rem;color:#fcd34d;margin-top:1rem}
+.analyst-banner{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:var(--navy2);border:1px solid rgba(34,197,94,0.2);border-radius:10px;margin-bottom:1.5rem;border-left:3px solid #22c55e}
+.analyst-banner.rf{border-color:rgba(59,130,246,0.2);border-left-color:#3b82f6}
+.analyst-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;font-family:'Syne',sans-serif;flex-shrink:0;border:2px solid}
+.analyst-name{font-weight:700;font-size:.9rem;font-family:'Syne',sans-serif}
+.analyst-role{font-size:.72rem;color:var(--text2);font-family:'DM Mono',monospace;margin-top:.1rem}
+.analyst-tag{display:inline-block;padding:.15rem .55rem;border-radius:999px;font-size:.65rem;font-weight:600;letter-spacing:.06em;margin-left:.4rem}
+.split-banner{background:linear-gradient(135deg,rgba(30,58,95,0.6) 0%,rgba(10,15,30,0.95) 100%);border:1px solid rgba(59,130,246,0.25);border-radius:16px;padding:2rem 2.5rem;text-align:center;max-width:1100px;margin:0 auto}
+.split-banner h2{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:#93c5fd;margin-bottom:.4rem}
+.risk-dim{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:8px;padding:.9rem 1rem;margin-bottom:.5rem}
+.risk-dim-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem}
+.risk-dim-name{font-size:.75rem;font-weight:700;font-family:'DM Mono',monospace;color:var(--text2);text-transform:uppercase;letter-spacing:.08em}
+.risk-dim-desc{font-size:.8rem;color:var(--text2);line-height:1.55}
+.guarantee-item{display:flex;gap:.75rem;align-items:flex-start;padding:.65rem 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.guarantee-item:last-child{border-bottom:none}
+.guarantee-num{width:22px;height:22px;border-radius:50%;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.15rem}
+.guarantee-text{font-size:.83rem;color:var(--text);line-height:1.5}
+.trigger-item{display:flex;gap:.6rem;align-items:flex-start;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:.82rem;color:var(--text2)}
+.trigger-item:last-child{border-bottom:none}
+.trigger-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:.4rem}
+.veredicto-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+.veredicto-card{background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.3);border-radius:14px;padding:1.5rem;text-align:center}
+.veredicto-card.warn{background:rgba(245,158,11,0.07);border-color:rgba(245,158,11,0.3)}
+.veredicto-card-name{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.5rem}
+.veredicto-card-verdict{font-size:1.6rem;font-weight:800;font-family:'Syne',sans-serif;color:#86efac;margin-bottom:.35rem}
+.veredicto-card.warn .veredicto-card-verdict{color:#fcd34d}
+.veredicto-card-role{font-size:.75rem;color:var(--text2);margin-bottom:.5rem}
+.veredicto-card-sub{font-size:.78rem;color:var(--muted);line-height:1.5}
+.veredicto-unified{background:linear-gradient(135deg,rgba(34,197,94,0.12),rgba(34,197,94,0.06));border:2px solid rgba(34,197,94,0.45);border-radius:16px;padding:2rem;text-align:center;margin-top:1.25rem}
+section.rf-section .section-label{color:#60a5fa}
+section.rf-section .kpi-card{border-left-color:#3b82f6}
+.fin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:1.5rem 0}
+.fin-group{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+.fin-group-title{font-size:.72rem;text-transform:uppercase;letter-spacing:.09em;font-family:'DM Mono',monospace;color:var(--text2);margin-bottom:1rem;font-weight:600}
+.fin-item{display:flex;align-items:center;justify-content:space-between;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.fin-item:last-child{border-bottom:none}
+.fin-item-left{flex:1}
+.fin-item-name{font-size:.82rem;color:var(--text)}
+.fin-item-formula{font-size:.67rem;color:var(--muted);font-family:'DM Mono',monospace;margin-top:.1rem}
+.fin-item-value{font-family:'DM Mono',monospace;font-size:1rem;font-weight:700;text-align:right;min-width:55px;margin-right:.5rem}
+.doc-table{width:100%;border-collapse:collapse;font-size:.8rem}
+.doc-table th{text-align:left;padding:.55rem .9rem;font-size:.67rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--border);font-family:'DM Mono',monospace}
+.doc-table th.text-center{text-align:center}
+.doc-table td{padding:.6rem .9rem;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+.doc-table td.text-center{text-align:center}
+.doc-ok{color:#86efac;font-weight:700}
+.doc-miss{color:#fca5a5;font-weight:700}
+.doc-warn{color:#fcd34d;font-weight:700}
+.doc-na{color:var(--muted)}
+.limit-policy{background:var(--navy2);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin:1.5rem 0}
+.limit-policy-header{background:rgba(34,197,94,.08);padding:1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem}
+.limit-policy-title{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:#86efac}
+.limit-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.limit-col{padding:1.1rem 1.5rem}
+.limit-col:first-child{border-right:1px solid var(--border)}
+.limit-step{display:flex;justify-content:space-between;align-items:center;padding:.45rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.8rem}
+.limit-step:last-child{border-bottom:none}
+.limit-step-label{color:var(--text2)}
+.limit-step-value{font-family:'DM Mono',monospace;font-weight:600;color:var(--text)}
+.limit-final{background:rgba(34,197,94,.06);border-top:2px solid rgba(34,197,94,.35);padding:1.1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+@media(max-width:768px){.kpi-grid{grid-template-columns:1fr 1fr}.two-col,.three-col,.fin-grid,.limit-body,.veredicto-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-orbs">
+    <div class="hero-orb o1"></div>
+    <div class="hero-orb o2"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">AG Antecipa · Parecer de Comitê · Crédito + Financeiro · Junho/2026</div>
+    <h1 class="hero-title"><span class="accent">IGECAST</span><br>METALURGICA LTDA</h1>
+    <div class="hero-sub">CNPJ 17.873.389/0001-82 · Santa Bárbara d'Oeste/SP · Fabricação Equipamentos Elétricos</div>
+    <div class="hero-chips">
+      <span class="chip ok">APROVADO COM CONDIÇÕES</span>
+      <span class="chip">13 anos de mercado · 3 filiais</span>
+      <span class="chip">Serasa: Nada Consta</span>
+      <span class="chip warn">PL Crítico R$ 60k · Prej 2025</span>
+      <span class="chip">Crédito: Marcelo Vazquez</span>
+      <span class="chip">Financeiro: Rafael Bazan</span>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="sticky-nav">
+  <div class="nav-row nav-row-credito">
+    <div class="nav-row-label">Crédito<br>Vazquez</div>
+    <a href="#dashboard" class="nav-pill active">Dashboard</a>
+    <a href="#identificacao" class="nav-pill">Identificação</a>
+    <a href="#serasa" class="nav-pill">Serasa</a>
+    <a href="#bacen" class="nav-pill">BACEN / SCR</a>
+    <a href="#creditbox" class="nav-pill">CreditBox</a>
+    <a href="#patrimonio" class="nav-pill">Patrimônio</a>
+    <a href="#socios" class="nav-pill">Sócios</a>
+    <a href="#riscos" class="nav-pill">Riscos</a>
+    <a href="#parecer-credito" class="nav-pill">Parecer</a>
+  </div>
+  <div class="nav-row">
+    <div class="nav-row-label rf">Financeiro<br>Bazan</div>
+    <a href="#financeiro" class="nav-pill nav-rf">BP / DRE</a>
+    <a href="#docs" class="nav-pill nav-rf">Docs</a>
+    <a href="#negocio" class="nav-pill nav-rf">Mod. Negócio</a>
+    <a href="#juridico" class="nav-pill nav-rf">Análise Jurídica</a>
+    <a href="#risco-dim" class="nav-pill nav-rf">Risco Detalhado</a>
+    <a href="#garantias" class="nav-pill nav-rf">Garantias</a>
+    <a href="#monitoramento" class="nav-pill nav-rf">Monitoramento</a>
+    <a href="#parecer-financeiro" class="nav-pill nav-rf">Parecer Financeiro</a>
+    <a href="#veredicto" class="nav-pill" style="color:#86efac;border-color:rgba(34,197,94,0.3);background:rgba(34,197,94,0.1);font-weight:700">Veredicto</a>
+  </div>
+</nav>
+
+<!-- 0. DASHBOARD -->
+<section id="dashboard">
+  <div class="section-label">Seção 0</div>
+  <h2 class="section-title">Dashboard Executivo</h2>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Faturamento 2025</div>
+      <div class="kpi-value">R$ 16,9M</div>
+      <div class="kpi-sub">+31% vs 2024 · Crescimento acelerado</div>
+    </div>
+    <div class="kpi-card danger">
+      <div class="kpi-label">Lucro / Prej. 2025</div>
+      <div class="kpi-value negative">- R$ 1,99M</div>
+      <div class="kpi-sub">Reversão após LL R$2,5M em 2024</div>
+    </div>
+    <div class="kpi-card warn">
+      <div class="kpi-label">Dívida Bancária Abr/26</div>
+      <div class="kpi-value">R$ 8,05M</div>
+      <div class="kpi-sub">8 bancos · 385 operações SCR</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Faturamento Abr/26</div>
+      <div class="kpi-value positive">R$ 1,94M</div>
+      <div class="kpi-sub">Maior mês 12m · Tendência alta</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Painel de Status Geral</div>
+    <table class="status-table">
+      <thead><tr><th>Dimensão</th><th>Situação</th><th>Detalhe</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Situação Receita Federal</td><td>ATIVA desde 08/03/2013</td><td>13 anos · sem restrições</td><td><span class="risk-ok">OK</span></td></tr>
+        <tr><td>Protestos Serasa</td><td>Nada consta</td><td>Zero pendências financeiras</td><td><span class="risk-ok">OK</span></td></tr>
+        <tr><td>Consultas Serasa (Mai/26)</td><td>63 consultas</td><td>Alta demanda factoring · atenção</td><td><span class="risk-warn">ATENÇÃO</span></td></tr>
+        <tr><td>BACEN Vencidos</td><td>R$ 296k (3,68%)</td><td>Conta garantida R$68k vencida 15-30d</td><td><span class="risk-warn">ATENÇÃO</span></td></tr>
+        <tr><td>Patrimônio Líquido 2025</td><td>R$ 60k</td><td>Queda de R$3,1M (2024) → R$60k</td><td><span class="risk-high">CRÍTICO</span></td></tr>
+        <tr><td>Liquidez Corrente 2025</td><td>0,79x</td><td>AC &lt; PC em R$2,3M</td><td><span class="risk-high">CRÍTICO</span></td></tr>
+        <tr><td>Faturamento Mai/26</td><td>R$ 1,94M (Abr)</td><td>Tendência de recuperação em 2026</td><td><span class="risk-ok">OK</span></td></tr>
+        <tr><td>Processos Empresa</td><td>14 processos</td><td>9 cíveis + 5 trabalhistas · R$177k trab</td><td><span class="risk-warn">ATENÇÃO</span></td></tr>
+        <tr><td>PGE-SP Dívida Ativa</td><td>R$ 2.079,69 ICMS</td><td>Valor residual · baixo impacto</td><td><span class="risk-low">BAIXO</span></td></tr>
+        <tr><td>Sanções Nacionais/Internacionais</td><td>Nada consta</td><td>CEIS, CNEP, OFAC, ONU limpos</td><td><span class="risk-ok">OK</span></td></tr>
+        <tr><td>Coligada Ativa</td><td>IGECAST Distribuidora</td><td>Mesmos sócios · fat. Abr/26 R$28k</td><td><span class="risk-low">BAIXO</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 1. IDENTIFICAÇÃO -->
+<section id="identificacao">
+  <div class="section-label">Seção 1</div>
+  <h2 class="section-title">Identificação Cadastral</h2>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Dados da Empresa</div>
+      <table class="data-table">
+        <tr><td>Razão Social</td><td class="bold">IGECAST METALURGICA LTDA</td></tr>
+        <tr><td>CNPJ</td><td class="mono">17.873.389/0001-82</td></tr>
+        <tr><td>Abertura</td><td>08/03/2013 · 13 anos</td></tr>
+        <tr><td>CNAE Principal</td><td>27.90-2/99 · Fab. Equipamentos Elétricos</td></tr>
+        <tr><td>Natureza Jurídica</td><td>206-2 · Soc. Empresária Limitada</td></tr>
+        <tr><td>Capital Social</td><td>R$ 114.000,00</td></tr>
+        <tr><td>Regime Tributário</td><td>Normal — RPA (não Simples)</td></tr>
+        <tr><td>Porte RF</td><td>DEMAIS</td></tr>
+        <tr><td>Situação Cadastral</td><td><span class="risk-ok">ATIVA</span></td></tr>
+        <tr><td>IE</td><td class="mono">606.123.350.117 · Habilitado SEFAZ</td></tr>
+        <tr><td>Filiais</td><td>3 filiais em Santa Bárbara d'Oeste/SP</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Localização e Contatos</div>
+      <table class="data-table">
+        <tr><td>Endereço</td><td>Rua Nivaldo José Mattedi, 101 – Anexo 111</td></tr>
+        <tr><td>Bairro</td><td>Parque Industrial Bandeirantes</td></tr>
+        <tr><td>CEP</td><td class="mono">13457-170</td></tr>
+        <tr><td>Cidade/UF</td><td>Santa Bárbara d'Oeste / SP</td></tr>
+        <tr><td>Telefone</td><td>(19) 3037-6393 / (19) 3199-0689</td></tr>
+        <tr><td>E-mail</td><td>adm@igecast.com.br</td></tr>
+        <tr><td>Site</td><td>igecast.com.br · Publicado</td></tr>
+        <tr><td>Domínio</td><td>Responsável: José Thiago Castro da Silva</td></tr>
+      </table>
+      <div class="card-title" style="margin-top:1rem">Localização</div>
+      <div style="border-radius:8px;overflow:hidden;margin-top:.5rem">
+        <iframe
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFmBWY&q=Rua+Nivaldo+Jose+Mattedi+101+Santa+Barbara+d'Oeste+SP+Brazil"
+          width="100%" height="180" style="border:0;display:block" allowfullscreen loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">CNAEs Secundários</div>
+    <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem">
+      <span class="risk-info">28.40-2/00 Fab. Máquinas-Ferramenta</span>
+      <span class="risk-info">28.61-5/00 Fab. Máquinas Metalúrgicas</span>
+      <span class="risk-info">28.69-1/00 Fab. Máquinas Industriais</span>
+      <span class="risk-info">46.85-1/00 Com. Atacadista Siderúrgico</span>
+      <span class="risk-info">25.39-0/02 Tratamento e Revestimento Metais</span>
+      <span class="risk-info">25.39-0/01 Usinagem e Solda</span>
+      <span class="risk-info">13.53-7/00 Fab. Artefatos Cordoaria</span>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Quadro Societário e Coligadas</div>
+    <table class="data-table">
+      <thead><tr><th>Nome</th><th>CPF</th><th>Qualificação</th><th>Entrada</th><th>PEP</th><th>Sanções</th></tr></thead>
+      <tbody>
+        <tr><td class="bold">José Thiago Castro da Silva</td><td class="mono">329.054.728-04</td><td>Sócio-Administrador 50%</td><td>03/2013</td><td><span class="risk-ok">Não</span></td><td><span class="risk-ok">Nada Consta</span></td></tr>
+        <tr><td class="bold">Cleudilaine Medeiros Ferreira Castro</td><td class="mono">361.045.288-99</td><td>Sócia-Administradora 50%</td><td>03/2013</td><td><span class="risk-ok">Não</span></td><td><span class="risk-ok">Nada Consta</span></td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:1rem">
+      <div class="card-title">Coligadas e Participações</div>
+      <table class="data-table" style="margin-top:.5rem">
+        <thead><tr><th>Empresa</th><th>CNPJ</th><th>Status</th><th>Participação</th><th>Fat. Abr/26</th><th>Risco</th></tr></thead>
+        <tbody>
+          <tr><td>IGECAST DISTRIBUIDORA LTDA (ex-Trefilação)</td><td class="mono">30.793.924/0001-53</td><td><span class="risk-ok">ATIVA</span></td><td>Thiago 50% · Cleudilaine 50%</td><td>R$ 28k (queda)</td><td><span class="risk-low">Contágio Baixo</span></td></tr>
+          <tr><td>TREFIMAQ INDÚSTRIA E COMÉRCIO MÁQUINAS</td><td class="mono">05.966.480/0001-63</td><td><span class="risk-warn">Verificar</span></td><td>Thiago (participação)</td><td>N/D</td><td><span class="risk-warn">Monitorar</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="info-box" style="margin-top:.75rem">
+      <strong>INPI — Propriedade Intelectual:</strong> A empresa detém 3 registros de modelo de utilidade (2019–2020) para suportes de cerca elétrica e dispositivo de dobra de alumínio, demonstrando capacidade de inovação industrial própria.
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Histórico Cadastral Relevante</div>
+    <ul class="timeline">
+      <li><strong>08/03/2013</strong>Fundação da empresa — capital inicial R$35.000</li>
+      <li><strong>02/03/2017</strong>Mudança de endereço (R. Milton Kilner Pio → R. Nivaldo Mattedi)</li>
+      <li><strong>12/12/2023</strong>Aumento de capital R$35k → R$114k</li>
+      <li><strong>17/10/2023</strong>Abertura Filial 17.873.389/0003-44</li>
+      <li><strong>10/08/2025</strong>Baixa Filial 17.873.389/0002-63 (endereço R. Cataguazes 124)</li>
+      <li><strong>26/05/2026</strong>Alterações cadastrais recentes (situação e capital atualizados)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 2. SERASA -->
+<section id="serasa">
+  <div class="section-label">Seção 2</div>
+  <h2 class="section-title">Serasa / Boa Vista</h2>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Pendências Financeiras</div>
+      <div class="kpi-value positive">Nada Consta</div>
+      <div class="kpi-sub">PEFIN / REFIN / Ações Judiciais</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Protestos Boa Vista</div>
+      <div class="kpi-value positive">Nada Consta</div>
+      <div class="kpi-sub">Zero ocorrências em cartório</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Cheques</div>
+      <div class="kpi-value positive">Nada Consta</div>
+      <div class="kpi-sub">Sem fundos / sustados: zero</div>
+    </div>
+    <div class="kpi-card warn">
+      <div class="kpi-label">Consultas Mai/26</div>
+      <div class="kpi-value">63</div>
+      <div class="kpi-sub">Pico vs. média 20/mês em 2025</div>
+    </div>
+  </div>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Relacionamento Segmento Financeiro</div>
+      <table class="data-table">
+        <thead><tr><th>Empresa</th><th>Tipo</th><th>Ult. Ocorrência</th></tr></thead>
+        <tbody>
+          <tr><td>Eurocamp Securitizadora S/A</td><td>Factoring</td><td>02/06/2026</td></tr>
+          <tr><td>Hope Fomento Mercantil Ltda</td><td>Factoring</td><td>01/06/2026</td></tr>
+          <tr><td>Valorem FD Invest Dir Creditori</td><td>Factoring</td><td>01/06/2026</td></tr>
+          <tr><td>Multiplike FD Invest Direitos C</td><td>Factoring</td><td>01/06/2026</td></tr>
+          <tr><td>CDP Capital Factoring Ltda ME</td><td>Factoring</td><td>29/05/2026</td></tr>
+          <tr><td>Way Securitizadora S/A</td><td>Factoring</td><td>25/05/2026</td></tr>
+          <tr><td>Coinvest Securitizadora S/A</td><td>Factoring</td><td>25/05/2026</td></tr>
+          <tr><td>Banco Daycoval S/A</td><td>Banco</td><td>24/05/2024</td></tr>
+          <tr><td>Banco Santander Brasil S/A</td><td>Banco</td><td>23/05/2024</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Consultas 12 Meses (Serasa)</div>
+      <div class="chart-wrap">
+        <canvas id="consultasChart"></canvas>
+      </div>
+      <div class="info-box" style="margin-top:.75rem">
+        <strong>Pico de 63 consultas em Mai/26</strong> reflete processo ativo de captação junto a factorings. Em 2025 a média era ~18/mês. Não indica negativação — confirma busca por liquidez de curto prazo.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. BACEN/SCR -->
+<section id="bacen">
+  <div class="section-label">Seção 3</div>
+  <h2 class="section-title">BACEN / SCR — Abr/2026</h2>
+  <div class="kpi-grid">
+    <div class="kpi-card warn">
+      <div class="kpi-label">Carteira Ativa Total</div>
+      <div class="kpi-value">R$ 8,05M</div>
+      <div class="kpi-sub">96,3% a vencer · 3,7% vencidos</div>
+    </div>
+    <div class="kpi-card danger">
+      <div class="kpi-label">Créditos Vencidos</div>
+      <div class="kpi-value negative">R$ 296k</div>
+      <div class="kpi-sub">3,68% — 4 faixas de vencimento</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Nº Instituições</div>
+      <div class="kpi-value">8</div>
+      <div class="kpi-sub">92,43% docs processados</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Total Operações</div>
+      <div class="kpi-value">385</div>
+      <div class="kpi-sub">0 em discordância · 0 sob judice</div>
+    </div>
+  </div>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Composição da Carteira por Modalidade</div>
+      <div class="chart-wrap">
+        <canvas id="bacenDonut"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Detalhe das Modalidades</div>
+      <table class="data-table">
+        <thead><tr><th>Modalidade</th><th class="text-right">Valor</th><th class="text-right">% Cart.</th></tr></thead>
+        <tbody>
+          <tr><td>Cap. Giro &gt;365d</td><td class="text-right">R$ 2.974k</td><td class="text-right">36,9%</td></tr>
+          <tr><td>Outros Empréstimos</td><td class="text-right">R$ 2.444k</td><td class="text-right">30,4%</td></tr>
+          <tr><td>Desconto Duplicatas</td><td class="text-right">R$ 2.127k</td><td class="text-right">26,4%</td></tr>
+          <tr><td>Financ. Veículos</td><td class="text-right">R$ 262k</td><td class="text-right">3,3%</td></tr>
+          <tr><td>Cheque Especial</td><td class="text-right">R$ 165k</td><td class="text-right">2,1%</td></tr>
+          <tr><td>Conta Garantida</td><td class="text-right negative">R$ 68k <small>(vencido)</small></td><td class="text-right">0,8%</td></tr>
+          <tr><td>Cartão Crédito</td><td class="text-right">R$ 13k</td><td class="text-right">0,2%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Cronograma de Vencimentos (A Vencer)</div>
+    <div class="chart-wrap">
+      <canvas id="bacenVenc"></canvas>
+    </div>
+    <div class="info-box" style="margin-top:.75rem">
+      <strong>Concentração de longo prazo:</strong> R$2,57M vence entre 721 e 5.400 dias, indicando compromissos financeiros de longo prazo relevantes. Desconto de duplicatas R$2,1M representa operações de giro saudáveis mas com alta rotatividade exigida.
+    </div>
+  </div>
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">BACEN Sócios — Abr/2026</div>
+    <table class="data-table">
+      <thead><tr><th>Sócio</th><th>Carteira Ativa</th><th>Vencidos</th><th>Nº Inst.</th><th>Modalidades Principais</th></tr></thead>
+      <tbody>
+        <tr><td>José Thiago Castro da Silva</td><td>R$ 342k</td><td class="positive">R$ 0</td><td>3</td><td>Cred. Pessoal R$239k · Cheq. Esp R$48k · Cartão R$55k</td></tr>
+        <tr><td>Cleudilaine M. F. Castro</td><td>R$ 232k</td><td class="positive">R$ 0</td><td>4</td><td>Cred. Pessoal R$113k · Cheq. Esp R$54k · Cartão R$65k</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 4. CREDITBOX -->
+<section id="creditbox">
+  <div class="section-label">Seção 4</div>
+  <h2 class="section-title">CreditBox / CredMap — Nuclea</h2>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Faturamento Emitente — Últimos 12 Meses (CredMap)</div>
+      <div class="chart-wrap" style="height:240px">
+        <canvas id="fatChart"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Score e ILM — Visão Emitente</div>
+      <div class="gauge-wrap">
+        <svg class="gauge-svg" viewBox="0 0 160 90">
+          <defs>
+            <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#ef4444"/>
+              <stop offset="40%" style="stop-color:#f59e0b"/>
+              <stop offset="70%" style="stop-color:#22c55e"/>
+              <stop offset="100%" style="stop-color:#16a34a"/>
+            </linearGradient>
+          </defs>
+          <path d="M 15 80 A 65 65 0 0 1 145 80" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="12" stroke-linecap="round"/>
+          <path d="M 15 80 A 65 65 0 0 1 145 80" fill="none" stroke="url(#gaugeGrad)" stroke-width="12" stroke-linecap="round" stroke-dasharray="204" stroke-dashoffset="0" opacity="0.3"/>
+          <!-- ponteiro aprox 60% = score médio-alto  -->
+          <path d="M 15 80 A 65 65 0 0 1 115 35" fill="none" stroke="#22c55e" stroke-width="12" stroke-linecap="round" stroke-dasharray="204" stroke-dashoffset="0"/>
+          <text x="80" y="75" class="gauge-label" fill="#e5e7eb">Médio+</text>
+          <text x="80" y="88" class="gauge-sub">CredMap — Emitente C14-C16</text>
+        </svg>
+        <div class="gauge-score-label">Emissão média R$1,4-1,8M/mês · Boa classificação</div>
+      </div>
+      <div style="margin-top:1rem">
+        <div class="card-title">ILM — Índice de Liquidez (Sacado)</div>
+        <div class="progress-item">
+          <div class="progress-label"><span>ILM 30 dias</span><span>41–43%</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:42%;background:#f59e0b"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>ILM 60 dias</span><span>57–59%</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:58%;background:#f59e0b"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>ILM 90 dias</span><span>71–73%</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:72%;background:#22c55e"></div></div>
+        </div>
+      </div>
+      <div class="info-box" style="margin-top:.75rem;">
+        <strong>ILM 90d de 71–73%</strong>: sacados pagam bem em até 90 dias. Títulos curtos (30-60d) adequados para desconto. Pontualidade como emitente: 51–83% pontual nos meses recentes.
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Pontualidade Como Sacado (Historico de Pagamento)</div>
+    <table class="data-table">
+      <thead><tr><th>Mês</th><th>Pontual</th><th>1–7d</th><th>8–15d</th><th>16–30d</th><th>31–60d</th><th>Total (aprox)</th></tr></thead>
+      <tbody>
+        <tr><td>Mar/2026</td><td class="positive">41–43%</td><td>45–47%</td><td>11–13%</td><td>0,4–1%</td><td>0,3–0,4%</td><td>R$ 400–500k</td></tr>
+        <tr><td>Fev/2026</td><td class="positive">51–53%</td><td>35–37%</td><td>9–11%</td><td>1–3%</td><td>0,06%</td><td>R$ 400–500k</td></tr>
+        <tr><td>Jan/2026</td><td class="warn">43–45%</td><td>43–45%</td><td>11–13%</td><td>0,3–0,4%</td><td>0,2–0,3%</td><td>R$ 300–400k</td></tr>
+        <tr><td>Dez/2025</td><td class="warn">43–45%</td><td>25–27%</td><td>15–17%</td><td>9–11%</td><td>1–3%</td><td>R$ 500–600k</td></tr>
+        <tr><td>Nov/2025</td><td class="positive">81–83%</td><td>11–13%</td><td>0,1–0,2%</td><td>0,06%</td><td>3–5%</td><td>R$ 600–700k</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.8rem;color:var(--text2);margin-top:.75rem">Pontualidade como sacada é heterogênea: Nov/25 excelente (82%), Dez/25 deteriorou (43%). Padrão geral aceitável, sem concentração em 60d+.</p>
+  </div>
+</section>
+
+<!-- 5. PATRIMÔNIO -->
+<section id="patrimonio">
+  <div class="section-label">Seção 5</div>
+  <h2 class="section-title">Patrimônio e Ativos</h2>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Imobilizado (BP 2025)</div>
+      <table class="data-table">
+        <thead><tr><th>Item</th><th class="text-right">Valor (R$)</th></tr></thead>
+        <tbody>
+          <tr><td>Imobilizado Bruto</td><td class="text-right bold">R$ 6.320k</td></tr>
+          <tr><td>(–) Depreciação Acumulada</td><td class="text-right negative">(R$ 1.213k)</td></tr>
+          <tr><td>Imobilizado Líquido</td><td class="text-right bold positive">R$ 5.107k</td></tr>
+          <tr><td>Consórcio em Andamento</td><td class="text-right">R$ 669k</td></tr>
+          <tr><td>Depósitos Judiciais</td><td class="text-right">R$ 5k</td></tr>
+          <tr><td>Aplic. Financeiras LP</td><td class="text-right">R$ 50k</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:.8rem;color:var(--text2);margin-top:.75rem">Imobilizado expressivo de R$5,1M líquido representa maquinário metalúrgico industrial de médio e grande porte. Crescimento vs 2024 (R$4,3M liq.) indica investimento contínuo em equipamentos.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Bens Sócios (IRPF 2025 — Thiago Castro)</div>
+      <table class="data-table">
+        <thead><tr><th>Bem</th><th class="text-right">Valor declarado</th></tr></thead>
+        <tbody>
+          <tr><td>Imóvel Res. R. Cataguazes 178, Sta Bárbara</td><td class="text-right">R$ 100k</td></tr>
+          <tr><td>Ford Ranger LTDCD4A32C 2020/21</td><td class="text-right">R$ 210k</td></tr>
+          <tr><td>Jeep Commander OVR T270 2021/22</td><td class="text-right">R$ 200k</td></tr>
+          <tr><td>Ford Maverick 2023 (vendido Cleudilaine)</td><td class="text-right negative">R$ 0 (alienado)</td></tr>
+          <tr><td>Quotas IGECAST Metalúrgica (50%)</td><td class="text-right">R$ 17,5k</td></tr>
+          <tr><td>Quotas IGECAST Distribuidora (50%)</td><td class="text-right">R$ 10k</td></tr>
+          <tr><td>Aplicações Financeiras (BB + Santander)</td><td class="text-right">R$ 28k</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:.8rem;color:var(--text2);margin-top:.75rem">Bens pessoais modestos considerando o porte da empresa. Patrimônio pessoal líquido estimado em R$400k (bens R$567k – dívidas R$166k). Dividendos isentos recebidos de IGECAST Metalúrgica: R$580k em 2024 (ano-base IRPF).</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6. SÓCIOS -->
+<section id="socios">
+  <div class="section-label">Seção 6</div>
+  <h2 class="section-title">Análise dos Sócios</h2>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">José Thiago Castro da Silva — Sócio-Administrador</div>
+      <table class="data-table">
+        <tr><td>CPF</td><td class="mono">329.054.728-04</td></tr>
+        <tr><td>Nascimento</td><td>05/12/1984 · 41 anos</td></tr>
+        <tr><td>Profissão declarada IRPF</td><td>Engenheiro Mecânico</td></tr>
+        <tr><td>Participação</td><td>50% · Administrador desde 03/2013</td></tr>
+        <tr><td>PEP / COAF</td><td><span class="risk-ok">Nada Consta</span></td></tr>
+        <tr><td>Sanções Nacionais</td><td><span class="risk-ok">Nada Consta</span></td></tr>
+        <tr><td>Sanções Internacionais</td><td><span class="risk-ok">Limpo (OFAC/ONU/UE/UK)</span></td></tr>
+        <tr><td>Processos Pessoais</td><td>2 processos · R$4.398 · Arquivados (2016-17)</td></tr>
+        <tr><td>BACEN Pessoal Abr/26</td><td>R$342k · zero vencidos · 3 inst.</td></tr>
+        <tr><td>Renda IRPF 2024</td><td>R$55k tributável + R$580k dividendos isentos</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Cleudilaine Medeiros Ferreira Castro — Sócia-Administradora</div>
+      <table class="data-table">
+        <tr><td>CPF</td><td class="mono">361.045.288-99</td></tr>
+        <tr><td>Nascimento</td><td>20/05/1988 · 38 anos</td></tr>
+        <tr><td>Participação</td><td>50% · Administradora desde 03/2013</td></tr>
+        <tr><td>PEP / COAF</td><td><span class="risk-ok">Nada Consta</span></td></tr>
+        <tr><td>Sanções</td><td><span class="risk-ok">Nada Consta</span></td></tr>
+        <tr><td>Processos Pessoais</td><td><span class="risk-warn">2 processos</span> — Execução Fiscal (suspenso R$1.293) + Ação Penal "Adulteração Sinal Ident." (13/10/2025 · suspenso)</td></tr>
+        <tr><td>BACEN Pessoal Abr/26</td><td>R$232k · zero vencidos · 4 inst.</td></tr>
+      </table>
+      <div class="info-box" style="margin-top:.75rem;background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.2);color:#fca5a5">
+        <strong>Atenção:</strong> Cleudilaine possui processo penal ativo (Okt/2025) por "adulteração de sinal identificador" (SUSPENSO). Valor irrisório (R$1.293), porém requer diligência jurídica para confirmação de natureza e impacto reputacional.
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Regime de Bens — Certidão de Casamento</div>
+    <p style="font-size:.85rem;color:var(--text2)">Casados em <strong style="color:var(--text)">28/12/2007</strong> sob o regime de <strong style="color:#fcd34d">Comunhão Parcial de Bens</strong> (Piracicaba-SP, 3º Subdistrito). Os bens adquiridos na constância do casamento são comunicáveis, ampliando a base patrimonial para execução de garantias pessoais. Bens anteriores ao casamento permanecem separados.</p>
+  </div>
+</section>
+
+<!-- 7. RISCOS -->
+<section id="riscos">
+  <div class="section-label">Seção 7</div>
+  <h2 class="section-title">Matriz de Riscos Consolidada</h2>
+  <div class="risk-row"><div class="risk-level high">ALTO</div><div class="risk-desc"><strong>Patrimônio Líquido Crítico:</strong> PL de apenas R$60k em Dez/25, após prejuízo de R$1,99M. Empresa tecnicamente insolvente sob ótica contábil se não houver aporte.</div><span class="risk-high">Financeiro</span></div>
+  <div class="risk-row"><div class="risk-level high">ALTO</div><div class="risk-desc"><strong>Liquidez Corrente Negativa:</strong> LC de 0,79x indica déficit de caixa de curto prazo de R$2,3M. Empresa depende de renovação contínua de crédito bancário (R$8M BACEN).</div><span class="risk-high">Estrutural</span></div>
+  <div class="risk-row"><div class="risk-level high">ALTO</div><div class="risk-desc"><strong>Reversão de Resultado 2025:</strong> Salto de LL+R$2,5M (2024) para Prej-R$2M (2025) com receita crescendo 31%. Deterioração do CPV e despesas financeiras (+240%) são causas principais.</div><span class="risk-high">Operacional</span></div>
+  <div class="risk-row"><div class="risk-level medium">MÉDIO</div><div class="risk-desc"><strong>Alavancagem Bancária Elevada:</strong> Dívida BACEN R$8M representa 47% do faturamento anual 2025 (R$16,9M). Despesas financeiras consumiram R$1,09M em 2025, prejudicando resultado.</div><span class="risk-warn">Financeiro</span></div>
+  <div class="risk-row"><div class="risk-level medium">MÉDIO</div><div class="risk-desc"><strong>Vencidos BACEN (R$296k / 3,68%):</strong> Conta garantida R$68k (15-30d) e cap. giro R$228k vencido (31-120d). Sinais de stress de caixa pontual mas ainda controlável.</div><span class="risk-warn">Crédito</span></div>
+  <div class="risk-row"><div class="risk-level medium">MÉDIO</div><div class="risk-desc"><strong>Alta demanda por factoring (63 consultas Mai/26):</strong> Pico de consultas indica busca ativa por antecipação, confirmando pressão de liquidez. Empresa já opera com múltiplas securitizadoras.</div><span class="risk-warn">Comportamental</span></div>
+  <div class="risk-row"><div class="risk-level medium">MÉDIO</div><div class="risk-desc"><strong>Processo Penal Cleudilaine:</strong> Ação penal de Okt/2025 por adulteração de sinal identificador, suspenso. Embora de baixo valor, risco reputacional e jurídico para garantia pessoal.</div><span class="risk-warn">Jurídico</span></div>
+  <div class="risk-row"><div class="risk-level low">BAIXO</div><div class="risk-desc"><strong>Coligada Distribuidora:</strong> IGECAST Distribuidora (mesmo QSA) tem faturamento decrescente (Abr/26 R$28k) sem pendências Serasa. Risco de contágio limitado mas monitorável.</div><span class="risk-low">Contágio</span></div>
+  <div class="risk-row"><div class="risk-level low">BAIXO</div><div class="risk-desc"><strong>Ponto Positivo — Crescimento faturamento:</strong> Jan-Abr/2026 aceleração expressiva (Jan R$881k → Abr R$1,94M). Reversão operacional em curso sugere 2026 potencialmente positivo.</div><span class="risk-ok">Oportunidade</span></div>
+</section>
+
+<!-- 8. PARECER CRÉDITO -->
+<section id="parecer-credito">
+  <div class="section-label">Seção 8</div>
+  <h2 class="section-title">Parecer de Crédito — Marcelo Vazquez</h2>
+
+  <div class="analyst-banner">
+    <div class="analyst-avatar" style="background:rgba(34,197,94,0.15);border-color:#22c55e;color:#22c55e">MV</div>
+    <div>
+      <div class="analyst-name">Marcelo Vazquez <span class="analyst-tag" style="background:rgba(34,197,94,0.15);color:#86efac;border:1px solid rgba(34,197,94,0.3)">Analista de Crédito</span></div>
+      <div class="analyst-role">AG Antecipa · Diretor de Crédito · Junho/2026</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title" style="color:#86efac">Pontos Fortes</div>
+      <ul class="timeline">
+        <li><strong>13 anos de mercado consolidado</strong>Empresa fundada em 2013, com 3 filiais ativas, domínio próprio e patentes registradas no INPI. Histórico operacional sólido.</li>
+        <li><strong>Faturamento em aceleração</strong>De R$881k (Jan/26) para R$1,94M (Abr/26). Tendência de recuperação forte após queda pontual em Dez/25.</li>
+        <li><strong>Serasa completamente limpo</strong>Zero protestos, PEFIN, REFIN, cheques devolvidos. Relacionamento financeiro ativo com múltiplas securitizadoras.</li>
+        <li><strong>ILM sacado 71–73% em 90d</strong>Sacados pagam com boa pontualidade em 90 dias. Títulos de até 60d são elegíveis com baixo risco de inadimplência.</li>
+        <li><strong>Imobilizado R$5,1M líquido</strong>Maquinário industrial expressivo como base de garantia real potencial. Setor metalúrgico com ciclo de ativo longo.</li>
+        <li><strong>IRPF confirma dividendos R$580k (2024)</strong>Distribuição significativa ao sócio, demonstrando capacidade de geração de caixa no período anterior.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:#fcd34d">Pontos de Atenção</div>
+      <ul class="timeline">
+        <li><strong>PL crítico R$60k (Dez/25)</strong>Erosão de R$3M em um único exercício. Empresa opera com patrimônio praticamente nulo e dívida bancária de R$8M.</li>
+        <li><strong>Prejuízo R$1,99M em 2025</strong>Despesas financeiras cresceram 240% (R$321k→R$1,09M). CPV/RL subiu de 54% para 90%. Margens colapsaram.</li>
+        <li><strong>Vencidos BACEN R$296k</strong>Conta garantida e capital de giro com parcelas vencidas. Sinal de stress de caixa recente.</li>
+        <li><strong>63 consultas Serasa Mai/26</strong>Volume 3x acima da média histórica. Empresa buscando ativamente liquidez junto a factorings.</li>
+        <li><strong>Processo penal Cleudilaine</strong>Ação de outubro/2025 por adulteração de sinal identificador. Diligência adicional necessária antes de aceitar como garantidora.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="limit-policy" style="margin-top:1.5rem">
+    <div class="limit-policy-header">
+      <span style="font-size:1rem">📊</span>
+      <span class="limit-policy-title">Cálculo do Limite — Política AG Antecipa</span>
+    </div>
+    <div class="limit-body">
+      <div class="limit-col">
+        <div class="card-title" style="margin-bottom:1rem">Base de Cálculo</div>
+        <div class="limit-step"><span class="limit-step-label">Faturamento Nov/25</span><span class="limit-step-value">R$ 1.266k</span></div>
+        <div class="limit-step"><span class="limit-step-label">Faturamento Dez/25</span><span class="limit-step-value">R$ 539k</span></div>
+        <div class="limit-step"><span class="limit-step-label">Faturamento Jan/26</span><span class="limit-step-value">R$ 881k</span></div>
+        <div class="limit-step"><span class="limit-step-label">Faturamento Fev/26</span><span class="limit-step-value">R$ 960k</span></div>
+        <div class="limit-step"><span class="limit-step-label">Faturamento Mar/26</span><span class="limit-step-value">R$ 1.591k</span></div>
+        <div class="limit-step"><span class="limit-step-label">Faturamento Abr/26</span><span class="limit-step-value">R$ 1.940k</span></div>
+        <div class="limit-step"><span class="limit-step-label">Média 6 meses</span><span class="limit-step-value bold">R$ 1.196k</span></div>
+      </div>
+      <div class="limit-col">
+        <div class="card-title" style="margin-bottom:1rem">Aplicação da Política</div>
+        <div class="limit-step"><span class="limit-step-label">Faixa ≤ R$2,5M/mês</span><span class="limit-step-value">40% aplicável</span></div>
+        <div class="limit-step"><span class="limit-step-label">Teto máximo política</span><span class="limit-step-value">R$ 2.000k</span></div>
+        <div class="limit-step"><span class="limit-step-label">Base técnica (40%)</span><span class="limit-step-value">R$ 478k</span></div>
+        <div class="limit-step"><span class="limit-step-label">Fator risco (PL crítico + prej.)</span><span class="limit-step-value negative">× 0,50</span></div>
+        <div class="limit-step"><span class="limit-step-label">Limite ajustado ao risco</span><span class="limit-step-value">R$ 239k</span></div>
+        <div class="limit-step"><span class="limit-step-label">Arredondamento</span><span class="limit-step-value bold positive">R$ 250.000</span></div>
+      </div>
+    </div>
+    <div class="limit-final">
+      <div>
+        <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);font-family:'DM Mono',monospace">Limite Sugerido ao Comitê</div>
+        <div style="font-size:1.5rem;font-weight:800;font-family:'Syne',sans-serif;color:#86efac">R$ 250.000</div>
+        <div style="font-size:.75rem;color:var(--text2)">Concentração máx. 30% por sacado · Prazo máx. 60 dias</div>
+      </div>
+      <span class="risk-warn" style="font-size:.85rem;padding:.5rem 1rem">APROVADO COM CONDIÇÕES</span>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Condições Mandatórias para Aprovação</div>
+    <div class="guarantee-item">
+      <div class="guarantee-num" style="background:rgba(239,68,68,0.2);color:#fca5a5">1</div>
+      <div class="guarantee-text"><strong>Aval solidário de ambos os sócios</strong> — Thiago Castro e Cleudilaine Castro, com renúncia ao benefício de ordem. Regime comunhão parcial amplia alcance patrimonial.</div>
+    </div>
+    <div class="guarantee-item">
+      <div class="guarantee-num" style="background:rgba(239,68,68,0.2);color:#fca5a5">2</div>
+      <div class="guarantee-text"><strong>Sacados pré-aprovados</strong> — Nenhum sacado novo sem aprovação prévia do comitê. Concentração máxima de 30% por sacado sobre o limite.</div>
+    </div>
+    <div class="guarantee-item">
+      <div class="guarantee-num" style="background:rgba(239,68,68,0.2);color:#fca5a5">3</div>
+      <div class="guarantee-text"><strong>Apresentação de BP/DRE Jun/26</strong> — Demonstrativos semestrais assinados com aval do contador para revisão do limite em 90 dias.</div>
+    </div>
+    <div class="guarantee-item">
+      <div class="guarantee-num" style="background:rgba(239,68,68,0.2);color:#fca5a5">4</div>
+      <div class="guarantee-text"><strong>Diligência sobre processo penal Cleudilaine</strong> — Comprovação de natureza do processo e ausência de condenação antes de primeira operação.</div>
+    </div>
+  </div>
+
+  <div class="verdict-panel warn" style="margin-top:1.5rem">
+    <div class="verdict-title">APROVADO COM CONDIÇÕES</div>
+    <div class="verdict-sub">Empresa com histórico sólido e faturamento em recuperação, mas passando por estresse financeiro agudo em 2025. Limite conservador protege a AG Antecipa enquanto acompanha a virada.</div>
+    <div class="verdict-limit">Limite: R$ 250.000 · Prazo máx. 60d · Aval obrigatório · Revisão em 90 dias</div>
+  </div>
+</section>
+
+<!-- SPLIT BANNER -->
+<section style="padding:2rem;border-top:1px solid var(--border)">
+  <div class="split-banner">
+    <h2>ANÁLISE FINANCEIRA &amp; JURÍDICA CONSULTIVA</h2>
+    <p style="color:#60a5fa;font-size:.85rem;font-family:'DM Mono',monospace;margin-top:.3rem">Rafael Bazan · Analista Financeiro e Jurídico · AG Antecipa · Junho/2026</p>
+    <p style="color:var(--text2);font-size:.82rem;margin-top:.75rem">As seções a seguir aprofundam a análise sob perspectiva financeira-contábil e jurídico-consultiva, complementando o parecer de crédito.</p>
+  </div>
+</section>
+
+<!-- RF-0: BP/DRE -->
+<section id="financeiro" class="rf-section">
+  <div class="section-label">RF-0 · Financeiro</div>
+  <h2 class="section-title">Balanço Patrimonial &amp; DRE</h2>
+
+  <div class="analyst-banner rf">
+    <div class="analyst-avatar" style="background:rgba(59,130,246,0.15);border-color:#3b82f6;color:#60a5fa">RB</div>
+    <div>
+      <div class="analyst-name">Rafael Bazan <span class="analyst-tag" style="background:rgba(59,130,246,0.15);color:#93c5fd;border:1px solid rgba(59,130,246,0.3)">Analista Financeiro &amp; Jurídico</span></div>
+      <div class="analyst-role">AG Antecipa · Análise Consultiva · Junho/2026</div>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card" style="border-left-color:#3b82f6">
+      <div class="kpi-label">Ativo Total 2025</div>
+      <div class="kpi-value">R$ 14,70M</div>
+      <div class="kpi-sub">vs R$15,08M em 2024 (–2,5%)</div>
+    </div>
+    <div class="kpi-card danger">
+      <div class="kpi-label">PL 2025</div>
+      <div class="kpi-value negative">R$ 60k</div>
+      <div class="kpi-sub">vs R$3,10M em 2024 (–98%)</div>
+    </div>
+    <div class="kpi-card warn">
+      <div class="kpi-label">Endividamento Total</div>
+      <div class="kpi-value">99,6%</div>
+      <div class="kpi-sub">Quase totalidade financiada por terceiros</div>
+    </div>
+    <div class="kpi-card" style="border-left-color:#3b82f6">
+      <div class="kpi-label">Receita Bruta 2025</div>
+      <div class="kpi-value">R$ 16,92M</div>
+      <div class="kpi-sub">+31% vs 2024 (R$12,90M)</div>
+    </div>
+  </div>
+
+  <!-- DRE ESPELHO 3 ANOS -->
+  <div class="card" style="margin-bottom:1.25rem">
+    <div class="card-title">DRE Comparativo — 2022 / 2024 / 2025 (R$ mil)</div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Conta</th>
+          <th class="text-right">2022</th>
+          <th class="text-right">2024</th>
+          <th class="text-right">2025</th>
+          <th class="text-right">Var 24→25</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="bold">Receita Bruta</td><td class="text-right">13.037</td><td class="text-right">12.903</td><td class="text-right bold">16.919</td><td class="text-right positive">+31,1%</td></tr>
+        <tr><td style="color:var(--muted)">  (–) Deduções</td><td class="text-right negative">(1.870)</td><td class="text-right negative">(2.025)</td><td class="text-right negative">(4.674)</td><td class="text-right negative">+130,8%</td></tr>
+        <tr><td class="bold">Receita Líquida</td><td class="text-right">11.167</td><td class="text-right">10.878</td><td class="text-right bold">12.245</td><td class="text-right positive">+12,6%</td></tr>
+        <tr><td style="color:var(--muted)">  (–) CPV</td><td class="text-right negative">(6.722)</td><td class="text-right negative">(6.124)</td><td class="text-right negative">(10.968)</td><td class="text-right negative">+79,1%</td></tr>
+        <tr><td class="bold">Lucro Bruto</td><td class="text-right positive">4.446</td><td class="text-right positive">4.754</td><td class="text-right warn">1.278</td><td class="text-right negative">–73,1%</td></tr>
+        <tr><td style="color:var(--muted)">  Margem Bruta</td><td class="text-right">39,8%</td><td class="text-right">43,7%</td><td class="text-right negative">10,4%</td><td class="text-right negative">–33,3pp</td></tr>
+        <tr><td style="color:var(--muted)">  (–) SGA</td><td class="text-right negative">(2.159)</td><td class="text-right negative">(1.978)</td><td class="text-right negative">(2.288)</td><td class="text-right">+15,7%</td></tr>
+        <tr><td style="color:var(--muted)">  (±) Outras Rec/Desp</td><td class="text-right negative">(23)</td><td class="text-right positive">314</td><td class="text-right positive">519</td><td class="text-right positive">+65,3%</td></tr>
+        <tr><td style="color:var(--muted)">  (–) Desp. Financeiras</td><td class="text-right negative">(1.144)</td><td class="text-right negative">(321)</td><td class="text-right negative">(1.093)</td><td class="text-right negative">+240%</td></tr>
+        <tr><td class="bold">Resultado Operacional</td><td class="text-right positive">1.264</td><td class="text-right positive">2.760</td><td class="text-right negative">(1.575)</td><td class="text-right negative">–</td></tr>
+        <tr><td style="color:var(--muted)">  (–) IR + CSLL</td><td class="text-right negative">(381)</td><td class="text-right negative">(275)</td><td class="text-right negative">(412)</td><td class="text-right">–</td></tr>
+        <tr><td class="bold">Lucro / Prejuízo Líquido</td><td class="text-right positive">883</td><td class="text-right positive">2.485</td><td class="text-right negative bold">(1.987)</td><td class="text-right negative">–</td></tr>
+        <tr><td style="color:var(--muted)">  Margem Líquida</td><td class="text-right">7,9%</td><td class="text-right">22,8%</td><td class="text-right negative">–16,2%</td><td class="text-right negative">–39pp</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- INDICADORES -->
+  <div class="fin-grid">
+    <div class="fin-group">
+      <div class="fin-group-title">Liquidez (BP 2025)</div>
+      <div class="fin-item">
+        <div class="fin-item-left"><div class="fin-item-name">Liquidez Corrente</div><div class="fin-item-formula">AC ÷ PC</div></div>
+        <div class="fin-item-value negative">0,79</div><span class="risk-high">CRÍTICO</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left"><div class="fin-item-name">Liquidez Seca</div><div class="fin-item-formula">(AC – Est) ÷ PC</div></div>
+        <div class="fin-item-value warn">0,68</div><span class="risk-high">CRÍTICO</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left"><div class="fin-item-name">Liquidez Geral</div><div class="fin-item-formula">(AC+RLP) ÷ (PC+PNC)</div></div>
+        <div class="fin-item-value warn">0,61</div><span class="risk-high">CRÍTICO</span>
+      </div>
+    </div>
+    <div class="fin-group">
+      <div class="fin-group-title">Endividamento (BP 2025)</div>
+      <div class="fin-item">
+        <div class="fin-item-left"><div class="fin-item-name">Endiv. Geral</div><div class="fin-item-formula">(PC+PNC) ÷ AT</div></div>
+        <div class="fin-item-value negative">99,6%</div><span class="risk-high">CRÍTICO</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left"><div class="fin-item-name">Composição</div><div class="fin-item-formula">PC ÷ (PC+PNC)</div></div>
+        <div class="fin-item-value warn">76,4%</div><span class="risk-warn">ATENÇÃO</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left"><div class="fin-item-name">Imobil. do PL</div><div class="fin-item-formula">ANC ÷ PL</div></div>
+        <div class="fin-item-value negative">96,8x</div><span class="risk-high">CRÍTICO</span>
+      </div>
+    </div>
+    <div class="fin-group">
+      <div class="fin-group-title">Rentabilidade (2025)</div>
+      <div class="fin-item">
+        <div class="fin-item-left"><div class="fin-item-name">ROE</div><div class="fin-item-formula">LL ÷ PL</div></div>
+        <div class="fin-item-value negative">–33x</div><span class="risk-high">NEG</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left"><div class="fin-item-name">ROA</div><div class="fin-item-formula">LL ÷ AT</div></div>
+        <div class="fin-item-value negative">–13,5%</div><span class="risk-high">NEG</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left"><div class="fin-item-name">Margem Líquida</div><div class="fin-item-formula">LL ÷ RB</div></div>
+        <div class="fin-item-value negative">–11,7%</div><span class="risk-high">NEG</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Análise do Faturamento Declarado (Mai/25–Abr/26)</div>
+    <div class="chart-wrap" style="height:260px">
+      <canvas id="fatDeclarado"></canvas>
+    </div>
+    <p style="font-size:.82rem;color:var(--text2);margin-top:.75rem">Total declarado 12 meses: <strong style="color:var(--text)">R$ 14,15M</strong>. Julho/25 foi o menor mês (R$725k) possivelmente por sazonalidade ou mix de ordens. Abril/26 apresenta o maior nível do período, confirmando recuperação consistente desde janeiro/26.</p>
+  </div>
+</section>
+
+<!-- RF-1: DOCS -->
+<section id="docs" class="rf-section">
+  <div class="section-label">RF-1 · Validação Documental</div>
+  <h2 class="section-title">Checklist de Documentos</h2>
+  <table class="doc-table">
+    <thead>
+      <tr>
+        <th>Documento</th>
+        <th class="text-center">Presente</th>
+        <th class="text-center">Assin. Digital</th>
+        <th class="text-center">Assin. Contador</th>
+        <th>Observação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>BP + DRE 2024 (Assinado)</td>
+        <td class="text-center doc-ok">SIM</td>
+        <td class="text-center doc-ok">SIM (gov.br Thiago)</td>
+        <td class="text-center doc-ok">SIM (Luis Carlos Monaro CRC 1-SP-090074/O-0)</td>
+        <td>Assinatura digital válida + contador CRC</td>
+      </tr>
+      <tr>
+        <td>BP + DRE 2025 (Assinado)</td>
+        <td class="text-center doc-ok">SIM</td>
+        <td class="text-center doc-warn">Parcial (só contador)</td>
+        <td class="text-center doc-ok">SIM (Luis Carlos Monaro)</td>
+        <td>Sem assinatura gov.br de Thiago — solicitar confirmação</td>
+      </tr>
+      <tr>
+        <td>DRE 2022 (Assinado)</td>
+        <td class="text-center doc-ok">SIM</td>
+        <td class="text-center doc-na">N/A (físico)</td>
+        <td class="text-center doc-ok">SIM (Luis Carlos Monaro)</td>
+        <td>Documento físico escaneado — válido</td>
+      </tr>
+      <tr>
+        <td>Declaração de Faturamento (Mai/25–Abr/26)</td>
+        <td class="text-center doc-ok">SIM</td>
+        <td class="text-center doc-ok">SIM (gov.br Cleudilaine)</td>
+        <td class="text-center doc-ok">SIM (Monaro · 28/05/2026)</td>
+        <td>Total R$14,15M — consistente com CredMap</td>
+      </tr>
+      <tr>
+        <td>Relação Faturamento Mai/26</td>
+        <td class="text-center doc-ok">SIM</td>
+        <td class="text-center doc-ok">SIM (gov.br Cleudilaine)</td>
+        <td class="text-center doc-ok">SIM (Monaro · 29/05/2026)</td>
+        <td>Abr/26 R$1.940k — assinatura digital dupla</td>
+      </tr>
+      <tr>
+        <td>IRPF Thiago 2025 (ano-base 2024)</td>
+        <td class="text-center doc-ok">SIM</td>
+        <td class="text-center doc-ok">SIM</td>
+        <td class="text-center doc-na">N/A</td>
+        <td>12 páginas · bens e rendimentos detalhados</td>
+      </tr>
+      <tr>
+        <td>IRPF Cleudilaine (2024)</td>
+        <td class="text-center doc-ok">SIM</td>
+        <td class="text-center doc-ok">SIM</td>
+        <td class="text-center doc-na">N/A</td>
+        <td>Recibo de entrega presente</td>
+      </tr>
+      <tr>
+        <td>Certidão de Casamento</td>
+        <td class="text-center doc-ok">SIM</td>
+        <td class="text-center doc-na">N/A</td>
+        <td class="text-center doc-na">N/A</td>
+        <td>Comunhão Parcial de Bens · 28/12/2007 · Piracicaba</td>
+      </tr>
+      <tr>
+        <td>CNH Thiago Castro</td>
+        <td class="text-center doc-ok">SIM</td>
+        <td class="text-center doc-na">N/A</td>
+        <td class="text-center doc-na">N/A</td>
+        <td>Documento de identidade válido</td>
+      </tr>
+      <tr>
+        <td>CNH Cleudilaine Castro</td>
+        <td class="text-center doc-ok">SIM</td>
+        <td class="text-center doc-na">N/A</td>
+        <td class="text-center doc-na">N/A</td>
+        <td>Documento de identidade válido</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="analyst-note">
+    <strong>Avaliação Documental:</strong> A documentação apresentada é substancialmente completa e de qualidade. O BP 2025 carece da assinatura digital do sócio administrador (apenas contador assinou), o que é recomendável corrigir. A contabilidade é conduzida pela ETECON Assessoria &amp; Contabilidade (47 anos de existência), empresa idônea de Santa Bárbara d'Oeste. O mesmo contador (Luis Carlos Monaro, CRC 1-SP-090074/O-0) assina todos os demonstrativos, garantindo consistência.
+  </div>
+</section>
+
+<!-- RF-2: NEGÓCIO -->
+<section id="negocio" class="rf-section">
+  <div class="section-label">RF-2 · Modelo de Negócio</div>
+  <h2 class="section-title">Metalurgia Industrial — Modelo e Sacados</h2>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">O Que a IGECAST Produz e Vende</div>
+      <p style="font-size:.85rem;color:var(--text2);line-height:1.7">A IGECAST atua como <strong style="color:var(--text)">fabricante industrial metalúrgica</strong> especializada em equipamentos elétricos, máquinas metalúrgicas, componentes de alumínio e serviços de usinagem, tornearia e solda. Detém patentes de modelos de utilidade em suportes para cerca elétrica e dispositivos de dobra de alumínio, indicando diferenciação tecnológica.</p>
+      <p style="font-size:.85rem;color:var(--text2);line-height:1.7;margin-top:.75rem">O ciclo de venda é B2B industrial com prazo médio de recebimento entre 30 e 90 dias. A empresa emite notas fiscais de produto (NF-e) e pode emitir duplicatas mercantis elegíveis para desconto. O setor industrial metalúrgico tem crescimento de <strong style="color:var(--text)">+27,6% acumulado 12 meses</strong> (IBGE produção física industrial — CNAE 27.90).</p>
+      <div class="info-box">
+        <strong>Regime Normal RPA:</strong> A empresa não está no Simples Nacional, o que significa que as NFs emitidas possuem alíquotas ICMS cheias — verificar crédito tributário na elegibilidade das operações.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Fornecedores Identificados (CredBox)</div>
+      <table class="data-table">
+        <thead><tr><th>Fornecedor</th><th>CNPJ</th><th>Segmento</th></tr></thead>
+        <tbody>
+          <tr><td>Supermix Concreto S/A</td><td class="mono">34.230.979/0001-06</td><td>Materiais construção</td></tr>
+          <tr><td>Mais Polímeros do Brasil</td><td class="mono">07.228.128/0001-56</td><td>Polímeros industriais</td></tr>
+          <tr><td>TF TopFusion Tubos e Conexões</td><td class="mono">07.432.397/0001-30</td><td>Conexões metálicas</td></tr>
+          <tr><td>Manetoni Dist. Siderúrgico</td><td class="mono">49.795.800/0001-35</td><td>Siderurgia atacado</td></tr>
+          <tr><td>Morlan S/A</td><td class="mono">53.309.795/0001-80</td><td>Industrial</td></tr>
+          <tr><td>Piracicaba Eletrodiesel</td><td class="mono">54.369.517/0001-81</td><td>Equipamentos</td></tr>
+          <tr><td>Alltape Fitas Adesivas</td><td class="mono">03.250.204/0001-79</td><td>Insumos industriais</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Elegibilidade de Títulos para Desconto</div>
+    <table class="data-table">
+      <thead><tr><th>Tipo de Título</th><th>Elegível?</th><th>Prazo Recomendado</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td>Duplicata Mercantil (NF Produto)</td><td><span class="risk-ok">SIM</span></td><td>Até 60 dias</td><td>Principal instrumento — CNAE industrial, SEFAZ habilitado</td></tr>
+        <tr><td>Duplicata de Serviços (NFS-e)</td><td><span class="risk-low">SIM c/ análise</span></td><td>Até 45 dias</td><td>Verificar se serviços são para empresas de 1ª linha</td></tr>
+        <tr><td>Cheque</td><td><span class="risk-warn">NÃO RECOMENDADO</span></td><td>—</td><td>Empresa utiliza boletos bancários — sem histórico de cheques</td></tr>
+        <tr><td>CTe (Conhecimento de Transporte)</td><td><span class="risk-warn">Verificar</span></td><td>—</td><td>SEFAZ: "não credenciada para emissão CT-e"</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- RF-3: JURÍDICO -->
+<section id="juridico" class="rf-section">
+  <div class="section-label">RF-3 · Análise Jurídica</div>
+  <h2 class="section-title">Análise Jurídico-Tributária</h2>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Processos Judiciais — Empresa</div>
+      <table class="data-table">
+        <thead><tr><th>Tipo</th><th>Qtd</th><th>Valor</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Trabalhistas</td><td>5</td><td>R$ 177.914</td><td><span class="risk-warn">Em tramitação</span></td></tr>
+          <tr><td>Estaduais (passivo)</td><td>1</td><td>R$ 97.417</td><td><span class="risk-low">Suspenso (Embargos Exec.)</span></td></tr>
+          <tr><td>Estaduais (ativo/empresa move)</td><td>6</td><td>R$ 403.053</td><td><span class="risk-ok">Maioria arquivado</span></td></tr>
+          <tr><td>Outros/Terceiros</td><td>2</td><td>R$ 144,9M</td><td><span class="risk-info">RJ/Agravo de Inst. — terceiros</span></td></tr>
+        </tbody>
+      </table>
+      <div class="info-box" style="margin-top:.75rem">
+        <strong>Atenção ao valor "outros e terceiros" de R$144,9M:</strong> Este valor refere-se a processos em que a empresa figura como terceira ou em processo de recuperação judicial de terceiro — não é exposição direta da IGECAST. Confirmar na diligência jurídica.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Análise Tributária e Regularidade</div>
+      <table class="data-table">
+        <thead><tr><th>Órgão</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Receita Federal (CNPJ)</td><td><span class="risk-ok">Nada Consta</span></td></tr>
+          <tr><td>TST — Débitos Trabalhistas</td><td><span class="risk-ok">Certidão Negativa · val. Nov/26</span></td></tr>
+          <tr><td>SIT — Multas Trabalhistas</td><td><span class="risk-ok">Nada Consta (21/05/26)</span></td></tr>
+          <tr><td>TCU</td><td><span class="risk-ok">Nada Consta</span></td></tr>
+          <tr><td>CEIS / CNEP / CEPIM</td><td><span class="risk-ok">Nada Consta</span></td></tr>
+          <tr><td>PGE-SP ICMS Declarado</td><td><span class="risk-warn">R$ 2.079,69 — residual</span></td></tr>
+          <tr><td>FGTS</td><td><span class="risk-warn">Erro na consulta online</span></td></tr>
+          <tr><td>PGFN</td><td><span class="risk-warn">Não emissível online — contatar</span></td></tr>
+          <tr><td>PROCON</td><td><span class="risk-ok">Nada Consta</span></td></tr>
+          <tr><td>Trabalho Escravo (SIT)</td><td><span class="risk-ok">Não Localizado</span></td></tr>
+        </tbody>
+      </table>
+      <div class="analyst-note" style="border-left-color:#3b82f6">
+        <strong>Diligências pendentes:</strong> (1) Regularizar consulta FGTS e PGFN antes de primeira operação. (2) Esclarecer processo penal de Cleudilaine (adulteração de sinal ident., out/2025). (3) Confirmar natureza dos processos "outros e terceiros" R$144,9M. (4) Verificar 5 processos trabalhistas em tramitação (R$178k de passivo contingente).
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Risco de Contágio — Coligadas</div>
+    <table class="data-table">
+      <thead><tr><th>Coligada</th><th>Status</th><th>Fat. Abr/26</th><th>Serasa</th><th>Risco Contágio</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>IGECAST DISTRIBUIDORA LTDA (30.793.924/0001-53)</td>
+          <td><span class="risk-ok">ATIVA</span></td>
+          <td>R$ 28k (decrescente)</td>
+          <td><span class="risk-ok">Nada Consta</span></td>
+          <td><span class="risk-low">BAIXO</span> — operação menor, sem pendências</td>
+        </tr>
+        <tr>
+          <td>TREFIMAQ INDÚSTRIA E COMÉRCIO (05.966.480/0001-63)</td>
+          <td><span class="risk-warn">Verificar</span></td>
+          <td>N/D</td>
+          <td>N/D</td>
+          <td><span class="risk-warn">MONITORAR</span> — Thiago como sócio/administrador</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- RF-4: RISCO DIMENSIONADO -->
+<section id="risco-dim" class="rf-section">
+  <div class="section-label">RF-4 · Risco Detalhado</div>
+  <h2 class="section-title">Seis Dimensões de Risco — Metodologia Bazan</h2>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header">
+      <span class="risk-dim-name">D1 · Capacidade de Pagamento</span>
+      <span class="risk-high">ALTO</span>
+    </div>
+    <div class="risk-dim-desc">A empresa gerou prejuízo de R$2M em 2025, com caixa de apenas R$526k em Dez/25. A cobertura de juros é negativa (EBIT negativo vs. despesas financeiras R$1,09M). O faturamento crescente de 2026 sinaliza recuperação, mas a capacidade atual de serviço da dívida é comprometida.</div>
+  </div>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header">
+      <span class="risk-dim-name">D2 · Qualidade dos Sacados</span>
+      <span class="risk-low">BAIXO</span>
+    </div>
+    <div class="risk-dim-desc">Fornecedores incluem empresas de grande porte (Supermix S/A, Transportadora Americana S/A) sugerindo base de clientes industriais sólidos. ILM 90d de 71-73% confirma boa pontualidade dos sacados. Concentração não declarada explicitamente, mas mix de clientes industriais B2B reduz o risco individual.</div>
+  </div>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header">
+      <span class="risk-dim-name">D3 · Estrutura de Capital</span>
+      <span class="risk-high">ALTO</span>
+    </div>
+    <div class="risk-dim-desc">PL de R$60k contra passivo total de R$14,6M resulta em alavancagem de 244x. A estrutura é insustentável sem aporte de capital ou forte geração de caixa operacional em 2026. O adiantamento de clientes de R$750k no PC pode indicar pedidos futuros, o que é positivo. Consórcio em andamento R$669k pode ser convertido em ativo imobilizado.</div>
+  </div>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header">
+      <span class="risk-dim-name">D4 · Risco Setorial e Mercado</span>
+      <span class="risk-ok">FAVORÁVEL</span>
+    </div>
+    <div class="risk-dim-desc">O setor metalúrgico (CNAE 27.90) cresceu +27,6% acumulado em 12 meses (dados IBGE). A empresa possui patentes industriais que conferem diferencial competitivo. A diversificação de CNAEs secundários (8 atividades) amplia a base de clientes potenciais. Contexto macroeconômico favorável para indústria metalúrgica em 2026.</div>
+  </div>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header">
+      <span class="risk-dim-name">D5 · Gestão e Governança</span>
+      <span class="risk-warn">MÉDIO</span>
+    </div>
+    <div class="risk-dim-desc">Gestão familiar com sócios desde a fundação (13 anos) demonstra comprometimento. Ausência de conselho de administração ou auditoria independente é típica do porte. O processo penal de Cleudilaine (suspenso) requer atenção. A contabilidade é externalizada para escritório idôneo com 47 anos de mercado. Processo de recuperação financeira parece em curso (faturamento crescente em 2026).</div>
+  </div>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header">
+      <span class="risk-dim-name">D6 · Histórico de Relacionamento</span>
+      <span class="risk-ok">FAVORÁVEL</span>
+    </div>
+    <div class="risk-dim-desc">Empresa jamais teve protesto, cheque devolvido ou pendência financeira em 13 anos. Relacionamento com 8 bancos e múltiplas securitizadoras (Banco Daycoval, Santander, factorings) demonstra credibilidade histórica. A empresa é nova no relacionamento com AG Antecipa — sem histórico interno, mas histórico externo positivo compensa.</div>
+  </div>
+
+  <div class="verdict-panel warn" style="margin-top:1.5rem">
+    <div class="verdict-title">CLASSIFICAÇÃO GERAL DE RISCO: MODERADO-ALTO</div>
+    <div class="verdict-sub">D1 e D3 com risco alto (financeiro/estrutural) · D2 e D4/D6 positivos (sacados e mercado) · Resultado líquido: operação viável com limite conservador e garantias reforçadas</div>
+  </div>
+</section>
+
+<!-- RF-5: GARANTIAS -->
+<section id="garantias" class="rf-section">
+  <div class="section-label">RF-5 · Garantias</div>
+  <h2 class="section-title">Estrutura de Garantias</h2>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title" style="color:#fca5a5">Garantias Obrigatórias (Condição Sine Qua Non)</div>
+      <div class="guarantee-item">
+        <div class="guarantee-num" style="background:rgba(239,68,68,0.2);color:#fca5a5">1</div>
+        <div class="guarantee-text"><strong>Aval solidário de José Thiago Castro da Silva</strong> (CPF 329.054.728-04) — sócio-administrador 50%, com bens pessoais declarados em IRPF: imóvel R$100k, veículos R$410k, aplicações R$28k. Rendimentos anuais comprovados ~R$635k. Comunhão parcial de bens amplia base.</div>
+      </div>
+      <div class="guarantee-item">
+        <div class="guarantee-num" style="background:rgba(239,68,68,0.2);color:#fca5a5">2</div>
+        <div class="guarantee-text"><strong>Aval solidário de Cleudilaine M. F. Castro</strong> (CPF 361.045.288-99) — condicionado à resolução da diligência sobre processo penal. Regime comunhão parcial: bens adquiridos após 2007 são comunicáveis com Thiago.</div>
+      </div>
+      <div class="guarantee-item">
+        <div class="guarantee-num" style="background:rgba(239,68,68,0.2);color:#fca5a5">3</div>
+        <div class="guarantee-text"><strong>Cessão fiduciária dos recebíveis cedidos</strong> — todas as duplicatas descontadas devem ter cessão fiduciária registrada. Notificação ao sacado obrigatória para operações acima de R$30k.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:#93c5fd">Garantias Complementares (Recomendadas)</div>
+      <div class="guarantee-item">
+        <div class="guarantee-num" style="background:rgba(59,130,246,0.2);color:#93c5fd">4</div>
+        <div class="guarantee-text"><strong>Duplicata com aceite confirmado</strong> — para operações com sacados não cadastrados na AG Antecipa, exigir aceite do sacado na duplicata ou contrato de fornecimento como suporte.</div>
+      </div>
+      <div class="guarantee-item">
+        <div class="guarantee-num" style="background:rgba(59,130,246,0.2);color:#93c5fd">5</div>
+        <div class="guarantee-text"><strong>Autorização expressa de débito em conta</strong> — instrumento de quitação automática caso duplicata retorne sem pagamento, com penhor de recebíveis futuros da mesma conta bancária.</div>
+      </div>
+      <div class="guarantee-item">
+        <div class="guarantee-num" style="background:rgba(59,130,246,0.2);color:#93c5fd">6</div>
+        <div class="guarantee-text"><strong>Contrato de alienação fiduciária de veículo</strong> — a critério do comitê, Jeep Commander 2021 (RENAVAM 01286759622, valor R$200k) pode ser alienado como garantia complementar em operações acima de R$150k acumulados.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RF-6: MONITORAMENTO -->
+<section id="monitoramento" class="rf-section">
+  <div class="section-label">RF-6 · Monitoramento</div>
+  <h2 class="section-title">Plano de Monitoramento Contínuo</h2>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Monitoramento Periódico</div>
+      <div class="trigger-item">
+        <div class="trigger-dot" style="background:#22c55e"></div>
+        <div><strong style="color:var(--text)">Mensal:</strong> Acompanhar emissão de boletos no CredMap (faixa esperada C14-C16 = R$1-1,9M). Queda para C12 ou abaixo deve acionar alerta.</div>
+      </div>
+      <div class="trigger-item">
+        <div class="trigger-dot" style="background:#22c55e"></div>
+        <div><strong style="color:var(--text)">Trimestral:</strong> Consultar BACEN — monitorar evolução dos vencidos (atualmente 3,68%). Acima de 5% = revisão de limite.</div>
+      </div>
+      <div class="trigger-item">
+        <div class="trigger-dot" style="background:#f59e0b"></div>
+        <div><strong style="color:var(--text)">Trimestral:</strong> Exigir declaração de faturamento atualizada assinada pelo contador. Consistência com CredMap obrigatória (tolerância ±15%).</div>
+      </div>
+      <div class="trigger-item">
+        <div class="trigger-dot" style="background:#f59e0b"></div>
+        <div><strong style="color:var(--text)">Semestral (90 dias):</strong> Revisão completa de limite com BP/DRE Jun/26 assinados. Aumento de limite somente com PL positivo e LL positivo demonstrados.</div>
+      </div>
+      <div class="trigger-item">
+        <div class="trigger-dot" style="background:#3b82f6"></div>
+        <div><strong style="color:var(--text)">Anual:</strong> IRPF dos dois sócios para rastrear evolução patrimonial pessoal. Verificar se dividendos continuam sendo distribuídos.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Gatilhos de Revisão Imediata</div>
+      <div class="trigger-item">
+        <div class="trigger-dot" style="background:#ef4444"></div>
+        <div><strong style="color:#fca5a5">STOP:</strong> Aparecimento de protesto ou PEFIN no Serasa — suspensão imediata de novas operações até esclarecimento.</div>
+      </div>
+      <div class="trigger-item">
+        <div class="trigger-dot" style="background:#ef4444"></div>
+        <div><strong style="color:#fca5a5">STOP:</strong> Consultas Serasa acima de 100/mês — indicativo de stress de crédito severo com múltiplos credores.</div>
+      </div>
+      <div class="trigger-item">
+        <div class="trigger-dot" style="background:#ef4444"></div>
+        <div><strong style="color:#fca5a5">STOP:</strong> Vencidos BACEN acima de 7% — deterioração acelerada da capacidade de pagamento bancário.</div>
+      </div>
+      <div class="trigger-item">
+        <div class="trigger-dot" style="background:#f59e0b"></div>
+        <div><strong style="color:#fcd34d">ALERTA:</strong> Faturamento declarado abaixo de R$600k/mês por 2 meses consecutivos — revisar prazo máximo para 30 dias e reduzir limite 50%.</div>
+      </div>
+      <div class="trigger-item">
+        <div class="trigger-dot" style="background:#f59e0b"></div>
+        <div><strong style="color:#fcd34d">ALERTA:</strong> Condenação no processo penal de Cleudilaine — reavaliação do aval e possível exigência de garantia real adicional.</div>
+      </div>
+      <div class="trigger-item">
+        <div class="trigger-dot" style="background:#f59e0b"></div>
+        <div><strong style="color:#fcd34d">ALERTA:</strong> Queda de pontualidade como sacada abaixo de 30% por 2 meses — risco de deterioração de relacionamento com clientes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RF-7: PARECER FINANCEIRO -->
+<section id="parecer-financeiro" class="rf-section">
+  <div class="section-label">RF-7 · Parecer Financeiro</div>
+  <h2 class="section-title">Parecer Financeiro — Rafael Bazan</h2>
+
+  <div class="analyst-banner rf">
+    <div class="analyst-avatar" style="background:rgba(59,130,246,0.15);border-color:#3b82f6;color:#60a5fa">RB</div>
+    <div>
+      <div class="analyst-name">Rafael Bazan</div>
+      <div class="analyst-role">Análise Financeira &amp; Jurídico-Consultiva · AG Antecipa · Junho/2026</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Parecer Verbatim</div>
+    <div class="analyst-note" style="border-left-color:#3b82f6">
+      <p>A IGECAST METALURGICA LTDA apresenta um quadro financeiro dual: <strong>operacionalmente expansiva em 2026</strong> com aceleração de faturamento consistente, mas <strong>estruturalmente fragilizada</strong> pelo exercício de 2025. O prejuízo de R$1,99M em 2025 não decorre de queda de receita — ao contrário, a receita cresceu 31% — mas sim de descontrole no custo do produto vendido (CPV/RL saltou de 54% para 90%) e de explosão das despesas financeiras (R$321k → R$1,09M, alta de 240%).</p>
+      <p style="margin-top:.75rem">Esta combinação sugere que a empresa realizou investimentos ou compromissos de fornecimento a preço fixo em um período de alta de insumos siderúrgicos e metalúrgicos, absorvendo prejuízo contratual. O imobilizado cresceu de R$4,3M (2024) para R$5,1M (2025), indicando aquisição de equipamentos provavelmente financiada com crédito de longo prazo — a dívida bancária de longo prazo saltou de R$108k (2024) para R$2,56M (2025), mais que justificando o crescimento das despesas financeiras.</p>
+      <p style="margin-top:.75rem">O cenário em 2026 aponta para recuperação: faturamento acelerado, adiantamentos de clientes de R$750k no passivo circulante (pedidos futuros confirmados), e ativo imobilizado capaz de suportar aumento de produção. A empresa possui capacidade técnica instalada para gerar o volume necessário à recuperação do PL ao longo de 2026.</p>
+      <p style="margin-top:.75rem"><strong>Sob perspectiva jurídica:</strong> A estrutura de aval dos sócios é adequada dada a realidade patrimonial da empresa (PL R$60k insuficiente como garantia isolada). O regime de comunhão parcial de bens amplia substancialmente a base de execução em caso de inadimplência. O processo penal de Cleudilaine, embora suspenso, deve ser objeto de consulta jurídica antes de formalizar seu aval — recomendo a contratação de due diligence junto ao TJSP para obter o teor completo do processo.</p>
+      <p style="margin-top:.75rem">A operação de desconto de duplicatas é <strong>estruturalmente adequada</strong> ao modelo de negócio da empresa: ciclo B2B industrial de 30-90 dias, sacados empresariais identificáveis, títulos com base em NF-e rastreável pela SEFAZ-SP. O risco principal não está nos recebíveis em si — está na capacidade da IGECAST de honrar recompras em caso de devolução ou não pagamento do sacado. Daí a importância do aval pessoal dos sócios e do limite conservador.</p>
+    </div>
+  </div>
+
+  <div class="verdict-panel warn" style="margin-top:1.5rem">
+    <div class="verdict-title">VIÁVEL COM LIMITE CONSERVADOR</div>
+    <div class="verdict-sub">Empresa em processo de recuperação financeira após ano adverso. Fundamentos operacionais e de mercado são positivos. Risco financeiro estrutural exige limite baixo, garantias pessoais e revisão em 90 dias com BP semestral.</div>
+    <div class="verdict-limit">Voto: APROVAR · Limite R$250k · Condições &amp; Monitoramento conforme estruturado acima</div>
+  </div>
+</section>
+
+<!-- VEREDICTO FINAL -->
+<section id="veredicto">
+  <div class="section-label">Veredicto Final</div>
+  <h2 class="section-title">Decisão do Comitê</h2>
+
+  <div class="veredicto-grid">
+    <div class="veredicto-card warn">
+      <div class="veredicto-card-name">Marcelo Vazquez · Crédito</div>
+      <div class="veredicto-card-verdict">APROVADO</div>
+      <div class="veredicto-card-role">COM CONDIÇÕES</div>
+      <div class="veredicto-card-sub">Limite R$250k · Prazo máx. 60d · Sacados pré-aprovados · Aval obrigatório ambos sócios · Diligência penal Cleudilaine · Revisão BP em 90 dias</div>
+    </div>
+    <div class="veredicto-card warn">
+      <div class="veredicto-card-name">Rafael Bazan · Financeiro &amp; Jurídico</div>
+      <div class="veredicto-card-verdict">VIÁVEL</div>
+      <div class="veredicto-card-role">LIMITE CONSERVADOR</div>
+      <div class="veredicto-card-sub">Modelo de negócio adequado · Sacados B2B elegíveis · Recuperação 2026 em curso · Due diligence jurídica Cleudilaine antes 1ª operação · PL crítico exige aval real</div>
+    </div>
+  </div>
+
+  <div class="veredicto-unified">
+    <div style="font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-family:'DM Mono',monospace;color:var(--text2);margin-bottom:.75rem">DECISÃO DO COMITÊ AG ANTECIPA</div>
+    <div style="font-size:2.4rem;font-weight:800;font-family:'Syne',sans-serif;color:#86efac;margin-bottom:.5rem">APROVADO COM CONDIÇÕES</div>
+    <div style="font-size:1rem;color:var(--text2);margin-bottom:1rem">IGECAST METALURGICA LTDA · CNPJ 17.873.389/0001-82 · Junho/2026</div>
+    <div style="display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;font-size:.85rem;color:var(--text)">
+      <div><div style="font-size:.65rem;color:var(--text2);font-family:'DM Mono',monospace;text-transform:uppercase;margin-bottom:.25rem">Limite Aprovado</div><div style="font-weight:700;color:#86efac">R$ 250.000</div></div>
+      <div><div style="font-size:.65rem;color:var(--text2);font-family:'DM Mono',monospace;text-transform:uppercase;margin-bottom:.25rem">Prazo Máximo</div><div style="font-weight:700">60 dias</div></div>
+      <div><div style="font-size:.65rem;color:var(--text2);font-family:'DM Mono',monospace;text-transform:uppercase;margin-bottom:.25rem">Concentração por Sacado</div><div style="font-weight:700">Máx. 30%</div></div>
+      <div><div style="font-size:.65rem;color:var(--text2);font-family:'DM Mono',monospace;text-transform:uppercase;margin-bottom:.25rem">Revisão do Limite</div><div style="font-weight:700">90 dias (set/26)</div></div>
+    </div>
+    <div style="margin-top:1.25rem;padding-top:1rem;border-top:1px solid rgba(34,197,94,0.2);font-size:.82rem;color:var(--text2)">
+      <strong style="color:var(--text)">Condições Obrigatórias:</strong> Aval solidário ambos sócios · Diligência penal Cleudilaine (TJSP) · Cessão fiduciária de recebíveis · FGTS/PGFN regularizados · BP/DRE Jun/26 em 90 dias
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top:2rem">
+    <div style="text-align:center;padding:1.5rem;background:var(--navy2);border:1px solid var(--border);border-radius:12px">
+      <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.5rem">Analista de Crédito</div>
+      <div style="font-size:1.1rem;font-weight:700;font-family:'Syne',sans-serif;color:#22c55e">Marcelo Vazquez</div>
+      <div style="font-size:.75rem;color:var(--text2);margin-top:.3rem">Diretor de Crédito · AG Antecipa</div>
+      <div style="font-size:.7rem;color:var(--muted);margin-top:.5rem;font-family:'DM Mono',monospace">marcelo.vazquez@agantecipa.com.br</div>
+    </div>
+    <div style="text-align:center;padding:1.5rem;background:var(--navy2);border:1px solid var(--border);border-radius:12px">
+      <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.5rem">Analista Financeiro &amp; Jurídico</div>
+      <div style="font-size:1.1rem;font-weight:700;font-family:'Syne',sans-serif;color:#3b82f6">Rafael Bazan</div>
+      <div style="font-size:.75rem;color:var(--text2);margin-top:.3rem">Análise Financeira &amp; Jurídico-Consultiva · AG Antecipa</div>
+      <div style="font-size:.7rem;color:var(--muted);margin-top:.5rem;font-family:'DM Mono',monospace">Junho/2026</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div style="margin-bottom:.5rem">AG Antecipa · Parecer de Comitê · IGECAST METALURGICA LTDA · Junho/2026</div>
+  <div>Este documento é estritamente confidencial. Elaborado com base em documentos e bureaus apresentados em 03/06/2026.</div>
+  <div style="margin-top:.5rem;color:rgba(255,255,255,0.3)">build: 2026-06-03 · Dupla perspectiva: Marcelo Vazquez (Crédito) + Rafael Bazan (Financeiro/Jurídico)</div>
+</footer>
+
+<script>
+// Consultas Serasa chart
+new Chart(document.getElementById('consultasChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Jan/25','Fev/25','Mar/25','Abr/25','Mai/25','Jun/25','Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26','Abr/26','Mai/26'],
+    datasets: [{
+      label: 'Consultas Serasa',
+      data: [23,37,31,15,22,8,18,21,20,24,20,13,23,37,31,53,63],
+      backgroundColor: ctx => ctx.raw > 50 ? 'rgba(239,68,68,0.7)' : ctx.raw > 35 ? 'rgba(245,158,11,0.6)' : 'rgba(59,130,246,0.5)',
+      borderRadius: 4,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { ticks: { color: '#9ca3af', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
+      y: { ticks: { color: '#9ca3af', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,0.04)' } }
+    }
+  }
+});
+
+// BACEN Donut
+new Chart(document.getElementById('bacenDonut'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Cap. Giro>365d','Outros Emp.','Desc. Dup.','Financ. Veic.','Cheq. Esp.','Conta Gar.','Cartão'],
+    datasets: [{
+      data: [2974, 2444, 2127, 262, 165, 68, 13],
+      backgroundColor: ['#3b82f6','#8b5cf6','#22c55e','#f59e0b','#ef4444','#ec4899','#06b6d4'],
+      borderWidth: 0
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'right', labels: { color: '#9ca3af', font: { size: 10 }, boxWidth: 12 } }
+    }
+  }
+});
+
+// BACEN Vencimentos bar
+new Chart(document.getElementById('bacenVenc'), {
+  type: 'bar',
+  data: {
+    labels: ['≤30d','31-60d','61-90d','91-180d','181-360d','361-720d','721-1080d','1081-1440d','1441-1800d','1801-5400d'],
+    datasets: [{
+      label: 'A Vencer (R$ mil)',
+      data: [1215, 915, 515, 524, 722, 1244, 751, 301, 287, 1283],
+      backgroundColor: 'rgba(34,197,94,0.55)',
+      borderRadius: 4,
+    },{
+      label: 'Vencidos (R$ mil)',
+      data: [67.5, 76.3, 76.2, 76.1, 0, 0, 0, 0, 0, 0],
+      backgroundColor: 'rgba(239,68,68,0.6)',
+      borderRadius: 4,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#9ca3af', font: { size: 10 } } } },
+    scales: {
+      x: { ticks: { color: '#9ca3af', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
+      y: { ticks: { color: '#9ca3af', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,0.04)' } }
+    }
+  }
+});
+
+// CredMap emitente
+new Chart(document.getElementById('fatChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Abr/25','Mai/25','Jun/25','Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26'],
+    datasets: [{
+      label: 'Emissão Boletos (R$ mil, aprox.)',
+      data: [1250, 1300, 1650, 1600, 1750, 1600, 1500, 1600, 1700, 1500, 1700, 1100],
+      backgroundColor: ctx => {
+        const v = ctx.raw;
+        if(v >= 1600) return 'rgba(34,197,94,0.65)';
+        if(v >= 1400) return 'rgba(34,197,94,0.45)';
+        return 'rgba(59,130,246,0.45)';
+      },
+      borderRadius: 4,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { ticks: { color: '#9ca3af', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
+      y: { ticks: { color: '#9ca3af', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,0.04)' } }
+    }
+  }
+});
+
+// Faturamento declarado
+new Chart(document.getElementById('fatDeclarado'), {
+  type: 'bar',
+  data: {
+    labels: ['Mai/25','Jun/25','Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26','Abr/26'],
+    datasets: [{
+      label: 'Faturamento Declarado (R$)',
+      data: [1268426, 1335089, 725567, 1250350, 1020160, 1374498, 1265543, 539347, 881256, 960242, 1591420, 1940030],
+      backgroundColor: ctx => {
+        const v = ctx.raw;
+        if(v >= 1500000) return 'rgba(34,197,94,0.7)';
+        if(v >= 1000000) return 'rgba(34,197,94,0.45)';
+        if(v >= 700000) return 'rgba(245,158,11,0.5)';
+        return 'rgba(239,68,68,0.5)';
+      },
+      borderRadius: 4,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => 'R$ ' + (ctx.raw/1000).toFixed(0) + 'k'
+        }
+      }
+    },
+    scales: {
+      x: { ticks: { color: '#9ca3af', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
+      y: {
+        ticks: { color: '#9ca3af', font: { size: 9 }, callback: v => 'R$' + (v/1000).toFixed(0) + 'k' },
+        grid: { color: 'rgba(255,255,255,0.04)' }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>
