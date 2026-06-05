@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<!-- build: 2026-06-04T22:00 -->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+<title>Parecer de Crédito — GB INSTALACOES COMERCIAIS · Junho 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0a0f1e;--navy2:#111827;--blue:#1e3a5f;
+  --accent:#ef4444;--accent-dim:rgba(239,68,68,0.12);--accent-border:rgba(239,68,68,0.3);
+  --amber:#f59e0b;--red:#ef4444;--green:#22c55e;--muted:#6b7280;
+  --text:#e5e7eb;--text2:#9ca3af;--border:rgba(255,255,255,0.07);
+}
+body{background:var(--navy);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6}
+h1,h2,h3{font-family:'Syne',sans-serif}
+.mono{font-family:'DM Mono',monospace}
+.hero{position:relative;min-height:340px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(135deg,#0a0f1e 0%,#150608 60%,#1a0a0a 100%);border-bottom:1px solid var(--border)}
+.hero-orbs{position:absolute;inset:0;pointer-events:none}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55}
+.hero-orb.o1{width:420px;height:420px;top:-80px;left:-60px;background:radial-gradient(circle,rgba(239,68,68,0.55) 0%,transparent 70%)}
+.hero-orb.o2{width:300px;height:300px;bottom:-60px;right:80px;background:radial-gradient(circle,rgba(239,68,68,0.3) 0%,transparent 70%)}
+.hero-content{position:relative;z-index:2;text-align:center;padding:2.5rem 2rem}
+.hero-badge{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);margin-bottom:.75rem;font-family:'DM Mono',monospace}
+.hero-title{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;line-height:1.1;margin-bottom:.75rem;letter-spacing:-.02em}
+.hero-title .accent{color:var(--accent)}
+.hero-sub{color:var(--text2);font-size:.9rem;margin-bottom:1.25rem;font-family:'DM Mono',monospace}
+.hero-chips{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+.chip{padding:.3rem .85rem;border-radius:999px;font-size:.75rem;font-weight:600;letter-spacing:.04em;border:1px solid var(--border);background:rgba(255,255,255,0.06);color:var(--text2)}
+.chip.danger{background:rgba(239,68,68,0.15);border-color:rgba(239,68,68,0.4);color:#fca5a5}
+.chip.warn{background:rgba(245,158,11,0.15);border-color:rgba(245,158,11,0.4);color:#fcd34d}
+.sticky-nav{position:sticky;top:0;z-index:100;background:rgba(10,15,30,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-row{display:flex;align-items:center;padding:.15rem 1.25rem;max-width:1100px;margin:0 auto;flex-wrap:wrap;gap:.1rem}
+.nav-row-credito{border-bottom:1px solid rgba(255,255,255,0.05)}
+.nav-row-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.09em;font-family:'DM Mono',monospace;white-space:nowrap;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.08);padding-right:.75rem;margin-right:.4rem;line-height:1.3;color:#00e6be}
+.nav-row-label.rf{color:#60a5fa}
+.nav-pill{display:inline-block;padding:.3rem .7rem;border-radius:999px;font-size:.72rem;font-weight:600;color:var(--text2);text-decoration:none;transition:all .2s;border:1px solid transparent}
+.nav-pill:hover,.nav-pill.active{background:var(--accent-dim);color:var(--accent);border-color:var(--accent-border)}
+section{padding:3rem 2rem;max-width:1100px;margin:0 auto}
+section+section{border-top:1px solid var(--border)}
+.section-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-family:'DM Mono',monospace;margin-bottom:.4rem}
+.section-title{font-size:1.6rem;font-weight:700;margin-bottom:1.75rem}
+.card{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+.card-title{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);margin-bottom:.75rem;font-family:'DM Mono',monospace}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+.kpi-card{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;border-left:3px solid var(--accent)}
+.kpi-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:.3rem;font-family:'DM Mono',monospace}
+.kpi-value{font-size:1.55rem;font-weight:700;font-family:'Syne',sans-serif;line-height:1}
+.kpi-sub{font-size:.72rem;color:var(--text2);margin-top:.25rem}
+.status-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.status-table th{text-align:left;padding:.6rem 1rem;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--border);font-family:'DM Mono',monospace}
+.status-table td{padding:.65rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04)}
+.status-table tr:hover td{background:rgba(255,255,255,0.02)}
+.risk-ok{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(34,197,94,0.15);color:#86efac;border:1px solid rgba(34,197,94,0.3)}
+.risk-high{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(239,68,68,0.15);color:#fca5a5;border:1px solid rgba(239,68,68,0.3)}
+.risk-warn{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(245,158,11,0.15);color:#fcd34d;border:1px solid rgba(245,158,11,0.3)}
+.risk-moderate{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(234,179,8,0.12);color:#fde68a;border:1px solid rgba(234,179,8,0.3)}
+.risk-info{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(59,130,246,0.15);color:#93c5fd;border:1px solid rgba(59,130,246,0.3)}
+.risk-low{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(34,197,94,0.1);color:#6ee7b7;border:1px solid rgba(34,197,94,0.2)}
+.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.data-table th{text-align:left;padding:.55rem .85rem;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-weight:500}
+.data-table td{padding:.55rem .85rem;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text)}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:rgba(255,255,255,0.02)}
+.text-right{text-align:right}
+.text-center{text-align:center}
+.negative{color:#fca5a5}
+.positive{color:#86efac}
+.bold{font-weight:600}
+.chart-wrap{position:relative;height:220px}
+.gauge-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem}
+.gauge-svg{width:160px;height:90px;overflow:visible}
+.gauge-label{font-size:1.8rem;font-weight:700;font-family:'Syne',sans-serif;text-anchor:middle;dominant-baseline:middle}
+.gauge-sub{font-size:.65rem;text-anchor:middle;fill:var(--text2)}
+.gauge-score-label{font-size:.75rem;color:var(--text2);margin-top:.4rem;text-align:center}
+.progress-item{margin-bottom:.75rem}
+.progress-label{display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:.3rem;color:var(--text2)}
+.progress-track{height:7px;background:rgba(255,255,255,0.07);border-radius:999px;overflow:hidden}
+.progress-fill{height:100%;border-radius:999px}
+.risk-row{display:grid;grid-template-columns:80px 1fr auto;gap:1rem;align-items:center;padding:.7rem 1rem;border-radius:8px;margin-bottom:.45rem;background:rgba(255,255,255,0.02);border:1px solid var(--border)}
+.risk-level{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-family:'DM Mono',monospace}
+.risk-level.high{color:#fca5a5}
+.risk-level.medium{color:#fcd34d}
+.risk-level.low{color:#86efac}
+.risk-level.critical{color:#f87171;text-shadow:0 0 8px rgba(239,68,68,0.5)}
+.risk-desc{font-size:.82rem;color:var(--text)}
+.verdict-panel{border-radius:14px;padding:1.75rem 2rem;border:1px solid;margin-top:1.5rem;text-align:center}
+.verdict-panel.danger{background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.35)}
+.verdict-panel.warn{background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.35)}
+.verdict-title{font-size:1.4rem;font-weight:700;font-family:'Syne',sans-serif;margin-bottom:.4rem}
+.verdict-panel.danger .verdict-title{color:#fca5a5}
+.verdict-panel.warn .verdict-title{color:#fcd34d}
+.verdict-sub{font-size:.85rem;color:var(--text2);margin-bottom:1rem}
+.verdict-limit{font-size:1rem;font-weight:600;color:var(--text);margin-top:.75rem}
+.analyst-note{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;padding:1.25rem 1.5rem;font-size:.85rem;line-height:1.7;color:var(--text2);margin-top:1.25rem}
+.analyst-note strong{color:var(--text)}
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);color:var(--muted);font-size:.75rem;font-family:'DM Mono',monospace}
+.timeline{list-style:none;padding-left:1.2rem;border-left:2px solid var(--accent-border)}
+.timeline li{position:relative;padding:.4rem 0 .4rem 1rem;font-size:.82rem;color:var(--text2)}
+.timeline li::before{content:'';position:absolute;left:-5px;top:.75rem;width:8px;height:8px;border-radius:50%;background:var(--accent);border:2px solid var(--navy2)}
+.timeline li strong{color:var(--text);display:block}
+.timeline li.alert::before{background:#fcd34d}
+.info-box{background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:1rem 1.25rem;font-size:.83rem;color:#fca5a5;margin-top:1rem}
+.alert-box{background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.25);border-radius:8px;padding:1rem 1.25rem;font-size:.83rem;color:#fcd34d;margin-top:1rem}
+.analyst-banner{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:var(--navy2);border:1px solid rgba(59,130,246,0.2);border-radius:10px;margin-bottom:1.5rem;border-left:3px solid #3b82f6}
+.analyst-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;font-family:'Syne',sans-serif;flex-shrink:0;border:2px solid}
+.analyst-name{font-weight:700;font-size:.9rem;font-family:'Syne',sans-serif}
+.analyst-role{font-size:.72rem;color:var(--text2);font-family:'DM Mono',monospace;margin-top:.1rem}
+.analyst-tag{display:inline-block;padding:.15rem .55rem;border-radius:999px;font-size:.65rem;font-weight:600;letter-spacing:.06em;margin-left:.4rem}
+.split-banner{background:linear-gradient(135deg,rgba(30,58,95,0.6) 0%,rgba(10,15,30,0.95) 100%);border:1px solid rgba(59,130,246,0.25);border-radius:16px;padding:2rem 2.5rem;text-align:center}
+.split-banner h2{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:#93c5fd;margin-bottom:.4rem}
+.risk-dim{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:8px;padding:.9rem 1rem;margin-bottom:.5rem}
+.risk-dim-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem}
+.risk-dim-name{font-size:.75rem;font-weight:700;font-family:'DM Mono',monospace;color:var(--text2);text-transform:uppercase;letter-spacing:.08em}
+.risk-dim-desc{font-size:.8rem;color:var(--text2);line-height:1.55}
+.guarantee-item{display:flex;gap:.75rem;align-items:flex-start;padding:.65rem 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.guarantee-item:last-child{border-bottom:none}
+.guarantee-num{width:22px;height:22px;border-radius:50%;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.15rem}
+.guarantee-text{font-size:.83rem;color:var(--text);line-height:1.5}
+.trigger-item{display:flex;gap:.6rem;align-items:flex-start;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:.82rem;color:var(--text2)}
+.trigger-item:last-child{border-bottom:none}
+.trigger-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:.4rem}
+.veredicto-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+.veredicto-card{background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.3);border-radius:14px;padding:1.5rem;text-align:center}
+.veredicto-card-name{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.5rem}
+.veredicto-card-verdict{font-size:1.6rem;font-weight:800;font-family:'Syne',sans-serif;color:#fca5a5;margin-bottom:.35rem}
+.veredicto-card-role{font-size:.75rem;color:var(--text2);margin-bottom:.5rem}
+.veredicto-card-sub{font-size:.78rem;color:var(--muted);line-height:1.5}
+.veredicto-unified{background:linear-gradient(135deg,rgba(239,68,68,0.12),rgba(239,68,68,0.06));border:2px solid rgba(239,68,68,0.45);border-radius:16px;padding:2rem;text-align:center;margin-top:1.25rem}
+section.rf-section .section-label{color:#60a5fa}
+section.rf-section .kpi-card{border-left-color:#3b82f6}
+.nav-sep{color:rgba(255,255,255,0.15);padding:0 .15rem;display:flex;align-items:center}
+.nav-pill.nav-rf:hover{background:rgba(59,130,246,0.1)!important;color:#93c5fd!important;border-color:rgba(59,130,246,0.3)!important}
+.fin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:1.5rem 0}
+.fin-group{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+.fin-group-title{font-size:.72rem;text-transform:uppercase;letter-spacing:.09em;font-family:'DM Mono',monospace;color:var(--text2);margin-bottom:1rem;font-weight:600}
+.fin-item{display:flex;align-items:center;justify-content:space-between;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.fin-item:last-child{border-bottom:none}
+.fin-item-left{flex:1}
+.fin-item-name{font-size:.82rem;color:var(--text)}
+.fin-item-formula{font-size:.67rem;color:var(--muted);font-family:'DM Mono',monospace;margin-top:.1rem}
+.fin-item-value{font-family:'DM Mono',monospace;font-size:1rem;font-weight:700;text-align:right;min-width:55px;margin-right:.5rem}
+.doc-table{width:100%;border-collapse:collapse;font-size:.8rem}
+.doc-table th{text-align:left;padding:.55rem .9rem;font-size:.67rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--border);font-family:'DM Mono',monospace}
+.doc-table th.text-center{text-align:center}
+.doc-table td{padding:.6rem .9rem;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+.doc-table td.text-center{text-align:center}
+.doc-ok{color:#86efac;font-weight:700}
+.doc-miss{color:#fca5a5;font-weight:700}
+.doc-warn{color:#fcd34d;font-weight:700}
+.doc-na{color:var(--muted)}
+.limit-policy{background:var(--navy2);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin:1.5rem 0}
+.limit-policy-header{background:rgba(59,130,246,.08);padding:1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem}
+.limit-policy-title{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:#93c5fd}
+.limit-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.limit-col{padding:1.1rem 1.5rem}
+.limit-col:first-child{border-right:1px solid var(--border)}
+.limit-step{display:flex;justify-content:space-between;align-items:center;padding:.45rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.8rem}
+.limit-step:last-child{border-bottom:none}
+.limit-step-label{color:var(--text2)}
+.limit-step-value{font-family:'DM Mono',monospace;font-weight:600;color:var(--text)}
+.limit-final{background:rgba(239,68,68,.06);border-top:2px solid rgba(239,68,68,.35);padding:1.1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+.alert-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .9rem;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.35);border-radius:8px;font-size:.78rem;font-weight:700;color:#fca5a5;margin:.25rem .15rem}
+.ratio-box{background:rgba(239,68,68,0.08);border:2px solid rgba(239,68,68,0.4);border-radius:12px;padding:1.25rem 1.5rem;margin:1rem 0;text-align:center}
+.ratio-number{font-size:2.5rem;font-weight:800;font-family:'Syne',sans-serif;color:#fca5a5;line-height:1}
+.ratio-label{font-size:.8rem;color:var(--text2);margin-top:.4rem}
+@media(max-width:768px){
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .two-col,.three-col,.fin-grid,.limit-body,.veredicto-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-orbs">
+    <div class="hero-orb o1"></div>
+    <div class="hero-orb o2"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">AG Antecipa · Parecer de Comitê · Crédito + Financeiro · Junho/2026</div>
+    <h1 class="hero-title"><span class="accent">GB INSTALACOES</span><br>COMERCIAIS LTDA</h1>
+    <div class="hero-sub">CNPJ 26.831.249/0001-32 · São José do Rio Preto/SP · Instalações PDV + Móveis</div>
+    <div class="hero-chips">
+      <span class="chip danger">&#9888; ALTO RISCO — NÃO RECOMENDADO</span>
+      <span class="chip">Score 740 — Risco Moderado (CreditBox)</span>
+      <span class="chip danger">203 Protestos · R$ 17,9M</span>
+      <span class="chip danger">Dívida Total &gt; R$ 43M</span>
+      <span class="chip">Crédito: Marcelo Vazquez</span>
+      <span class="chip">Financeiro: Rafael Bazan</span>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="sticky-nav">
+  <div class="nav-row nav-row-credito">
+    <div class="nav-row-label">Crédito<br>Vazquez</div>
+    <a href="#dashboard" class="nav-pill active">Dashboard</a>
+    <a href="#identificacao" class="nav-pill">Identificação</a>
+    <a href="#serasa" class="nav-pill">Serasa</a>
+    <a href="#bacen" class="nav-pill">BACEN/SCR</a>
+    <a href="#creditbox" class="nav-pill">CreditBox</a>
+    <a href="#patrimonio" class="nav-pill">Patrimônio</a>
+    <a href="#socios" class="nav-pill">Sócios</a>
+    <a href="#riscos" class="nav-pill">Riscos</a>
+    <a href="#parecer-credito" class="nav-pill">Parecer</a>
+  </div>
+  <div class="nav-row">
+    <div class="nav-row-label rf">Financeiro<br>Bazan</div>
+    <a href="#financeiro" class="nav-pill nav-rf">BP / DRE</a>
+    <a href="#docs" class="nav-pill nav-rf">Docs</a>
+    <a href="#negocio" class="nav-pill nav-rf">Mod. Negócio</a>
+    <a href="#juridico" class="nav-pill nav-rf">Análise Jurídica</a>
+    <a href="#risco-dim" class="nav-pill nav-rf">Risco Detalhado</a>
+    <a href="#garantias" class="nav-pill nav-rf">Garantias</a>
+    <a href="#monitoramento" class="nav-pill nav-rf">Monitoramento</a>
+    <a href="#parecer-financeiro" class="nav-pill nav-rf">Parecer Financeiro</a>
+    <a href="#veredicto" class="nav-pill" style="color:#fca5a5;border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.1);font-weight:700">&#8853; Veredicto</a>
+  </div>
+</nav>
+
+<!-- 0. DASHBOARD -->
+<section id="dashboard">
+  <div class="section-label">Seção 0</div>
+  <h2 class="section-title">Dashboard Executivo</h2>
+
+  <div class="info-box" style="margin-bottom:1.5rem">
+    <strong>&#9888; ALERTAS PRÉVIOS DO ANALISTA:</strong> (1) Troca societária total em Dez/2021 — ex-sócios saíram com protestos milionários; (2) Endividamento fiscal e bancário extremamente alavancado: passivo circulante de R$ 22,06M vs. faturamento anual declarado de R$ 24,1M.
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Faturamento 2025</div>
+      <div class="kpi-value positive">R$ 24,1M</div>
+      <div class="kpi-sub">Curva ABC clientes — autoatribuído</div>
+    </div>
+    <div class="kpi-card" style="border-left-color:#fca5a5">
+      <div class="kpi-label">Prejuízo 2025 (BP)</div>
+      <div class="kpi-value negative">R$ 4,28M</div>
+      <div class="kpi-sub">4º ano consecutivo de prejuízo</div>
+    </div>
+    <div class="kpi-card" style="border-left-color:#fca5a5">
+      <div class="kpi-label">Passivo Circulante (Dez/25)</div>
+      <div class="kpi-value negative">R$ 22,06M</div>
+      <div class="kpi-sub">PC &gt; AT (R$ 11,24M) — insolvência técnica</div>
+    </div>
+    <div class="kpi-card" style="border-left-color:#fca5a5">
+      <div class="kpi-label">Restrição Serasa</div>
+      <div class="kpi-value negative">R$ 18,11M</div>
+      <div class="kpi-sub">203 protestos · 5 ações judiciais</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Tabela de Status — Indicadores Críticos</div>
+    <table class="status-table">
+      <thead>
+        <tr><th>Indicador</th><th>Valor</th><th>Referência</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Protestos (Serasa/CENPROT)</td><td>203 ocorrências — R$ 17,9M</td><td>Ideal: zero</td><td><span class="risk-high">CRÍTICO</span></td></tr>
+        <tr><td>Dívida Ativa PGFN Federal</td><td>R$ 18,71M (prev+não prev+não trib)</td><td>Ideal: zero</td><td><span class="risk-high">CRÍTICO</span></td></tr>
+        <tr><td>Dívida Ativa PGE-SP (ICMS)</td><td>R$ 5,85M</td><td>Ideal: zero</td><td><span class="risk-high">CRÍTICO</span></td></tr>
+        <tr><td>Parcelamento tributos (BP)</td><td>R$ 2,52M no circulante</td><td>—</td><td><span class="risk-high">ALTO</span></td></tr>
+        <tr><td>Ratio Dívida BACEN / Fat. Mensal (empresa)</td><td>R$ 187,8k BACEN / ~R$ 450k/mês = 0,42x</td><td>&lt;1,5x aceitável</td><td><span class="risk-warn">MODERADO</span></td></tr>
+        <tr><td>Ratio Passivo Total / Faturamento Anual</td><td>R$ 22,7M / R$ 24,1M = 0,94x anual</td><td>&lt;0,5x aceitável</td><td><span class="risk-high">CRÍTICO</span></td></tr>
+        <tr><td>Patrimônio Líquido (Dez/25)</td><td><strong>NEGATIVO — R$ (4,28M)</strong></td><td>&gt;0 obrigatório</td><td><span class="risk-high">CRÍTICO</span></td></tr>
+        <tr><td>Score CreditBox</td><td>740 / 1000</td><td>&gt;700 = mod. risco</td><td><span class="risk-warn">MODERADO</span></td></tr>
+        <tr><td>Processos judiciais totais</td><td>56 processos · R$ 24,5M</td><td>—</td><td><span class="risk-high">ALTO</span></td></tr>
+        <tr><td>Troca societária recente</td><td>Ex-sócios saíram Dez/2021 c/ protestos</td><td>—</td><td><span class="risk-high">INVESTIGAR</span></td></tr>
+        <tr><td>Faturamento 2026 (Jan–Abr)</td><td>R$ 4,51M (apenas 4 meses, zerado após)</td><td>—</td><td><span class="risk-high">ALERTA</span></td></tr>
+        <tr><td>Pontualidade pagamentos (CredMap sacado)</td><td>40–60% pontual (Fev/26), melhora em Abr/26</td><td>&gt;90% ideal</td><td><span class="risk-warn">ATENÇÃO</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 1. IDENTIFICAÇÃO -->
+<section id="identificacao">
+  <div class="section-label">Seção 1</div>
+  <h2 class="section-title">Identificação da Empresa</h2>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Dados Cadastrais</div>
+      <table class="data-table">
+        <tbody>
+          <tr><td style="color:var(--text2)">Razão Social</td><td class="bold">GB INSTALACOES COMERCIAIS LTDA</td></tr>
+          <tr><td style="color:var(--text2)">Nome Fantasia</td><td>ATUAL PDV</td></tr>
+          <tr><td style="color:var(--text2)">CNPJ</td><td class="mono">26.831.249/0001-32</td></tr>
+          <tr><td style="color:var(--text2)">Situação</td><td><span class="risk-ok">ATIVA</span> desde 10/01/2017</td></tr>
+          <tr><td style="color:var(--text2)">Porte</td><td>EPP</td></tr>
+          <tr><td style="color:var(--text2)">Capital Social</td><td>R$ 30.000,00</td></tr>
+          <tr><td style="color:var(--text2)">CNAE Principal</td><td>31.01-2/00 — Fab. Móveis (Madeira)</td></tr>
+          <tr><td style="color:var(--text2)">Endereço</td><td>R. José Guide, 680 — Dist. Industrial, São José do Rio Preto/SP</td></tr>
+          <tr><td style="color:var(--text2)">Telefone</td><td>(17) 3513-4886 / (17) 8111-1368</td></tr>
+          <tr><td style="color:var(--text2)">E-mail</td><td>xml.notas@atualpdv.com.br</td></tr>
+          <tr><td style="color:var(--text2)">Sefaz-SP</td><td><span class="risk-ok">Habilitado</span> — Regime Normal (Lucro Real 2025)</td></tr>
+          <tr><td style="color:var(--text2)">PGFN</td><td><span class="risk-high">Emissão online não disponível</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Evolução do Nome Fantasia</div>
+      <ul class="timeline" style="margin-bottom:1rem">
+        <li><strong>Jan/2017 — Fundação</strong> Nome fantasia inicial: GB SOLUCOES EM MOVEIS E TRANSPORTES</li>
+        <li><strong>Mar/2022</strong> Troca: GB SOLUCOES EM MOVEIS E TRANSPORTES → PONTUAL PDV</li>
+        <li><strong>Fev/2023</strong> Troca: PONTUAL PDV → ATUAL PDV (nome atual)</li>
+      </ul>
+      <div class="card-title" style="margin-top:1rem">Fornecedores Cadastrados</div>
+      <p style="font-size:.82rem;color:var(--text2);line-height:1.6">Fort Luz Mat. Elétricos · Wurth do Brasil · Balau Madeiras · Passalacqua &amp; Cia · Travagin &amp; Travagin · Pado S/A · Soprano Ind. · Ferramentas Gerais</p>
+    </div>
+  </div>
+
+  <!-- Timeline societária completa -->
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">&#128680; Timeline Societária Completa — Reconstituição JUCESP</div>
+    <ul class="timeline">
+      <li><strong>10/01/2017 — Constituição da empresa</strong>
+        Sócios fundadores (família Zini da Motta): <br>
+        • BRUNA ZINI DA MOTTA (CPF 359.889.188-16) — Sócia-Administradora — R$ 13.500,00 (45%)<br>
+        • GUSTAVO ZINI DA MOTTA (CPF 311.100.468-63) — Sócio-Administrador — R$ 13.500,00 (45%)<br>
+        • SILVIA INEZ ZINI DA MOTTA (CPF 021.775.538-06) — Sócia — R$ 3.000,00 (10%)
+      </li>
+      <li class="alert"><strong>07/12/2021 — TROCA SOCIETÁRIA TOTAL (Arquivamento JUCESP nº 532.597/21-7)</strong>
+        Entrada: SERGIO DA MOTTA (CPF 050.289.138-62) — assume 100% (R$ 30.000,00) — Sócio-Administrador único<br>
+        Saída simultânea de TODOS os 3 ex-sócios (família Zini da Motta).<br>
+        NOTA ANALISTA: Troca realizada em Dezembro de 2021. Os ex-sócios Bruna (8 protestos, R$ 1,55M) e Gustavo (7 protestos, R$ 1,19M) saíram com passivos expressivos. Investigar se houve transferência de dívidas.
+      </li>
+      <li><strong>Atual — Junho/2026</strong>
+        SERGIO DA MOTTA — 100% — CPF 050.289.138-62 — 62 anos — único sócio e administrador
+      </li>
+    </ul>
+    <div class="info-box">
+      <strong>Conclusão da reconstituição societária:</strong> A troca de sócios ocorreu em Dezembro/2021 (há 4,5 anos), portanto não é "recente" no sentido de meses, mas a situação dos ex-sócios é grave: Bruna Zini da Motta (ex-sócia, 45%) possui 8 protestos totalizando R$ 1,55M e 1 REFIN de R$ 14k; Gustavo Zini da Motta (ex-sócio, 45%) possui 7 protestos totalizando R$ 1,19M. A empresa herdou o histórico — ou os protestos da empresa foram gerados após a troca, sob Sergio da Motta. O CNPJ acumula 203 protestos de R$ 17,9M, iniciados em Mar/2024 segundo Serasa, período em que Sergio já era sócio único. O padrão sugere que os protestos são da empresa sob gestão atual, não uma herança direta dos ex-sócios.
+    </div>
+  </div>
+</section>
+
+<!-- 2. SERASA -->
+<section id="serasa">
+  <div class="section-label">Seção 2</div>
+  <h2 class="section-title">Serasa — Anotações e Consultas</h2>
+
+  <div class="kpi-grid">
+    <div class="kpi-card" style="border-left-color:#fca5a5">
+      <div class="kpi-label">Total Restrições</div>
+      <div class="kpi-value negative">R$ 18,11M</div>
+      <div class="kpi-sub">Serasa Concentre — Jun/2026</div>
+    </div>
+    <div class="kpi-card" style="border-left-color:#fca5a5">
+      <div class="kpi-label">Protestos</div>
+      <div class="kpi-value negative">203</div>
+      <div class="kpi-sub">R$ 17.896.914 — Mar/24 a Abr/26</div>
+    </div>
+    <div class="kpi-card" style="border-left-color:#fcd34d">
+      <div class="kpi-label">Ações Judiciais</div>
+      <div class="kpi-value" style="color:#fcd34d">5</div>
+      <div class="kpi-sub">R$ 204.016 — Fiscais estaduais e federais</div>
+    </div>
+    <div class="kpi-card" style="border-left-color:#fcd34d">
+      <div class="kpi-label">REFIN + Div. Vencida</div>
+      <div class="kpi-value" style="color:#fcd34d">R$ 9k</div>
+      <div class="kpi-sub">REFIN R$ 6.660 Bradesco · Div. R$ 2.416</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Consultas ao Serasa — últimos 12 meses</div>
+      <div class="chart-wrap"><canvas id="chartConsultas"></canvas></div>
+      <div class="alert-box" style="margin-top:.75rem">
+        <strong>Pico em Ago/2025:</strong> 33 consultas em um único mês — comportamento atípico indicativo de busca agressiva por crédito ou rodada intensa de propostas junto a factorings/bancos. Padrão diminuiu em 2026 (9–12/mês).
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Últimos Protestos (5 mais recentes)</div>
+      <table class="data-table">
+        <thead><tr><th>Data</th><th>Valor</th><th>Cartório</th><th>Cidade</th></tr></thead>
+        <tbody>
+          <tr><td>24/04/2026</td><td>R$ 1.717</td><td>01</td><td>São José do Rio Preto/SP</td></tr>
+          <tr><td>23/04/2026</td><td>R$ 68</td><td>01</td><td>São José do Rio Preto/SP</td></tr>
+          <tr><td>14/04/2026</td><td>R$ 1.000</td><td>02</td><td>São José do Rio Preto/SP</td></tr>
+          <tr><td>10/04/2026</td><td>R$ 1.346</td><td>01</td><td>São José do Rio Preto/SP</td></tr>
+          <tr><td>07/04/2026</td><td>R$ 2.000</td><td>01</td><td>São José do Rio Preto/SP</td></tr>
+        </tbody>
+      </table>
+      <div class="card-title" style="margin-top:1rem">Relacionamento Factoring (Serasa)</div>
+      <table class="data-table">
+        <thead><tr><th>Empresa</th><th>Ocorrências</th><th>Última</th></tr></thead>
+        <tbody>
+          <tr><td>Fast Capital Fomento Mercantil</td><td>2</td><td>15/05/2026</td></tr>
+          <tr><td>GlobalCash FD Invest Dir Credit</td><td>1</td><td>20/05/2026</td></tr>
+          <tr><td>DUE Cred S/A</td><td>1</td><td>15/05/2026</td></tr>
+          <tr><td>MegaFris Plásticos Ltda EPP</td><td>1</td><td>25/05/2026</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Ações Judiciais (5 ocorrências — R$ 204.016)</div>
+    <table class="data-table">
+      <thead><tr><th>Data</th><th>Natureza</th><th>Valor</th><th>Cidade/UF</th></tr></thead>
+      <tbody>
+        <tr><td>27/04/2026</td><td>Fiscal Estadual</td><td>R$ 134.717</td><td>São Paulo/SP</td></tr>
+        <tr><td>18/02/2026</td><td>Fiscal Estadual</td><td>R$ 69.299</td><td>São Paulo/SP</td></tr>
+        <tr><td>08/10/2025</td><td>Fiscal Federal</td><td>—</td><td>S.J.Rio Preto/SP</td></tr>
+        <tr><td>07/02/2025</td><td>Fiscal Federal</td><td>—</td><td>S.J.Rio Preto/SP</td></tr>
+        <tr><td>06/02/2025</td><td>Fiscal Federal</td><td>—</td><td>S.J.Rio Preto/SP</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 3. BACEN / SCR -->
+<section id="bacen">
+  <div class="section-label">Seção 3</div>
+  <h2 class="section-title">BACEN / SCR — Sistema de Informações de Crédito</h2>
+
+  <div class="ratio-box">
+    <div class="ratio-number">0,42x</div>
+    <div class="ratio-label">Ratio BACEN empresa (R$ 187,8k) ÷ Faturamento Médio Mensal 2025 (R$ ~450k/cartão faturamento)<br>
+    <span style="color:#fcd34d;font-size:.85rem;">Ratio de risco bancário isolado: MODERADO — porém o passivo TOTAL é CRÍTICO</span></div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Carteira Ativa (BACEN empresa)</div>
+      <div class="kpi-value">R$ 187,8k</div>
+      <div class="kpi-sub">2 instituições · 6 operações</div>
+    </div>
+    <div class="kpi-card" style="border-left-color:#fca5a5">
+      <div class="kpi-label">Créditos Vencidos</div>
+      <div class="kpi-value negative">R$ 59,1k</div>
+      <div class="kpi-sub">31,5% da carteira vencida (cart. rotativo)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Limite de Crédito</div>
+      <div class="kpi-value">R$ 15k</div>
+      <div class="kpi-sub">Só cartão de crédito (até 360 dias)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Início Relac. Bancário</div>
+      <div class="kpi-value">Fev/2017</div>
+      <div class="kpi-sub">9 anos de histórico bancário</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Detalhamento das Modalidades (Empresa CNPJ)</div>
+      <table class="data-table">
+        <thead><tr><th>Modalidade</th><th class="text-right">Valor</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Créd. Rotativo — Cartão</td><td class="text-right negative">R$ 51.400,61</td><td><span class="risk-high">VENCIDO 15–30d</span></td></tr>
+          <tr><td>Cartão compra/fatura parcelada</td><td class="text-right">R$ 1.124,10</td><td><span class="risk-ok">A vencer</span></td></tr>
+          <tr><td>Cheque especial</td><td class="text-right">R$ 54.155,29</td><td><span class="risk-warn">Parcial vencido</span></td></tr>
+          <tr><td>Cartão compra à vista/lojista</td><td class="text-right">R$ 81.162,33</td><td><span class="risk-ok">A vencer</span></td></tr>
+          <tr><td>Limite cartão crédito</td><td class="text-right">R$ 15.000,00</td><td><span class="risk-info">Limite</span></td></tr>
+          <tr><td class="bold">Total Carteira Ativa</td><td class="text-right bold">R$ 187.842,33</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Vencimentos — Distribuição por Prazo</div>
+      <div class="chart-wrap"><canvas id="chartBacen"></canvas></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">&#128680; Contexto de Alavancagem Total (Passivo BP Dez/25 vs. Faturamento)</div>
+    <table class="data-table">
+      <thead><tr><th>Métrica</th><th class="text-right">Valor</th><th>Avaliação</th></tr></thead>
+      <tbody>
+        <tr><td>Passivo Circulante (Dez/25)</td><td class="text-right negative bold">R$ 22,06M</td><td><span class="risk-high">CRÍTICO</span></td></tr>
+        <tr><td>Passivo Não Circulante (Dez/25)</td><td class="text-right negative">R$ 616,5k</td><td><span class="risk-warn">ALTO</span></td></tr>
+        <tr><td>Passivo Total</td><td class="text-right negative bold">R$ 22,68M</td><td><span class="risk-high">CRÍTICO</span></td></tr>
+        <tr><td>Faturamento bruto 2025 (BP)</td><td class="text-right">R$ 25,1M</td><td><span class="risk-warn">Insuficiente</span></td></tr>
+        <tr><td>Ratio Passivo Total / Faturamento Anual</td><td class="text-right negative bold">0,90x</td><td><span class="risk-high">CRÍTICO (&gt;0,5x)</span></td></tr>
+        <tr><td>Passivo Total / Fat. Mensal (meses para quitar)</td><td class="text-right negative bold">~10,8 meses</td><td><span class="risk-high">CRÍTICO (&gt;3 meses)</span></td></tr>
+        <tr><td>Dívida PGFN Federal</td><td class="text-right negative">R$ 18,71M</td><td><span class="risk-high">CRÍTICO</span></td></tr>
+        <tr><td>Dívida PGFN Estadual (ICMS-SP)</td><td class="text-right negative">R$ 5,85M</td><td><span class="risk-high">CRÍTICO</span></td></tr>
+        <tr><td>Total passivos fiscais (PGFN + PGE)</td><td class="text-right negative bold">R$ 24,56M</td><td><span class="risk-high">CRÍTICO</span></td></tr>
+      </tbody>
+    </table>
+    <div class="info-box">
+      <strong>Observação crítica:</strong> A dívida fiscal total (R$ 24,56M) supera o faturamento anual bruto declarado de 2025 (R$ 25,1M). Combinada com o passivo trabalhista (R$ 6,76M no BP) e empréstimos bancários (R$ 2,4M), o passivo consolidado estimado supera R$ 43M, representando aproximadamente <strong>17,7 meses de faturamento médio de 2025</strong> — extremamente acima do limiar crítico de 3 meses.
+    </div>
+  </div>
+</section>
+
+<!-- 4. CREDITBOX -->
+<section id="creditbox">
+  <div class="section-label">Seção 4</div>
+  <h2 class="section-title">CreditBox / CredMap — Comportamento de Pagamentos</h2>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Score CreditBox</div>
+      <div class="kpi-value" style="color:#fcd34d">740</div>
+      <div class="kpi-sub">Risco moderado — pequena fração com problemas</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">ILM Sacado — 30d</div>
+      <div class="kpi-value" style="color:#fcd34d">21–23%</div>
+      <div class="kpi-sub">Baixo índice de pontualidade</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">ILM Sacado — 90d</div>
+      <div class="kpi-value" style="color:#fcd34d">61–63%</div>
+      <div class="kpi-sub">Acumulado em 90 dias</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Carteira Sacado (a vencer)</div>
+      <div class="kpi-value">R$ 550–600k</div>
+      <div class="kpi-sub">Total exposição como sacado</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Histórico de Emissão de Boletos (Emitente/Cedente) — últimos 12 meses</div>
+      <div class="chart-wrap"><canvas id="chartEmissao"></canvas></div>
+      <p style="font-size:.78rem;color:var(--text2);margin-top:.75rem">Emissão como cedente muito baixa (C5-C8 = R$ 55k–R$400k/mês). Volumes maiores aparecem na posição sacado (R$ 300–600k/mês), coerente com empresa que vende para grandes varejistas.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Histórico de Pagamento como Sacado (Fev–Abr/2026)</div>
+      <table class="data-table">
+        <thead><tr><th>Mês</th><th>Pontual</th><th>1–7d</th><th>8–15d</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td>Abr/2026</td><td class="positive">59–61%</td><td>21–23%</td><td>3–5%</td><td>C7 ~R$200–300k</td></tr>
+          <tr><td>Mar/2026</td><td style="color:#fcd34d">47–49%</td><td>17–19%</td><td>17–19%</td><td>C8 ~R$300–400k</td></tr>
+          <tr><td>Fev/2026</td><td class="negative">39–41%</td><td>9–11%</td><td>19–21%</td><td>C8 ~R$300–400k</td></tr>
+          <tr><td>Jan/2026</td><td style="color:#fcd34d">43–45%</td><td>27–29%</td><td>5–7%</td><td>C8 ~R$300–400k</td></tr>
+          <tr><td>Dez/2025</td><td class="positive">75–77%</td><td>23–25%</td><td>&lt;1%</td><td>C10 ~R$500–600k</td></tr>
+        </tbody>
+      </table>
+      <div class="alert-box" style="margin-top:.75rem">
+        Piora de pontualidade em Fev/2026 (39%) com melhora gradual. Pagamentos com atraso 8–15d representam risco para factoring. ILM como emitente/cedente: excelente (97–100%) — os boletos que emite são pagos pontualmente pelos sacados (varejistas de grande porte).
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. PATRIMÔNIO -->
+<section id="patrimonio">
+  <div class="section-label">Seção 5</div>
+  <h2 class="section-title">Patrimônio — Sócio Sérgio da Motta (IRPF 2022–2025)</h2>
+
+  <div class="card">
+    <div class="card-title">Declaração de Bens e Direitos — Evolução Patrimonial</div>
+    <table class="data-table">
+      <thead><tr><th>Bem / Direito</th><th class="text-right">Dez/2022</th><th class="text-right">Dez/2025</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td>Imóvel residencial — Res. Gaivota I (Lote 04, Qda 50) — 439m²</td><td class="text-right">R$ 485.000</td><td class="text-right">R$ 485.000</td><td>Mantido</td></tr>
+        <tr><td>Casa — Casas de Veneza (Bloco 01 Casa 136) — 125m²</td><td class="text-right">R$ 192.042</td><td class="text-right">R$ 192.042</td><td>Mantido</td></tr>
+        <tr><td>Apt. Apto 21 — Green Fields Residence — 181m²</td><td class="text-right">R$ 432.922</td><td class="text-right">R$ 432.922</td><td>Mantido</td></tr>
+        <tr><td>Imóvel Uchoa/SP (Rua 1, nº 624) — 183m²</td><td class="text-right">R$ 9.000</td><td class="text-right">—</td><td>Saiu da declaração</td></tr>
+        <tr><td>Sala comercial — GBPARK Setor Europe T2 306-B — 58m²</td><td class="text-right">R$ 192.624</td><td class="text-right">—</td><td>Saiu da declaração</td></tr>
+        <tr><td>Apart. comercial nº 457 (IBIS Budget Hotel) — 17m²</td><td class="text-right">R$ 110.824</td><td class="text-right">R$ 110.824</td><td>Mantido</td></tr>
+        <tr><td>30.000 cotas GB Instalações Ltda (CNPJ)</td><td class="text-right">R$ 30.000</td><td class="text-right">R$ 30.000</td><td>Valor nominal</td></tr>
+        <tr><td>Motor de popa Yamaha 15HP</td><td class="text-right">R$ 5.700</td><td class="text-right">R$ 5.700</td><td>Mantido</td></tr>
+        <tr><td>Investimentos / poupança / aplicações</td><td class="text-right">~R$ 315k</td><td class="text-right">~R$ 18k</td><td class="negative">Redução drástica</td></tr>
+        <tr><td class="bold">TOTAL BENS E DIREITOS</td><td class="text-right bold">R$ 1.784.656</td><td class="text-right bold">R$ 1.274.924</td><td class="negative">-R$ 510k</td></tr>
+        <tr><td class="bold">DÍVIDAS E ÔNUS REAIS</td><td class="text-right bold">R$ 0</td><td class="text-right negative bold">R$ 950.556</td><td class="negative">Endividamento pessoal</td></tr>
+        <tr><td class="bold">PATRIMÔNIO LÍQUIDO PESSOAL</td><td class="text-right positive bold">R$ 1.784.656</td><td class="text-right" style="color:#fcd34d;font-weight:700">R$ 324.368</td><td class="negative">Queda de 82%</td></tr>
+      </tbody>
+    </table>
+    <div class="info-box" style="margin-top:1rem">
+      <strong>Deterioração patrimonial severa:</strong> Patrimônio líquido pessoal de Sérgio da Motta caiu de R$ 1,78M (Dez/2022) para R$ 324k (Dez/2025) — queda de 82%. As dívidas pessoais saltaram de zero para R$ 950,5k (Banco do Brasil CDC R$ 39k + Banco Itaú Crediário R$ 896k). Investimentos financeiros quase zerados. Renda pró-labore de R$ 97.889/ano (2025) sem dividendos declarados. Este perfil de empobrecimento pessoal paralelo à crise da empresa é consistente com uso de recursos pessoais para sustentar operações deficitárias.
+    </div>
+  </div>
+</section>
+
+<!-- 6. SÓCIOS -->
+<section id="socios">
+  <div class="section-label">Seção 6</div>
+  <h2 class="section-title">Sócios — Atual e Ex-sócios</h2>
+
+  <div class="analyst-banner" style="border-left-color:#ef4444">
+    <div class="analyst-avatar" style="background:rgba(239,68,68,0.15);border-color:#ef4444;color:#fca5a5">MV</div>
+    <div>
+      <div class="analyst-name">Alerta Societário — Marcelo Vazquez</div>
+      <div class="analyst-role">Os ex-sócios (família Zini da Motta) saíram em Dez/2021 e possuem passivos pesados de protestos (Bruna: R$ 1,55M; Gustavo: R$ 1,19M). Os protestos da EMPRESA surgem a partir de Mar/2024 — já sob Sérgio como único sócio. A hipótese de "laranjamento" ou blindagem patrimonial dos ex-sócios não se confirma diretamente, mas o perfil dos ex-sócios justifica atenção.</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1.25rem">
+    <div class="card-title">Sócio Atual — SERGIO DA MOTTA</div>
+    <table class="data-table">
+      <tbody>
+        <tr><td style="color:var(--text2)">Nome</td><td>Sergio da Motta</td></tr>
+        <tr><td style="color:var(--text2)">CPF</td><td class="mono">050.289.138-62</td></tr>
+        <tr><td style="color:var(--text2)">Nascimento</td><td>20/03/1964 — 62 anos</td></tr>
+        <tr><td style="color:var(--text2)">Entrada na empresa</td><td>01/12/2021 (Dec/2021)</td></tr>
+        <tr><td style="color:var(--text2)">Participação</td><td>100% — Sócio-Administrador único</td></tr>
+        <tr><td style="color:var(--text2)">Endereço</td><td>Rua Osvaldo Politano Junior, 636 — Resid. Gaivota I — SJRP/SP</td></tr>
+        <tr><td style="color:var(--text2)">Restrição Serasa Pessoal</td><td><span class="risk-warn">REFIN R$ 66.562 (Itaú Holding — Abr/2026)</span></td></tr>
+        <tr><td style="color:var(--text2)">BACEN pessoal (Abr/26)</td><td>R$ 817.983 a vencer · Zero vencido · 3 instituições · 18 operações</td></tr>
+        <tr><td style="color:var(--text2)">PEP / Sanções</td><td><span class="risk-ok">Nada Consta</span></td></tr>
+        <tr><td style="color:var(--text2)">Processos pessoais</td><td>17 processos — R$ 266.955 (penal: 4 · tributário: 3 · civil: 5)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Ex-sócios — Situação de Crédito (Saída em Dez/2021)</div>
+    <table class="data-table">
+      <thead><tr><th>Nome</th><th>CPF</th><th>% Anterior</th><th>Restrição Serasa</th><th>BACEN (Abr/26)</th><th>Processos</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Bruna Zini da Motta</td>
+          <td class="mono" style="font-size:.7rem">359.889.188-16</td>
+          <td>45%</td>
+          <td class="negative">R$ 1,57M (8 protestos + 1 REFIN)</td>
+          <td>N/A (ex-sócia PF)</td>
+          <td>9 processos · R$ 2,31M</td>
+          <td><span class="risk-high">ALTO</span></td>
+        </tr>
+        <tr>
+          <td>Gustavo Zini da Motta</td>
+          <td class="mono" style="font-size:.7rem">311.100.468-63</td>
+          <td>45%</td>
+          <td class="negative">R$ 1,19M (7 protestos)</td>
+          <td>R$ 200,9k — zero vencido</td>
+          <td>7 processos · R$ 1,17M</td>
+          <td><span class="risk-high">ALTO</span></td>
+        </tr>
+        <tr>
+          <td>Silvia Inez Zini da Motta</td>
+          <td class="mono" style="font-size:.7rem">021.775.538-06</td>
+          <td>10%</td>
+          <td style="color:#fcd34d">R$ 6.522 (1 ação judicial)</td>
+          <td>R$ 47,2k — zero vencido</td>
+          <td>5 processos · R$ 11,6k</td>
+          <td><span class="risk-moderate">MODERADO</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert-box" style="margin-top:.75rem">
+      <strong>Análise crítica dos ex-sócios:</strong> Os protestos de Bruna e Gustavo Zini da Motta (R$ 1,55M e R$ 1,19M respectivamente) concentram-se em Jan-Out/2025 no CENPROT, ou seja, após a saída da empresa em 2021. Isso indica que os problemas pessoais deles não foram gerados pela GB Instalações, mas sim pela empresa coirmã PONTUAL BRASIL INSTALACOES COMERCIAIS LTDA (CNPJ 08.649.736/0001-05) na qual Gustavo ainda é sócio. Não há evidência direta de "golpe do laranja" ou blindagem patrimonial — trata-se de uma família com múltiplos negócios em dificuldade financeira.
+    </div>
+  </div>
+</section>
+
+<!-- 7. RISCOS -->
+<section id="riscos">
+  <div class="section-label">Seção 7</div>
+  <h2 class="section-title">Matriz de Riscos Consolidada</h2>
+
+  <div class="risk-row">
+    <div class="risk-level critical">CRÍTICO</div>
+    <div class="risk-desc"><strong>Passivo Fiscal Acumulado (R$ 24,56M)</strong> — PGFN Federal R$ 18,71M + PGE-SP R$ 5,85M. Supera o faturamento anual. Risco de bloqueio de contas via PGFN a qualquer momento.</div>
+    <span class="risk-high">Fiscal</span>
+  </div>
+  <div class="risk-row">
+    <div class="risk-level critical">CRÍTICO</div>
+    <div class="risk-desc"><strong>203 Protestos — R$ 17,9M</strong> — Acumulados desde Mar/2024 em São José do Rio Preto. Volume e velocidade de protestos incompatíveis com empresa saudável. Protestos novos em Abr/2026.</div>
+    <span class="risk-high">Crédito</span>
+  </div>
+  <div class="risk-row">
+    <div class="risk-level critical">CRÍTICO</div>
+    <div class="risk-desc"><strong>Patrimônio Líquido Negativo (Dez/25)</strong> — PL de R$ (4,28M) — empresa tecnicamente insolvente. Passivo circulante de R$ 22M supera o ativo total de R$ 11,2M em mais do dobro.</div>
+    <span class="risk-high">Financeiro</span>
+  </div>
+  <div class="risk-row">
+    <div class="risk-level high">ALTO</div>
+    <div class="risk-desc"><strong>4 Anos Consecutivos de Prejuízo</strong> — R$ 2,96M (2023) + R$ 3,69M (2024) + R$ 4,28M (2025) + estimativa 2026. Tendência crescente de deterioração.</div>
+    <span class="risk-high">Operacional</span>
+  </div>
+  <div class="risk-row">
+    <div class="risk-level high">ALTO</div>
+    <div class="risk-desc"><strong>Faturamento Zerado Após Abr/2026</strong> — Carta de faturamento 2026 mostra R$ 0,00 de Mai/2026 em diante. Indica paralisação operacional ou mudança de modelo de negócio não esclarecida.</div>
+    <span class="risk-high">Continuidade</span>
+  </div>
+  <div class="risk-row">
+    <div class="risk-level high">ALTO</div>
+    <div class="risk-desc"><strong>56 Processos Judiciais — R$ 24,5M</strong> — 20 trabalhistas (R$ 6,1M) + 24 tributários (R$ 12,2M) + 7 civis + 3 administrativos. Passivo contingente relevante.</div>
+    <span class="risk-high">Jurídico</span>
+  </div>
+  <div class="risk-row">
+    <div class="risk-level medium">MÉDIO</div>
+    <div class="risk-desc"><strong>Troca Societária Total (Dez/2021)</strong> — Família Zini da Motta saiu, Sérgio da Motta entrou com 100%. Ex-sócios apresentam passivos pesados, mas os protestos da empresa surgiram após (não necessariamente relacionados).</div>
+    <span class="risk-warn">Societário</span>
+  </div>
+  <div class="risk-row">
+    <div class="risk-level medium">MÉDIO</div>
+    <div class="risk-desc"><strong>Concentração de Sacados</strong> — Top 3 clientes (Pernambucanas 30%, Fonseca Magazine 17,5%, Lojas Avenida 11,4%) representam 59% do faturamento 2025. Alta dependência.</div>
+    <span class="risk-warn">Concentração</span>
+  </div>
+  <div class="risk-row">
+    <div class="risk-level medium">MÉDIO</div>
+    <div class="risk-desc"><strong>Deterioração Patrimonial do Sócio</strong> — PL pessoal de Sérgio da Motta caiu de R$ 1,78M para R$ 324k (-82%). Dívidas pessoais de R$ 950k em Dez/2025. Capacidade como avalista comprometida.</div>
+    <span class="risk-warn">Garantia</span>
+  </div>
+</section>
+
+<!-- 8. PARECER DE CRÉDITO -->
+<section id="parecer-credito">
+  <div class="section-label">Seção 8</div>
+  <h2 class="section-title">Parecer de Crédito — Marcelo Vazquez</h2>
+
+  <div class="analyst-banner">
+    <div class="analyst-avatar" style="background:rgba(0,230,190,0.15);border-color:#00e6be;color:#00e6be">MV</div>
+    <div>
+      <div class="analyst-name">Marcelo Vazquez <span class="analyst-tag" style="background:rgba(0,230,190,0.15);color:#00e6be;border:1px solid rgba(0,230,190,0.3)">Análise de Crédito</span></div>
+      <div class="analyst-role">AG Antecipa · Gestor de Crédito · Junho/2026</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">&#10003; Pontos Positivos</div>
+      <ul style="list-style:none;font-size:.83rem;color:var(--text2);line-height:1.8">
+        <li>&#9654; Score CreditBox 740 — categoria risco moderado</li>
+        <li>&#9654; Sacados de altíssima qualidade (Pernambucanas, Fonseca Magazine, Lojas Avenida, Riachuelo, C&amp;A)</li>
+        <li>&#9654; ILM emitente excelente: 97–100% — sacados pagam bem</li>
+        <li>&#9654; Empresa ativa há 9 anos, no mesmo endereço</li>
+        <li>&#9654; Faturamento 2025 expressivo: R$ 24,1M (Curva ABC)</li>
+        <li>&#9654; Nenhum protesto pessoal do sócio Sérgio</li>
+        <li>&#9654; CND trabalhista negativa — sem inadimplência no TST</li>
+        <li>&#9654; Sem recuperação judicial ou falência</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">&#9888; Pontos Críticos de Atenção</div>
+      <ul style="list-style:none;font-size:.83rem;color:#fca5a5;line-height:1.8">
+        <li>&#9654; 203 protestos — R$ 17,9M — acumulação desde Mar/2024</li>
+        <li>&#9654; Dívida fiscal total estimada em R$ 24,56M</li>
+        <li>&#9654; PL negativo em R$ 4,28M — insolvência técnica</li>
+        <li>&#9654; 4 anos consecutivos de prejuízo crescente</li>
+        <li>&#9654; Faturamento zerado Mai–Dez/2026 na carta de faturamento</li>
+        <li>&#9654; 56 processos judiciais — R$ 24,5M</li>
+        <li>&#9654; Passivo trabalhista R$ 6,76M (BP Dez/25)</li>
+        <li>&#9654; Patrimônio pessoal do sócio em colapso (-82% em 3 anos)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Cálculo de limite -->
+  <div class="limit-policy">
+    <div class="limit-policy-header">
+      <span class="limit-policy-title">&#128200; Cálculo do Limite AG Antecipa</span>
+    </div>
+    <div class="limit-body">
+      <div class="limit-col">
+        <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:.75rem;font-family:'DM Mono',monospace">Base de Cálculo</div>
+        <div class="limit-step"><span class="limit-step-label">Fat. médio mensal 2025 (Carta Fat.)</span><span class="limit-step-value">R$ 2.010.856</span></div>
+        <div class="limit-step"><span class="limit-step-label">Faixa aplicável (&gt;R$2,5M anual)</span><span class="limit-step-value">30%</span></div>
+        <div class="limit-step"><span class="limit-step-label">Limite base (fat. mensal × 30%)</span><span class="limit-step-value">R$ 603.257</span></div>
+        <div class="limit-step"><span class="limit-step-label">Teto AG Antecipa</span><span class="limit-step-value">R$ 2.000.000</span></div>
+        <div class="limit-step"><span class="limit-step-label">Limite base pré-ajuste</span><span class="limit-step-value">R$ 603.257</span></div>
+      </div>
+      <div class="limit-col">
+        <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:.75rem;font-family:'DM Mono',monospace">Ajustes de Risco (severos)</div>
+        <div class="limit-step"><span class="limit-step-label">(-) 203 protestos R$ 17,9M</span><span class="limit-step-value negative">-80%</span></div>
+        <div class="limit-step"><span class="limit-step-label">(-) PL negativo / insolvência técnica</span><span class="limit-step-value negative">-adicional</span></div>
+        <div class="limit-step"><span class="limit-step-label">(-) Fat. zerado Mai/26 em diante</span><td class="text-right"><span class="limit-step-value negative">-adicional</span></div>
+        <div class="limit-step"><span class="limit-step-label">(-) Dívida fiscal R$ 24,56M</span><span class="limit-step-value negative">-definitivo</span></div>
+        <div class="limit-step"><span class="limit-step-label">Limite ajustado</span><span class="limit-step-value negative">R$ 0 — Recusar</span></div>
+      </div>
+    </div>
+    <div class="limit-final">
+      <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;color:#fca5a5">LIMITE FINAL SUGERIDO</span>
+      <span style="font-family:'DM Mono',monospace;font-weight:700;font-size:1.1rem;color:#fca5a5">R$ 0,00 — RECUSAR</span>
+    </div>
+  </div>
+
+  <div class="verdict-panel danger">
+    <div class="verdict-title">NÃO RECOMENDADO — RECUSAR</div>
+    <div class="verdict-sub">A empresa apresenta um perfil de risco extremo que inviabiliza qualquer exposição da AG Antecipa. A combinação de insolvência técnica, passivo fiscal superior ao faturamento anual, 203 protestos em curso, 4 anos de prejuízo crescente e faturamento declarado como zerado a partir de Maio/2026 configura cenário de empresa em colapso financeiro iminente — independentemente da qualidade dos sacados.</div>
+    <div class="verdict-limit">Condição para reabertura: Regularização comprovada do passivo fiscal, laudo de auditoria independente, mínimo 12 meses de BP positivo e SERASA limpa.</div>
+  </div>
+
+  <div class="analyst-note">
+    <strong>Nota específica sobre os alertas do analista:</strong><br>
+    <strong>Alerta 1 — Troca societária:</strong> A troca ocorreu em Dez/2021 (há 4,5 anos), não é recente. Os ex-sócios (Bruna e Gustavo Zini da Motta) apresentam protestos pesados, mas estes surgiram em 2024–2025, portanto não há evidência direta de transferência de dívida da empresa para eles ou vice-versa. O histórico societário não configura, por si só, "laranjamento". O risco real é a situação financeira atual da empresa sob Sérgio.<br>
+    <strong>Alerta 2 — Alavancagem:</strong> Confirmado como EXTREMAMENTE CRÍTICO. Passivo fiscal de R$ 24,56M + passivo trabalhista de R$ 6,76M + empréstimos de R$ 2,4M = estimativa de R$ 33,72M apenas em passivos formalizados. Isso representa aproximadamente 1,4x o faturamento anual bruto de 2025 — situação insustentável.
+  </div>
+</section>
+
+<!-- SPLIT BANNER -->
+<section style="padding:2rem">
+  <div class="split-banner">
+    <h2>&#9135; ANÁLISE FINANCEIRA &amp; JURÍDICA CONSULTIVA</h2>
+    <p style="color:#93c5fd;font-size:.85rem;margin-top:.35rem">Rafael Bazan · Contador CRC · Consultor Financeiro e Jurídico · AG Antecipa · Junho/2026</p>
+    <p style="color:var(--text2);font-size:.78rem;margin-top:.5rem">As seções a seguir apresentam análise técnica independente das demonstrações contábeis, modelo de negócio, dimensionamento de risco e estrutura de garantias.</p>
+  </div>
+</section>
+
+<!-- RF-0: BP / DRE -->
+<section id="financeiro" class="rf-section">
+  <div class="section-label">RF-0 · Financeiro</div>
+  <h2 class="section-title">Balanço Patrimonial &amp; DRE — Análise Comparativa</h2>
+
+  <div class="analyst-banner">
+    <div class="analyst-avatar" style="background:rgba(59,130,246,0.15);border-color:#3b82f6;color:#93c5fd">RB</div>
+    <div>
+      <div class="analyst-name">Rafael Bazan <span class="analyst-tag" style="background:rgba(59,130,246,0.15);color:#93c5fd;border:1px solid rgba(59,130,246,0.3)">Análise Financeira &amp; Contábil</span></div>
+      <div class="analyst-role">AG Antecipa · Consultor Financeiro e Jurídico · Junho/2026</div>
+    </div>
+  </div>
+
+  <!-- DRE Espelho -->
+  <div class="card" style="margin-bottom:1.25rem">
+    <div class="card-title">DRE Espelho — 2023 / 2024 / 2025 (anual)</div>
+    <table class="data-table">
+      <thead><tr><th>Item</th><th class="text-right">2023</th><th class="text-right">2024</th><th class="text-right">2025 (BP anual)</th></tr></thead>
+      <tbody>
+        <tr><td class="bold">Receita Bruta</td><td class="text-right">R$ 14,32M</td><td class="text-right">R$ 19,97M</td><td class="text-right">R$ 25,10M</td></tr>
+        <tr><td>(–) Deduções</td><td class="text-right">(R$ 2,59M)</td><td class="text-right">(R$ 3,61M)</td><td class="text-right">(R$ 5,91M)</td></tr>
+        <tr><td class="bold">Receita Líquida</td><td class="text-right">R$ 11,73M</td><td class="text-right">R$ 16,36M</td><td class="text-right">R$ 19,19M</td></tr>
+        <tr><td>(–) Custos totais</td><td class="text-right">(R$ 4,58M)</td><td class="text-right">(R$ 7,92M)</td><td class="text-right">(R$ 10,49M)</td></tr>
+        <tr><td class="bold">Lucro Bruto</td><td class="text-right positive">R$ 7,15M</td><td class="text-right positive">R$ 8,44M</td><td class="text-right positive">R$ 8,70M</td></tr>
+        <tr><td>(–) Desp. Operacionais + Financeiras</td><td class="text-right">(R$ 10,10M)</td><td class="text-right">(R$ 11,59M)</td><td class="text-right">(R$ 12,97M)</td></tr>
+        <tr><td class="bold negative">Prejuízo Líquido</td><td class="text-right negative bold">(R$ 2,97M)</td><td class="text-right negative bold">(R$ 3,69M)</td><td class="text-right negative bold">(R$ 4,28M)</td></tr>
+        <tr><td>Margem bruta</td><td class="text-right">60,9%</td><td class="text-right">51,6%</td><td class="text-right">45,4%</td></tr>
+        <tr><td>Margem líquida</td><td class="text-right negative">-25,3%</td><td class="text-right negative">-22,6%</td><td class="text-right negative">-22,3%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- BP comparativo -->
+  <div class="card" style="margin-bottom:1.25rem">
+    <div class="card-title">Balanço Patrimonial — 2023 / 2024 / 2025</div>
+    <table class="data-table">
+      <thead><tr><th>Item</th><th class="text-right">31/12/2023</th><th class="text-right">31/12/2024</th><th class="text-right">31/12/2025</th></tr></thead>
+      <tbody>
+        <tr><td class="bold">Ativo Circulante</td><td class="text-right">R$ 4,13M</td><td class="text-right">R$ 6,89M</td><td class="text-right">R$ 8,10M</td></tr>
+        <tr><td class="bold">Ativo Não Circulante</td><td class="text-right">R$ 2,68M</td><td class="text-right">R$ 2,90M</td><td class="text-right">R$ 3,14M</td></tr>
+        <tr><td class="bold">Ativo Total</td><td class="text-right">R$ 6,84M</td><td class="text-right">R$ 9,79M</td><td class="text-right">R$ 11,24M</td></tr>
+        <tr><td class="bold negative">Passivo Circulante</td><td class="text-right negative">R$ 9,70M</td><td class="text-right negative">R$ 16,20M</td><td class="text-right negative bold">R$ 22,06M</td></tr>
+        <tr><td class="bold">Passivo Não Circulante</td><td class="text-right">R$ 461k</td><td class="text-right">R$ 742k</td><td class="text-right">R$ 617k</td></tr>
+        <tr><td class="bold negative">Patrimônio Líquido</td><td class="text-right negative">(R$ 3,35M)</td><td class="text-right negative">(R$ 7,16M)</td><td class="text-right negative bold">(R$ 11,44M)*</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.72rem;color:var(--text2);margin-top:.5rem">* PL calculado: AT R$ 11,24M – PT R$ 22,68M = (R$ 11,44M). Nota: o BP 2025 consolida os prejuízos acumulados de R$ 7,19M como débito contra o PL.</p>
+  </div>
+
+  <!-- Indicadores financeiros -->
+  <div class="fin-grid">
+    <div class="fin-group">
+      <div class="fin-group-title">Liquidez (Dez/2025)</div>
+      <div class="fin-item">
+        <div class="fin-item-left">
+          <div class="fin-item-name">Liquidez Corrente</div>
+          <div class="fin-item-formula">AC ÷ PC</div>
+        </div>
+        <div class="fin-item-value negative">0,37</div>
+        <span class="risk-high">CRÍTICO</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left">
+          <div class="fin-item-name">Liquidez Seca</div>
+          <div class="fin-item-formula">(AC – Est) ÷ PC</div>
+        </div>
+        <div class="fin-item-value negative">0,36</div>
+        <span class="risk-high">CRÍTICO</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left">
+          <div class="fin-item-name">Liquidez Geral</div>
+          <div class="fin-item-formula">(AC+RLP) ÷ (PC+PNC)</div>
+        </div>
+        <div class="fin-item-value negative">0,37</div>
+        <span class="risk-high">CRÍTICO</span>
+      </div>
+    </div>
+    <div class="fin-group">
+      <div class="fin-group-title">Endividamento (Dez/2025)</div>
+      <div class="fin-item">
+        <div class="fin-item-left">
+          <div class="fin-item-name">Endividamento Geral</div>
+          <div class="fin-item-formula">(PC+PNC) ÷ AT</div>
+        </div>
+        <div class="fin-item-value negative">2,01</div>
+        <span class="risk-high">CRÍTICO</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left">
+          <div class="fin-item-name">Composição Endividamento</div>
+          <div class="fin-item-formula">PC ÷ (PC+PNC)</div>
+        </div>
+        <div class="fin-item-value negative">97%</div>
+        <span class="risk-high">CRÍTICO</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left">
+          <div class="fin-item-name">Imobilização PL</div>
+          <div class="fin-item-formula">Imob ÷ PL</div>
+        </div>
+        <div class="fin-item-value negative">N/A</div>
+        <span class="risk-high">PL negativo</span>
+      </div>
+    </div>
+    <div class="fin-group">
+      <div class="fin-group-title">Rentabilidade (2025)</div>
+      <div class="fin-item">
+        <div class="fin-item-left">
+          <div class="fin-item-name">ROE</div>
+          <div class="fin-item-formula">LL ÷ PL</div>
+        </div>
+        <div class="fin-item-value negative">N/A</div>
+        <span class="risk-high">PL negativo</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left">
+          <div class="fin-item-name">ROA</div>
+          <div class="fin-item-formula">LL ÷ AT</div>
+        </div>
+        <div class="fin-item-value negative">-38%</div>
+        <span class="risk-high">CRÍTICO</span>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-left">
+          <div class="fin-item-name">Margem Líquida</div>
+          <div class="fin-item-formula">LL ÷ Rec. Líq.</div>
+        </div>
+        <div class="fin-item-value negative">-22,3%</div>
+        <span class="risk-high">CRÍTICO</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Análise crítica faturamento -->
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">&#128200; Análise Crítica de Credibilidade do Faturamento</div>
+    <table class="data-table">
+      <thead><tr><th>Ano</th><th class="text-right">Fat. Bruto DRE/BP</th><th class="text-right">Fat. Carta Mensal</th><th>Consistência</th></tr></thead>
+      <tbody>
+        <tr><td>2023</td><td class="text-right">R$ 14,32M</td><td class="text-right">—</td><td><span class="risk-ok">BP auditado</span></td></tr>
+        <tr><td>2024</td><td class="text-right">R$ 19,97M</td><td class="text-right">—</td><td><span class="risk-ok">BP assinado CRC</span></td></tr>
+        <tr><td>2025</td><td class="text-right">R$ 25,10M (BP)</td><td class="text-right">R$ 24,13M (carta)</td><td><span class="risk-ok">Consistente</span></td></tr>
+        <tr><td>2026 (Jan–Abr)</td><td class="text-right">—</td><td class="text-right">R$ 4,51M</td><td><span class="risk-high">Zerado Mai–Dez/26</span></td></tr>
+      </tbody>
+    </table>
+    <div class="info-box" style="margin-top:.75rem">
+      <strong>Alerta crítico Bazan — Credibilidade 2026:</strong> A carta de faturamento emitida em 30/04/2026 declara R$ 0,00 para os meses de Maio a Dezembro de 2026. Isso é incompatível com a alegação de empresa ativa e operacional. Pode indicar: (a) paralisação de atividades; (b) mudança para informalidade; (c) erro na carta. A curva ABC de clientes de 2025 (R$ 24,1M) inclui varejistas de grande porte — se esses contratos foram rescindidos em Abr/2026, configura colapso operacional imediato.
+    </div>
+  </div>
+</section>
+
+<!-- RF-0b: DOCS -->
+<section id="docs" class="rf-section">
+  <div class="section-label">RF-0b · Documentação</div>
+  <h2 class="section-title">Checklist de Documentação</h2>
+
+  <table class="doc-table">
+    <thead>
+      <tr><th>Documento</th><th>Status</th><th class="text-center">Assinatura</th><th class="text-center">CRC</th><th>Observação</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>BP 2023 (Balanço Patrimonial)</td><td class="doc-ok">&#10003; Presente</td><td class="text-center doc-ok">&#10003; Digital Serpro</td><td class="text-center doc-ok">CRC 1SP182583/O-5</td><td>Mario José da Motta (Técnico)</td></tr>
+      <tr><td>DRE 2023</td><td class="doc-ok">&#10003; Presente</td><td class="text-center doc-ok">&#10003; Digital Serpro</td><td class="text-center doc-ok">CRC 1SP182583/O-5</td><td>Assinado por Sérgio da Motta</td></tr>
+      <tr><td>BP 2024</td><td class="doc-ok">&#10003; Presente</td><td class="text-center doc-ok">&#10003; Digital Serpro</td><td class="text-center doc-ok">CRC 1SP119596 (Perossi)</td><td>Novo contador a partir de 2024</td></tr>
+      <tr><td>DRE 2024</td><td class="doc-ok">&#10003; Presente</td><td class="text-center doc-ok">&#10003; Digital Serpro</td><td class="text-center doc-ok">CRC 1SP119596 (Perossi)</td><td>Prejuízo R$ 3,69M declarado</td></tr>
+      <tr><td>BP 2025 (Balancete Dez/25)</td><td class="doc-ok">&#10003; Presente</td><td class="text-center doc-ok">&#10003; Digital Serpro</td><td class="text-center doc-ok">CRC 1SP119596</td><td>Balancete analítico completo</td></tr>
+      <tr><td>Balancete + DRE Ago/2025</td><td class="doc-ok">&#10003; Presente</td><td class="text-center doc-ok">&#10003; Digital Serpro</td><td class="text-center doc-ok">CRC 1SP119596</td><td>Período Jan–Ago/2025</td></tr>
+      <tr><td>Carta Faturamento 2025</td><td class="doc-ok">&#10003; Presente</td><td class="text-center doc-ok">&#10003; Digital Serpro</td><td class="text-center doc-ok">CRC 182583/O</td><td>Mês a mês com Jan/26</td></tr>
+      <tr><td>Carta Faturamento 2026</td><td class="doc-warn">&#9888; Presente</td><td class="text-center doc-ok">&#10003; Digital Serpro</td><td class="text-center doc-ok">CRC 182583/O</td><td><strong>R$ 0,00 a partir de Mai/26</strong></td></tr>
+      <tr><td>Curva ABC Clientes 2025</td><td class="doc-ok">&#10003; Presente</td><td class="text-center doc-ok">&#10003; Assinada</td><td class="text-center">—</td><td>Total R$ 24,1M · 60+ clientes</td></tr>
+      <tr><td>IRPF Sérgio da Motta 2023–2026</td><td class="doc-ok">&#10003; Presente (4 anos)</td><td class="text-center doc-ok">&#10003; Digital Serpro</td><td class="text-center doc-na">N/A</td><td>Completo — bens e dívidas</td></tr>
+      <tr><td>CNH Digital do sócio</td><td class="doc-ok">&#10003; Presente</td><td class="text-center">—</td><td class="text-center doc-na">N/A</td><td>Documento atualizado</td></tr>
+      <tr><td>Comprovante endereço (Fev/2026)</td><td class="doc-ok">&#10003; Presente</td><td class="text-center">—</td><td class="text-center doc-na">N/A</td><td>—</td></tr>
+      <tr><td>Identidade ex-sócia Silvia Zini da Motta</td><td class="doc-warn">&#9888; Presente (WhatsApp)</td><td class="text-center doc-warn">—</td><td class="text-center doc-na">N/A</td><td>Foto do RG antigo (1959) — a ex-sócia não é mais sócia</td></tr>
+      <tr><td>Proposta de factoring concorrente</td><td class="doc-ok">&#10003; Presente (WhatsApp)</td><td class="text-center">—</td><td class="text-center doc-na">N/A</td><td>MaxCenter R$ 2M · Predileta R$ 350k · Interativa R$ 200k</td></tr>
+      <tr><td>PGFN — Certidão Negativa</td><td class="doc-miss">&#10007; Indisponível</td><td class="text-center doc-miss">—</td><td class="text-center doc-na">N/A</td><td>Emissão online não disponível — dívida confirmada R$ 18,71M</td></tr>
+    </tbody>
+  </table>
+
+  <div class="alert-box" style="margin-top:1rem">
+    <strong>Observação sobre as imagens WhatsApp:</strong> A imagem de 27/05/2026 mostra tabela de proposta de factorings concorrentes (MaxCenter limite R$ 2M a 3,8% · Predileta R$ 350k a 4% · Interativa R$ 200k a 4,3%). As imagens de 01/06/2026 mostram o documento de identidade de Silvia Inez Zini da Motta (ex-sócia, CPF 021.775.538-06, nascida 19/08/1959, RG 12.404.543-1, Uchoa-SP), documento desnecessário para a operação atual, pois ela deixou a sociedade em Dez/2021.
+  </div>
+</section>
+
+<!-- RF-1: MODELO DE NEGÓCIO -->
+<section id="negocio" class="rf-section">
+  <div class="section-label">RF-1 · Modelo de Negócio</div>
+  <h2 class="section-title">Modelo de Negócio e Sacados</h2>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">O que faz a GB Instalações / Atual PDV</div>
+      <p style="font-size:.83rem;color:var(--text2);line-height:1.7">A empresa atua em dois segmentos complementares: <strong>(1) Fabricação e instalação de móveis para lojas (PDV — Ponto de Venda)</strong> — mobiliário comercial, gôndolas, expositores, vitrines e instalações para redes varejistas; <strong>(2) Transporte rodoviário</strong> de carga (CT-e). O nome fantasia ATUAL PDV reflete a especialização em montagem de ambientes de ponto de venda para grandes varejistas.</p>
+      <p style="font-size:.83rem;color:var(--text2);line-height:1.7;margin-top:.75rem">Ciclo: recebe pedido do varejista → produz o mobiliário → instala na loja → emite NF e boletos. Prazo de recebimento típico de 30–90 dias sobre o valor da obra.</p>
+      <p style="font-size:.83rem;color:var(--text2);line-height:1.7;margin-top:.75rem"><strong>Elegibilidade dos sacados para factoring:</strong> EXCELENTE. Os principais clientes são Pernambucanas, Fonseca Magazine, Lojas Avenida, Riachuelo, Caedu, CEAC — todos de altíssimo nível de crédito, com pagamento pontual (ILM emitente 97–100%). Os títulos (boletos de serviços/produtos instalados) são genuínos e rastreáveis por NF-e.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Curva ABC de Clientes 2025 (R$ 24,1M)</div>
+      <div class="chart-wrap"><canvas id="chartABC"></canvas></div>
+      <table class="data-table" style="margin-top:.75rem">
+        <thead><tr><th>Cliente</th><th class="text-right">Valor</th><th class="text-right">%</th></tr></thead>
+        <tbody>
+          <tr><td>Arthur Lundgren (Pernambucanas)</td><td class="text-right">R$ 7,32M</td><td class="text-right bold">30,4%</td></tr>
+          <tr><td>Fonseca Magazine Ltda</td><td class="text-right">R$ 4,23M</td><td class="text-right">17,6%</td></tr>
+          <tr><td>Lojas Avenida S.A.</td><td class="text-right">R$ 2,74M</td><td class="text-right">11,4%</td></tr>
+          <tr><td>Lojas Riachuelo SA</td><td class="text-right">R$ 2,09M</td><td class="text-right">8,7%</td></tr>
+          <tr><td>CAEDU Comércio Varejista</td><td class="text-right">R$ 2,05M</td><td class="text-right">8,5%</td></tr>
+          <tr><td>Demais clientes (55+)</td><td class="text-right">R$ 5,70M</td><td class="text-right">23,4%</td></tr>
+        </tbody>
+      </table>
+      <div class="alert-box" style="margin-top:.75rem;font-size:.78rem">Concentração TOP 5: 76,6%. Altíssima dependência de Pernambucanas (30%). Se este contrato for rescindido, a empresa perde 30% da receita imediatamente.</div>
+    </div>
+  </div>
+</section>
+
+<!-- RF-2: JURÍDICO -->
+<section id="juridico" class="rf-section">
+  <div class="section-label">RF-2 · Análise Jurídica</div>
+  <h2 class="section-title">Análise Jurídica e Tributária</h2>
+
+  <div class="card" style="margin-bottom:1.25rem">
+    <div class="card-title">Processos Judiciais — Síntese (56 processos · R$ 24,5M)</div>
+    <table class="data-table">
+      <thead><tr><th>Área</th><th class="text-right">Qtde</th><th class="text-right">Valor</th><th>Status Principal</th><th>Avaliação</th></tr></thead>
+      <tbody>
+        <tr><td>Direito Tributário</td><td class="text-right">24</td><td class="text-right negative">R$ 12,17M (federal)</td><td>Em tramitação / Execução fiscal</td><td><span class="risk-high">CRÍTICO</span></td></tr>
+        <tr><td>Direito do Trabalho</td><td class="text-right">20</td><td class="text-right negative">R$ 6,09M</td><td>Passivo trabalhista ativo</td><td><span class="risk-high">ALTO</span></td></tr>
+        <tr><td>Direito Civil</td><td class="text-right">7</td><td class="text-right">R$ 696k</td><td>Perdas e danos, obrigações</td><td><span class="risk-warn">MÉDIO</span></td></tr>
+        <tr><td>Direito Administrativo</td><td class="text-right">3</td><td class="text-right">—</td><td>—</td><td><span class="risk-moderate">BAIXO</span></td></tr>
+        <tr><td>Direito do Consumidor</td><td class="text-right">1</td><td class="text-right">—</td><td>Funcionamento de estabelecimento</td><td><span class="risk-moderate">BAIXO</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Análise da Troca Societária como Risco Jurídico</div>
+      <p style="font-size:.83rem;color:var(--text2);line-height:1.7">A troca societária de Dezembro/2021 transferiu a totalidade das cotas para Sérgio da Motta. Do ponto de vista jurídico, os sócios cedentes (família Zini da Motta) permanecem solidariamente responsáveis pelas dívidas anteriores à cessão, enquanto Sérgio responde pelas dívidas geradas após sua entrada.</p>
+      <p style="font-size:.83rem;color:var(--text2);line-height:1.7;margin-top:.75rem"><strong>Ausência de blindagem patrimonial configurada:</strong> Os protestos da empresa (Mar/2024 em diante) foram gerados sob a gestão de Sérgio — não são herança dos ex-sócios. Os protestos pessoais dos ex-sócios (Bruna e Gustavo) surgem em Jan–Out/2025 e parecem relacionados a outra empresa da família (Pontual Brasil Instalações).</p>
+      <p style="font-size:.83rem;color:var(--text2);line-height:1.7;margin-top:.75rem"><strong>Risco residual:</strong> A dívida fiscal acumulada (PGFN R$ 18,71M + PGE R$ 5,85M) pode ter parte de sua origem anterior à troca. Diligência obrigatória: solicitar à empresa os parcelamentos firmados e verificar se os ex-sócios foram incluídos como corresponsáveis.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Situação Tributária e Fiscal</div>
+      <table class="data-table">
+        <tbody>
+          <tr><td>PGFN Federal — Dívida Previdenciária</td><td class="text-right negative">R$ 8.281.830</td></tr>
+          <tr><td>PGFN Federal — Dívida Não Previdenciária</td><td class="text-right negative">R$ 9.918.582</td></tr>
+          <tr><td>PGFN Federal — Dívida Não Tributária</td><td class="text-right negative">R$ 512.658</td></tr>
+          <tr><td class="bold">Total PGFN Federal</td><td class="text-right negative bold">R$ 18.713.070</td></tr>
+          <tr><td>PGE-SP — ICMS Declarado</td><td class="text-right negative">R$ 5.850.404</td></tr>
+          <tr><td class="bold">Total Dívida Ativa (Federal + Estadual)</td><td class="text-right negative bold">R$ 24.563.474</td></tr>
+          <tr><td>Parcelamentos no BP circulante</td><td class="text-right" style="color:#fcd34d">R$ 2.517.347</td></tr>
+          <tr><td>Impostos a pagar/recolher (BP)</td><td class="text-right" style="color:#fcd34d">R$ 6.685.356</td></tr>
+          <tr><td>Regime tributário</td><td class="text-right">Lucro Real (a partir Jan/2025)</td></tr>
+          <tr><td>Simples Nacional</td><td class="text-right"><span class="risk-ok">Não</span></td></tr>
+        </tbody>
+      </table>
+      <div class="info-box" style="margin-top:.75rem;font-size:.79rem">PGFN não consegue emitir certidão online — empresa com dívida ativa confirmada. Execuções fiscais federais em andamento em SJRP desde Fev/2025. Risco de bloqueio de contas (Bacenjud) e penhora de recebíveis a qualquer momento.</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">Diligências Jurídicas Obrigatórias (caso operação seja considerada)</div>
+    <div style="font-size:.83rem;color:var(--text2);line-height:1.9">
+      1. Verificar situação dos parcelamentos PGFN (REFIS/Pert) — valores, parcelas em aberto e risco de rescisão<br>
+      2. Solicitar certidão de distribuição de execuções fiscais federais e estaduais<br>
+      3. Verificar se Sérgio da Motta foi incluído como devedor solidário nos processos tributários<br>
+      4. Confirmar inexistência de ação de desconsideração da personalidade jurídica<br>
+      5. Verificar origem dos protestos de Mar/2024–Abr/2026 (203 títulos R$ 17,9M) — identificar credores
+    </div>
+  </div>
+</section>
+
+<!-- RF-3: DIMENSÕES DE RISCO -->
+<section id="risco-dim" class="rf-section">
+  <div class="section-label">RF-3 · Risco Detalhado</div>
+  <h2 class="section-title">6 Dimensões de Risco — Rafael Bazan</h2>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header">
+      <span class="risk-dim-name">D1 — Capacidade de Pagamento</span>
+      <span class="risk-high">CRÍTICO</span>
+    </div>
+    <div class="risk-dim-desc">Liquidez corrente de 0,37 — empresa não tem recursos para honrar nem 40% do passivo circulante com os ativos disponíveis. Prejuízo operacional crescente: 2023 R$ 2,97M → 2024 R$ 3,69M → 2025 R$ 4,28M. Despesas financeiras de R$ 1,67M em 2025 consomem 8,7% da receita líquida. Fluxo de caixa cronicamente negativo.</div>
+  </div>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header">
+      <span class="risk-dim-name">D2 — Estrutura de Capital e Alavancagem</span>
+      <span class="risk-high">CRÍTICO</span>
+    </div>
+    <div class="risk-dim-desc">Patrimônio Líquido negativo em R$ 11,44M (Dez/25). Endividamento geral de 2,01x o ativo total. Passivo circulante de R$ 22,06M representa 196% do Ativo Total. Dívida fiscal não contabilizada de R$ 24,56M adicional (fora do BP, inscrita em dívida ativa). Passivo trabalhista R$ 6,76M. Combinação explosiva e insustentável.</div>
+  </div>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header">
+      <span class="risk-dim-name">D3 — Qualidade dos Recebíveis</span>
+      <span class="risk-warn">MODERADO</span>
+    </div>
+    <div class="risk-dim-desc">Sacados excelentes (Pernambucanas, Riachuelo, Lojas Avenida, Caedu). ILM emitente 97–100% — os boletos emitidos pela GB são pagos pontualmente. Contas a receber de R$ 4,7M (Dez/25). RISCO: faturamento zerado a partir de Mai/2026 sugere que novos títulos não estão sendo gerados, esgotando a carteira de recebíveis disponíveis para cessão.</div>
+  </div>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header">
+      <span class="risk-dim-name">D4 — Risco de Fraude e Simulação</span>
+      <span class="risk-high">ALTO</span>
+    </div>
+    <div class="risk-dim-desc">Crescimento de faturamento de 39% em 2023→2024 e 26% em 2024→2025 merece escrutínio: coincide com período de acúmulo de protestos e deterioração do PL. Faturamento zerado de Mai/2026 em diante na carta oficial levanta suspeita: ou a empresa encerrou atividades (sem comunicado formal), ou está migrando operações para estrutura informal. Pico de 33 consultas Serasa em Ago/2025 indica comportamento de busca agressiva de crédito. A existência de propostas de 3 factorings simultâneas (MaxCenter, Predileta, Interativa) reforça o padrão.</div>
+  </div>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header">
+      <span class="risk-dim-name">D5 — Risco Jurídico e Tributário</span>
+      <span class="risk-high">CRÍTICO</span>
+    </div>
+    <div class="risk-dim-desc">56 processos judiciais R$ 24,5M. Dívida ativa PGFN + PGE de R$ 24,56M. Risco de execução fiscal a qualquer momento (bloqueio de contas, penhora de recebíveis via BacenJud). Ações fiscais estaduais recentes (Abr/2026: R$ 134k; Fev/2026: R$ 69k). PGFN bloqueada para emissão de certidão online. 20 processos trabalhistas R$ 6,09M com passivo provisionado no BP.</div>
+  </div>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header">
+      <span class="risk-dim-name">D6 — Risco de Continuidade Operacional</span>
+      <span class="risk-high">CRÍTICO</span>
+    </div>
+    <div class="risk-dim-desc">Faturamento declarado zerado a partir de Mai/2026. Quatro anos consecutivos de prejuízo crescente. Patrimônio do sócio em colapso (-82%). Sem nenhum instrumento de recuperação formal (RJ/falência ainda não requerida). O modelo de negócio B2B com grandes varejistas é viável — mas a estrutura financeira não sustenta as operações. Risco de insolvência formal (pedido de falência ou recuperação judicial) dentro de 6–12 meses.</div>
+  </div>
+</section>
+
+<!-- RF-4: GARANTIAS -->
+<section id="garantias" class="rf-section">
+  <div class="section-label">RF-4 · Garantias</div>
+  <h2 class="section-title">Estrutura de Garantias</h2>
+
+  <div class="card" style="margin-bottom:1.25rem">
+    <div class="card-title">Garantias Obrigatórias (dado o perfil de risco extremo)</div>
+    <div class="guarantee-item">
+      <div class="guarantee-num" style="background:rgba(239,68,68,0.2);color:#fca5a5">1</div>
+      <div class="guarantee-text"><strong>Aval pessoal irretratável de Sérgio da Motta (CPF 050.289.138-62)</strong> — obrigatório, com declaração de bens atualizada. Observar que o PL pessoal é de apenas R$ 324k (Dez/25), comprometendo a efetividade do aval.</div>
+    </div>
+    <div class="guarantee-item">
+      <div class="guarantee-num" style="background:rgba(239,68,68,0.2);color:#fca5a5">2</div>
+      <div class="guarantee-text"><strong>Cessão fiduciária dos recebíveis com sacados homologados</strong> — somente títulos de Pernambucanas, Fonseca Magazine, Lojas Avenida, Riachuelo e Caedu, com comprovação de NF-e.</div>
+    </div>
+    <div class="guarantee-item">
+      <div class="guarantee-num" style="background:rgba(239,68,68,0.2);color:#fca5a5">3</div>
+      <div class="guarantee-text"><strong>Rastreabilidade obrigatória dos títulos</strong> — XML das NF-e de origem vinculado ao duplicata. Sem NF-e comprovada: título não elegível.</div>
+    </div>
+    <div class="guarantee-item">
+      <div class="guarantee-num" style="background:rgba(239,68,68,0.2);color:#fca5a5">4</div>
+      <div class="guarantee-text"><strong>Notificação prévia aos sacados</strong> — confirmar a cessão diretamente com o responsável de contas a pagar do sacado antes de qualquer desembolso.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Garantias Complementares (risco extremo — condições de reabertura futura)</div>
+    <div class="guarantee-item">
+      <div class="guarantee-num" style="background:rgba(245,158,11,0.15);color:#fcd34d">A</div>
+      <div class="guarantee-text">Hipoteca dos imóveis do sócio — imóvel residencial R$ 485k (Gaivota I) como garantia real, desde que previamente registrado em cartório.</div>
+    </div>
+    <div class="guarantee-item">
+      <div class="guarantee-num" style="background:rgba(245,158,11,0.15);color:#fcd34d">B</div>
+      <div class="guarantee-text">Comprovação de regularidade PGFN (parcelamento em dia) e CND-PGE-SP antes de qualquer nova operação.</div>
+    </div>
+    <div class="guarantee-item">
+      <div class="guarantee-num" style="background:rgba(245,158,11,0.15);color:#fcd34d">C</div>
+      <div class="guarantee-text">Fundo de reserva de 15% sobre o valor descontado, retido na AG Antecipa até liquidação completa da operação.</div>
+    </div>
+  </div>
+</section>
+
+<!-- RF-5: MONITORAMENTO -->
+<section id="monitoramento" class="rf-section">
+  <div class="section-label">RF-5 · Monitoramento</div>
+  <h2 class="section-title">Monitoramento Periódico (se operação aprovada futuramente)</h2>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Monitoramento Periódico</div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#22c55e"></div>Consulta Serasa mensal — verificar novos protestos</div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#22c55e"></div>CredMap sacado — verificar pontualidade mês a mês</div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#22c55e"></div>Verificação PGFN e PGE-SP — situação parcelamentos</div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#22c55e"></div>Consulta BACEN — evolução da carteira bancária</div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#22c55e"></div>Balancete mensal — mínimo trimestral</div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#22c55e"></div>Verificação de novas ações judiciais e execuções</div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#22c55e"></div>Confirmação de faturamento via carta mensal assinada</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Gatilhos de Suspensão Imediata</div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div>Novo protesto de qualquer valor — suspensão imediata de novos descontos</div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div>Restrição bancária (BacenJud) sobre contas da empresa</div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div>Pedido de recuperação judicial ou citação em falência</div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div>Saída ou substituição do sócio sem anuência da AG Antecipa</div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div>ILM sacado caindo abaixo de 85% em 30 dias</div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div>Faturamento mensal abaixo de R$ 500k sem justificativa</div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div>Execução fiscal com penhora de bens ou recebíveis</div>
+    </div>
+  </div>
+</section>
+
+<!-- RF-6: PARECER FINANCEIRO BAZAN -->
+<section id="parecer-financeiro" class="rf-section">
+  <div class="section-label">RF-6 · Parecer Financeiro</div>
+  <h2 class="section-title">Parecer Financeiro — Rafael Bazan</h2>
+
+  <div class="analyst-banner">
+    <div class="analyst-avatar" style="background:rgba(59,130,246,0.15);border-color:#3b82f6;color:#93c5fd">RB</div>
+    <div>
+      <div class="analyst-name">Rafael Bazan <span class="analyst-tag" style="background:rgba(59,130,246,0.15);color:#93c5fd;border:1px solid rgba(59,130,246,0.3)">Consultor Financeiro e Jurídico</span></div>
+      <div class="analyst-role">AG Antecipa · Junho/2026</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Parecer Técnico Integral</div>
+    <div style="font-size:.88rem;color:var(--text2);line-height:1.85">
+      <p>A GB Instalações Comerciais Ltda, nome fantasia Atual PDV, é uma empresa com modelo de negócio legítimo e sacados de altíssima qualidade — porém em profunda crise financeira estrutural, sem perspectiva de reversão no curto prazo.</p>
+
+      <p style="margin-top:1rem"><strong style="color:var(--text)">Sobre o Alerta 1 — Troca Societária:</strong> A mudança societária de Dezembro/2021 foi abrangente: saída de toda a família Zini da Motta (Bruna 45%, Gustavo 45%, Silvia 10%) e entrada de Sérgio da Motta com 100%. Não identificamos, pela análise documental, evidências conclusivas de "golpe do laranja" ou blindagem patrimonial com prejuízo deliberado à empresa. Os protestos da empresa (203 ocorrências, R$ 17,9M) se iniciaram em Março/2024 — sob gestão exclusiva de Sérgio — e não são herança direta dos ex-sócios. Os protestos pessoais de Bruna e Gustavo Zini da Motta datam de 2024–2025 e parecem relacionados a outra empresa da família (Pontual Brasil Instalações). Contudo, a troca societária merece verificação adicional: se os passivos fiscais de R$ 24,56M foram gerados predominantemente durante a gestão anterior, os ex-sócios têm corresponsabilidade — o que pode ser investigado via histórico dos parcelamentos PGFN.</p>
+
+      <p style="margin-top:1rem"><strong style="color:var(--text)">Sobre o Alerta 2 — Alavancagem Extrema:</strong> Este é o risco determinante. A empresa apresenta um quadro de insolvência técnica inequívoco: (i) Passivo Total estimado superior a R$ 33M, incluindo R$ 24,56M em dívida ativa fiscal e R$ 6,76M de passivo trabalhista; (ii) Patrimônio Líquido negativo em R$ 11,44M (Dez/2025); (iii) quatro anos consecutivos de prejuízo crescente (2022: presumivelmente negativo, 2023: R$ 2,97M, 2024: R$ 3,69M, 2025: R$ 4,28M); (iv) faturamento declarado zerado a partir de Maio/2026, o que configura colapso operacional ou migração informal das atividades.</p>
+
+      <p style="margin-top:1rem"><strong style="color:var(--text)">A qualidade dos sacados não compensa o risco da cedente:</strong> Embora o ILM dos sacados seja excelente (97–100%), o risco de duplicatas fraudulentas ou frias é elevado quando a empresa cedente está em situação de desespero financeiro. O histórico de busca simultânea em 3–4 factorings (MaxCenter, Predileta, Interativa + AG Antecipa) levanta a hipótese de tentativa de endividamento paralelo nos mesmos títulos (duplicata de vendas não realizadas ou cessão múltipla do mesmo título).</p>
+
+      <p style="margin-top:1rem"><strong style="color:var(--text)">Comparativo DRE — Despesas Absorvem Todo o Resultado:</strong> A empresa tem margem bruta de 45,4% (2025) — saudável. O problema está nos custos e despesas que absorvem tudo: despesas com pessoal (R$ 6,95M), despesas diversas (R$ 2,13M), despesas financeiras (R$ 1,67M), outras perdas (R$ 2,11M). O total de despesas operacionais em 2025 (R$ 12,97M) supera o lucro bruto (R$ 8,70M) em R$ 4,27M — daí o prejuízo. Esta estrutura de custos é incompatível com a continuidade do negócio sem uma reestruturação radical.</p>
+
+      <p style="margin-top:1rem"><strong style="color:var(--text)">Conclusão Bazan:</strong> A operação de factoring para a GB Instalações Comerciais Ltda, neste momento, não reúne condições técnicas para aprovação. O risco de inadimplência, seja por incapacidade de honrar compromissos, por bloqueio judicial de recebíveis via PGFN, ou por cessão múltipla de títulos, é inaceitável para a AG Antecipa. O veredicto é de <strong style="color:#fca5a5">NÃO RECOMENDADO</strong>, com possibilidade de reanálise condicional à regularização documentada do passivo fiscal e à apresentação de BP com PL positivo.</p>
+    </div>
+  </div>
+
+  <div class="verdict-panel danger" style="margin-top:1.5rem">
+    <div class="verdict-title">NÃO RECOMENDADO — Risco Inaceitável</div>
+    <div class="verdict-sub">Insolvência técnica confirmada · Dívida fiscal R$ 24,56M · 4 anos de prejuízo crescente · Faturamento zerado Mai/2026 · 203 protestos R$ 17,9M</div>
+    <div class="verdict-limit">Veredicto Bazan: RECUSAR. Reavaliar somente após regularização fiscal comprovada e BP auditado com PL positivo.</div>
+  </div>
+</section>
+
+<!-- VEREDICTO CONJUNTO -->
+<section id="veredicto">
+  <div class="section-label">Veredicto Final</div>
+  <h2 class="section-title">Decisão do Comitê — Veredicto Conjunto</h2>
+
+  <!-- Localização -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="card-title">Localização — GB Instalações Comerciais Ltda</div>
+    <div style="border-radius:10px;overflow:hidden;background:#1a1a2e;border:1px solid var(--border)">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3714.8!2d-49.3898!3d-20.8198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94bdac5f5a5a5a5a%3A0x0!2sRua+Jos%C3%A9+Guide%2C+680+-+Distrito+Industrial%2C+S%C3%A3o+Jos%C3%A9+do+Rio+Preto+-+SP%2C+15035-500!5e1!3m2!1spt-BR!2sbr!4v1717538400000!5m2!1spt-BR!2sbr"
+        width="100%" height="300" style="border:0;display:block" allowfullscreen loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+    <p style="font-size:.78rem;color:var(--text2);margin-top:.5rem;text-align:center">Rua José Guide, 680 — Distrito Industrial — São José do Rio Preto/SP — CEP 15035-500 | <a href="https://maps.google.com/?q=Rua+Jose+Guide+680+Distrito+Industrial+Sao+Jose+do+Rio+Preto+SP" target="_blank" style="color:#60a5fa">Abrir no Google Maps</a></p>
+  </div>
+
+  <div class="veredicto-grid">
+    <div class="veredicto-card">
+      <div class="veredicto-card-name">Análise de Crédito</div>
+      <div class="veredicto-card-verdict">RECUSAR</div>
+      <div class="veredicto-card-role">Marcelo Vazquez · Gestor de Crédito</div>
+      <div class="veredicto-card-sub">203 protestos R$ 17,9M · Dívida fiscal R$ 24,56M · PL negativo R$ 11,44M · 4 anos de prejuízo crescente. Nenhum limite factoring viável.</div>
+    </div>
+    <div class="veredicto-card">
+      <div class="veredicto-card-name">Análise Financeira &amp; Jurídica</div>
+      <div class="veredicto-card-verdict">NÃO RECOMENDADO</div>
+      <div class="veredicto-card-role">Rafael Bazan · Consultor Financeiro</div>
+      <div class="veredicto-card-sub">Insolvência técnica. Estrutura de custos insustentável. Faturamento zerado Mai/2026. Risco jurídico extremo (PGFN, 56 processos). Cessão múltipla possível.</div>
+    </div>
+  </div>
+
+  <div class="veredicto-unified">
+    <div style="font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);font-family:'DM Mono',monospace;margin-bottom:.75rem">Decisão do Comitê · AG Antecipa · 04/06/2026</div>
+    <div style="font-size:2.2rem;font-weight:800;font-family:'Syne',sans-serif;color:#fca5a5;margin-bottom:.5rem">OPERAÇÃO REPROVADA</div>
+    <div style="font-size:.92rem;color:rgba(252,165,165,0.8);margin-bottom:1.25rem">GB INSTALAÇÕES COMERCIAIS LTDA · CNPJ 26.831.249/0001-32 · Junho/2026</div>
+    <div style="font-size:.83rem;color:var(--text2);line-height:1.75;max-width:700px;margin:0 auto">
+      Fundamentos da decisão: (1) Insolvência técnica comprovada — PL negativo em R$ 11,44M; (2) Dívida ativa fiscal de R$ 24,56M com execuções em andamento e risco de BacenJud; (3) 203 protestos — R$ 17,9M — em cartório; (4) Quatro anos consecutivos de prejuízo, com tendência de piora; (5) Faturamento declarado zerado a partir de Maio/2026 — continuidade operacional duvidosa; (6) Risco de cessão múltipla de títulos (empresa operando com múltiplos factorings simultâneos). <strong style="color:var(--text)">Sacados de qualidade excelente não compensam o risco extremo do cedente.</strong>
+    </div>
+    <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid rgba(239,68,68,0.2);font-size:.8rem;color:rgba(252,165,165,0.7)">
+      Limite aprovado: <strong style="color:#fca5a5">R$ 0,00</strong> &nbsp;|&nbsp; Condição de reabertura: Regularização PGFN documentada + CND-PGE-SP + BP auditado com PL positivo + mínimo 12 meses sem protestos
+    </div>
+  </div>
+
+  <!-- Assinaturas -->
+  <div class="two-col" style="margin-top:1.5rem">
+    <div class="card" style="text-align:center">
+      <div style="width:50px;height:50px;border-radius:50%;background:rgba(0,230,190,0.15);border:2px solid #00e6be;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800;font-family:'Syne',sans-serif;color:#00e6be;margin:0 auto .75rem">MV</div>
+      <div style="font-weight:700;font-size:.9rem;font-family:'Syne',sans-serif">Marcelo Vazquez</div>
+      <div style="font-size:.72rem;color:var(--text2);margin:.25rem 0">Gestor de Crédito · AG Antecipa</div>
+      <div style="font-size:.7rem;color:var(--muted);font-family:'DM Mono',monospace">marcelo.vazquez@agantecipa.com.br</div>
+    </div>
+    <div class="card" style="text-align:center">
+      <div style="width:50px;height:50px;border-radius:50%;background:rgba(59,130,246,0.15);border:2px solid #3b82f6;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800;font-family:'Syne',sans-serif;color:#93c5fd;margin:0 auto .75rem">RB</div>
+      <div style="font-weight:700;font-size:.9rem;font-family:'Syne',sans-serif">Rafael Bazan</div>
+      <div style="font-size:.72rem;color:var(--text2);margin:.25rem 0">Consultor Financeiro &amp; Jurídico · AG Antecipa</div>
+      <div style="font-size:.7rem;color:var(--muted);font-family:'DM Mono',monospace">rafael.bazan@agantecipa.com.br</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div style="margin-bottom:.5rem">AG ANTECIPA · PARECER DE COMITÊ · GB INSTALACOES COMERCIAIS LTDA · JUNHO/2026</div>
+  <div>Este documento é estritamente confidencial e destinado exclusivamente ao uso interno da AG Fomento Mercantil S/A (CNPJ 06.256.919/0001-27). É proibida a reprodução ou divulgação a terceiros.</div>
+  <div style="margin-top:.5rem">Gerado em 04/06/2026 · Crédito: Marcelo Vazquez · Financeiro: Rafael Bazan</div>
+</footer>
+
+<script>
+// ── CHART: Consultas Serasa 12 meses ──
+new Chart(document.getElementById('chartConsultas'), {
+  type: 'bar',
+  data: {
+    labels: ['Jun/25','Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26','Abr/26','Mai/26'],
+    datasets: [{
+      label: 'Consultas Serasa',
+      data: [9, 5, 33, 9, 12, 9, 5, 9, 10, 12, 12, 11],
+      backgroundColor: ctx => {
+        const v = ctx.dataset.data[ctx.dataIndex];
+        return v >= 30 ? 'rgba(239,68,68,0.7)' : v >= 12 ? 'rgba(245,158,11,0.6)' : 'rgba(59,130,246,0.5)';
+      },
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { ticks: { color: '#9ca3af', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
+      y: { ticks: { color: '#9ca3af', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.04)' } }
+    }
+  }
+});
+
+// ── CHART: BACEN Vencimentos ──
+new Chart(document.getElementById('chartBacen'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Vencido (rotativo)', 'Até 30d', '31–90d', '91–360d', '361d+'],
+    datasets: [{
+      data: [59097, 92195, 30490, 14508, 170800],
+      backgroundColor: ['rgba(239,68,68,0.7)','rgba(245,158,11,0.6)','rgba(59,130,246,0.5)','rgba(34,197,94,0.5)','rgba(168,85,247,0.5)'],
+      borderWidth: 0
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'right', labels: { color: '#9ca3af', font: { size: 10 }, boxWidth: 12 } }
+    }
+  }
+});
+
+// ── CHART: Emissão Boletos Cedente 12 meses ──
+new Chart(document.getElementById('chartEmissao'), {
+  type: 'bar',
+  data: {
+    labels: ['Mai/25','Jun/25','Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26','Abr/26'],
+    datasets: [{
+      label: 'Emissão (cedente)',
+      data: [27500, 27500, 350000, 350000, 110000, 110000, 350000, 5000, 1000, 67500, 28750, 8750],
+      backgroundColor: 'rgba(0,230,190,0.5)',
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { ticks: { color: '#9ca3af', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
+      y: { ticks: { color: '#9ca3af', font: { size: 9 }, callback: v => 'R$' + (v/1000).toFixed(0) + 'k' }, grid: { color: 'rgba(255,255,255,0.04)' } }
+    }
+  }
+});
+
+// ── CHART: Curva ABC Clientes ──
+new Chart(document.getElementById('chartABC'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Pernambucanas 30,4%','Fonseca Mag 17,6%','Lojas Avenida 11,4%','Riachuelo 8,7%','Caedu 8,5%','Demais 23,4%'],
+    datasets: [{
+      data: [7324522, 4230858, 2744144, 2086390, 2047132, 5677007],
+      backgroundColor: [
+        'rgba(239,68,68,0.7)','rgba(245,158,11,0.6)','rgba(59,130,246,0.6)',
+        'rgba(34,197,94,0.6)','rgba(168,85,247,0.5)','rgba(156,163,175,0.4)'
+      ],
+      borderWidth: 0
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'bottom', labels: { color: '#9ca3af', font: { size: 9 }, boxWidth: 10 } }
+    }
+  }
+});
+</script>
+</body>
+</html>
