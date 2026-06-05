@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<!-- build: 2026-06-05T10:00 -->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+<title>Revisão de Limite — Grupo Brindes · Junho 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0a0f1e;--navy2:#111827;--blue:#1e3a5f;
+  --teal:#00e6be;--teal-dim:rgba(0,230,190,0.10);--teal-border:rgba(0,230,190,0.3);
+  --rfblue:#3b82f6;--rfblue-dim:rgba(59,130,246,0.10);--rfblue-border:rgba(59,130,246,0.3);
+  --accent:#00e6be;--accent-dim:rgba(0,230,190,0.10);--accent-border:rgba(0,230,190,0.3);
+  --amber:#f59e0b;--red:#ef4444;--green:#22c55e;--muted:#6b7280;
+  --text:#e5e7eb;--text2:#9ca3af;--border:rgba(255,255,255,0.07);
+}
+body{background:var(--navy);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6}
+h1,h2,h3{font-family:'Syne',sans-serif}
+.mono{font-family:'DM Mono',monospace}
+
+.hero{position:relative;min-height:360px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(135deg,#0a0f1e 0%,#031a14 60%,#041c15 100%);border-bottom:1px solid var(--border)}
+.hero-orbs{position:absolute;inset:0;pointer-events:none}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.45}
+.hero-orb.o1{width:500px;height:500px;top:-100px;left:-80px;background:radial-gradient(circle,rgba(0,230,190,0.4) 0%,transparent 70%)}
+.hero-orb.o2{width:300px;height:300px;bottom:-60px;right:60px;background:radial-gradient(circle,rgba(0,230,190,0.2) 0%,transparent 70%)}
+.hero-content{position:relative;z-index:2;text-align:center;padding:2.5rem 2rem}
+.hero-badge{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);margin-bottom:.75rem;font-family:'DM Mono',monospace}
+.hero-title{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;line-height:1.1;margin-bottom:.75rem;letter-spacing:-.02em}
+.hero-title .accent{color:var(--teal)}
+.hero-sub{color:var(--text2);font-size:.9rem;margin-bottom:1.25rem;font-family:'DM Mono',monospace}
+.hero-chips{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
+.chip{padding:.3rem .85rem;border-radius:999px;font-size:.75rem;font-weight:600;letter-spacing:.04em;border:1px solid var(--border);background:rgba(255,255,255,0.06);color:var(--text2)}
+.chip.warn{background:rgba(245,158,11,0.15);border-color:rgba(245,158,11,0.4);color:#fcd34d}
+.chip.ok{background:rgba(34,197,94,0.12);border-color:rgba(34,197,94,0.3);color:#86efac}
+.chip.danger{background:rgba(239,68,68,0.15);border-color:rgba(239,68,68,0.4);color:#fca5a5}
+.chip.teal{background:rgba(0,230,190,0.12);border-color:rgba(0,230,190,0.35);color:#5eead4}
+
+.sticky-nav{position:sticky;top:0;z-index:100;background:rgba(10,15,30,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-row{display:flex;align-items:center;padding:.15rem 1.25rem;max-width:1200px;margin:0 auto;flex-wrap:wrap;gap:.15rem}
+.nav-row-credito{border-bottom:1px solid rgba(255,255,255,0.05)}
+.nav-row-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.09em;font-family:'DM Mono',monospace;white-space:nowrap;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.08);padding-right:.75rem;margin-right:.4rem;line-height:1.3;color:var(--teal)}
+.nav-row-label.rf{color:#60a5fa}
+.nav-pill{display:inline-block;padding:.3rem .7rem;border-radius:999px;font-size:.72rem;font-weight:600;color:var(--text2);text-decoration:none;transition:all .2s;border:1px solid transparent}
+.nav-pill:hover,.nav-pill.active{background:var(--teal-dim);color:var(--teal);border-color:var(--teal-border)}
+.nav-pill.nav-rf:hover{background:var(--rfblue-dim)!important;color:#93c5fd!important;border-color:var(--rfblue-border)!important}
+
+section{padding:3rem 2rem;max-width:1100px;margin:0 auto}
+section+section{border-top:1px solid var(--border)}
+.section-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);font-family:'DM Mono',monospace;margin-bottom:.4rem}
+.section-title{font-size:1.6rem;font-weight:700;margin-bottom:1.75rem}
+
+.card{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+.card-title{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);margin-bottom:.75rem;font-family:'DM Mono',monospace}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+.kpi-card{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;border-left:3px solid var(--teal)}
+.kpi-card.danger{border-left-color:#ef4444}
+.kpi-card.warn{border-left-color:#f59e0b}
+.kpi-card.ok{border-left-color:#22c55e}
+.kpi-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:.3rem;font-family:'DM Mono',monospace}
+.kpi-value{font-size:1.55rem;font-weight:700;font-family:'Syne',sans-serif;line-height:1}
+.kpi-sub{font-size:.72rem;color:var(--text2);margin-top:.25rem}
+
+.status-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.status-table th{text-align:left;padding:.6rem 1rem;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--border);font-family:'DM Mono',monospace}
+.status-table td{padding:.65rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04)}
+.status-table tr:hover td{background:rgba(255,255,255,0.02)}
+
+.risk-ok{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(34,197,94,0.15);color:#86efac;border:1px solid rgba(34,197,94,0.3)}
+.risk-high{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(239,68,68,0.15);color:#fca5a5;border:1px solid rgba(239,68,68,0.3)}
+.risk-warn{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(245,158,11,0.15);color:#fcd34d;border:1px solid rgba(245,158,11,0.3)}
+.risk-moderate{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(234,179,8,0.12);color:#fde68a;border:1px solid rgba(234,179,8,0.3)}
+.risk-info{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(59,130,246,0.15);color:#93c5fd;border:1px solid rgba(59,130,246,0.3)}
+.risk-low{display:inline-block;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:600;background:rgba(0,230,190,0.1);color:#5eead4;border:1px solid rgba(0,230,190,0.2)}
+
+.data-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.data-table th{text-align:left;padding:.55rem .85rem;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-weight:500}
+.data-table td{padding:.55rem .85rem;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text)}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:rgba(255,255,255,0.02)}
+.text-right{text-align:right}
+.text-center{text-align:center}
+.negative{color:#fca5a5}
+.positive{color:#86efac}
+.bold{font-weight:600}
+
+.chart-wrap{position:relative;height:240px}
+
+.analyst-note{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:8px;padding:1.25rem 1.5rem;font-size:.85rem;line-height:1.7;color:var(--text2);margin-top:1.25rem}
+.analyst-note strong{color:var(--text)}
+.analyst-note.rf{border-left-color:#3b82f6}
+.analyst-note.danger{border-left-color:#ef4444;background:rgba(239,68,68,0.04)}
+
+.timeline{list-style:none;padding-left:1.2rem;border-left:2px solid var(--teal-border)}
+.timeline li{position:relative;padding:.4rem 0 .4rem 1rem;font-size:.82rem;color:var(--text2)}
+.timeline li::before{content:'';position:absolute;left:-5px;top:.75rem;width:8px;height:8px;border-radius:50%;background:var(--teal);border:2px solid var(--navy2)}
+.timeline li strong{color:var(--text);display:block}
+
+.info-box{background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:1rem 1.25rem;font-size:.83rem;color:#fca5a5;margin-top:1rem}
+.info-box.warn{background:rgba(245,158,11,0.06);border-color:rgba(245,158,11,0.2);color:#fcd34d}
+.info-box.ok{background:rgba(34,197,94,0.06);border-color:rgba(34,197,94,0.2);color:#86efac}
+
+.analyst-banner{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:var(--navy2);border:1px solid var(--teal-border);border-radius:10px;margin-bottom:1.5rem;border-left:3px solid var(--teal)}
+.analyst-banner.rf{border-color:var(--rfblue-border);border-left-color:#3b82f6}
+.analyst-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;font-family:'Syne',sans-serif;flex-shrink:0;border:2px solid}
+.analyst-name{font-weight:700;font-size:.9rem;font-family:'Syne',sans-serif}
+.analyst-role{font-size:.72rem;color:var(--text2);font-family:'DM Mono',monospace;margin-top:.1rem}
+
+.split-banner{background:linear-gradient(135deg,rgba(0,90,70,0.4) 0%,rgba(10,15,30,0.95) 100%);border:1px solid rgba(0,230,190,0.2);border-radius:16px;padding:2rem 2.5rem;text-align:center}
+.split-banner h2{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:#5eead4;margin-bottom:.4rem}
+.split-banner.rf{background:linear-gradient(135deg,rgba(30,58,95,0.5) 0%,rgba(10,15,30,0.95) 100%);border-color:rgba(59,130,246,0.25)}
+.split-banner.rf h2{color:#93c5fd}
+
+.risk-dim{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:8px;padding:.9rem 1rem;margin-bottom:.5rem}
+.risk-dim-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem}
+.risk-dim-name{font-size:.75rem;font-weight:700;font-family:'DM Mono',monospace;color:var(--text2);text-transform:uppercase;letter-spacing:.08em}
+.risk-dim-desc{font-size:.8rem;color:var(--text2);line-height:1.55}
+
+.guarantee-item{display:flex;gap:.75rem;align-items:flex-start;padding:.65rem 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.guarantee-item:last-child{border-bottom:none}
+.guarantee-num{width:22px;height:22px;border-radius:50%;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.15rem}
+.guarantee-text{font-size:.83rem;color:var(--text);line-height:1.5}
+.trigger-item{display:flex;gap:.6rem;align-items:flex-start;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:.82rem;color:var(--text2)}
+.trigger-item:last-child{border-bottom:none}
+.trigger-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:.4rem}
+
+.veredicto-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+.veredicto-card{background:rgba(0,230,190,0.07);border:1px solid rgba(0,230,190,0.3);border-radius:14px;padding:1.5rem;text-align:center}
+.veredicto-card-name{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.5rem}
+.veredicto-card-verdict{font-size:1.6rem;font-weight:800;font-family:'Syne',sans-serif;color:#5eead4;margin-bottom:.35rem}
+.veredicto-card-role{font-size:.75rem;color:var(--text2);margin-bottom:.5rem}
+.veredicto-card-sub{font-size:.78rem;color:var(--muted);line-height:1.5}
+.veredicto-unified{background:linear-gradient(135deg,rgba(0,230,190,0.10),rgba(0,230,190,0.04));border:2px solid rgba(0,230,190,0.4);border-radius:16px;padding:2rem;text-align:center;margin-top:1.25rem}
+
+.progress-item{margin-bottom:.75rem}
+.progress-label{display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:.3rem;color:var(--text2)}
+.progress-track{height:7px;background:rgba(255,255,255,0.07);border-radius:999px;overflow:hidden}
+.progress-fill{height:100%;border-radius:999px}
+
+section.rf-section .section-label{color:#60a5fa}
+section.rf-section .kpi-card{border-left-color:#3b82f6}
+
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);color:var(--muted);font-size:.75rem;font-family:'DM Mono',monospace}
+
+.flag-band{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1rem;font-size:.83rem;color:#fcd34d}
+.flag-band strong{color:#fde68a}
+.flag-band.red{background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.25);color:#fca5a5}
+.flag-band.red strong{color:#fecaca}
+.flag-band.ok{background:rgba(34,197,94,0.06);border-color:rgba(34,197,94,0.2);color:#86efac}
+
+@media(max-width:768px){
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .two-col,.three-col,.veredicto-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-orbs">
+    <div class="hero-orb o1"></div>
+    <div class="hero-orb o2"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">AG Antecipa · Revisão de Limite / Análise de Continuidade · Junho 2026</div>
+    <h1 class="hero-title"><span class="accent">GRUPO BRINDES</span><br>INOVA GIFTS + 7 AFILIADAS</h1>
+    <div class="hero-sub">8 CNPJs · Porto Alegre/RS · Brindes Corporativos · Exposição Total R$ 2.170.000</div>
+    <div class="hero-chips">
+      <span class="chip warn">⚠ MANTER COM CONDICIONANTES</span>
+      <span class="chip">Cedente Ativo · Zero Inadimplência AG</span>
+      <span class="chip danger">ARCA PROMO INAPTA 05/06/2026</span>
+      <span class="chip warn">Restrições Crescentes em 6 CNPJs</span>
+      <span class="chip teal">Alienação Fiduciária Imóvel Proposta</span>
+      <span class="chip">Crédito: Marcelo Vazquez</span>
+      <span class="chip">Financeiro: Rafael Bazan</span>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="sticky-nav">
+  <div class="nav-row nav-row-credito">
+    <div class="nav-row-label">Crédito<br>Vazquez</div>
+    <a href="#dashboard" class="nav-pill active">Dashboard</a>
+    <a href="#grupo" class="nav-pill">Grupo</a>
+    <a href="#comparativo" class="nav-pill">Comparativo</a>
+    <a href="#flags" class="nav-pill">Alertas</a>
+    <a href="#bacen" class="nav-pill">BACEN</a>
+    <a href="#socios" class="nav-pill">Sócios</a>
+    <a href="#garantia" class="nav-pill">Garantia</a>
+    <a href="#parecer-credito" class="nav-pill">Parecer MV</a>
+  </div>
+  <div class="nav-row">
+    <div class="nav-row-label rf">Financeiro<br>Bazan</div>
+    <a href="#risco-dim" class="nav-pill nav-rf">6 Dimensões</a>
+    <a href="#continuidade" class="nav-pill nav-rf">Continuidade</a>
+    <a href="#condicoes" class="nav-pill nav-rf">Condições</a>
+    <a href="#monitoramento" class="nav-pill nav-rf">Monitoramento</a>
+    <a href="#parecer-financeiro" class="nav-pill nav-rf">Parecer RB</a>
+    <a href="#veredicto" class="nav-pill" style="color:#5eead4;border-color:rgba(0,230,190,0.35);background:rgba(0,230,190,0.1);font-weight:700">⊕ Decisão</a>
+  </div>
+</nav>
+
+<!-- 0. DASHBOARD -->
+<section id="dashboard">
+  <div class="section-label">Seção 0</div>
+  <h2 class="section-title">Dashboard Executivo — Data-base 05/06/2026</h2>
+
+  <div class="kpi-grid">
+    <div class="kpi-card danger">
+      <div class="kpi-label">Exposição Total AG</div>
+      <div class="kpi-value negative">R$ 2.170.000</div>
+      <div class="kpi-sub">8 CNPJs · cedente ativo</div>
+    </div>
+    <div class="kpi-card ok">
+      <div class="kpi-label">Inadimplência AG</div>
+      <div class="kpi-value positive">R$ 0,00</div>
+      <div class="kpi-sub">Zero ocorrências registradas</div>
+    </div>
+    <div class="kpi-card danger">
+      <div class="kpi-label">Restrições Serasa (Grupo)</div>
+      <div class="kpi-value negative">R$ 3,19M</div>
+      <div class="kpi-sub">+97% vs. análise anterior</div>
+    </div>
+    <div class="kpi-card warn">
+      <div class="kpi-label">BACEN Total Grupo</div>
+      <div class="kpi-value" style="color:#fcd34d">R$ 6,48M</div>
+      <div class="kpi-sub">A vencer + R$81k vencido</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1.25rem">
+    <div class="card-title">Status Consolidado por CNPJ — 05/06/2026</div>
+    <table class="status-table">
+      <thead>
+        <tr>
+          <th>Empresa</th>
+          <th>CNPJ</th>
+          <th>Situação RF</th>
+          <th>Restrições Serasa</th>
+          <th>Variação</th>
+          <th>BACEN a Vencer</th>
+          <th>Exp. AG</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="bold">INOVA GIFTS</td>
+          <td class="mono" style="font-size:.75rem">34.477.716/0001-04</td>
+          <td><span class="risk-ok">ATIVA</span></td>
+          <td class="negative bold">R$ 1.470.563</td>
+          <td class="negative">+98% (era R$582k)</td>
+          <td class="negative">R$ 1.217.173</td>
+          <td class="bold">R$ 700.000</td>
+          <td><span class="risk-high">ALTO RISCO</span></td>
+        </tr>
+        <tr>
+          <td class="bold">ARAÇA</td>
+          <td class="mono" style="font-size:.75rem">57.202.895/0001-64</td>
+          <td><span class="risk-ok">ATIVA</span></td>
+          <td style="color:#fcd34d">R$ 18.200</td>
+          <td style="color:var(--text2)">Estável</td>
+          <td style="color:var(--text2)">—</td>
+          <td class="bold">R$ 500.000</td>
+          <td><span class="risk-warn">ATENÇÃO</span></td>
+        </tr>
+        <tr>
+          <td class="bold">FMVS BRINDES</td>
+          <td class="mono" style="font-size:.75rem">51.867.664/0001-93</td>
+          <td><span class="risk-ok">ATIVA</span></td>
+          <td class="positive">R$ 0</td>
+          <td class="positive">Zerou</td>
+          <td style="color:var(--text2)">—</td>
+          <td class="bold">R$ 200.000</td>
+          <td><span class="risk-warn">MONITORAR</span></td>
+        </tr>
+        <tr>
+          <td class="bold">ARCA ILIMITADA</td>
+          <td class="mono" style="font-size:.75rem">37.069.335/0001-76</td>
+          <td><span class="risk-high">INAPTA</span></td>
+          <td class="negative">R$ 196.852</td>
+          <td class="negative">+25%</td>
+          <td class="negative">R$ 858.773</td>
+          <td class="bold">R$ 200.000</td>
+          <td><span class="risk-high">CRÍTICO</span></td>
+        </tr>
+        <tr>
+          <td class="bold">INVENT BRINDES</td>
+          <td class="mono" style="font-size:.75rem">41.303.628/0001-43</td>
+          <td><span class="risk-ok">ATIVA</span></td>
+          <td style="color:#fcd34d">R$ 18.497</td>
+          <td class="negative">Nova (era zero)</td>
+          <td class="negative">R$ 509.882</td>
+          <td class="bold">R$ 300.000</td>
+          <td><span class="risk-warn">ATENÇÃO</span></td>
+        </tr>
+        <tr>
+          <td class="bold">NATTIVUS</td>
+          <td class="mono" style="font-size:.75rem">25.043.129/0001-08</td>
+          <td><span class="risk-ok">ATIVA</span></td>
+          <td class="negative bold">R$ 1.386.964</td>
+          <td class="negative">+19%</td>
+          <td class="negative">R$ 1.843.496</td>
+          <td class="bold">R$ 200.000</td>
+          <td><span class="risk-high">ALTO RISCO</span></td>
+        </tr>
+        <tr>
+          <td class="bold">NOVA PRESENTES</td>
+          <td class="mono" style="font-size:.75rem">36.015.875/0001-04</td>
+          <td><span class="risk-ok">ATIVA</span></td>
+          <td style="color:#fcd34d">R$ 172.952</td>
+          <td class="negative">Nova (era zero)</td>
+          <td class="negative">R$ 1.040.648</td>
+          <td class="bold">R$ 45.000</td>
+          <td><span class="risk-warn">ATENÇÃO</span></td>
+        </tr>
+        <tr>
+          <td class="bold">ZERO ONZE</td>
+          <td class="mono" style="font-size:.75rem">54.171.478/0001-03</td>
+          <td><span class="risk-ok">ATIVA</span></td>
+          <td style="color:#fcd34d">R$ 66.523</td>
+          <td class="negative">+8%</td>
+          <td style="color:var(--text2)">R$ 6.033</td>
+          <td class="bold">R$ 25.000</td>
+          <td><span class="risk-warn">ATENÇÃO</span></td>
+        </tr>
+        <tr style="background:rgba(0,230,190,0.04)">
+          <td class="bold" style="color:#5eead4">TOTAL GRUPO</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="negative bold">R$ 3.190.551</td>
+          <td class="negative bold">+97% vs. ant.</td>
+          <td class="negative bold">R$ 5.476.005</td>
+          <td class="bold" style="color:#5eead4">R$ 2.170.000</td>
+          <td><span class="risk-warn">MANTER COND.</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info-box ok">
+    <strong>PONTO POSITIVO CONFIRMADO:</strong> Ao longo de toda a operação com a AG Antecipa, o Grupo Brindes registra <strong>zero ocorrência de inadimplência</strong> — nenhum título devolvido, nenhum atraso. Este histórico constitui fator atenuante relevante na avaliação de continuidade, sendo reconhecido explicitamente por ambos os analistas.
+  </div>
+</section>
+
+<!-- 1. PERFIL DO GRUPO -->
+<section id="grupo">
+  <div class="section-label">Seção 1</div>
+  <h2 class="section-title">Perfil do Grupo</h2>
+
+  <div class="analyst-banner">
+    <div class="analyst-avatar" style="background:rgba(0,230,190,0.12);border-color:var(--teal);color:var(--teal)">MV</div>
+    <div>
+      <div class="analyst-name">Marcelo Vazquez — Análise de Crédito</div>
+      <div class="analyst-role">AG Antecipa Securitizadora · Revisão de Limite · Junho/2026</div>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-bottom:1.25rem">
+    <div class="card">
+      <div class="card-title">Controlador Central</div>
+      <table class="data-table">
+        <tbody>
+          <tr><td style="color:var(--text2);width:42%">Nome</td><td class="bold">Andre Luiz Otto Cruz</td></tr>
+          <tr><td style="color:var(--text2)">CPF</td><td class="mono">850.198.870-72</td></tr>
+          <tr><td style="color:var(--text2)">Idade</td><td>23 anos</td></tr>
+          <tr><td style="color:var(--text2)">Entrada</td><td>01/03/2026 (todas as empresas)</td></tr>
+          <tr><td style="color:var(--text2)">Controle</td><td>100% em INOVA, NATTIVUS, NOVA PRESENTES, ARCA PROMO, INVENT</td></tr>
+          <tr><td style="color:var(--text2)">PEP (COAF)</td><td><span class="risk-ok">NADA CONSTA</span></td></tr>
+          <tr><td style="color:var(--text2)">Processos</td><td>Sem processos registrados no CPF (INVENT — seção sócios)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Outros Administradores por CNPJ</div>
+      <table class="data-table">
+        <tbody>
+          <tr><td style="color:var(--text2)">ARAÇA</td><td>Osmar Garcia Cardoso (CPF 296.445.180-04, 66a) — 30 processos R$1,36M</td></tr>
+          <tr><td style="color:var(--text2)">FMVS</td><td>Francisco Marzelino Valença Silveira (CPF 911.625.210-15, 50a)</td></tr>
+          <tr><td style="color:var(--text2)">ZERO ONZE</td><td>Carlos Alberto Monteiro (CPF 382.930.050-68, 62a) — 58 empresas</td></tr>
+          <tr><td style="color:var(--text2)">INVENT</td><td>Sócio original: Roger Rocha Pires — atual admin: Andre Luiz</td></tr>
+        </tbody>
+      </table>
+      <div class="analyst-note" style="margin-top:.75rem">
+        <strong>Ponto de atenção:</strong> Andre Luiz Otto Cruz, 23 anos, assumiu o controle de 5 empresas simultaneamente em 01/03/2026 — há apenas 3 meses. O perfil jovem com múltiplas empresas e entrada recente requer monitoramento de capacidade de gestão. Antecessor NATTIVUS era Robson Rocha Pires.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Mapa do Grupo — Estrutura Societária Simplificada</div>
+    <div style="padding:.75rem 0;font-size:.83rem;color:var(--text2);line-height:2">
+      <div style="text-align:center;margin-bottom:.75rem">
+        <span style="background:rgba(0,230,190,0.12);border:1px solid var(--teal-border);border-radius:8px;padding:.4rem 1.2rem;font-weight:700;font-family:'Syne',sans-serif;color:#5eead4">ANDRE LUIZ OTTO CRUZ (100%)</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;text-align:center;font-size:.72rem">
+        <div style="background:var(--navy2);border:1px solid var(--border);border-radius:6px;padding:.5rem;border-top:2px solid #ef4444"><div style="color:#fca5a5;font-weight:700">ARCA PROMO</div><div style="color:var(--text2)">INAPTA 05/06</div><div style="color:#fca5a5">R$ 200k exp.</div></div>
+        <div style="background:var(--navy2);border:1px solid var(--border);border-radius:6px;padding:.5rem;border-top:2px solid #ef4444"><div style="color:#fca5a5;font-weight:700">NATTIVUS</div><div style="color:var(--text2)">Maior dívida</div><div style="color:#fca5a5">R$ 200k exp.</div></div>
+        <div style="background:var(--navy2);border:1px solid var(--border);border-radius:6px;padding:.5rem;border-top:2px solid #ef4444"><div style="color:#fca5a5;font-weight:700">INOVA GIFTS</div><div style="color:var(--text2)">Core do grupo</div><div style="color:#fca5a5">R$ 700k exp.</div></div>
+        <div style="background:var(--navy2);border:1px solid var(--border);border-radius:6px;padding:.5rem;border-top:2px solid #f59e0b"><div style="color:#fcd34d;font-weight:700">NOVA PRESENTES</div><div style="color:var(--text2)">Novas restr.</div><div style="color:#fcd34d">R$ 45k exp.</div></div>
+        <div style="background:var(--navy2);border:1px solid var(--border);border-radius:6px;padding:.5rem;border-top:2px solid #f59e0b"><div style="color:#fcd34d;font-weight:700">INVENT</div><div style="color:var(--text2)">Novas restr.</div><div style="color:#fcd34d">R$ 300k exp.</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;text-align:center;font-size:.72rem;margin-top:.5rem">
+        <div style="background:var(--navy2);border:1px solid var(--border);border-radius:6px;padding:.5rem;border-top:2px solid #f59e0b"><div style="color:#fcd34d;font-weight:700">ARAÇA</div><div style="color:var(--text2)">Admin: Osmar</div><div style="color:#fcd34d">R$ 500k exp.</div></div>
+        <div style="background:var(--navy2);border:1px solid var(--border);border-radius:6px;padding:.5rem;border-top:2px solid #f59e0b"><div style="color:#fcd34d;font-weight:700">FMVS</div><div style="color:var(--text2)">+1400% consultas</div><div style="color:#fcd34d">R$ 200k exp.</div></div>
+        <div style="background:var(--navy2);border:1px solid var(--border);border-radius:6px;padding:.5rem;border-top:2px solid #f59e0b"><div style="color:#fcd34d;font-weight:700">ZERO ONZE</div><div style="color:var(--text2)">Admin: Carlos</div><div style="color:#fcd34d">R$ 25k exp.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. COMPARATIVO -->
+<section id="comparativo">
+  <div class="section-label">Seção 2</div>
+  <h2 class="section-title">Comparativo — Análise Anterior vs. Atual (05/06/2026)</h2>
+
+  <div class="card" style="margin-bottom:1.25rem">
+    <div class="card-title">Evolução de Consultas ao Serasa (Dez/25 → Fev/26) — Sinal de Demanda por Crédito</div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Empresa</th>
+          <th class="text-right">Dez/25</th>
+          <th class="text-right">Jan/26</th>
+          <th class="text-right">Fev/26</th>
+          <th class="text-right">Variação</th>
+          <th>Avaliação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="bold">ARAÇA</td><td class="text-right">9</td><td class="text-right">19</td><td class="text-right">21</td><td class="text-right negative bold">+133%</td><td><span class="risk-warn">ATENÇÃO</span></td></tr>
+        <tr><td class="bold">ARCA ILIMITADA</td><td class="text-right">15</td><td class="text-right">24</td><td class="text-right">21</td><td class="text-right negative">+40%</td><td><span class="risk-high">CRÍTICO (INAPTA)</span></td></tr>
+        <tr><td class="bold">FMVS</td><td class="text-right">1</td><td class="text-right">6</td><td class="text-right">15</td><td class="text-right negative bold">+1400%</td><td><span class="risk-high">ALARME</span></td></tr>
+        <tr><td class="bold">INOVA GIFTS</td><td class="text-right">20</td><td class="text-right">28</td><td class="text-right">28</td><td class="text-right negative">+40%</td><td><span class="risk-high">ALTO RISCO</span></td></tr>
+        <tr><td class="bold">INVENT BRINDES</td><td class="text-right">15</td><td class="text-right">18</td><td class="text-right">23</td><td class="text-right negative">+53%</td><td><span class="risk-warn">ATENÇÃO</span></td></tr>
+        <tr><td class="bold">NATTIVUS</td><td class="text-right">23</td><td class="text-right">30</td><td class="text-right">24</td><td class="text-right" style="color:var(--text2)">+4%</td><td><span class="risk-warn">MONITORAR</span></td></tr>
+        <tr><td class="bold">NOVA PRESENTES</td><td class="text-right">11</td><td class="text-right">15</td><td class="text-right">19</td><td class="text-right negative">+73%</td><td><span class="risk-warn">ATENÇÃO</span></td></tr>
+        <tr><td class="bold">ZERO ONZE</td><td class="text-right">7</td><td class="text-right">15</td><td class="text-right">16</td><td class="text-right negative bold">+129%</td><td><span class="risk-warn">ATENÇÃO</span></td></tr>
+      </tbody>
+    </table>
+    <div class="analyst-note" style="margin-top:.75rem">
+      <strong>Leitura analítica:</strong> O crescimento expressivo de consultas no segmento factoring — com AGANTECIPA entre os principais consultores em 7 das 8 empresas — indica que o grupo está buscando liquidez de forma estruturada e diversificada. Esse comportamento, isoladamente, não caracteriza fraude, mas sinaliza aperto de caixa e elevada dependência de antecipação.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Evolução de Restrições Serasa — Antes vs. Atual</div>
+    <div class="chart-wrap" style="height:260px">
+      <canvas id="chartRestricoes"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- 3. ALERTAS / FLAGS -->
+<section id="flags">
+  <div class="section-label">Seção 3</div>
+  <h2 class="section-title">Alertas Críticos — 5 Pontos Mandatórios</h2>
+
+  <!-- FLAG 1: ARCA PROMO INAPTA -->
+  <div class="flag-band red" style="margin-bottom:1rem">
+    <strong>FLAG 1 — CRITICA: ARCA ILIMITADA (ARCA PROMOÇÕES E EVENTOS LTDA) — INAPTA EM 05/06/2026</strong><br>
+    A empresa CNPJ 37.069.335/0001-76 tornou-se INAPTA na data exata da consulta (05/06/2026) por "Omissão de Declarações". Status anterior: ATIVA desde 05/05/2020. Capital social R$105.000 (maior do grupo). Admin: Andre Luiz Otto Cruz desde 01/03/2026. Restrições: R$196.852 (16 protestos R$88k + REFIN R$63k + div.vencidas R$45k). BACEN: R$858.773 a vencer + R$2.672 vencido. <strong>Exposição AG: R$200.000. Operação deverá ser suspensa imediatamente para este CNPJ.</strong>
+  </div>
+
+  <!-- FLAG 2: FMVS +1400% -->
+  <div class="flag-band" style="margin-bottom:1rem">
+    <strong>FLAG 2 — ATENÇÃO: FMVS BRINDES — +1400% DE CONSULTAS (1 → 15 em 2 meses)</strong><br>
+    FMVS passou de 1 consulta em Dez/25 para 15 em Fev/26. Histórico completo: Dez/25=1, Jan/26=6, Fev/26=15, Mar/26=5, Abr/26=10, Mai/26=13. AG Antecipa aparece 7 vezes (mais frequente). Outros: SYNTHEO 5x, HAMPTON 2x. Empresa tem capital social de R$1.000 (MEI convertido em jun/2025). Francisco Silveira possui processo penal (2014). Restrições atuais: zero (limpou). <strong>Comportamento de crédito agressivo — risco de pirâmide de antecipação.</strong>
+  </div>
+
+  <!-- FLAG 3: INOVA GIFTS +98% -->
+  <div class="flag-band red" style="margin-bottom:1rem">
+    <strong>FLAG 3 — CRÍTICA: INOVA GIFTS — RESTRIÇÕES +98% e R$1,47M TOTAL</strong><br>
+    INOVA é a maior exposição do grupo (R$700.000). Restrições saltaram de R$313.771 para R$581.997 na planilha de comparação, e o relatório de 05/06/2026 mostra R$1.470.563 total: 29 protestos em Porto Alegre (R$673k), 8 dívidas SEFAZ-RS (R$511k), REFIN Santander+Banrisul (R$278k), PEFIN R$7k. Processos: 7 trabalhistas R$192k + 1 estadual R$13,75k + 1 federal R$49k. BACEN: R$1.217.173 a vencer + R$3.360 vencido. Protestos iniciados out/2025 escalaram fortemente a partir de mar/2026. <strong>Sinal de deterioração acelerada iniciada no mesmo período em que Andre Luiz entrou (mar/2026).</strong>
+  </div>
+
+  <!-- FLAG 4: NATTIVUS -->
+  <div class="flag-band red" style="margin-bottom:1rem">
+    <strong>FLAG 4 — CRÍTICA: NATTIVUS — R$1,39M SERASA + BACEN R$1,84M A VENCER</strong><br>
+    NATTIVUS (fundada 2016, empresa mais antiga do grupo) acumula: 25 protestos R$656k (início nov/2025), 17 dívidas SEFAZ-RS R$618k (ago/2025 a mar/2026), REFIN Banrisul+CREDIVIL R$111k. Total Serasa: R$1.386.964. BACEN: R$1.843.496 a vencer + R$42.053 vencido. Processos judiciais: R$1,16M (4 cíveis passivos R$1,08M). Capital social R$60.000. Exposição AG R$200.000. <strong>Maior risco absoluto do grupo em termos de endividamento total.</strong>
+  </div>
+
+  <!-- FLAG 5: NOVA PRESENTES e INVENT novas restrições -->
+  <div class="flag-band" style="margin-bottom:1rem">
+    <strong>FLAG 5 — ATENÇÃO: NOVA PRESENTES e INVENT BRINDES — RESTRIÇÕES SURGIRAM DO ZERO</strong><br>
+    NOVA PRESENTES: era zero restrições, agora R$172.952 (2 protestos R$30k + REFIN Santander R$122k + div.vencida SEFAZ R$20k) + 2 processos cíveis R$233k (mai/2026). BACEN R$1.040.648. INVENT BRINDES: era zero, agora R$40.497 (3 protestos Porto Alegre R$17.5k + REFIN CREDIVIL 5x R$22.9k). Capital social era R$20.000, agora alterado (28/05/2026). INVENT também tem pendências no CEIS e CNJ. <strong>Aparecimento simultâneo de restrições em empresas que estavam limpas é sinal de estresse do grupo.</strong>
+  </div>
+
+  <div class="info-box ok">
+    <strong>FATOR ATENUANTE CONFIRMADO:</strong> Não obstante os alertas acima, o grupo opera com AG Antecipa sem qualquer inadimplência desde o início do relacionamento. Isso demonstra que, até o momento, o fluxo das operações cedidas foi honrado integralmente. O crescimento das restrições externas não contaminou a carteira AG.
+  </div>
+</section>
+
+<!-- 4. BACEN -->
+<section id="bacen">
+  <div class="section-label">Seção 4</div>
+  <h2 class="section-title">BACEN / SCR — Exposição Bancária do Grupo</h2>
+
+  <div class="card" style="margin-bottom:1.25rem">
+    <div class="card-title">Exposição BACEN Consolidada por Empresa</div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Empresa</th>
+          <th class="text-right">A Vencer</th>
+          <th class="text-right">Vencido</th>
+          <th class="text-right">Total BACEN</th>
+          <th>Situação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="bold">INOVA GIFTS</td><td class="text-right">R$ 1.217.173</td><td class="text-right negative">R$ 3.360</td><td class="text-right bold">R$ 1.220.533</td><td><span class="risk-warn">Vencido mínimo</span></td></tr>
+        <tr><td class="bold">ARCA ILIMITADA</td><td class="text-right">R$ 858.773</td><td class="text-right negative">R$ 2.672</td><td class="text-right bold">R$ 861.445</td><td><span class="risk-high">INAPTA</span></td></tr>
+        <tr><td class="bold">NATTIVUS</td><td class="text-right">R$ 1.843.496</td><td class="text-right negative">R$ 42.053</td><td class="text-right bold">R$ 1.885.549</td><td><span class="risk-high">Vencido relevante</span></td></tr>
+        <tr><td class="bold">INVENT BRINDES</td><td class="text-right">R$ 509.882</td><td class="text-right negative">R$ 1.242</td><td class="text-right bold">R$ 511.124</td><td><span class="risk-warn">Vencido mínimo</span></td></tr>
+        <tr><td class="bold">NOVA PRESENTES</td><td class="text-right">R$ 1.040.648</td><td class="text-right negative">R$ 26.270</td><td class="text-right bold">R$ 1.066.918</td><td><span class="risk-warn">Vencido relevante</span></td></tr>
+        <tr><td class="bold">ZERO ONZE</td><td class="text-right">R$ 6.033</td><td class="text-right negative">R$ 5.648</td><td class="text-right bold">R$ 11.681</td><td><span class="risk-warn">Proporção alta</span></td></tr>
+        <tr><td class="bold">ARAÇA</td><td class="text-right" style="color:var(--text2)">—</td><td class="text-right" style="color:var(--text2)">—</td><td class="text-right" style="color:var(--text2)">—</td><td><span class="risk-ok">Não possui</span></td></tr>
+        <tr><td class="bold">FMVS</td><td class="text-right" style="color:var(--text2)">—</td><td class="text-right" style="color:var(--text2)">—</td><td class="text-right" style="color:var(--text2)">—</td><td><span class="risk-ok">Não possui</span></td></tr>
+        <tr style="background:rgba(239,68,68,0.04)">
+          <td class="bold negative">TOTAL GRUPO</td>
+          <td class="text-right bold">R$ 5.476.005</td>
+          <td class="text-right bold negative">R$ 81.245</td>
+          <td class="text-right bold negative">R$ 5.557.250</td>
+          <td><span class="risk-high">ELEVADO</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">BACEN de Andre Luiz Otto Cruz (Controlador) — Fev/2026</div>
+    <table class="data-table">
+      <tbody>
+        <tr><td style="color:var(--text2)">Carteira Ativa Total</td><td class="bold">R$ 8.103,10</td></tr>
+        <tr><td style="color:var(--text2)">A Vencer</td><td class="positive">R$ 8.039,85 (99,2%)</td></tr>
+        <tr><td style="color:var(--text2)">Vencido</td><td class="negative">R$ 63,25 (0,78%) — mínimo</td></tr>
+        <tr><td style="color:var(--text2)">Instituições</td><td>5 (Banco do Brasil, CREDIVIL, CEEE-D, Nubank, etc.)</td></tr>
+        <tr><td style="color:var(--text2)">Prejuízo</td><td class="positive">R$ 0,00</td></tr>
+      </tbody>
+    </table>
+    <div class="analyst-note">
+      <strong>Observação:</strong> O BACEN pessoal do controlador Andre Luiz é modesto (R$8k), compatível com seu perfil de 23 anos. A capacidade patrimonial pessoal para suportar o volume de obrigações do grupo (R$5,5M+ BACEN) é reconhecidamente limitada. A alienação fiduciária de imóvel é essencial para balancear essa assimetria.
+    </div>
+  </div>
+</section>
+
+<!-- 5. SÓCIOS -->
+<section id="socios">
+  <div class="section-label">Seção 5</div>
+  <h2 class="section-title">Análise de Sócios e Administradores</h2>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Osmar Garcia Cardoso — Admin ARAÇA (66 anos)</div>
+      <div class="progress-item"><div class="progress-label"><span>Processos (30 total)</span><span style="color:#fca5a5">R$ 1.360.000</span></div><div class="progress-track"><div class="progress-fill" style="width:78%;background:#ef4444"></div></div></div>
+      <ul style="font-size:.82rem;color:var(--text2);list-style:none;padding:0">
+        <li style="padding:.3rem 0;border-bottom:1px solid rgba(255,255,255,.04)">28 processos estaduais — R$ 1.338.000</li>
+        <li style="padding:.3rem 0;border-bottom:1px solid rgba(255,255,255,.04)">2 processos federais — R$ 25.000</li>
+        <li style="padding:.3rem 0;border-bottom:1px solid rgba(255,255,255,.04)"><span class="risk-high">5 processos PENAIS</span></li>
+        <li style="padding:.3rem 0;border-bottom:1px solid rgba(255,255,255,.04)">3 processos tributários</li>
+        <li style="padding:.3rem 0">Serasa pessoal: protesto R$1,1k + ação judicial R$77k + div.vencida R$1,2k</li>
+      </ul>
+      <div class="analyst-note danger" style="margin-top:.75rem">
+        <strong>Risco elevado:</strong> Administrador da empresa com maior exposição individual (ARAÇA R$500k) possui histórico judicial grave incluindo processos penais. Requer investigação adicional.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Francisco Silveira — Admin FMVS (50 anos)</div>
+      <div class="progress-item"><div class="progress-label"><span>Processos (4 total)</span><span style="color:#fcd34d">R$ 196.000</span></div><div class="progress-track"><div class="progress-fill" style="width:30%;background:#f59e0b"></div></div></div>
+      <ul style="font-size:.82rem;color:var(--text2);list-style:none;padding:0">
+        <li style="padding:.3rem 0;border-bottom:1px solid rgba(255,255,255,.04)">1 trabalhista — R$ 155.000</li>
+        <li style="padding:.3rem 0;border-bottom:1px solid rgba(255,255,255,.04)">2 estaduais — R$ 7.600</li>
+        <li style="padding:.3rem 0;border-bottom:1px solid rgba(255,255,255,.04)">1 federal — R$ 32.900</li>
+        <li style="padding:.3rem 0"><span class="risk-warn">1 processo PENAL (2014)</span></li>
+      </ul>
+      <div class="card-title" style="margin-top:1rem">Carlos Alberto Monteiro — Admin ZERO ONZE (62 anos)</div>
+      <ul style="font-size:.82rem;color:var(--text2);list-style:none;padding:0">
+        <li style="padding:.3rem 0;border-bottom:1px solid rgba(255,255,255,.04)">58 empresas por grafia</li>
+        <li style="padding:.3rem 0">1 processo trabalhista R$13.125 (2021)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.25rem">
+    <div class="card-title">ARAÇA — Mudança de Nome Suspeita</div>
+    <div class="analyst-note danger">
+      <strong>ALERTA OPERACIONAL:</strong> A empresa ARAÇA COMÉRCIO DE BRINDES LTDA (CNPJ 57.202.895/0001-64, fundada set/2024) alterou sua razão social <strong>duas vezes em mai-jun/2026</strong>: primeiro para "NT PERSONALIZADOS LTDA" em 03/06/2026, depois reverteu para o nome atual. Empresas que trocam de nome repetidamente em curto espaço de tempo são sinalizadas como potencial risco de fraude/simulação. 5 protestos em Novo Hamburgo (abr-mai/2025, R$18.200 — todos no mesmo cartório). Exposição AG: R$500.000 — segunda maior individual.
+    </div>
+  </div>
+</section>
+
+<!-- 6. GARANTIA -->
+<section id="garantia">
+  <div class="section-label">Seção 6</div>
+  <h2 class="section-title">Garantia Proposta — Alienação Fiduciária de Imóvel</h2>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Estrutura da Garantia</div>
+      <div class="guarantee-item">
+        <div class="guarantee-num" style="background:rgba(0,230,190,0.15);color:var(--teal);border:1px solid var(--teal-border)">1</div>
+        <div class="guarantee-text"><strong>Modalidade:</strong> Alienação fiduciária de bem imóvel (Lei 9.514/97) — transferência da propriedade resolúvel ao credor fiduciário (AG Antecipa) como garantia das obrigações do grupo.</div>
+      </div>
+      <div class="guarantee-item">
+        <div class="guarantee-num" style="background:rgba(0,230,190,0.15);color:var(--teal);border:1px solid var(--teal-border)">2</div>
+        <div class="guarantee-text"><strong>Cobertura pretendida:</strong> Guarda-chuva sobre a totalidade da exposição do grupo (R$2.170.000). O imóvel deve ter valor de avaliação mínimo de R$2,5M para índice de cobertura de 115%.</div>
+      </div>
+      <div class="guarantee-item">
+        <div class="guarantee-num" style="background:rgba(0,230,190,0.15);color:var(--teal);border:1px solid var(--teal-border)">3</div>
+        <div class="guarantee-text"><strong>Vantagens:</strong> Execução extrajudicial rápida (30-60 dias vs. anos em processo judicial). Propriedade efetivamente transferida ao credor até quitação das obrigações. Proteção mesmo em falência do devedor.</div>
+      </div>
+      <div class="guarantee-item">
+        <div class="guarantee-num" style="background:rgba(245,158,11,0.15);color:#fcd34d;border:1px solid rgba(245,158,11,0.3)">!</div>
+        <div class="guarantee-text"><strong>Pendência crítica:</strong> A garantia ainda está em fase de proposta. Até a efetiva formalização em cartório com registro da CRI (Certidão de Registro de Imóveis), a AG Antecipa não detém qualquer proteção real sobre o bem.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Avaliação da Cobertura</div>
+      <div style="margin-bottom:1rem">
+        <div class="progress-item">
+          <div class="progress-label"><span>Exposição Total AG</span><span>R$ 2.170.000</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:87%;background:#ef4444"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>Cobertura mínima necessária (115%)</span><span>R$ 2.495.500</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:100%;background:#22c55e"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-label"><span>Cobertura recomendada (130%)</span><span>R$ 2.821.000</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:100%;background:#00e6be"></div></div>
+        </div>
+      </div>
+      <div class="analyst-note">
+        <strong>Condição para aprovação:</strong> A alienação fiduciária deve ser formalizada com: (i) laudo de avaliação por CRECI/Engenheiro credenciado; (ii) certidão de matrícula atualizada (≤30 dias); (iii) certidão de ônus reais; (iv) registro no CRI competente; (v) comprovante de quitação de IPTU e condomínio. <strong>Sem esses documentos, o limite atual deve ser mantido sem expansão.</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. PARECER CRÉDITO -->
+<section id="parecer-credito">
+  <div class="section-label">Seção 7 — Perspectiva I</div>
+  <h2 class="section-title">Parecer de Crédito — Marcelo Vazquez</h2>
+
+  <div class="analyst-banner">
+    <div class="analyst-avatar" style="background:rgba(0,230,190,0.12);border-color:var(--teal);color:var(--teal)">MV</div>
+    <div>
+      <div class="analyst-name">Marcelo Vazquez</div>
+      <div class="analyst-role">Analista de Crédito Sênior · AG Antecipa Securitizadora · 05/06/2026</div>
+    </div>
+  </div>
+
+  <div class="analyst-note">
+    <strong>Contexto da revisão:</strong> O Grupo Brindes é um cedente ativo da AG Antecipa com histórico de zero inadimplência. Esta análise não é de um novo cliente — é uma revisão de continuidade motivada por deterioração observada nos indicadores do grupo entre a análise anterior e a data-base atual (05/06/2026). O grupo demonstrou capacidade de honrar as operações cedidas, mas sinais externos indicam estresse financeiro crescente que requer atenção imediata.
+  </div>
+
+  <div class="two-col" style="margin:1.25rem 0">
+    <div class="card">
+      <div class="card-title">Fatores de Risco</div>
+      <ul style="list-style:none;padding:0;font-size:.83rem">
+        <li style="padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text2)"><span class="risk-high" style="margin-right:.5rem">CRÍTICO</span> ARCA PROMO tornou-se INAPTA em 05/06/2026</li>
+        <li style="padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text2)"><span class="risk-high" style="margin-right:.5rem">CRÍTICO</span> ARAÇA — troca de nome 2x em menos de 30 dias</li>
+        <li style="padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text2)"><span class="risk-high" style="margin-right:.5rem">CRÍTICO</span> Restrições Serasa cresceram 97% no grupo consolidado</li>
+        <li style="padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text2)"><span class="risk-high" style="margin-right:.5rem">ALTO</span> Admin ARAÇA possui processos penais (5)</li>
+        <li style="padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text2)"><span class="risk-warn" style="margin-right:.5rem">MÉDIO</span> FMVS +1400% consultas — comportamento agressivo</li>
+        <li style="padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text2)"><span class="risk-warn" style="margin-right:.5rem">MÉDIO</span> Controlador com 23 anos, entrou há 3 meses em 5 empresas</li>
+        <li style="padding:.4rem 0;color:var(--text2)"><span class="risk-warn" style="margin-right:.5rem">MÉDIO</span> BACEN total grupo R$5,5M — concentrado em 4 CNPJs</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Fatores Favoráveis</div>
+      <ul style="list-style:none;padding:0;font-size:.83rem">
+        <li style="padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text2)"><span class="risk-ok" style="margin-right:.5rem">POSITIVO</span> Zero inadimplência histórica com AG Antecipa</li>
+        <li style="padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text2)"><span class="risk-ok" style="margin-right:.5rem">POSITIVO</span> Grupo ativo no mercado de brindes — setor operante</li>
+        <li style="padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text2)"><span class="risk-ok" style="margin-right:.5rem">POSITIVO</span> NATTIVUS — empresa mais antiga, 9 anos de história</li>
+        <li style="padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text2)"><span class="risk-ok" style="margin-right:.5rem">POSITIVO</span> Proposta de alienação fiduciária imobiliária</li>
+        <li style="padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text2)"><span class="risk-ok" style="margin-right:.5rem">POSITIVO</span> FMVS e ARAÇA sem BACEN — menor risco bancário</li>
+        <li style="padding:.4rem 0;color:var(--text2)"><span class="risk-ok" style="margin-right:.5rem">POSITIVO</span> Sacados diversificados — risco de concentração baixo</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="analyst-note">
+    <strong>Posicionamento de crédito (Marcelo Vazquez):</strong> Diante do histórico positivo de relacionamento e da capacidade operacional demonstrada, recomendo a <strong>manutenção do limite atual de R$2.170.000</strong> com a imposição imediata de duas condições resolutivas: (1) suspensão de novas operações para ARCA ILIMITADA (CNPJ INAPTA) e (2) prazo de 30 dias para formalização da alienação fiduciária. A restrição adicional sobre ARAÇA deve ser avaliada em reunião de comitê dada a mudança de nome e o perfil do administrador. Não recomendo redução de limite neste momento, mas tampouco aprovo expansão até a garantia real ser formalizada.
+  </div>
+</section>
+
+<!-- === DIVISOR RAFAEL BAZAN === -->
+<section style="padding:1.5rem 2rem">
+  <div class="split-banner rf">
+    <h2>Perspectiva II — Análise Financeira e de Risco</h2>
+    <div style="color:var(--text2);font-size:.85rem;margin-top:.35rem">Rafael Bazan · Controller / Analista Financeiro · AG Antecipa · 05/06/2026</div>
+  </div>
+</section>
+
+<!-- 8. 6 DIMENSÕES DE RISCO -->
+<section id="risco-dim" class="rf-section">
+  <div class="section-label">Seção 8 — Perspectiva II</div>
+  <h2 class="section-title">6 Dimensões de Risco — Rafael Bazan</h2>
+
+  <div class="analyst-banner rf">
+    <div class="analyst-avatar" style="background:rgba(59,130,246,0.12);border-color:#3b82f6;color:#60a5fa">RB</div>
+    <div>
+      <div class="analyst-name">Rafael Bazan</div>
+      <div class="analyst-role">Controller / Analista Financeiro · AG Antecipa Securitizadora · 05/06/2026</div>
+    </div>
+  </div>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header">
+      <span class="risk-dim-name">1. Risco Financeiro</span>
+      <span class="risk-high">ALTO</span>
+    </div>
+    <div class="risk-dim-desc">
+      O grupo acumula R$3,19M em restrições Serasa (+97% vs. análise anterior) e R$5,48M em BACEN a vencer distribuídos em 6 CNPJs. NATTIVUS possui R$618k em dívidas com SEFAZ-RS não regularizadas (17 ocorrências de ago/2025 a mar/2026). INOVA GIFTS carrega R$511k em dívidas SEFAZ-RS ativas. A proporção entre obrigações totais e a exposição AG (R$2,17M) é alta: o endividamento externo do grupo supera 2,5x a carteira AG. Fluxo de caixa aparentemente sustentado pelo factoring e antecipação, criando dependência circular.
+    </div>
+  </div>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header">
+      <span class="risk-dim-name">2. Risco Operacional</span>
+      <span class="risk-warn">MÉDIO-ALTO</span>
+    </div>
+    <div class="risk-dim-desc">
+      O setor de brindes corporativos é operacionalmente simples, mas intensivo em capital de giro. O grupo possui 8 CNPJs com atividades sobrepostas, endereços em salas comerciais (Av. Assis Brasil e similares), sem estrutura física robusta identificada. A concentração do controle em um único jovem administrador (23 anos, 3 meses no comando) com 5 empresas simultâneas representa risco de capacidade de gestão. A mudança de nome da ARAÇA duas vezes em mai-jun/2026 é um evento operacional anômalo.
+    </div>
+  </div>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header">
+      <span class="risk-dim-name">3. Risco Legal / Regulatório</span>
+      <span class="risk-high">ALTO</span>
+    </div>
+    <div class="risk-dim-desc">
+      ARCA ILIMITADA tornou-se INAPTA em 05/06/2026 por "Omissão de Declarações" — empresas inaptas perdem capacidade de emitir notas fiscais válidas e podem ter operações questionadas. INVENT BRINDES possui pendências no CEIS e CNJ. Admin ARAÇA tem 5 processos penais e 3 tributários. FMVS teve fundador com processo penal (2014). NATTIVUS possui 8 processos judiciais no valor de R$1,16M. O passivo judicial consolidado do grupo supera R$2M.
+    </div>
+  </div>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header">
+      <span class="risk-dim-name">4. Risco de Gestão / Governança</span>
+      <span class="risk-warn">MÉDIO-ALTO</span>
+    </div>
+    <div class="risk-dim-desc">
+      Troca simultânea de administradores em múltiplas empresas do grupo em 01/03/2026 (Andre Luiz Cruz) — apenas 3 meses antes da data desta análise. Ausência de balanços formais auditados. Capital social nominal reduzido na maioria das empresas (R$1.000 FMVS, R$10.000 INOVA/NOVA PRESENTES). Estrutura sugestiva de grupo econômico informal não declarado, com possível risco de desconsideração da personalidade jurídica em caso de ação judicial movida por credores.
+    </div>
+  </div>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header">
+      <span class="risk-dim-name">5. Risco de Fraude / Simulação</span>
+      <span class="risk-warn">MÉDIO</span>
+    </div>
+    <div class="risk-dim-desc">
+      Não há evidência concreta de fraude, mas existem padrões que merecem atenção: (i) múltiplas empresas sobrepostas no mesmo nicho de brindes com endereços comercializados; (ii) troca de nome na ARAÇA duas vezes em curto período; (iii) comportamento de consultas ao Serasa consistente com busca ativa por crédito em várias casas simultâneas. O fato de o grupo operar sem inadimplência com a AG sugere que os títulos cedidos são legítimos e com sacados reais — o que mitiga o risco de simulação de operações.
+    </div>
+  </div>
+
+  <div class="risk-dim">
+    <div class="risk-dim-header">
+      <span class="risk-dim-name">6. Risco de Concentração</span>
+      <span class="risk-warn">MÉDIO</span>
+    </div>
+    <div class="risk-dim-desc">
+      A exposição está distribuída em 8 CNPJs, o que cria uma aparente diversificação. Contudo, a concentração real é em INOVA GIFTS (R$700k = 32% da carteira) e ARAÇA (R$500k = 23%). As 2 empresas mais concentradas representam 55% do total. Do ponto de vista de nicho, todas operam em brindes corporativos — correlação de ciclos de crédito alta. A dependência de antecipação de recebíveis como principal fonte de capital de giro constitui risco de concentração de funding.
+    </div>
+  </div>
+</section>
+
+<!-- 9. ANÁLISE DE CONTINUIDADE -->
+<section id="continuidade" class="rf-section">
+  <div class="section-label">Seção 9</div>
+  <h2 class="section-title">Análise de Continuidade do Relacionamento</h2>
+
+  <div class="two-col" style="margin-bottom:1.25rem">
+    <div class="card">
+      <div class="card-title">Cenário Base — Manutenção Condicionada</div>
+      <ul class="timeline">
+        <li><strong>Imediato (D+0)</strong>Suspender novas operações para ARCA ILIMITADA (INAPTA). Congelar o limite de R$200k desta empresa.</li>
+        <li><strong>D+15 dias</strong>Exigir apresentação formal do imóvel para alienação fiduciária: matrícula, avaliação, certidões.</li>
+        <li><strong>D+30 dias</strong>Formalização do instrumento de alienação fiduciária em cartório com registro no CRI.</li>
+        <li><strong>D+30 dias</strong>Esclarecimento formal sobre as mudanças de nome da ARAÇA e situação do administrador Osmar Cardoso.</li>
+        <li><strong>D+60 dias</strong>Nova consulta ao CNPJ da ARCA ILIMITADA — verificar regularização da situação INAPTA.</li>
+        <li><strong>Trimestral</strong>Monitoramento dos indicadores de restrições e BACEN para todas as 8 empresas.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Gatilhos de Redução / Encerramento</div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div><span>Qualquer inadimplência com a AG Antecipa — redução imediata de 50% do limite</span></div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div><span>Novo CNPJ do grupo tornando-se INAPTO ou sendo BAIXADO</span></div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div><span>Não formalização da alienação fiduciária no prazo de 30 dias</span></div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#ef4444"></div><span>Protestos a AG Antecipa em qualquer empresa do grupo</span></div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#f59e0b"></div><span>Crescimento de restrições Serasa acima de 30% em nova consulta em 90 dias</span></div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#f59e0b"></div><span>Surgimento de novo CNPJ do grupo com restrições acima de R$50k</span></div>
+      <div class="trigger-item"><div class="trigger-dot" style="background:#f59e0b"></div><span>Processos de recuperação judicial em qualquer empresa do grupo</span></div>
+    </div>
+  </div>
+
+  <div class="analyst-note rf">
+    <strong>Análise de viabilidade (Rafael Bazan):</strong> Do ponto de vista financeiro e contábil, o grupo demonstra sinais inequívocos de estresse financeiro — a aceleração de protestos, dívidas SEFAZ e endividamento bancário a partir de set/out 2025 é consistente com um grupo que perdeu acesso a crédito bancário convencional e migrou para o factoring como fonte primária de funding. Este é um fenômeno comum em PMEs do setor de brindes corporativos, e não necessariamente terminal. A questão central é se os sacados continuam honrando os títulos cedidos à AG — o que tem ocorrido até agora. A alienação fiduciária imobiliária, se formalizada corretamente, converte o risco de crédito em risco de recuperação de garantia, que é substancialmente mais gerenciável.
+  </div>
+</section>
+
+<!-- 10. CONDIÇÕES -->
+<section id="condicoes" class="rf-section">
+  <div class="section-label">Seção 10</div>
+  <h2 class="section-title">Condições de Continuidade — Rafael Bazan</h2>
+
+  <div class="card" style="margin-bottom:1.25rem">
+    <div class="card-title">Matriz de Condições por CNPJ</div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Empresa</th>
+          <th>Limite Atual</th>
+          <th>Recomendação</th>
+          <th>Condição</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="bold">INOVA GIFTS</td><td>R$ 700.000</td><td><span class="risk-warn">MANTER</span></td><td style="font-size:.75rem">Monitoramento mensal de protestos e SEFAZ</td></tr>
+        <tr><td class="bold">ARAÇA</td><td>R$ 500.000</td><td><span class="risk-warn">MANTER + ESCLARECIMENTO</span></td><td style="font-size:.75rem">Exigir esclarecimento formal sobre mudança de nome e Osmar Cardoso em 15 dias</td></tr>
+        <tr><td class="bold">FMVS</td><td>R$ 200.000</td><td><span class="risk-warn">MANTER — MONITORAR</span></td><td style="font-size:.75rem">Verificar se consultas ao Serasa não excedem 20/mês</td></tr>
+        <tr><td class="bold negative bold">ARCA ILIMITADA</td><td>R$ 200.000</td><td><span class="risk-high">SUSPENDER NOVAS OPS</span></td><td style="font-size:.75rem">CNPJ INAPTO — zero novas operações até regularização comprovada</td></tr>
+        <tr><td class="bold">INVENT BRINDES</td><td>R$ 300.000</td><td><span class="risk-warn">MANTER</span></td><td style="font-size:.75rem">Verificar pendências CEIS/CNJ em 15 dias</td></tr>
+        <tr><td class="bold">NATTIVUS</td><td>R$ 200.000</td><td><span class="risk-warn">MANTER — MONITORAR</span></td><td style="font-size:.75rem">Maior risco absoluto — acompanhar BACEN vencido mensalmente</td></tr>
+        <tr><td class="bold">NOVA PRESENTES</td><td>R$ 45.000</td><td><span class="risk-warn">MANTER</span></td><td style="font-size:.75rem">Baixa exposição — monitoramento trimestral suficiente</td></tr>
+        <tr><td class="bold">ZERO ONZE</td><td>R$ 25.000</td><td><span class="risk-warn">MANTER</span></td><td style="font-size:.75rem">Baixa exposição — processo penal ZERO ONZE (CNPJ) data 24/03/2026 — verificar</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="analyst-note rf">
+    <strong>Condição precípua (Rafael Bazan):</strong> A manutenção da totalidade do limite (R$2.170.000) está <strong>condicionada à formalização da alienação fiduciária imobiliária em até 30 dias</strong>. Sem esta garantia real registrada, o limite operacional efetivo deve ser reduzido para R$1.800.000 — excluindo imediatamente a parcela da ARCA ILIMITADA (INAPTA). A formalização da garantia é o único mecanismo capaz de justificar a manutenção do nível de exposição atual dada a deterioração dos indicadores de mercado do grupo.
+  </div>
+</section>
+
+<!-- 11. MONITORAMENTO -->
+<section id="monitoramento" class="rf-section">
+  <div class="section-label">Seção 11</div>
+  <h2 class="section-title">Plano de Monitoramento Contínuo</h2>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Frequência de Monitoramento por Tipo</div>
+      <div class="guarantee-item">
+        <div class="guarantee-num" style="background:rgba(239,68,68,0.15);color:#fca5a5;border:1px solid rgba(239,68,68,0.3)">M</div>
+        <div class="guarantee-text"><strong>Mensal:</strong> Situação cadastral (CNPJ/RF) de todas as 8 empresas. Posição de protestos Serasa. Ocorrências de inadimplência na carteira AG.</div>
+      </div>
+      <div class="guarantee-item">
+        <div class="guarantee-num" style="background:rgba(245,158,11,0.15);color:#fcd34d;border:1px solid rgba(245,158,11,0.3)">T</div>
+        <div class="guarantee-text"><strong>Trimestral:</strong> Reavaliação completa Serasa + BACEN das 8 empresas. Verificação da situação de regularidade fiscal (SEFAZ-RS). Checagem de novos processos judiciais.</div>
+      </div>
+      <div class="guarantee-item">
+        <div class="guarantee-num" style="background:rgba(0,230,190,0.15);color:var(--teal);border:1px solid var(--teal-border)">S</div>
+        <div class="guarantee-text"><strong>Semestral:</strong> Revisão completa de limite. Nova análise de garantia (imóvel). Reavaliação do perfil dos administradores. Atualização do presente parecer.</div>
+      </div>
+      <div class="guarantee-item">
+        <div class="guarantee-num" style="background:rgba(59,130,246,0.15);color:#93c5fd;border:1px solid rgba(59,130,246,0.3)">E</div>
+        <div class="guarantee-text"><strong>Event-driven:</strong> Qualquer mudança cadastral (nome, endereço, sócio), novo CNPJ do grupo, ou sinalização de concentração de protestos em novo cartório.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Indicadores-Chave de Deterioração (KRI)</div>
+      <table class="data-table">
+        <thead><tr><th>KRI</th><th>Nível Atual</th><th>Limite Alerta</th><th>Limite Crítico</th></tr></thead>
+        <tbody>
+          <tr><td>Inadimplência AG</td><td class="positive">R$ 0</td><td>R$ 50k</td><td class="negative">R$ 100k</td></tr>
+          <tr><td>Restrições Serasa (grupo)</td><td style="color:#fcd34d">R$ 3,19M</td><td>R$ 4M</td><td class="negative">R$ 5M</td></tr>
+          <tr><td>BACEN Vencido (grupo)</td><td style="color:#fcd34d">R$ 81k</td><td>R$ 150k</td><td class="negative">R$ 300k</td></tr>
+          <tr><td>CNPJs INAPTOS/BAIXADOS</td><td class="negative">1 (ARCA)</td><td>1</td><td class="negative">2</td></tr>
+          <tr><td>Novos Protestos/mês</td><td style="color:#fcd34d">Alto</td><td>10/mês</td><td class="negative">20/mês</td></tr>
+          <tr><td>Concentração INOVA</td><td>32%</td><td>40%</td><td class="negative">50%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 12. PARECER FINANCEIRO -->
+<section id="parecer-financeiro" class="rf-section">
+  <div class="section-label">Seção 12 — Perspectiva II</div>
+  <h2 class="section-title">Parecer Financeiro — Rafael Bazan</h2>
+
+  <div class="analyst-note rf">
+    <strong>Parecer financeiro conclusivo (Rafael Bazan):</strong><br><br>
+    O Grupo Brindes encontra-se em situação de estresse financeiro moderado-alto, evidenciado pela aceleração de protestos, dívidas tributárias estaduais não regularizadas, e crescimento do endividamento bancário a partir do segundo semestre de 2025. A coincidência temporal entre a entrada do novo controlador (Andre Luiz Cruz, 01/03/2026) e o agravamento das métricas pode ter duas explicações não excludentes: (i) a deterioração estava em curso antes e o novo controlador assumiu uma empresa já fragilizada; (ii) a mudança de gestão gerou descontinuidade operacional que acelerou os problemas.<br><br>
+    Do ponto de vista financeiro e contábil, <strong>não há elementos que justifiquem o encerramento imediato do relacionamento</strong>, considerando: (a) zero inadimplência histórica com AG; (b) evidência de fluxo operacional real (consultas frequentes de outros factorings indicam mercado ativo); (c) proposta concreta de garantia real. Contudo, <strong>a manutenção exige as condições impostas</strong>, em especial a suspensão de ARCA ILIMITADA e a formalização da garantia.<br><br>
+    <strong>A decisão de comitê deve ser: MANTER o limite em R$1.970.000 (excluindo ARCA INAPTA R$200k), com expansão para R$2.170.000 condicionada ao registro da alienação fiduciária em cartório.</strong>
+  </div>
+</section>
+
+<!-- 13. VEREDICTO / DECISÃO DE COMITÊ -->
+<section id="veredicto">
+  <div class="section-label">Seção 13 — Decisão do Comitê</div>
+  <h2 class="section-title">Decisão do Comitê de Crédito</h2>
+
+  <div class="veredicto-grid">
+    <div class="veredicto-card">
+      <div class="veredicto-card-name">Análise de Crédito · MV</div>
+      <div class="veredicto-card-verdict" style="font-size:1.2rem">MANTER CONDICIONADO</div>
+      <div class="veredicto-card-role">Marcelo Vazquez · Crédito Sênior</div>
+      <div class="veredicto-card-sub">
+        Limites mantidos. ARCA ILIMITADA suspensa. Prazo 30 dias para formalização de alienação fiduciária. Esclarecimento sobre ARAÇA em 15 dias. Sem expansão até garantia registrada.
+      </div>
+    </div>
+    <div class="veredicto-card" style="border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.07)">
+      <div class="veredicto-card-name">Análise Financeira · RB</div>
+      <div class="veredicto-card-verdict" style="font-size:1.2rem;color:#93c5fd">MANTER CONDICIONADO</div>
+      <div class="veredicto-card-role" style="color:var(--text2)">Rafael Bazan · Financeiro / Controller</div>
+      <div class="veredicto-card-sub">
+        Estresse moderado-alto identificado. Fluxo operacional confirmado. Limite operacional R$1.970.000 (excl. ARCA). Expansão para R$2.170.000 condicionada ao registro da garantia real.
+      </div>
+    </div>
+  </div>
+
+  <div class="veredicto-unified">
+    <div style="font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.75rem">Decisão Unificada do Comitê — 05/06/2026</div>
+    <div style="font-size:2rem;font-weight:800;font-family:'Syne',sans-serif;color:#5eead4;margin-bottom:.5rem">MANTER COM CONDICIONANTES</div>
+    <div style="font-size:.9rem;color:var(--text2);margin-bottom:1.25rem">Grupo Brindes — 8 CNPJs · Cedente Ativo AG Antecipa</div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.25rem;text-align:center">
+      <div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);border-radius:10px;padding:1rem">
+        <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.3rem">Limite Imediato</div>
+        <div style="font-size:1.4rem;font-weight:700;font-family:'Syne',sans-serif;color:#fca5a5">R$ 1.970.000</div>
+        <div style="font-size:.72rem;color:var(--text2)">ARCA suspensa (R$200k)</div>
+      </div>
+      <div style="background:rgba(0,230,190,0.1);border:1px solid rgba(0,230,190,0.25);border-radius:10px;padding:1rem">
+        <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.3rem">Limite Pós-Garantia</div>
+        <div style="font-size:1.4rem;font-weight:700;font-family:'Syne',sans-serif;color:#5eead4">R$ 2.170.000</div>
+        <div style="font-size:.72rem;color:var(--text2)">Após registro AF em cartório</div>
+      </div>
+      <div style="background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);border-radius:10px;padding:1rem">
+        <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);font-family:'DM Mono',monospace;margin-bottom:.3rem">Prazo para Condições</div>
+        <div style="font-size:1.4rem;font-weight:700;font-family:'Syne',sans-serif;color:#93c5fd">30 dias</div>
+        <div style="font-size:.72rem;color:var(--text2)">Até 05/07/2026</div>
+      </div>
+    </div>
+
+    <div style="text-align:left;font-size:.83rem;color:var(--text2);line-height:1.8">
+      <strong style="color:var(--text)">Condições obrigatórias:</strong><br>
+      1. <span class="risk-high" style="margin:0 .3rem">IMEDIATO</span> Suspensão de novas operações para ARCA ILIMITADA (CNPJ 37.069.335/0001-76) — INAPTA em 05/06/2026.<br>
+      2. <span class="risk-high" style="margin:0 .3rem">D+15</span> Esclarecimento formal do grupo sobre troca de nome na ARAÇA e background do administrador Osmar Garcia Cardoso.<br>
+      3. <span class="risk-high" style="margin:0 .3rem">D+30</span> Entrega de matrícula + laudo de avaliação + certidões do imóvel para alienação fiduciária.<br>
+      4. <span class="risk-warn" style="margin:0 .3rem">D+30</span> Formalização do instrumento de alienação fiduciária e protocolo de registro no CRI.<br>
+      5. <span class="risk-warn" style="margin:0 .3rem">D+60</span> Verificação da regularização da ARCA ILIMITADA (INAPTA). Se não regularizada, reduzir limite em R$200k permanentemente.<br>
+      6. <span class="risk-info" style="margin:0 .3rem">CONTÍNUO</span> Monitoramento mensal de situação cadastral, protestos e inadimplência. Revisão completa em 90 dias (ago/2026).<br>
+      <br>
+      <strong style="color:var(--text)">Reconhecimento explícito:</strong> O Comitê reconhece e valoriza o histórico de <strong style="color:#5eead4">zero inadimplência</strong> do Grupo Brindes com a AG Antecipa até a presente data. Este histórico é fator determinante para a decisão de manutenção e não redução do limite neste momento, a despeito dos alertas externos identificados.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div style="margin-bottom:.5rem">AG Antecipa Securitizadora S/A · Revisão de Limite — Grupo Brindes</div>
+  <div style="margin-bottom:.5rem">Data-base: 05/06/2026 · Gerado em 05/06/2026 · Confidencial — uso exclusivo interno</div>
+  <div>Analistas: Marcelo Vazquez (Crédito) · Rafael Bazan (Financeiro)</div>
+  <div style="margin-top:.5rem;font-size:.65rem;color:rgba(107,114,128,0.7)">As informações contidas neste parecer são baseadas em consultas a bureaus de crédito (Serasa/VADU/CreditBox), BACEN/SCR e documentos fornecidos pelo cedente. A decisão de crédito é de responsabilidade exclusiva do Comitê da AG Antecipa.</div>
+</footer>
+
+<script>
+// Chart Restrições
+const ctx = document.getElementById('chartRestricoes');
+if(ctx){
+  new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels:['INOVA GIFTS','ARAÇA','FMVS','ARCA ILIMITADA','INVENT','NATTIVUS','NOVA PRESENTES','ZERO ONZE'],
+      datasets:[
+        {label:'Análise Anterior',data:[313771,18200,1172,24301,0,806807,0,61628],backgroundColor:'rgba(59,130,246,0.4)',borderColor:'rgba(59,130,246,0.8)',borderWidth:1},
+        {label:'Nova Análise 05/06/2026',data:[1470563,18200,0,196852,18497,1386964,172952,66523],backgroundColor:'rgba(0,230,190,0.5)',borderColor:'rgba(0,230,190,0.9)',borderWidth:1}
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:'#9ca3af',font:{size:11}}}},
+      scales:{
+        x:{ticks:{color:'#6b7280',font:{size:10}},grid:{color:'rgba(255,255,255,0.05)'}},
+        y:{ticks:{color:'#6b7280',font:{size:10},callback:v=>v>=1000000?'R$'+(v/1000000).toFixed(1)+'M':'R$'+(v/1000).toFixed(0)+'k'},grid:{color:'rgba(255,255,255,0.05)'}}
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>
