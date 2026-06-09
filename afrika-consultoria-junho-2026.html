@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Afrika Consultoria — Parecer de Comitê | Jun/2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{--navy:#0a0f1e;--teal:#00d4aa;--teal2:#00b894;--blue:#4f8ef7;--blue2:#2563eb;--red:#ef4444;--amber:#f59e0b;--green:#22c55e;--text:#e2e8f0;--muted:#94a3b8;--border:rgba(255,255,255,0.08);}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;}
+a{color:inherit;text-decoration:none;}h1,h2,h3{font-family:'Syne',sans-serif;}
+.nb{position:sticky;top:0;z-index:100;}
+.nr1{background:rgba(10,15,30,.97);border-bottom:1px solid var(--teal);display:flex;align-items:center;gap:4px;padding:0 18px;height:44px;overflow-x:auto;}
+.nr2{background:rgba(10,15,30,.95);border-bottom:1px solid var(--blue);display:flex;align-items:center;gap:4px;padding:0 18px;height:40px;overflow-x:auto;}
+.nb1{font-family:'Syne',sans-serif;font-weight:700;font-size:12px;color:var(--teal);margin-right:8px;white-space:nowrap;}
+.nb2{font-family:'Syne',sans-serif;font-weight:700;font-size:12px;color:var(--blue);margin-right:8px;white-space:nowrap;}
+.nt{padding:4px 9px;border-radius:4px;font-size:11px;font-weight:500;color:var(--muted);transition:all .2s;white-space:nowrap;}
+.nt:hover{color:var(--teal);background:rgba(0,212,170,.08);}
+.nt.rf:hover{color:var(--blue);background:rgba(79,142,247,.08);}
+.ns{width:1px;height:18px;background:var(--border);margin:0 3px;}
+.sec{max-width:1100px;margin:0 auto;padding:32px 20px;}
+.rf-sec{background:linear-gradient(135deg,rgba(13,21,41,.5),rgba(37,99,235,.05));}
+.sl{display:inline-flex;align-items:center;gap:8px;margin-bottom:14px;}
+.sn{width:26px;height:26px;border-radius:6px;background:var(--teal);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:11px;color:#000;}
+.sn.b{background:var(--blue);color:#fff;}
+.st{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;}
+.hero{background:linear-gradient(135deg,#0a0f1e,#0d1e3d 55%,#0a1628);padding:48px 20px 32px;border-bottom:1px solid var(--border);}
+.hi{max-width:1100px;margin:0 auto;}
+.hbadge{display:inline-flex;align-items:center;background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.3);border-radius:20px;padding:3px 12px;font-size:11px;color:var(--teal);margin-bottom:12px;}
+.htitle{font-size:clamp(20px,4vw,30px);font-weight:800;line-height:1.1;margin-bottom:4px;}
+.hsub{color:var(--muted);font-size:13px;margin-bottom:22px;}
+.kgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:9px;}
+.kpi{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:9px;padding:11px 13px;}
+.kpi.dk{border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.07);}
+.kpi.wk{border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.07);}
+.kpi.ok{border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.07);}
+.kl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;}
+.kv{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;}
+.kv.r{color:var(--red);}.kv.a{color:var(--amber);}.kv.g{color:var(--green);}.kv.bl{color:var(--blue);}
+.card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:15px 17px;margin-bottom:11px;}
+.card h4{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{text-align:left;padding:6px 9px;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border-bottom:1px solid var(--border);font-weight:600;}
+td{padding:6px 9px;border-bottom:1px solid rgba(255,255,255,.04);}
+tr:last-child td{border-bottom:none;}
+.mono{font-family:'DM Mono',monospace;font-size:12px;}
+.chip{display:inline-flex;align-items:center;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;}
+.cok{background:rgba(34,197,94,.15);color:#22c55e;}
+.chi{background:rgba(239,68,68,.15);color:#ef4444;}
+.cwi{background:rgba(245,158,11,.15);color:#f59e0b;}
+.cbi{background:rgba(79,142,247,.15);color:#4f8ef7;}
+.rr{display:flex;align-items:flex-start;gap:11px;padding:9px 13px;border-radius:8px;margin-bottom:5px;border:1px solid var(--border);}
+.rd{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.rt{flex:1;font-size:13px;}.rt strong{display:block;margin-bottom:1px;}.rt span{font-size:12px;color:var(--muted);}
+.rr.rh{background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.2);}.rr.rh .rd{background:var(--red);}
+.rr.rm{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.2);}.rr.rm .rd{background:var(--amber);}
+.rr.rg{background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.2);}.rr.rg .rd{background:var(--green);}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+@media(max-width:700px){.g2,.g3{grid-template-columns:1fr;}}
+.ab{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:12px 15px;display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.av{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:14px;}
+.av.mv{background:linear-gradient(135deg,#00d4aa,#00b894);color:#000;}
+.av.rb{background:linear-gradient(135deg,#4f8ef7,#2563eb);color:#fff;}
+.an{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;}.ar{font-size:12px;color:var(--muted);}
+.split{background:linear-gradient(135deg,#0d1e3d,#162040);border-top:2px solid var(--blue);border-bottom:2px solid var(--blue);padding:26px 20px;text-align:center;}
+.sp-t{font-family:'Syne',sans-serif;font-size:19px;font-weight:800;color:var(--blue);}
+.sp-s{color:var(--muted);font-size:12px;margin-top:5px;}
+.vp{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:18px;}
+@media(max-width:600px){.vp{grid-template-columns:1fr;}}
+.vc{border-radius:11px;padding:16px;text-align:center;border:1px solid;}
+.vc.tc{border-color:rgba(0,212,170,.4);background:rgba(0,212,170,.06);}
+.vc.bc{border-color:rgba(79,142,247,.4);background:rgba(79,142,247,.06);}
+.vl{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:5px;}
+.vr{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;margin-bottom:3px;}
+.vm{font-family:'Syne',sans-serif;font-size:21px;font-weight:800;margin-top:5px;}
+.vfinal{border-radius:13px;padding:24px;text-align:center;}
+.vfinal.cond{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);}
+.vff-l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;}
+.vff-t{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;margin-bottom:5px;color:var(--amber);}
+.vff-m{font-family:'Syne',sans-serif;font-size:16px;font-weight:600;margin-bottom:14px;}
+.sigs{display:flex;justify-content:center;gap:36px;margin-top:16px;}
+.sig{text-align:center;}.sg-l{width:110px;height:1px;background:var(--border);margin:0 auto 5px;}
+.sg-n{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;}.sg-r{font-size:10px;color:var(--muted);}
+.pb{background:rgba(255,255,255,.03);border-left:3px solid var(--teal);border-radius:8px;padding:13px 15px;margin-bottom:9px;font-size:13px;line-height:1.7;}
+.pb.b{border-left-color:var(--blue);}
+.cl{list-style:none;}
+.cl li{display:flex;gap:9px;align-items:flex-start;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px;}
+.cl li:last-child{border-bottom:none;}
+.cn{width:20px;height:20px;border-radius:50%;background:var(--teal);color:#000;font-weight:700;font-size:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.cn.b{background:var(--blue);color:#fff;}
+.alrt{font-size:12px;padding:9px 11px;border-radius:7px;margin-top:8px;line-height:1.6;}
+.alrt.r{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2);color:#fca5a5;}
+.alrt.a{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);color:#fde68a;}
+.alrt.g{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);color:#86efac;}
+.chart-wrap{position:relative;width:100%;height:210px;}
+footer{border-top:1px solid var(--border);padding:16px 20px;text-align:center;color:var(--muted);font-size:11px;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nb">
+  <div class="nr1">
+    <span class="nb1">CRÉDITO · Marcelo Vazquez</span><div class="ns"></div>
+    <a href="#overview" class="nt">Dashboard</a>
+    <a href="#cadastro" class="nt">Cadastro</a>
+    <a href="#biro" class="nt">Serasa / CreditBox</a>
+    <a href="#bacen" class="nt">BACEN</a>
+    <a href="#balanco" class="nt">Balanço</a>
+    <a href="#socios" class="nt">Sócios</a>
+    <a href="#riscos" class="nt">Riscos</a>
+    <a href="#parecer-mv" class="nt">Parecer MV</a>
+  </div>
+  <div class="nr2">
+    <span class="nb2">FINANCEIRO · Rafael Bazan</span><div class="ns"></div>
+    <a href="#financeiro" class="nt rf">BP / DRE</a>
+    <a href="#juridico" class="nt rf">Jurídico</a>
+    <a href="#garantias" class="nt rf">Garantias</a>
+    <a href="#parecer-rb" class="nt rf">Parecer RB</a>
+    <a href="#veredicto" class="nt rf">Veredicto</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hi">
+    <div class="hbadge">PARECER DE COMITÊ &nbsp;·&nbsp; Junho / 2026</div>
+    <h1 class="htitle">Afrika Consultoria e Tecnologia</h1>
+    <p class="hsub">CNPJ 19.925.865/0001-97 &nbsp;·&nbsp; Consultoria em Segurança da Informação / IAM &nbsp;·&nbsp; Santo Amaro, São Paulo/SP &nbsp;·&nbsp; 12 anos de operação</p>
+    <div class="kgrid">
+      <div class="kpi ok"><div class="kl">Score CreditBox</div><div class="kv g">930 / 1000</div></div>
+      <div class="kpi ok"><div class="kl">Birô / Serasa</div><div class="kv g">LIMPO</div></div>
+      <div class="kpi"><div class="kl">Fat. Anual 2025</div><div class="kv bl">R$ 8,04M</div></div>
+      <div class="kpi wk"><div class="kl">BACEN Total</div><div class="kv a">R$ 5,20M</div></div>
+      <div class="kpi dk"><div class="kl">Patrim. Líquido</div><div class="kv r">-R$ 5,70M</div></div>
+      <div class="kpi dk"><div class="kl">Passivo Tributário</div><div class="kv r">R$ 3,44M</div></div>
+      <div class="kpi wk"><div class="kl">Dívida Financeira</div><div class="kv a">R$ 5,76M</div></div>
+      <div class="kpi wk"><div class="kl">Mútuo c/ Sócios</div><div class="kv a">R$ 580k</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARCELO BLOCK -->
+<div class="sec" id="overview" style="padding-top:28px;padding-bottom:0;">
+  <div class="ab"><div class="av mv">MV</div><div><div class="an">Marcelo Vazquez</div><div class="ar">Analista de Crédito — AG Antecipa</div></div></div>
+</div>
+
+<!-- CADASTRO -->
+<div class="sec" id="cadastro" style="padding-top:10px;">
+  <div class="sl"><div class="sn">1</div><span class="st">Identificação do Cedente</span></div>
+  <div class="g2">
+    <div class="card">
+      <h4>Dados Cadastrais</h4>
+      <table>
+        <tr><td style="color:var(--muted);width:42%">Razão Social</td><td>AFRIKA CONSULTORIA E TECNOLOGIA DA INFORMACAO S.A.</td></tr>
+        <tr><td style="color:var(--muted)">CNPJ</td><td class="mono">19.925.865/0001-97</td></tr>
+        <tr><td style="color:var(--muted)">Abertura</td><td>21/03/2014 <span style="color:var(--muted)">(12 anos)</span></td></tr>
+        <tr><td style="color:var(--muted)">Natureza</td><td>S.A. Fechada (desde jan/2023)</td></tr>
+        <tr><td style="color:var(--muted)">CNAE</td><td>70.20-4-00 — Consultoria em Gestão</td></tr>
+        <tr><td style="color:var(--muted)">Endereço</td><td>Av. Adolfo Pinheiro 1.029, Cj.54-56, Santo Amaro/SP</td></tr>
+        <tr><td style="color:var(--muted)">Situação RF</td><td><span class="chip cok">ATIVA</span></td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h4>Quadro Societário Atual</h4>
+      <table>
+        <tr><th>Sócio / Função</th><th>CPF</th><th>Participação</th></tr>
+        <tr>
+          <td>Marcio Tadeu de Araujo<br><span style="font-size:11px;color:var(--muted)">CEO / Diretor Presidente</span></td>
+          <td class="mono" style="font-size:11px">259.689.848-99</td>
+          <td><span class="chip cbi">100% ord.</span></td>
+        </tr>
+        <tr>
+          <td>Adriano José do Nascimento<br><span style="font-size:11px;color:var(--muted)">Diretor Estatutário</span></td>
+          <td class="mono" style="font-size:11px">187.560.378-64</td>
+          <td>50% pref.</td>
+        </tr>
+        <tr>
+          <td>David Henrique Soares Dias<br><span style="font-size:11px;color:var(--muted)">Diretor Estatutário — desde jan/2026</span></td>
+          <td class="mono" style="font-size:11px">329.588.918-01</td>
+          <td>50% pref.</td>
+        </tr>
+      </table>
+      <div class="alrt a">⚠ Ações de Adriano e David são preferenciais sem voto. Marcio detém controle absoluto (100% das ordinárias). David ingressou há apenas 5 meses e ainda integraliza os R$150k em 36 parcelas.</div>
+    </div>
+  </div>
+</div>
+
+<!-- BIRÔ -->
+<div class="sec" id="biro" style="padding-top:6px;">
+  <div class="sl"><div class="sn">2</div><span class="st">Serasa / CreditBox / CredMap</span></div>
+  <div class="g2">
+    <div class="card">
+      <h4>Situação em Birô — Empresa (CNPJ)</h4>
+      <table>
+        <tr><td>PEFIN / REFIN</td><td><span class="chip cok">NADA CONSTA</span></td></tr>
+        <tr><td>Protestos</td><td><span class="chip cok">NADA CONSTA</span></td></tr>
+        <tr><td>Cheques Sem Fundo</td><td><span class="chip cok">NADA CONSTA</span></td></tr>
+        <tr><td>Dívida Ativa Receita Federal</td><td><span class="chip cok">NEGATIVA</span></td></tr>
+        <tr><td>TST / Trabalhista Federal</td><td><span class="chip cok">NEGATIVA até dez/2026</span></td></tr>
+        <tr><td>Processo Trabalhista</td><td><span class="chip cwi">1 processo — R$53.010 (polo passivo)</span></td></tr>
+        <tr><td>Score CreditBox</td><td style="font-family:'Syne',sans-serif;font-weight:800;color:var(--green);font-size:15px;">930 / 1000</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h4>CredMap / Nuclea — Visão Emitente e Pagadora</h4>
+      <table>
+        <tr><th>Indicador</th><th>Dado</th><th>Avaliação</th></tr>
+        <tr><td>Carteira como emitente</td><td>R$400k–500k</td><td><span class="chip cok">Normal</span></td></tr>
+        <tr><td>ILM — como emitente</td><td style="color:var(--green);font-weight:700;">97–100%</td><td><span class="chip cok">Excelente</span></td></tr>
+        <tr><td>Inadimplência emitida</td><td>Zero</td><td><span class="chip cok">Limpo</span></td></tr>
+        <tr><td>ILM — como pagadora</td><td style="color:var(--amber);font-weight:700;">77–79%</td><td><span class="chip cwi">Moderado</span></td></tr>
+      </table>
+      <div class="alrt a">⚠ ILM 77–79% como pagadora indica que a empresa paga seus fornecedores com algum atraso habitual. Sinal de pressão de caixa operacional.</div>
+      <div class="alrt g" style="margin-top:6px;">✔ Como emitente (títulos que nos cede) — ILM 97–100% e inadimplência zero. Sacados honram os boletos da Afrika.</div>
+    </div>
+  </div>
+</div>
+
+<!-- BACEN -->
+<div class="sec" id="bacen" style="padding-top:6px;">
+  <div class="sl"><div class="sn">3</div><span class="st">BACEN / SCR — Empresa (Abr/2026)</span></div>
+  <div class="g3" style="margin-bottom:13px;">
+    <div class="card" style="text-align:center;margin-bottom:0;"><div class="kl" style="margin-bottom:6px;">CARTEIRA TOTAL</div><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--amber);">R$ 5.201.274</div></div>
+    <div class="card" style="text-align:center;margin-bottom:0;"><div class="kl" style="margin-bottom:6px;">VENCIDO 15–30 DIAS</div><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--amber);">R$ 26.734</div></div>
+    <div class="card" style="text-align:center;margin-bottom:0;"><div class="kl" style="margin-bottom:6px;">BANCOS / OPERAÇÕES</div><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--blue);">10 / 52</div></div>
+  </div>
+  <div class="card">
+    <h4>Carteira por Modalidade</h4>
+    <table>
+      <tr><th>Modalidade</th><th style="text-align:right">Saldo</th><th style="text-align:right">%</th><th>Obs.</th></tr>
+      <tr><td>Capital de Giro LP (&gt;365 dias)</td><td class="mono" style="text-align:right">R$ 4.443.197</td><td class="mono" style="text-align:right;color:var(--amber)">85,4%</td><td>R$ 26.734 vencido 15–30d</td></tr>
+      <tr><td>Desconto de Duplicatas</td><td class="mono" style="text-align:right">R$ 334.271</td><td class="mono" style="text-align:right">6,4%</td><td><span class="chip chi" style="font-size:10px;">JÁ DESCONTADO</span></td></tr>
+      <tr><td>Capital de Giro CP (&lt;365 dias)</td><td class="mono" style="text-align:right">R$ 281.187</td><td class="mono" style="text-align:right">5,4%</td><td></td></tr>
+      <tr><td>Conta Garantida</td><td class="mono" style="text-align:right">R$ 133.267</td><td class="mono" style="text-align:right">2,6%</td><td></td></tr>
+      <tr><td>Cartão de Crédito</td><td class="mono" style="text-align:right">R$ 9.353</td><td class="mono" style="text-align:right">0,2%</td><td></td></tr>
+    </table>
+    <div class="alrt r">🔴 R$334.271 já cedido/descontado em bancos como desconto de duplicatas. Verificação CRDC obrigatória antes de qualquer cessão — risco de dupla cessão real.</div>
+  </div>
+</div>
+
+<!-- BALANÇO -->
+<div class="sec" id="balanco" style="padding-top:6px;">
+  <div class="sl"><div class="sn">4</div><span class="st">Balanço — Evolução 3 Anos</span></div>
+  <div class="card">
+    <h4>Indicadores Patrimoniais e de Resultado</h4>
+    <table>
+      <tr><th>Indicador</th><th style="text-align:right">2023</th><th style="text-align:right">2024</th><th style="text-align:right">2025</th><th>Tendência</th></tr>
+      <tr><td>Receita Bruta</td><td class="mono" style="text-align:right">R$ 7.707.219</td><td class="mono" style="text-align:right">R$ 8.804.505</td><td class="mono" style="text-align:right">R$ 8.040.709</td><td><span class="chip cbi">Estável</span></td></tr>
+      <tr><td>Despesas Financeiras (juros)</td><td class="mono" style="text-align:right;color:var(--red)">R$ 925.254</td><td class="mono" style="text-align:right;color:var(--red)">R$ 1.894.136</td><td class="mono" style="text-align:right;color:var(--red)">R$ 1.902.323</td><td><span class="chip chi">Alta / 23,6%</span></td></tr>
+      <tr><td>Resultado Líquido</td><td class="mono" style="text-align:right;color:var(--red)">-R$ 1.305.225</td><td class="mono" style="text-align:right;color:var(--red)">-R$ 177.722</td><td class="mono" style="text-align:right;color:var(--green)">+R$ 748.838</td><td><span class="chip cok">Melhora</span></td></tr>
+      <tr><td>Patrimônio Líquido</td><td class="mono" style="text-align:right;color:var(--red)">-R$ 4.551.623</td><td class="mono" style="text-align:right;color:var(--red)">-R$ 4.617.873</td><td class="mono" style="text-align:right;color:var(--red)">-R$ 5.703.768</td><td><span class="chip chi">Piora</span></td></tr>
+      <tr><td>Dívida Financeira</td><td class="mono" style="text-align:right">R$ 5.912.353</td><td class="mono" style="text-align:right">R$ 6.195.146</td><td class="mono" style="text-align:right">R$ 5.760.681</td><td><span class="chip cwi">Estável alta</span></td></tr>
+      <tr><td>Passivo Tributário (REFIS/parcel.)</td><td class="mono" style="text-align:right">R$ 1.722.215</td><td class="mono" style="text-align:right">R$ 3.015.154</td><td class="mono" style="text-align:right">R$ 3.437.309</td><td><span class="chip chi">Crescendo</span></td></tr>
+      <tr><td>Caixa Disponível</td><td class="mono" style="text-align:right">R$ 579.008</td><td class="mono" style="text-align:right;color:var(--red)">R$ 7.235</td><td class="mono" style="text-align:right;color:var(--amber)">R$ 72.663</td><td><span class="chip chi">Crítico</span></td></tr>
+      <tr><td>Aplic. Financeiras LP (CEF + Itaú)</td><td class="mono" style="text-align:right">R$ 1.300.021</td><td class="mono" style="text-align:right">R$ 2.196.850</td><td class="mono" style="text-align:right">R$ 2.398.552</td><td><span class="chip cwi">Provavelmente caucionadas</span></td></tr>
+      <tr><td>Mútuo ativo c/ Sócios</td><td class="mono" style="text-align:right">—</td><td class="mono" style="text-align:right;color:var(--amber)">R$ 763.960</td><td class="mono" style="text-align:right;color:var(--amber)">R$ 580.460</td><td><span class="chip cwi">Sócios devem à empresa</span></td></tr>
+    </table>
+    <div class="alrt r" style="margin-top:12px;">🔴 <strong>Paradoxo do PL:</strong> a empresa teve lucro de R$748k em 2025, mas o PL piorou de -R$4,6M para -R$5,7M. A explicação está nos dividendos de R$560k pagos na saída de Matheus Wuerges. Mesmo com resultado positivo, o grupo distribuiu dinheiro que não tinha, ampliando o patrimônio negativo.</div>
+    <div class="alrt a">⚠ <strong>Para onde vai o dinheiro:</strong> R$1,90M/ano em despesas financeiras (23,6% da receita bruta), mais R$3,44M em passivo tributário parcelado (REFIS + ISS + PGFN). A empresa está presa em uma armadilha de dívida estrutural onde quase ¼ da receita serve apenas para pagar juros.</div>
+    <div class="alrt a" style="margin-top:6px;">⚠ <strong>Aplicações LP suspeitas:</strong> R$2,4M em aplicações na CEF e Itaú enquanto deve R$5,76M nos mesmos bancos. É provável que esses ativos estejam caucionados como garantia dessas operações — sem liquidez real disponível para a empresa.</div>
+  </div>
+
+  <!-- FATURAMENTO CHART -->
+  <div class="card" style="margin-top:6px;">
+    <h4>Faturamento Mensal — Mai/2024 a Abr/2025 (Declaração Contador)</h4>
+    <div class="chart-wrap"><canvas id="fatChart"></canvas></div>
+    <div style="display:flex;gap:20px;margin-top:12px;flex-wrap:wrap;font-size:12px;">
+      <div>Média 12m: <strong style="color:var(--teal)">R$ 740.886</strong></div>
+      <div>Pico: <strong style="color:var(--green)">R$ 1.571.897 (Jan/25)</strong></div>
+      <div>Vale: <strong style="color:var(--red)">R$ 100.682 (Abr/25)</strong></div>
+      <div>Sazonalidade: <strong style="color:var(--amber)">ALTA — risco de descasamento</strong></div>
+    </div>
+    <div class="alrt a" style="margin-top:8px;">⚠ Sazonalidade brutal: Jan/25 = R$1,57M vs Abr/25 = R$100k (queda de 94% em 3 meses). Contratos com receita recorrente no 2º semestre. Antecipações no 1º semestre devem considerar o descasamento.</div>
+  </div>
+</div>
+
+<!-- SÓCIOS -->
+<div class="sec" id="socios" style="padding-top:6px;">
+  <div class="sl"><div class="sn">5</div><span class="st">Sócios — BACEN e Patrimônio</span></div>
+  <div class="g2">
+    <div class="card">
+      <h4>Marcio Tadeu de Araujo — CPF 259.689.848-99 (CEO)</h4>
+      <table>
+        <tr><td style="color:var(--muted)">BACEN — Carteira</td><td class="mono">R$ 1.664.507</td></tr>
+        <tr><td style="color:var(--muted)">BACEN — Vencido</td><td class="mono"><span class="chip cok">R$ 0,00</span></td></tr>
+        <tr><td style="color:var(--muted)">Nº Bancos / Operações</td><td>7 / 37</td></tr>
+        <tr><td style="color:var(--muted)">Financ. Imobiliário SFH</td><td class="mono">R$ 1.181.048</td></tr>
+        <tr><td style="color:var(--muted)">Crédito Pessoal</td><td class="mono">R$ 355.723</td></tr>
+      </table>
+      <div style="margin-top:12px;font-size:12px;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;">BENS IRPF 2024 (total R$1.019.230)</div>
+      <table>
+        <tr><td>Apt. Moema (Chanes Street)</td><td class="mono" style="text-align:right">R$ 113.397</td></tr>
+        <tr><td>Apt. Vila Olímpia (Vibe)</td><td class="mono" style="text-align:right">R$ 70.585</td></tr>
+        <tr><td>Apt. Anhembi (Living Infinity)</td><td class="mono" style="text-align:right">R$ 782.474</td></tr>
+        <tr><td>Aplicações financeiras</td><td class="mono" style="text-align:right">R$ 9.278</td></tr>
+      </table>
+      <div class="alrt a">⚠ Imóveis declarados a valores históricos (IRPF), não de mercado. Anhembi financiado pelo Itaú (R$782k declarado = saldo devedor). Marcio tem dívida de R$300k com a própria Afrika S.A.</div>
+    </div>
+    <div class="card">
+      <h4>Adriano José do Nascimento — CPF 187.560.378-64 (Diretor)</h4>
+      <table>
+        <tr><td style="color:var(--muted)">BACEN — Carteira</td><td class="mono">R$ 207.538</td></tr>
+        <tr><td style="color:var(--muted)">BACEN — Vencido</td><td class="mono"><span class="chip cok">R$ 0,00</span></td></tr>
+        <tr><td style="color:var(--muted)">Nº Bancos / Operações</td><td>3 / 7</td></tr>
+        <tr><td style="color:var(--muted)">Financ. Imobiliário SFH</td><td class="mono">R$ 280.625</td></tr>
+      </table>
+      <div style="margin-top:12px;font-size:12px;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;">BENS IRPF 2024 (total R$2.502.432)</div>
+      <table>
+        <tr><td>Imóvel Guarulhos 250m²</td><td class="mono" style="text-align:right">R$ 635.000</td></tr>
+        <tr><td>Imóvel Guarulhos 95m² (c/ cônjuge)</td><td class="mono" style="text-align:right">R$ 675.000</td></tr>
+        <tr><td>Imóvel Itupeva 330m²</td><td class="mono" style="text-align:right">R$ 375.000</td></tr>
+        <tr><td>Moto CCROSS XRE 2024/2025</td><td class="mono" style="text-align:right">R$ 175.000</td></tr>
+        <tr><td>Fundos + CDBs + Bolsa</td><td class="mono" style="text-align:right">R$ 492.432</td></tr>
+      </table>
+      <div class="alrt g">✔ Adriano tem patrimônio real de ~R$2,5M com boa diversificação (3 imóveis + investimentos). BACEN limpo. É o sócio com maior peso patrimonial para garantia.</div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:2px;">
+    <h4>David Henrique Soares Dias — CPF 329.588.918-01 (Diretor — desde Jan/2026)</h4>
+    <div style="display:flex;gap:24px;flex-wrap:wrap;font-size:13px;padding:4px 0;">
+      <div>BACEN: <strong style="color:var(--amber)">R$ 104.744</strong></div>
+      <div>Vencido: <span class="chip cok">R$ 0,00</span></div>
+      <div>Prejuízo: <span class="chip chi">R$ 2.747 (cheque especial baixado)</span></div>
+      <div>Bancos / Op: 6 / 19</div>
+      <div>Patrimônio IRPF: <strong>não disponível</strong></div>
+    </div>
+    <div class="alrt a">⚠ David está há apenas 5 meses na empresa, ainda integralizando as ações (R$150k em 36x). O pequeno prejuízo em cheque especial nos últimos 12 meses é sinal de gestão pessoal de fluxo de caixa inadequada. Peso baixo para garantia.</div>
+  </div>
+</div>
+
+<!-- RISCOS -->
+<div class="sec" id="riscos" style="padding-top:6px;">
+  <div class="sl"><div class="sn">6</div><span class="st">Matriz de Riscos</span></div>
+  <div class="rr rh"><div class="rd"></div><div class="rt"><strong>Insolvência Patrimonial Estrutural</strong><span>PL -R$5,70M em dez/2025, piora contínua em todos os exercícios apesar do lucro 2025. Empresa tecnicamente insolvente pelo balanço.</span></div><span class="chip chi">ALTO</span></div>
+  <div class="rr rh"><div class="rd"></div><div class="rt"><strong>Passivo Tributário R$3,44M em Parcelamento</strong><span>REFIS RFB R$2,90M + parcelamento ISS R$264k + PGFN R$40k. Obrigação corrente que pressiona o caixa mensalmente. Renegociação constante.</span></div><span class="chip chi">ALTO</span></div>
+  <div class="rr rh"><div class="rd"></div><div class="rt"><strong>Risco de Dupla Cessão</strong><span>R$334.271 já em desconto de duplicatas em bancos (BACEN). Verificação CRDC obrigatória em cada título antes de qualquer operação de antecipação.</span></div><span class="chip chi">ALTO</span></div>
+  <div class="rr rm"><div class="rd"></div><div class="rt"><strong>Armadilha de Dívida Financeira</strong><span>R$1,90M/ano em juros = 23,6% da receita bruta. Dívida bancária R$5,76M em 10 instituições / 52 operações. Dependência total do sistema bancário.</span></div><span class="chip cwi">MÉDIO</span></div>
+  <div class="rr rm"><div class="rd"></div><div class="rt"><strong>Mútuo com Sócios R$580k</strong><span>Empresa emprestou R$337k para Marcio e R$243k para Adriano. Confirmado no IRPF de ambos. Governança questionável — saída de caixa da empresa para benefício dos controladores.</span></div><span class="chip cwi">MÉDIO</span></div>
+  <div class="rr rm"><div class="rd"></div><div class="rt"><strong>Sazonalidade e Concentração de Receita</strong><span>Faturamento cai 94% de jan/25 (R$1,57M) para abr/25 (R$100k). Descasamento severo no 1º semestre. Cliente depende do 2º semestre para equilibrar o fluxo.</span></div><span class="chip cwi">MÉDIO</span></div>
+  <div class="rr rg"><div class="rd"></div><div class="rt"><strong>Score 930 e Birô Limpo</strong><span>Nenhum PEFIN/REFIN/Protesto/Cheque. Certidão trabalhista negativa. Operação comercial real com clientes enterprise (BTG, Magazine Luiza, Leroy Merlin).</span></div><span class="chip cok">MITIGANTE</span></div>
+</div>
+
+<!-- PARECER MV -->
+<div class="sec" id="parecer-mv" style="padding-top:6px;">
+  <div class="sl"><div class="sn">7</div><span class="st">Parecer de Crédito — Marcelo Vazquez</span></div>
+  <div class="pb">
+    A Afrika Consultoria apresenta um paradoxo típico de empresas de serviços tech em fase de consolidação: operação comercial robusta com faturamento acima de R$8M/ano e clientes de primeiro nível, convivendo com uma estrutura patrimonial severamente negativa (-R$5,7M de PL) resultado de anos de prejuízo acumulado, REFIS pesado e endividamento bancário histórico. O score 930 e a ausência de qualquer restrição em birô refletem que a empresa honra seus compromissos formais, mas o balanço revela que o fluxo livre de caixa é inteiramente consumido pelo serviço da dívida.
+  </div>
+  <div class="pb">
+    Para uma operação de antecipação de recebíveis, o risco central não é a inadimplência dos sacados — BTG, Magazine Luiza, Leroy Merlin e GPA têm risco próximo de zero. O risco real é de dupla cessão: a empresa já possui R$334k em desconto de duplicatas em bancos (BACEN) e tem histórico de operar crédito em 10 instituições simultaneamente. Cada operação precisa de verificação CRDC obrigatória antes de qualquer cessão.
+  </div>
+  <div class="pb">
+    A política de limite AG Antecipa (faturamento médio 6m de R$808k → máximo 40% = R$323k por mês) é o balizador técnico, mas considerando a qualidade dos sacados e o contexto de 3 contratos enterprise em andamento, recomendo aprovação com limite conservador e condições rígidas de monitoramento.
+  </div>
+  <div style="margin-top:14px;margin-bottom:8px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--muted);">CONDIÇÕES DE APROVAÇÃO — Marcelo Vazquez</div>
+  <ul class="cl">
+    <li><div class="cn">1</div><div>Verificação CRDC obrigatória em cada título antes da cessão, sem exceção. Qualquer título com histórico no sistema financeiro deve ser descartado.</div></li>
+    <li><div class="cn">2</div><div>Operações limitadas a sacados enterprise com rating comprovado: BTG Pactual, Magazine Luiza, Leroy Merlin, GPA, Banco Neon ou similar. Vedado sacados sem histórico verificável.</div></li>
+    <li><div class="cn">3</div><div>Aval pessoal solidário de Marcio Tadeu de Araujo e Adriano José do Nascimento, com apresentação dos contratos dos 3 negócios em andamento como suporte documental.</div></li>
+    <li><div class="cn">4</div><div>Prazo máximo por nota: 90 dias. Acima disso, revisão caso a caso.</div></li>
+    <li><div class="cn">5</div><div>Revisão de limite em 90 dias mediante entrega de balancete mar/2026 e confirmação da entrada dos novos contratos.</div></li>
+  </ul>
+  <div style="margin-top:16px;background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.3);border-radius:10px;padding:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+    <div>
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">Veredicto Crédito — MV</div>
+      <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:var(--amber);">APROVAR COM CONDIÇÕES</div>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:11px;color:var(--muted);margin-bottom:4px;">Limite Recomendado</div>
+      <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--teal);">R$ 700.000</div>
+    </div>
+  </div>
+</div>
+
+<!-- SPLIT -->
+<div class="split">
+  <div class="sp-t">PERSPECTIVA FINANCEIRA &amp; CONTÁBIL</div>
+  <div class="sp-s">Rafael Bazan — Análise Financeira / Contábil / Jurídica Consultiva</div>
+</div>
+
+<!-- RAFAEL BLOCK -->
+<div class="sec rf-sec" id="financeiro" style="padding-top:28px;">
+  <div class="ab"><div class="av rb">RB</div><div><div class="an">Rafael Bazan</div><div class="ar">Analista Financeiro / Contábil — AG Antecipa</div></div></div>
+  <div class="sl"><div class="sn b">BP</div><span class="st">Análise Financeira — BP / DRE</span></div>
+
+  <div class="g2">
+    <div class="card">
+      <h4>Estrutura Patrimonial 2025 — Balanço</h4>
+      <table>
+        <tr><th>Ativo</th><th style="text-align:right">Valor</th></tr>
+        <tr><td>Ativo Circulante Total</td><td class="mono" style="text-align:right">R$ 1.349.298</td></tr>
+        <tr><td style="padding-left:18px;color:var(--muted)">Caixa e Bancos</td><td class="mono" style="text-align:right;color:var(--amber)">R$ 72.663</td></tr>
+        <tr><td style="padding-left:18px;color:var(--muted)">Clientes (líquido de descontos)</td><td class="mono" style="text-align:right">R$ 486.052</td></tr>
+        <tr><td style="padding-left:18px;color:var(--muted)">Adiantamento Afrika Negócios</td><td class="mono" style="text-align:right;color:var(--amber)">R$ 243.600</td></tr>
+        <tr><td>Aplic. Financeiras LP (CEF+Itaú)</td><td class="mono" style="text-align:right;color:var(--amber)">R$ 2.398.552</td></tr>
+        <tr><td>Mútuo Ativo (sócios)</td><td class="mono" style="text-align:right;color:var(--amber)">R$ 580.460</td></tr>
+        <tr><td><strong>ATIVO TOTAL</strong></td><td class="mono" style="text-align:right"><strong>R$ 4.887.738</strong></td></tr>
+        <tr><th>Passivo</th><th style="text-align:right">Valor</th></tr>
+        <tr><td style="color:var(--red)">Empréstimos e Financiamentos</td><td class="mono" style="text-align:right;color:var(--red)">R$ 5.760.681</td></tr>
+        <tr><td style="color:var(--red)">Passivo Tributário (REFIS/ISS/PGFN)</td><td class="mono" style="text-align:right;color:var(--red)">R$ 3.437.309</td></tr>
+        <tr><td>Obrigações Trabalhistas</td><td class="mono" style="text-align:right">R$ 111.814</td></tr>
+        <tr><td>Outras Obrigações</td><td class="mono" style="text-align:right;color:var(--amber)">R$ 495.862</td></tr>
+        <tr><td><strong>PASSIVO TOTAL</strong></td><td class="mono" style="text-align:right"><strong>R$ 9.805.666</strong></td></tr>
+        <tr><td style="color:var(--red)"><strong>PATRIMÔNIO LÍQUIDO</strong></td><td class="mono" style="text-align:right;color:var(--red)"><strong>-R$ 5.703.768</strong></td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h4>DRE 2025 — Para Onde Vai o Dinheiro</h4>
+      <table>
+        <tr><td>Receita Bruta</td><td class="mono" style="text-align:right;color:var(--green)">R$ 8.040.709</td></tr>
+        <tr><td style="padding-left:14px;color:var(--muted)">(-) Comissões de Vendas</td><td class="mono" style="text-align:right;color:var(--red)">-R$ 385.800</td></tr>
+        <tr><td style="padding-left:14px;color:var(--muted)">(-) Despesas Financeiras (juros)</td><td class="mono" style="text-align:right;color:var(--red)">-R$ 1.902.323</td></tr>
+        <tr><td style="padding-left:14px;color:var(--muted)">(-) Provisão IR + CSLL</td><td class="mono" style="text-align:right;color:var(--red)">-R$ 939.562</td></tr>
+        <tr><td style="padding-left:14px;color:var(--muted)">(-) Demais despesas</td><td class="mono" style="text-align:right;color:var(--muted)">~R$ 4.064.186</td></tr>
+        <tr><td style="font-weight:700;color:var(--green)"><strong>Resultado Líquido</strong></td><td class="mono" style="text-align:right;color:var(--green);font-weight:700">+R$ 748.838</td></tr>
+        <tr><td style="color:var(--red)">(-) Dividendos pagos (saída Matheus)</td><td class="mono" style="text-align:right;color:var(--red)">-R$ 560.000</td></tr>
+        <tr><td style="font-weight:700;color:var(--amber)">Efeito líquido no PL</td><td class="mono" style="text-align:right;color:var(--red);font-weight:700">-R$ 1.085.895</td></tr>
+      </table>
+      <div class="alrt r" style="margin-top:10px;">🔴 <strong>Inconsistência crítica:</strong> lucro de R$748k em 2025, mas PL piorou R$1,09M. A empresa distribuiu dividendos de R$560k enquanto tinha PL negativo de -R$4,6M. Isso é tecnicamente irregular (S.A. não pode distribuir dividendos com PL negativo) e revela que o interesse dos sócios prevaleceu sobre o equilíbrio financeiro da empresa.</div>
+      <div style="margin-top:10px;display:flex;gap:16px;flex-wrap:wrap;font-size:12px;">
+        <div>Liquidez Corrente: <strong style="color:var(--red)">0,14</strong> (crítico)</div>
+        <div>Margem Líquida 2025: <strong style="color:var(--green)">9,3%</strong></div>
+        <div>Juros / Receita: <strong style="color:var(--red)">23,6%</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FATURAMENTO DEC 12M -->
+  <div class="card" style="margin-top:4px;">
+    <h4>Declaração de Faturamento — Mai/2024 a Abr/2025 (Contador CRC Assinado)</h4>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:6px;margin-bottom:10px;">
+      <div style="text-align:center;padding:7px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:7px;font-size:12px;"><div style="color:var(--muted);margin-bottom:2px;">Mai/24</div><div style="font-family:'DM Mono',monospace;font-weight:600;">R$777k</div></div>
+      <div style="text-align:center;padding:7px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:7px;font-size:12px;"><div style="color:var(--muted);margin-bottom:2px;">Jun/24</div><div style="font-family:'DM Mono',monospace;font-weight:600;">R$578k</div></div>
+      <div style="text-align:center;padding:7px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:7px;font-size:12px;"><div style="color:var(--muted);margin-bottom:2px;">Jul/24</div><div style="font-family:'DM Mono',monospace;font-weight:600;">R$811k</div></div>
+      <div style="text-align:center;padding:7px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:7px;font-size:12px;"><div style="color:var(--muted);margin-bottom:2px;">Ago/24</div><div style="font-family:'DM Mono',monospace;font-weight:600;">R$658k</div></div>
+      <div style="text-align:center;padding:7px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:7px;font-size:12px;"><div style="color:var(--muted);margin-bottom:2px;">Set/24</div><div style="font-family:'DM Mono',monospace;font-weight:600;">R$617k</div></div>
+      <div style="text-align:center;padding:7px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:7px;font-size:12px;"><div style="color:var(--muted);margin-bottom:2px;">Out/24</div><div style="font-family:'DM Mono',monospace;font-weight:600;">R$594k</div></div>
+      <div style="text-align:center;padding:7px;background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);border-radius:7px;font-size:12px;"><div style="color:var(--muted);margin-bottom:2px;">Nov/24</div><div style="font-family:'DM Mono',monospace;font-weight:600;color:var(--green);">R$1,24M</div></div>
+      <div style="text-align:center;padding:7px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:7px;font-size:12px;"><div style="color:var(--muted);margin-bottom:2px;">Dez/24</div><div style="font-family:'DM Mono',monospace;font-weight:600;">R$367k</div></div>
+      <div style="text-align:center;padding:7px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.3);border-radius:7px;font-size:12px;"><div style="color:var(--muted);margin-bottom:2px;">Jan/25</div><div style="font-family:'DM Mono',monospace;font-weight:600;color:var(--green);">R$1,57M</div></div>
+      <div style="text-align:center;padding:7px;background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);border-radius:7px;font-size:12px;"><div style="color:var(--muted);margin-bottom:2px;">Fev/25</div><div style="font-family:'DM Mono',monospace;font-weight:600;color:var(--green);">R$1,29M</div></div>
+      <div style="text-align:center;padding:7px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:7px;font-size:12px;"><div style="color:var(--muted);margin-bottom:2px;">Mar/25</div><div style="font-family:'DM Mono',monospace;font-weight:600;color:var(--amber);">R$280k</div></div>
+      <div style="text-align:center;padding:7px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:7px;font-size:12px;"><div style="color:var(--muted);margin-bottom:2px;">Abr/25</div><div style="font-family:'DM Mono',monospace;font-weight:600;color:var(--red);">R$100k</div></div>
+    </div>
+    <div style="display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--muted);">
+      <div>Total 12m: <strong style="color:var(--text)">R$ 8.890.634</strong></div>
+      <div>Média 12m: <strong style="color:var(--teal)">R$ 740.886/mês</strong></div>
+      <div>Média 6m (Nov/24–Abr/25): <strong style="color:var(--amber)">R$ 808.142/mês</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- JURÍDICO -->
+<div class="sec rf-sec" id="juridico" style="padding-top:6px;">
+  <div class="sl"><div class="sn b">RF-2</div><span class="st">Análise Jurídica Consultiva</span></div>
+  <div class="g2">
+    <div class="card">
+      <h4>Passivos Jurídicos — Empresa</h4>
+      <table>
+        <tr><th>Tipo</th><th>Detalhe</th><th>Risco</th></tr>
+        <tr><td>Trabalhista</td><td>1 processo | R$53.010 | Polo passivo | Mai/2023</td><td><span class="chip cwi">Médio</span></td></tr>
+        <tr><td>REFIS RFB</td><td>R$2.899.967 parcelado | PGFN R$39.751</td><td><span class="chip chi">Alto</span></td></tr>
+        <tr><td>ISS Parcelamento</td><td>R$264.530 (município SP)</td><td><span class="chip cwi">Médio</span></td></tr>
+        <tr><td>Matheus Wuerges</td><td>R$56.000 parcelas saída (ex-sócio)</td><td><span class="chip cwi">Médio</span></td></tr>
+        <tr><td>Cível / Criminal</td><td><span class="chip cok">Nada Consta</span></td><td><span class="chip cok">Baixo</span></td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h4>Sócios — Passivos Jurídicos Individuais</h4>
+      <table>
+        <tr><th>Sócio</th><th>Processos</th><th>Status</th></tr>
+        <tr><td>Marcio Araujo</td><td>1 cível (ativo)</td><td><span class="chip cok">Arquivado definitivo</span></td></tr>
+        <tr><td>Adriano Nascimento</td><td>3 cíveis (1994–2010)</td><td><span class="chip cok">Todos arquivados</span></td></tr>
+        <tr><td>David Dias</td><td>Nada consta</td><td><span class="chip cok">Limpo</span></td></tr>
+        <tr><td>Leticia (ex-sócia 2021)</td><td>1 protesto R$167 | 1 proc. penal 2024</td><td><span class="chip cwi">Sem reflexo</span></td></tr>
+        <tr><td>Matheus (ex-sócio 2025)</td><td>2 cíveis arquivados</td><td><span class="chip cok">Limpo</span></td></tr>
+      </table>
+      <div class="alrt a">⚠ A ex-sócia Leticia tem processo penal federal iniciado em 2024 (parte ativa). Ela saiu da empresa em 2021, portanto não há reflexo direto na operação.</div>
+    </div>
+  </div>
+</div>
+
+<!-- GARANTIAS -->
+<div class="sec rf-sec" id="garantias" style="padding-top:6px;">
+  <div class="sl"><div class="sn b">RF-4</div><span class="st">Estrutura de Garantias Recomendada</span></div>
+  <div class="g2">
+    <div class="card">
+      <h4>Garantias Obrigatórias</h4>
+      <ul class="cl">
+        <li><div class="cn b">1</div><div><strong>Cessão fiduciária de recebíveis dos 3 contratos enterprise</strong> — contratos com BTG, Magazine Luiza, Leroy Merlin, GPA ou Neon. Apresentação dos instrumentos com prazo e valores antes da abertura da linha.</div></li>
+        <li><div class="cn b">2</div><div><strong>Aval pessoal solidário de Marcio Tadeu de Araujo</strong> — possui 3 imóveis em SP (Moema, Vila Olímpia, Anhembi). Atenção: imóvel Anhembi em fase de financiamento Itaú.</div></li>
+        <li><div class="cn b">3</div><div><strong>Aval pessoal solidário de Adriano José do Nascimento</strong> — patrimônio R$2,5M (3 imóveis + investimentos). É o avalista mais robusto do grupo.</div></li>
+        <li><div class="cn b">4</div><div><strong>Verificação CRDC por título</strong> — etapa não negociável antes de cada cessão, dado o volume de desconto já realizado em bancos (R$334k).</div></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Garantias Complementares Recomendadas</h4>
+      <ul class="cl">
+        <li><div class="cn b">5</div><div><strong>Trava bancária na conta principal da empresa</strong> — mitigação de risco em caso de deterioração do caixa operacional.</div></li>
+        <li><div class="cn b">6</div><div><strong>Apresentação periódica dos balancetes</strong> — trimestral a partir de set/2026 para monitorar a evolução do PL e do passivo tributário.</div></li>
+      </ul>
+      <div class="alrt a" style="margin-top:12px;">⚠ <strong>Sem imóvel em alienação fiduciária no momento:</strong> nenhum imóvel foi formalmente oferecido para registro. O patrimônio dos sócios existe (IRPF), mas precisa de declaração formal de bens e ausência de ônus antes de ser aceito como garantia.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PARECER RB -->
+<div class="sec rf-sec" id="parecer-rb" style="padding-top:6px;">
+  <div class="sl"><div class="sn b">RF-6</div><span class="st">Parecer Financeiro — Rafael Bazan</span></div>
+  <div class="pb b">
+    A Afrika opera em um modelo de negócios tecnicamente viável, com receita recorrente de contratos enterprise e mix saudável entre serviços diretos (45%) e comissionamento SaaS (55%). O problema não está na operação comercial, que é real e sustentável. Está na estrutura financeira histórica: prejuízos acumulados de R$5,97M, REFIS de R$2,9M que consome caixa mensalmente, e despesas financeiras de R$1,9M/ano que absorvem quase um quarto de toda a receita.
+  </div>
+  <div class="pb b">
+    O balancete 2025 traz um sinal positivo inédito: resultado líquido de R$748k. Mas a decisão de distribuir R$560k em dividendos na saída de Matheus, com PL já negativo em -R$4,6M, é um sinal de alerta de governança relevante para o comitê. Uma S.A. fechada não pode legalmente distribuir dividendos com PL negativo sem aprovação específica e justificativa de reservas. O fato de ter ocorrido sugere que as decisões financeiras da empresa priorizam os interesses imediatos dos sócios sobre a saúde do balanço.
+  </div>
+  <div class="pb b">
+    Para o FIDC, o risco financeiro estrutural é mitigado pela natureza da operação: antecipamos títulos de sacados de altíssima qualidade, e o risco de pagamento recai sobre eles, não sobre a Afrika. O risco real permanece na autenticidade e exclusividade dos títulos cedidos. Com verificação CRDC obrigatória e cessão fiduciária dos contratos como garantia, a operação é estruturável dentro de limites conservadores.
+  </div>
+  <div style="margin-top:14px;background:rgba(79,142,247,.08);border:1px solid rgba(79,142,247,.3);border-radius:10px;padding:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+    <div>
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">Veredicto Financeiro — RB</div>
+      <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:var(--amber);">APROVAR COM RESSALVAS</div>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:11px;color:var(--muted);margin-bottom:4px;">Limite Recomendado</div>
+      <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--blue);">R$ 500.000</div>
+    </div>
+  </div>
+</div>
+
+<!-- VEREDICTO -->
+<div class="sec" id="veredicto" style="padding-top:12px;">
+  <div class="vp">
+    <div class="vc tc">
+      <div class="vl">Crédito — Marcelo Vazquez</div>
+      <div class="vr" style="color:var(--amber);">APROVAR COM CONDIÇÕES</div>
+      <div class="vm" style="color:var(--teal);">R$ 700.000</div>
+    </div>
+    <div class="vc bc">
+      <div class="vl">Financeiro — Rafael Bazan</div>
+      <div class="vr" style="color:var(--amber);">APROVAR COM RESSALVAS</div>
+      <div class="vm" style="color:var(--blue);">R$ 500.000</div>
+    </div>
+  </div>
+  <div class="vfinal cond">
+    <div class="vff-l">Decisão do Comitê</div>
+    <div class="vff-t">APROVAR COM CONDIÇÕES</div>
+    <div class="vff-m">Limite Inicial: R$ 700.000 &nbsp;·&nbsp; Revisão em 90 dias</div>
+    <div style="font-size:12px;color:var(--muted);max-width:600px;margin:0 auto;line-height:1.7;">Operação viável com sacados enterprise de alto nível, score 930 e zero restrições em birô. Estrutura financeira do cedente é frágil (PL -R$5,7M, REFIS R$3,4M), mas não impede a operação desde que cada cessão passe por verificação CRDC obrigatória, os sacados sejam exclusivamente enterprise e o aval pessoal dos dois principais sócios esteja formalizado.</div>
+    <div class="sigs">
+      <div class="sig"><div class="sg-l"></div><div class="sg-n">Marcelo Vazquez</div><div class="sg-r">Analista de Crédito</div></div>
+      <div class="sig"><div class="sg-l"></div><div class="sg-n">Rafael Bazan</div><div class="sg-r">Analista Financeiro</div></div>
+    </div>
+  </div>
+</div>
+
+<footer>AG Antecipa — Parecer de Comitê / Afrika Consultoria e Tecnologia da Informação S.A. / CNPJ 19.925.865/0001-97 / Junho 2026 / Documento confidencial de uso interno</footer>
+
+<script>
+const ctx = document.getElementById('fatChart');
+if(ctx){
+  new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels:['Mai/24','Jun/24','Jul/24','Ago/24','Set/24','Out/24','Nov/24','Dez/24','Jan/25','Fev/25','Mar/25','Abr/25'],
+      datasets:[{
+        label:'Faturamento',
+        data:[777530,578665,811418,658229,617040,594888,1242016,367044,1571897,1290614,280607,100681],
+        backgroundColor:(ctx)=>{
+          const v=ctx.raw;
+          if(v>1000000) return 'rgba(34,197,94,0.7)';
+          if(v<200000) return 'rgba(239,68,68,0.7)';
+          if(v<400000) return 'rgba(245,158,11,0.7)';
+          return 'rgba(79,142,247,0.5)';
+        },
+        borderRadius:4
+      },{
+        label:'Média (R$740k)',
+        data:Array(12).fill(740886),
+        type:'line',
+        borderColor:'rgba(0,212,170,0.6)',
+        borderDash:[4,4],
+        pointRadius:0,
+        borderWidth:1.5,
+        fill:false
+      }]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:'#94a3b8',font:{size:11}}},tooltip:{callbacks:{label:(c)=>'R$ '+c.raw.toLocaleString('pt-BR')}}},
+      scales:{
+        x:{ticks:{color:'#94a3b8',font:{size:11}},grid:{color:'rgba(255,255,255,0.04)'}},
+        y:{ticks:{color:'#94a3b8',font:{size:10},callback:(v)=>'R$'+Math.round(v/1000)+'k'},grid:{color:'rgba(255,255,255,0.06)'}}
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>
