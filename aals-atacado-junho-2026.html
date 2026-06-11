@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parecer de Comitê - AALS Atacado e Varejo Ltda</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: #1a1a1a;
+            background: #f5f5f5;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 20px;
+        }
+        .header-left h1 { font-size: 14px; font-weight: 600; color: #666; letter-spacing: 1px; margin-bottom: 5px; }
+        .header-left p { font-size: 12px; color: #999; }
+        .header-right { text-align: right; }
+        nav {
+            display: flex;
+            gap: 15px;
+            font-size: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+            padding: 4px 0;
+            border-bottom: 1px solid transparent;
+        }
+        nav a:hover { border-bottom: 1px solid #0066cc; }
+        .nav-label { font-weight: 600; color: #1a1a1a; margin-right: 5px; }
+        .title-main { font-size: 24px; font-weight: 700; margin: 40px 0 5px 0; color: #1a1a1a; }
+        .subtitle { font-size: 13px; color: #666; margin-bottom: 30px; }
+        .company-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            font-size: 13px;
+        }
+        .info-item { display: flex; justify-content: space-between; }
+        .info-label { font-weight: 600; color: #666; }
+        .info-value { text-align: right; font-weight: 600; color: #1a1a1a; }
+        .score-box {
+            background: linear-gradient(135deg, #6b1818 0%, #c62828 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 4px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .score-box .label { font-size: 11px; opacity: 0.9; margin-bottom: 5px; }
+        .score-box .value { font-size: 22px; font-weight: 700; }
+        .status-box {
+            background: #e6f3e6;
+            color: #2d5016;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 10px;
+            border-left: 4px solid #4caf50;
+        }
+        .status-box.warning { background: #fff3cd; color: #856404; border-left-color: #ffc107; }
+        .status-box.danger { background: #f8d7da; color: #721c24; border-left-color: #dc3545; }
+        .position-summary { margin: 30px 0; }
+        .position-card {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        .position-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .analyst-name { font-weight: 700; font-size: 14px; }
+        .analyst-role { font-size: 12px; color: #666; }
+        .position-badge {
+            background: #ffc107;
+            color: #1a1a1a;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .position-badge.risco { background: #dc3545; color: white; }
+        .position-badge.condicionar { background: #ffc107; }
+        .position-text { font-size: 13px; line-height: 1.7; color: #333; }
+        h2 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+        h3 { font-size: 13px; font-weight: 600; margin-top: 20px; margin-bottom: 15px; color: #1a1a1a; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 12px; }
+        th {
+            background: #f0f0f0;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #ddd;
+            color: #1a1a1a;
+        }
+        td { padding: 10px 12px; border-bottom: 1px solid #e0e0e0; }
+        tr:hover { background: #fafafa; }
+        .alert {
+            margin: 15px 0;
+            padding: 12px;
+            border-left: 4px solid;
+            border-radius: 2px;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        .alert.warning { background: #fff8e1; border-left-color: #ffc107; color: #856404; }
+        .alert.danger { background: #ffebee; border-left-color: #dc3545; color: #721c24; }
+        .alert.success { background: #e8f5e9; border-left-color: #4caf50; color: #2d5016; }
+        .icon { margin-right: 6px; font-size: 14px; }
+        .conditions-list { background: #f9f9f9; padding: 20px; border-radius: 4px; margin-bottom: 20px; }
+        .conditions-list ol { margin-left: 20px; }
+        .conditions-list li { margin-bottom: 12px; font-size: 12px; line-height: 1.6; color: #333; }
+        .conditions-list strong { color: #1a1a1a; }
+        .risk-matrix { background: #f9f9f9; border-radius: 4px; padding: 20px; margin-bottom: 20px; }
+        .risk-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 12px;
+        }
+        .risk-row:last-child { border-bottom: none; }
+        .risk-title { flex: 1; font-weight: 600; color: #1a1a1a; margin-right: 15px; }
+        .risk-description { flex: 2; color: #666; font-size: 11px; margin-right: 15px; }
+        .risk-level { padding: 4px 12px; border-radius: 4px; font-weight: 600; font-size: 11px; white-space: nowrap; }
+        .risk-level.alto { background: #ffcdd2; color: #c62828; }
+        .risk-level.medio { background: #ffe0b2; color: #e65100; }
+        .risk-level.mitigante { background: #c8e6c9; color: #1b5e20; }
+        .decision-box {
+            background: linear-gradient(135deg, #ffebee 0%, #fff5f5 100%);
+            border: 2px solid #dc3545;
+            border-radius: 4px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        .decision-box h3 { color: #c62828; margin-top: 0; }
+        .decision-box p { font-size: 12px; line-height: 1.7; color: #333; }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+            font-size: 11px;
+            color: #999;
+        }
+        .signature-block {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 30px;
+        }
+        .signature { text-align: center; }
+        .signature-name { font-weight: 600; margin-top: 40px; color: #1a1a1a; }
+        .signature-role { font-size: 11px; color: #666; margin-top: 4px; }
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-left">
+            <h1>AALS Atacado e Varejo — Parecer de Comitê</h1>
+            <p>Jun/2026</p>
+        </div>
+        <div class="header-right">
+            <p style="font-weight: 600; margin-bottom: 5px;">CRÉDITO · Marcelo Vazquez</p>
+            <p style="font-size: 12px; color: #666;">FINANCEIRO · Rafael Bazan</p>
+        </div>
+    </div>
+
+    <!-- NAV -->
+    <nav>
+        <span class="nav-label">CRÉDITO</span>
+        <a href="#cadastro">Cadastro</a>
+        <a href="#biro">Serasa / CreditBox</a>
+        <a href="#bacen">BACEN</a>
+        <a href="#balanco">Balanço / DRE</a>
+        <a href="#socios">Sócio</a>
+        <a href="#riscos">Riscos</a>
+        <a href="#parecer-mv">Parecer MV</a>
+    </nav>
+    <nav>
+        <span class="nav-label">FINANCEIRO</span>
+        <a href="#sacados">Carteira de Sacados</a>
+        <a href="#parecer-rb">Parecer RB</a>
+        <a href="#veredicto">Veredicto</a>
+    </nav>
+
+    <!-- TÍTULO -->
+    <div style="margin-bottom: 30px; margin-top: 30px;">
+        <p style="font-size: 11px; color: #999; letter-spacing: 1px; margin-bottom: 15px;">PARECER DE COMITÊ  ·  Junho / 2026</p>
+        <h1 class="title-main">AALS Atacado e Varejo Ltda</h1>
+        <p class="subtitle">CNPJ 52.687.082/0001-98  ·  Atacado e Varejo de Vestuário  ·  Brás, São Paulo/SP  ·  ~2 anos de operação</p>
+    </div>
+
+    <!-- COMPANY INFO GRID -->
+    <div class="company-info">
+        <div class="score-box" style="grid-column: 1 / 2; margin-bottom: 0;">
+            <div class="label">CreditBox — Movimentação</div>
+            <div class="value">PRATICAMENTE NULA</div>
+        </div>
+        <div style="grid-column: 2 / 3;">
+            <div class="status-box danger">Bacen Sócio: PREJUÍZO R$ 23.789</div>
+            <div class="status-box warning" style="margin-top: 8px;">Carteira Sacados: 100% REPROVADA</div>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Fat. Médio 12m</span>
+            <span class="info-value">R$ 530.099/mês</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Fat. Total 12m</span>
+            <span class="info-value">R$ 6.361.197</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Margem Bruta (DRE)</span>
+            <span class="info-value" style="color: #dc3545;">85,5% — ATÍPICO</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">CMV / Rec. Líquida</span>
+            <span class="info-value" style="color: #dc3545;">14,5% — ATÍPICO</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Patrim. Líquido</span>
+            <span class="info-value">R$ 947.109</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Desc. Duplicatas (Passivo)</span>
+            <span class="info-value">R$ 308.425</span>
+        </div>
+    </div>
+
+    <!-- POSIÇÃO DOS ANALISTAS -->
+    <h2>Posição dos Analistas — Síntese Executiva</h2>
+
+    <div class="position-card">
+        <div class="position-header">
+            <div>
+                <div class="analyst-name">Marcelo Vazquez</div>
+                <div class="analyst-role">Analista de Crédito</div>
+            </div>
+            <span class="position-badge risco">REPROVADO</span>
+        </div>
+        <div class="position-text">
+            <p>A empresa possui aproximadamente 2 anos de constituição, com histórico operacional ainda limitado. Foi identificada coligada com tempo de fundação semelhante, sem elementos que tragam maior conforto à análise. Não foram localizados registros relevantes de Bacen em nome da empresa, porém o sócio apresenta prejuízo em Bacen no valor de R$ 23.789,35. A movimentação no Creditbox é praticamente nula, não demonstrando recorrência compatível com o faturamento informado.</p>
+            <p style="margin-top: 12px;">A documentação apresentada requer cautela, especialmente pela certidão de nascimento antiga, sendo recomendável solicitar documento atualizado ou verificar eventuais averbações. O ramo de vestuário, aliado à localização no Brás, eleva o risco da operação. A carteira de sacados apresenta concentração em empresas próximas ao Brás, também recentes, algumas com histórico de reativação cadastral em curto período. Diante do baixo poder financeiro identificado, fragilidade documental, pouca movimentação operacional e perfil dos sacados, o risco é elevado.</p>
+            <p style="margin-top: 12px;"><strong>Conclusão: parecer desfavorável ao prosseguimento da operação.</strong></p>
+        </div>
+    </div>
+
+    <div class="position-card">
+        <div class="position-header">
+            <div>
+                <div class="analyst-name">Rafael Bazan</div>
+                <div class="analyst-role">Analista Financeiro / Contábil</div>
+            </div>
+            <span class="position-badge risco">REPROVADO</span>
+        </div>
+        <div class="position-text">
+            <p>Operação com inconsistências relevantes na análise documental, financeira e da carteira apresentada. A empresa apresenta margem bruta incompatível com o setor, entre 79% e 85%, com CMV representando apenas cerca de 14,5% da receita líquida. Para o segmento de atacado de vestuário, esse patamar foge do padrão esperado e pode indicar faturamento sem lastro operacional compatível ou compras realizadas fora do CNPJ analisado.</p>
+            <p style="margin-top: 12px;">A carteira de sacados foi 100% reprovada. Foram apresentados 8 sacados, todos com restrições ou perfil inadequado. Parte deles aparenta ser empresa de prateleira, e os demais possuem perfil semelhante ao cedente, com pouco tempo de constituição e atuação concentrada na região do Brás. Os sacados apresentados representam apenas 9,4% do faturamento, permanecendo 90,6% da receita sem identificação clara.</p>
+            <p style="margin-top: 12px;"><strong>Conclusão: parecer desfavorável ao prosseguimento da operação.</strong></p>
+        </div>
+    </div>
+
+    <!-- SEÇÃO 1: CADASTRO -->
+    <h2 id="cadastro">1 — Identificação do Cedente</h2>
+
+    <h3>Dados Cadastrais</h3>
+    <table>
+        <tr><td style="font-weight: 600; width: 30%;">Razão Social</td><td>AALS ATACADO E VAREJO LTDA</td></tr>
+        <tr><td style="font-weight: 600;">CNPJ</td><td>52.687.082/0001-98</td></tr>
+        <tr><td style="font-weight: 600;">Insc. Estadual</td><td>158.441.437.119</td></tr>
+        <tr><td style="font-weight: 600;">Constituição</td><td>~2024 (aproximadamente 2 anos)</td></tr>
+        <tr><td style="font-weight: 600;">Endereço</td><td>Rua Rio Bonito, 1.063 — Brás — São Paulo/SP — CEP 03023-000</td></tr>
+        <tr><td style="font-weight: 600;">Segmento</td><td>Atacado e Varejo de Vestuário (CNAE: Brás/SP)</td></tr>
+        <tr><td style="font-weight: 600;">Situação RF</td><td>ATIVA</td></tr>
+    </table>
+
+    <h3>Quadro Societário</h3>
+    <table>
+        <thead>
+            <tr><th>Sócio / Função</th><th>CPF</th><th>Participação</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Alex de Almeida Santos</strong><br/>Empresário / Sócio</td>
+                <td>365.470.898-60</td>
+                <td>—</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="alert warning">
+        <span class="icon">⚠</span>
+        <strong>Coligada identificada:</strong> foi localizada empresa coligada com perfil de constituição semelhante (mesma faixa de tempo), sem elementos que tragam conforto adicional à análise. O relacionamento entre as entidades não foi esclarecido.
+    </div>
+
+    <div class="alert warning">
+        <span class="icon">⚠</span>
+        <strong>Certidão de nascimento antiga:</strong> o documento apresentado está desatualizado. Recomenda-se solicitar certidão atualizada ou verificar eventuais averbações (casamento, divórcio, óbito).
+    </div>
+
+    <!-- SEÇÃO 2: BIRÔ / CREDITBOX -->
+    <h2 id="biro">2 — Serasa / CreditBox</h2>
+
+    <h3>Situação em Birô — Empresa (CNPJ)</h3>
+    <table>
+        <tr><td style="font-weight: 600;">Registros relevantes Bacen (empresa)</td><td>NADA CONSTA</td></tr>
+        <tr><td style="font-weight: 600;">CreditBox — Movimentação</td><td style="font-weight: 600; color: #dc3545;">PRATICAMENTE NULA</td></tr>
+        <tr><td style="font-weight: 600;">Recorrência vs faturamento declarado</td><td style="color: #dc3545;">INCOMPATÍVEL</td></tr>
+    </table>
+
+    <div class="alert danger">
+        <span class="icon">🔴</span>
+        <strong>Movimentação no CreditBox praticamente nula</strong> é inconsistente com o faturamento declarado de R$ 530k/mês. Empresa que opera de fato em atacado de vestuário no Brás com esse volume gera rastro operacional relevante. A ausência de movimentação indica que as vendas não estão passando pelo CNPJ ou que o faturamento não é real.
+    </div>
+
+    <!-- SEÇÃO 3: BACEN -->
+    <h2 id="bacen">3 — BACEN — Empresa e Sócio</h2>
+
+    <h3>Empresa (CNPJ 52.687.082/0001-98)</h3>
+    <table>
+        <tr><td style="font-weight: 600;">Registros Bacen (empresa)</td><td>NADA CONSTA</td></tr>
+    </table>
+
+    <h3>Sócio — Alex de Almeida Santos (CPF 365.470.898-60)</h3>
+    <table>
+        <tr><td style="font-weight: 600;">Prejuízo em Bacen</td><td style="font-weight: 600; color: #dc3545;">R$ 23.789,35</td></tr>
+        <tr><td style="font-weight: 600;">Operações ativas / vencidas</td><td>—</td></tr>
+    </table>
+
+    <div class="alert danger">
+        <span class="icon">🔴</span>
+        <strong>Sócio com prejuízo em Bacen de R$ 23.789,35.</strong> Embora o valor seja relativamente baixo, a presença de prejuízo no sistema financeiro em nome do único sócio/controlador é fator negativo para uma operação em análise de crédito, especialmente combinado com os demais vetores de risco identificados.
+    </div>
+
+    <!-- SEÇÃO 4: BALANÇO / DRE -->
+    <h2 id="balanco">4 — Balanço Patrimonial e DRE — Mai/2026</h2>
+
+    <h3>Balanço Patrimonial — 31/05/2026</h3>
+    <table>
+        <thead><tr><th colspan="2" style="background: #e8f4f8; color: #004d99;">ATIVO</th></tr></thead>
+        <tbody>
+            <tr><td style="font-weight: 600;">Ativo Circulante Total</td><td style="text-align: right;">R$ 1.174.381,33</td></tr>
+            <tr><td style="padding-left: 30px;">Disponível (Caixa + Bancos)</td><td style="text-align: right;">R$ 334.725,69</td></tr>
+            <tr><td style="padding-left: 30px;">Créditos</td><td style="text-align: right;">R$ 423.779,95</td></tr>
+            <tr><td style="padding-left: 30px;">Estoques de Mercadorias</td><td style="text-align: right;">R$ 415.875,69</td></tr>
+            <tr><td style="font-weight: 600;">Ativo Exigível (realizável)</td><td style="text-align: right;">R$ 252.346,19</td></tr>
+            <tr><td style="font-weight: 600;">Ativo Permanente (imobilizado)</td><td style="text-align: right;">R$ 205.156,77</td></tr>
+            <tr style="background: #f0f0f0;"><td style="font-weight: 700;">ATIVO TOTAL</td><td style="text-align: right; font-weight: 700;">R$ 1.631.884,29</td></tr>
+        </tbody>
+    </table>
+
+    <table style="margin-top: 20px;">
+        <thead><tr><th colspan="2" style="background: #ffe8e8; color: #dc3545;">PASSIVO</th></tr></thead>
+        <tbody>
+            <tr><td style="font-weight: 600;">Fornecedores Nacionais</td><td style="text-align: right;">R$ 205.956,60</td></tr>
+            <tr><td style="font-weight: 600;">Tributos a Recolher</td><td style="text-align: right;">R$ 150.632,48</td></tr>
+            <tr><td style="font-weight: 600;">Obrigações Sociais</td><td style="text-align: right;">R$ 19.760,93</td></tr>
+            <tr style="background: #f0f0f0;"><td style="font-weight: 700;">Passivo Circulante</td><td style="text-align: right; font-weight: 700;">R$ 376.350,01</td></tr>
+            <tr><td style="font-weight: 600;">Desconto de Duplicatas — CP</td><td style="text-align: right; color: #dc3545;">R$ 156.856,36</td></tr>
+            <tr><td style="font-weight: 600;">Desconto de Duplicatas — LP</td><td style="text-align: right; color: #dc3545;">R$ 151.568,69</td></tr>
+            <tr style="background: #f0f0f0;"><td style="font-weight: 700;">Passivo Exigível (desc. duplic.)</td><td style="text-align: right; font-weight: 700; color: #dc3545;">R$ 308.425,05</td></tr>
+        </tbody>
+    </table>
+
+    <table style="margin-top: 20px;">
+        <tr style="background: #e8f5e9;"><td style="font-weight: 700;">PATRIMÔNIO LÍQUIDO</td><td style="text-align: right; font-weight: 700; color: #1b5e20;">R$ 947.109,23</td></tr>
+        <tr><td style="padding-left: 30px;">Capital Social Integralizado</td><td style="text-align: right;">R$ 300.000,00</td></tr>
+        <tr><td style="padding-left: 30px;">Lucros/Prejuízos Acumulados</td><td style="text-align: right;">R$ 438.239,91</td></tr>
+        <tr><td style="padding-left: 30px;">Resultado deste Exercício (BP)</td><td style="text-align: right;">R$ 208.869,32</td></tr>
+    </table>
+
+    <div class="alert danger">
+        <span class="icon">🔴</span>
+        <strong>Desconto de Duplicatas de R$ 308.425,05 já no passivo</strong> (R$ 156.856 curto prazo + R$ 151.569 longo prazo). A empresa já opera desconto de recebíveis em outra(s) instituição(ões). Verificação obrigatória de dupla cessão antes de qualquer operação.
+    </div>
+
+    <h3>DRE — Demonstração do Resultado — Jan a Mai/2026</h3>
+    <table>
+        <tr><td style="font-weight: 600;">Receita Bruta de Vendas</td><td style="text-align: right;">R$ 2.774.613,74</td></tr>
+        <tr><td style="padding-left: 30px;">(-) Deduções (PIS/COFINS/ICMS)</td><td style="text-align: right;">-R$ 308.801,33</td></tr>
+        <tr><td style="font-weight: 600;">Receita Líquida das Vendas</td><td style="text-align: right;">R$ 2.465.812,41</td></tr>
+        <tr><td style="padding-left: 30px;">(-) Custo das Vendas (CMV)</td><td style="text-align: right; color: #dc3545;">-R$ 357.931,94</td></tr>
+        <tr style="background: #ffebee;"><td style="font-weight: 700;">Lucro Bruto (Margem 85,5%)</td><td style="text-align: right; font-weight: 700; color: #dc3545;">R$ 2.107.880,47</td></tr>
+        <tr><td style="padding-left: 30px;">(-) Despesas Operacionais</td><td style="text-align: right;">-R$ 1.155.971,67</td></tr>
+        <tr><td style="font-weight: 600;">Resultado Antes das Provisões</td><td style="text-align: right;">R$ 951.908,80</td></tr>
+        <tr><td style="padding-left: 30px;">(-) Provisões Legais (IR + CSLL)</td><td style="text-align: right;">-R$ 37.227,89</td></tr>
+        <tr style="background: #f0f0f0;"><td style="font-weight: 700;">Resultado Líquido (DRE)</td><td style="text-align: right; font-weight: 700; color: #1b5e20;">R$ 914.680,91</td></tr>
+    </table>
+
+    <div class="alert danger">
+        <span class="icon">🔴</span>
+        <strong>Inconsistência crítica entre DRE e Balanço:</strong> o Resultado Líquido da DRE aponta R$ 914.680,91, enquanto o Balanço registra Resultado deste Exercício de R$ 208.869,32 — diferença de R$ 705.811,59 sem explicação nos documentos apresentados. Essa divergência entre as próprias demonstrações financeiras compromete a confiabilidade das informações contábeis.
+    </div>
+
+    <div class="alert danger">
+        <span class="icon">🔴</span>
+        <strong>Margem bruta de 85,5% é incompatível com atacado de vestuário.</strong> CMV de apenas R$ 357.931,94 sobre receita líquida de R$ 2.465.812,41 (14,5%) foge inteiramente do padrão do segmento, onde o CMV costuma representar 50% a 70% da receita. Indica faturamento sem lastro de compras ou operações de aquisição fora do CNPJ.
+    </div>
+
+    <h3>Faturamento 12 Meses (Jun/2025 – Mai/2026)</h3>
+    <table style="font-size: 11px;">
+        <thead>
+            <tr><th>Mês</th><th style="text-align: right;">Valor</th><th>Mês</th><th style="text-align: right;">Valor</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Jun/2025</td><td style="text-align: right;">R$ 417.952,27</td><td>Dez/2025</td><td style="text-align: right;">R$ 667.551,17</td></tr>
+            <tr><td>Jul/2025</td><td style="text-align: right;">R$ 443.546,81</td><td>Jan/2026</td><td style="text-align: right;">R$ 521.763,13</td></tr>
+            <tr><td>Ago/2025</td><td style="text-align: right;">R$ 452.981,34</td><td>Fev/2026</td><td style="text-align: right;">R$ 537.908,89</td></tr>
+            <tr><td>Set/2025</td><td style="text-align: right;">R$ 514.409,51</td><td>Mar/2026</td><td style="text-align: right;">R$ 544.561,87</td></tr>
+            <tr><td>Out/2025</td><td style="text-align: right;">R$ 536.900,48</td><td>Abr/2026</td><td style="text-align: right;">R$ 571.031,35</td></tr>
+            <tr><td>Nov/2025</td><td style="text-align: right;">R$ 553.242,11</td><td>Mai/2026</td><td style="text-align: right;">R$ 599.348,10</td></tr>
+        </tbody>
+    </table>
+    <table style="font-size: 12px; margin-top: 5px;">
+        <tr><td style="font-weight: 600;">Total 12 meses:</td><td style="font-weight: 600; text-align: right;">R$ 6.361.197,03</td></tr>
+        <tr><td style="font-weight: 600;">Média mensal:</td><td style="font-weight: 600; text-align: right;">R$ 530.099,75</td></tr>
+    </table>
+
+    <div class="alert warning">
+        <span class="icon">⚠</span>
+        <strong>Crescimento linear suspeito:</strong> o faturamento apresenta crescimento constante e progressivo mês a mês, sem variações sazonais típicas do setor de vestuário (o mês de dezembro, por exemplo, registra R$ 667k — quase o dobro do junho anterior). A curva excessivamente regular é atípica para comércio real de vestuário no Brás.
+    </div>
+
+    <!-- SEÇÃO 5: SÓCIO -->
+    <h2 id="socios">5 — Sócio — Alex de Almeida Santos</h2>
+
+    <table>
+        <tr><td style="font-weight: 600;">CPF</td><td>365.470.898-60</td></tr>
+        <tr><td style="font-weight: 600;">Função</td><td>Empresário / único sócio identificado</td></tr>
+        <tr><td style="font-weight: 600;">Prejuízo Bacen</td><td style="font-weight: 600; color: #dc3545;">R$ 23.789,35</td></tr>
+        <tr><td style="font-weight: 600;">Documentação</td><td style="color: #dc3545;">Certidão de nascimento desatualizada</td></tr>
+        <tr><td style="font-weight: 600;">Poder financeiro identificado</td><td style="color: #dc3545;">BAIXO</td></tr>
+    </table>
+
+    <div class="alert danger">
+        <span class="icon">🔴</span>
+        <strong>Baixo poder financeiro identificado.</strong> O sócio não apresenta patrimônio ou garantias compatíveis com a operação pretendida. O prejuízo em Bacen, ainda que de valor moderado, combinado com a fragilidade documental e ausência de histórico robusto, limita a capacidade de aval.
+    </div>
+
+    <!-- SEÇÃO 6: RISCOS -->
+    <h2 id="riscos">6 — Matriz de Riscos</h2>
+
+    <div class="risk-matrix">
+        <div class="risk-row">
+            <div class="risk-title">Margem Bruta Incompatível com o Setor</div>
+            <div class="risk-description">CMV de 14,5% da receita líquida em atacado de vestuário. Padrão do setor: 50%–70%. Indica faturamento sem lastro ou compras fora do CNPJ.</div>
+            <div class="risk-level alto">ALTO</div>
+        </div>
+        <div class="risk-row">
+            <div class="risk-title">Carteira de Sacados 100% Reprovada</div>
+            <div class="risk-description">8 sacados apresentados — todos reprovados. Parte com perfil de empresa de prateleira. Sacados = apenas 9,4% do faturamento. 90,6% sem identificação.</div>
+            <div class="risk-level alto">ALTO</div>
+        </div>
+        <div class="risk-row">
+            <div class="risk-title">Inconsistência DRE vs Balanço</div>
+            <div class="risk-description">Resultado DRE: R$ 914.680,91. Resultado no BP: R$ 208.869,32. Divergência de R$ 705.811,59 entre as próprias demonstrações financeiras.</div>
+            <div class="risk-level alto">ALTO</div>
+        </div>
+        <div class="risk-row">
+            <div class="risk-title">Movimentação CreditBox Nula</div>
+            <div class="risk-description">Sem recorrência operacional compatível com R$ 530k/mês declarados. Ausência de rastro financeiro para empresa com ~2 anos e esse volume.</div>
+            <div class="risk-level alto">ALTO</div>
+        </div>
+        <div class="risk-row">
+            <div class="risk-title">Desconto de Duplicatas Ativo no Passivo</div>
+            <div class="risk-description">R$ 308.425,05 já em desconto de duplicatas (CP + LP). Empresa opera recebíveis em outra(s) instituição(ões) — risco real de dupla cessão.</div>
+            <div class="risk-level alto">ALTO</div>
+        </div>
+        <div class="risk-row">
+            <div class="risk-title">Risco Setorial e Regional — Brás</div>
+            <div class="risk-description">Vestuário no Brás: segmento com histórico elevado de fraudes em carteiras de recebíveis, empresas de fachada e reativação cadastral frequente.</div>
+            <div class="risk-level alto">ALTO</div>
+        </div>
+        <div class="risk-row">
+            <div class="risk-title">Empresa com ~2 Anos / Coligada Similar</div>
+            <div class="risk-description">Histórico operacional limitado. Coligada com perfil de abertura semelhante sem elementos de conforto. Certidão de nascimento do sócio desatualizada.</div>
+            <div class="risk-level medio">MÉDIO</div>
+        </div>
+        <div class="risk-row">
+            <div class="risk-title">Patrimônio Líquido Positivo</div>
+            <div class="risk-description">PL de R$ 947.109 e liquidez corrente aparente de 3,12. Porém baseados em contabilidade com inconsistências graves — peso mitigante limitado.</div>
+            <div class="risk-level mitigante">MITIGANTE LIMITADO</div>
+        </div>
+    </div>
+
+    <!-- SEÇÃO 7: PARECER MV -->
+    <h2 id="parecer-mv">7 — Parecer de Crédito — Marcelo Vazquez</h2>
+
+    <p style="font-size: 12px; line-height: 1.8; margin-bottom: 15px;">A empresa possui aproximadamente 2 anos de constituição, com histórico operacional ainda limitado. Foi identificada coligada com tempo de fundação semelhante, sem elementos que tragam maior conforto à análise. Não foram localizados registros relevantes de Bacen em nome da empresa, porém o sócio apresenta prejuízo em Bacen no valor de R$ 23.789,35. A movimentação no Creditbox é praticamente nula, não demonstrando recorrência compatível com o faturamento informado.</p>
+
+    <p style="font-size: 12px; line-height: 1.8; margin-bottom: 15px;">A documentação apresentada requer cautela, especialmente pela certidão de nascimento antiga, sendo recomendável solicitar documento atualizado ou verificar eventuais averbações. O ramo de vestuário, aliado à localização no Brás, eleva o risco da operação, considerando o histórico do segmento e da região. A carteira de sacados apresenta concentração em empresas próximas ao Brás, também recentes, algumas com histórico de reativação cadastral em curto período, o que gera suspeita quanto à qualidade dos títulos.</p>
+
+    <p style="font-size: 12px; line-height: 1.8; margin-bottom: 15px;">Diante do baixo poder financeiro identificado, fragilidade documental, pouca movimentação operacional e perfil dos sacados, entendo que o risco é elevado.</p>
+
+    <h3>Posição de Crédito — MV</h3>
+    <div class="position-badge risco" style="display: inline-block; margin-bottom: 15px;">PARECER DESFAVORÁVEL</div>
+    <table>
+        <tr>
+            <td style="font-weight: 600;">Não recomendo o prosseguimento da operação</td>
+            <td style="text-align: right; font-weight: 600; color: #dc3545;">REPROVADO</td>
+        </tr>
+    </table>
+
+    <!-- SEÇÃO 8: SACADOS / PARECER RB -->
+    <h2 id="sacados">8 — Carteira de Sacados e Perspectiva Financeira — Rafael Bazan</h2>
+
+    <h3>Análise da Carteira de Sacados</h3>
+    <table>
+        <thead>
+            <tr><th>Indicador</th><th>Resultado</th></tr>
+        </thead>
+        <tbody>
+            <tr><td style="font-weight: 600;">Total de sacados apresentados</td><td>8</td></tr>
+            <tr><td style="font-weight: 600;">Sacados aprovados</td><td style="color: #dc3545; font-weight: 600;">0 (zero)</td></tr>
+            <tr><td style="font-weight: 600;">Sacados reprovados</td><td style="color: #dc3545; font-weight: 600;">8 (100%)</td></tr>
+            <tr><td style="font-weight: 600;">Motivos de reprovação</td><td>Restrições, perfil de empresa de prateleira, pouco tempo de constituição, reativação cadastral</td></tr>
+            <tr><td style="font-weight: 600;">Representatividade no faturamento</td><td style="color: #dc3545; font-weight: 600;">9,4% apenas</td></tr>
+            <tr><td style="font-weight: 600;">Faturamento sem sacados identificados</td><td style="color: #dc3545; font-weight: 600;">90,6% (sem identificação)</td></tr>
+        </tbody>
+    </table>
+
+    <div class="alert danger">
+        <span class="icon">🔴</span>
+        <strong>100% da carteira de sacados foi reprovada.</strong> Os 8 sacados apresentados possuem restrições, perfil de empresa de prateleira ou constituição muito recente concentrada no Brás — com histórico de reativação cadastral em curto período. A carteira apresentada não é operacional.
+    </div>
+
+    <div class="alert danger">
+        <span class="icon">🔴</span>
+        <strong>90,6% do faturamento sem identificação de pagador.</strong> Os sacados aproveitáveis representariam apenas 9,4% da receita declarada. O cedente não consegue identificar quem são os compradores por trás de quase toda a sua receita — fator incompatível com operação real de factoring.
+    </div>
+
+    <h3>Análise Financeira — DRE e Margem</h3>
+
+    <p style="font-size: 12px; line-height: 1.8; margin-bottom: 15px;">A empresa apresenta margem bruta incompatível com o setor, entre 79% e 85%, com CMV representando apenas cerca de 14,5% da receita líquida (R$ 357.931,94 sobre R$ 2.465.812,41). Para o segmento de atacado de vestuário, esse patamar foge do padrão esperado e pode indicar faturamento sem lastro operacional compatível ou compras realizadas fora do CNPJ analisado.</p>
+
+    <p style="font-size: 12px; line-height: 1.8; margin-bottom: 15px;">Agrava a situação a inconsistência entre o resultado apresentado na DRE (R$ 914.680,91) e o resultado registrado no próprio Balanço Patrimonial (R$ 208.869,32), uma diferença de R$ 705.811,59 sem explicação nos documentos. Essa divergência interna compromete a integridade das demonstrações financeiras como um todo.</p>
+
+    <table style="font-size: 12px; margin-top: 15px;">
+        <tr><td style="font-weight: 600;">Margem Bruta (DRE):</td><td style="font-weight: 600; color: #dc3545;">85,5% — padrão setor: 30–50%</td></tr>
+        <tr><td style="font-weight: 600;">CMV / Receita Líquida:</td><td style="font-weight: 600; color: #dc3545;">14,5% — padrão setor: 50–70%</td></tr>
+        <tr><td style="font-weight: 600;">Resultado DRE vs BP:</td><td style="font-weight: 600; color: #dc3545;">Divergência de R$ 705.811,59</td></tr>
+        <tr><td style="font-weight: 600;">Liquidez Corrente (aparente):</td><td style="font-weight: 600;">3,12</td></tr>
+    </table>
+
+    <h3>Posição Financeira — RB</h3>
+    <div class="position-badge risco" style="display: inline-block; margin-bottom: 15px;">PARECER DESFAVORÁVEL</div>
+    <table>
+        <tr>
+            <td style="font-weight: 600;">Inconsistências graves — carteira inoperante — faturamento sem lastro</td>
+            <td style="text-align: right; font-weight: 600; color: #dc3545;">REPROVADO</td>
+        </tr>
+    </table>
+
+    <!-- SEÇÃO 9: VEREDICTO -->
+    <h2 id="veredicto">9 — Decisão do Comitê</h2>
+
+    <div class="decision-box">
+        <h3>OPERAÇÃO REPROVADA</h3>
+        <p>Convergência unânime dos dois analistas — múltiplos vetores de risco crítico identificados de forma independente.</p>
+    </div>
+
+    <p style="font-size: 12px; line-height: 1.8; margin-bottom: 15px;">A operação não apresenta condições mínimas de aprovação. Os fundamentos da reprovação são:</p>
+
+    <div class="conditions-list">
+        <ol>
+            <li><strong>Margem bruta de 85,5% incompatível com o setor</strong> — CMV de 14,5% da receita líquida é inviável para atacado de vestuário real. Evidência de faturamento sem compras correspondentes ou operações fora do CNPJ.</li>
+            <li><strong>Carteira de sacados 100% reprovada</strong> — 8 sacados apresentados, nenhum aprovado. Perfil de prateleira, reativação cadastral, restrições. Sacados representam apenas 9,4% da receita declarada.</li>
+            <li><strong>Inconsistência contábil entre DRE e Balanço</strong> — divergência de R$ 705.811,59 no resultado do exercício entre as próprias demonstrações financeiras compromete a confiabilidade de toda a documentação.</li>
+            <li><strong>Movimentação CreditBox praticamente nula</strong> — sem rastro operacional compatível com R$ 530k/mês, empresa com ~2 anos e segmento atacadista ativo.</li>
+            <li><strong>Desconto de duplicatas ativo no passivo (R$ 308.425)</strong> — operação já em curso com outra instituição. Risco real de dupla cessão.</li>
+            <li><strong>Sócio com prejuízo em Bacen</strong> — R$ 23.789,35, baixo poder financeiro e documentação pessoal desatualizada.</li>
+            <li><strong>Risco setorial e regional</strong> — segmento de vestuário no Brás com histórico elevado de fraudes em carteiras e empresas de fachada.</li>
+        </ol>
+    </div>
+
+    <!-- ASSINATURAS -->
+    <div class="signature-block">
+        <div class="signature">
+            <div style="height: 50px; border-bottom: 1px solid #1a1a1a;"></div>
+            <div class="signature-name">Marcelo Vazquez</div>
+            <div class="signature-role">Analista de Crédito</div>
+        </div>
+        <div class="signature">
+            <div style="height: 50px; border-bottom: 1px solid #1a1a1a;"></div>
+            <div class="signature-name">Rafael Bazan</div>
+            <div class="signature-role">Analista Financeiro</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p style="margin-top: 30px;">AG Antecipa — Parecer de Comitê / AALS Atacado e Varejo Ltda / CNPJ 52.687.082/0001-98 / Junho 2026 / Documento confidencial de uso interno</p>
+    </div>
+
+</div>
+</body>
+</html>
