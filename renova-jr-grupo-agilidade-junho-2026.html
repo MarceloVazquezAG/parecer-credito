@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Grupo Agilidade — Renova JR · Parecer de Comitê | Jun/2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{--navy:#0a0f1e;--teal:#00d4aa;--teal2:#00b894;--blue:#4f8ef7;--blue2:#2563eb;--red:#ef4444;--amber:#f59e0b;--green:#22c55e;--text:#e2e8f0;--muted:#94a3b8;--border:rgba(255,255,255,0.08);}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;}
+a{color:inherit;text-decoration:none;}h1,h2,h3{font-family:'Syne',sans-serif;}
+.nb{position:sticky;top:0;z-index:100;}
+.nr1{background:rgba(10,15,30,.97);border-bottom:1px solid var(--teal);display:flex;align-items:center;gap:4px;padding:0 18px;height:44px;overflow-x:auto;}
+.nr2{background:rgba(10,15,30,.95);border-bottom:1px solid var(--blue);display:flex;align-items:center;gap:4px;padding:0 18px;height:40px;overflow-x:auto;}
+.nb1{font-family:'Syne',sans-serif;font-weight:700;font-size:12px;color:var(--teal);margin-right:8px;white-space:nowrap;}
+.nb2{font-family:'Syne',sans-serif;font-weight:700;font-size:12px;color:var(--blue);margin-right:8px;white-space:nowrap;}
+.nt{padding:4px 9px;border-radius:4px;font-size:11px;font-weight:500;color:var(--muted);transition:all .2s;white-space:nowrap;}
+.nt:hover{color:var(--teal);background:rgba(0,212,170,.08);}
+.nt.rf:hover{color:var(--blue);background:rgba(79,142,247,.08);}
+.ns{width:1px;height:18px;background:var(--border);margin:0 3px;}
+.sec{max-width:1100px;margin:0 auto;padding:32px 20px;}
+.rf-sec{background:linear-gradient(135deg,rgba(13,21,41,.5),rgba(37,99,235,.05));}
+.sl{display:inline-flex;align-items:center;gap:8px;margin-bottom:14px;}
+.sn{width:26px;height:26px;border-radius:6px;background:var(--teal);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:11px;color:#000;}
+.sn.b{background:var(--blue);color:#fff;}
+.st{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;}
+.hero{background:linear-gradient(135deg,#0a0f1e,#1a1000 55%,#0a0f1e);padding:48px 20px 32px;border-bottom:1px solid var(--border);}
+.hi{max-width:1100px;margin:0 auto;}
+.hbadge{display:inline-flex;align-items:center;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:20px;padding:3px 12px;font-size:11px;color:var(--amber);margin-bottom:12px;}
+.htitle{font-size:clamp(20px,4vw,30px);font-weight:800;line-height:1.1;margin-bottom:4px;}
+.hsub{color:var(--muted);font-size:13px;margin-bottom:22px;}
+.kgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:9px;}
+.kpi{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:9px;padding:11px 13px;}
+.kpi.dk{border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.07);}
+.kpi.wk{border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.07);}
+.kpi.ok{border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.07);}
+.kl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;}
+.kv{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;}
+.kv.r{color:var(--red);}.kv.a{color:var(--amber);}.kv.g{color:var(--green);}.kv.bl{color:var(--blue);}
+.card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:15px 17px;margin-bottom:11px;}
+.card h4{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{text-align:left;padding:6px 9px;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border-bottom:1px solid var(--border);font-weight:600;}
+td{padding:6px 9px;border-bottom:1px solid rgba(255,255,255,.04);}
+tr:last-child td{border-bottom:none;}
+.mono{font-family:'DM Mono',monospace;font-size:12px;}
+.chip{display:inline-flex;align-items:center;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;}
+.cok{background:rgba(34,197,94,.15);color:#22c55e;}
+.chi{background:rgba(239,68,68,.15);color:#ef4444;}
+.cwi{background:rgba(245,158,11,.15);color:#f59e0b;}
+.cbi{background:rgba(79,142,247,.15);color:#4f8ef7;}
+.rr{display:flex;align-items:flex-start;gap:11px;padding:9px 13px;border-radius:8px;margin-bottom:5px;border:1px solid var(--border);}
+.rd{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.rt{flex:1;font-size:13px;}.rt strong{display:block;margin-bottom:1px;}.rt span{font-size:12px;color:var(--muted);}
+.rr.rh{background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.2);}.rr.rh .rd{background:var(--red);}
+.rr.rm{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.2);}.rr.rm .rd{background:var(--amber);}
+.rr.rg{background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.2);}.rr.rg .rd{background:var(--green);}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+@media(max-width:700px){.g2,.g3{grid-template-columns:1fr;}}
+.ab{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:12px 15px;display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.av{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:14px;}
+.av.mv{background:linear-gradient(135deg,#00d4aa,#00b894);color:#000;}
+.av.rb{background:linear-gradient(135deg,#4f8ef7,#2563eb);color:#fff;}
+.an{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;}.ar{font-size:12px;color:var(--muted);}
+.split{background:linear-gradient(135deg,#0d1e3d,#162040);border-top:2px solid var(--blue);border-bottom:2px solid var(--blue);padding:26px 20px;text-align:center;}
+.sp-t{font-family:'Syne',sans-serif;font-size:19px;font-weight:800;color:var(--blue);}
+.sp-s{color:var(--muted);font-size:12px;margin-top:5px;}
+.vp{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:18px;}
+@media(max-width:600px){.vp{grid-template-columns:1fr;}}
+.vc{border-radius:11px;padding:16px;text-align:center;border:1px solid;}
+.vc.tc{border-color:rgba(0,212,170,.4);background:rgba(0,212,170,.06);}
+.vc.bc{border-color:rgba(79,142,247,.4);background:rgba(79,142,247,.06);}
+.vl{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:5px;}
+.vr{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;margin-bottom:3px;}
+.vm{font-family:'Syne',sans-serif;font-size:21px;font-weight:800;margin-top:5px;}
+.vfinal{border-radius:13px;padding:24px;text-align:center;}
+.vfinal.cond{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);}
+.vff-l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;}
+.vff-t{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;margin-bottom:5px;color:var(--amber);}
+.vff-m{font-family:'Syne',sans-serif;font-size:16px;font-weight:600;margin-bottom:14px;}
+.sigs{display:flex;justify-content:center;gap:36px;margin-top:16px;}
+.sig{text-align:center;}.sg-l{width:110px;height:1px;background:var(--border);margin:0 auto 5px;}
+.sg-n{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;}.sg-r{font-size:10px;color:var(--muted);}
+.pb{background:rgba(255,255,255,.03);border-left:3px solid var(--teal);border-radius:8px;padding:13px 15px;margin-bottom:9px;font-size:13px;line-height:1.7;}
+.pb.b{border-left-color:var(--blue);}
+.cl{list-style:none;}
+.cl li{display:flex;gap:9px;align-items:flex-start;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px;}
+.cl li:last-child{border-bottom:none;}
+.cn{width:20px;height:20px;border-radius:50%;background:var(--teal);color:#000;font-weight:700;font-size:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.cn.b{background:var(--blue);color:#fff;}
+.alrt{font-size:12px;padding:9px 11px;border-radius:7px;margin-top:8px;line-height:1.6;}
+.alrt.r{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2);color:#fca5a5;}
+.alrt.a{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);color:#fde68a;}
+.alrt.g{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);color:#86efac;}
+.chart-wrap{position:relative;width:100%;height:260px;}
+footer{border-top:1px solid var(--border);padding:16px 20px;text-align:center;color:var(--muted);font-size:11px;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nb">
+  <div class="nr1">
+    <span class="nb1">CRÉDITO · Marcelo Vazquez</span><div class="ns"></div>
+    <a href="#cadastro" class="nt">Grupo</a>
+    <a href="#biro" class="nt">Serasa / Birô</a>
+    <a href="#bacen" class="nt">BACEN</a>
+    <a href="#balanco" class="nt">Balanço Renova JR</a>
+    <a href="#ragilidade" class="nt">R. Agilidade</a>
+    <a href="#socios" class="nt">Sócios</a>
+    <a href="#sacados" class="nt">Sacados</a>
+    <a href="#riscos" class="nt">Riscos</a>
+    <a href="#parecer-mv" class="nt">Parecer MV</a>
+  </div>
+  <div class="nr2">
+    <span class="nb2">FINANCEIRO · Rafael Bazan</span><div class="ns"></div>
+    <a href="#financeiro" class="nt rf">BP / DRE</a>
+    <a href="#cruzamento" class="nt rf">Cruzamento</a>
+    <a href="#parecer-rb" class="nt rf">Parecer RB</a>
+    <a href="#veredicto" class="nt rf">Veredicto</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hi">
+    <div class="hbadge">PARECER DE COMITÊ &nbsp;·&nbsp; Junho / 2026</div>
+    <h1 class="htitle">Grupo Agilidade — Renova JR + R. Agilidade</h1>
+    <p class="hsub">CNPJ 04.699.076/0001-08 (Renova JR) · 05.411.783/0001-10 (R. Agilidade) &nbsp;·&nbsp; Terceirização e Locação de Mão de Obra &nbsp;·&nbsp; PR / SC / RS &nbsp;·&nbsp; 24 anos de operação (empresa principal)</p>
+    <div class="kgrid">
+      <div class="kpi ok"><div class="kl">Receita Grupo 2025</div><div class="kv g">R$ 45,8M</div></div>
+      <div class="kpi ok"><div class="kl">Lucro Líquido Renova JR</div><div class="kv g">R$ 2,16M (6,4%)</div></div>
+      <div class="kpi ok"><div class="kl">Birô / Serasa</div><div class="kv g">LIMPO</div></div>
+      <div class="kpi ok"><div class="kl">PL Renova JR</div><div class="kv g">R$ 6,42M</div></div>
+      <div class="kpi dk"><div class="kl">PL R. Agilidade</div><div class="kv r">-R$ 2,02M</div></div>
+      <div class="kpi dk"><div class="kl">INSS a Recolher — Grupo</div><div class="kv r">R$ 12,9M</div></div>
+      <div class="kpi wk"><div class="kl">Dívida Bancária — Grupo</div><div class="kv a">~R$ 7,2M</div></div>
+      <div class="kpi wk"><div class="kl">Dep. Judiciais R.Agilidade</div><div class="kv a">R$ 3,15M</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- POSIÇÃO DOS ANALISTAS -->
+<div style="background:rgba(255,255,255,.025);border-bottom:1px solid var(--border);">
+  <div class="sec" style="padding-top:28px;padding-bottom:28px;">
+    <div style="text-align:center;margin-bottom:18px;">
+      <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Posição dos Analistas — Síntese Executiva</div>
+    </div>
+    <div class="g2">
+      <!-- MV CARD -->
+      <div class="card" style="border-color:rgba(0,212,170,.2);background:rgba(0,212,170,.03);margin-bottom:0;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <div class="av mv" style="width:34px;height:34px;font-size:12px;">MV</div>
+          <div><div class="an" style="font-size:13px;">Marcelo Vazquez</div><div class="ar">Posição de Crédito</div></div>
+          <div style="margin-left:auto;"><span class="chip cwi">CONDICIONAR</span></div>
+        </div>
+        <p style="font-size:13px;line-height:1.75;">A empresa RENOVA J.R., fundada em 19/09/2001, possui 24 anos de atuação e demonstra estabilidade operacional e histórico consolidado no mercado. Na análise cadastral, societária e reputacional, não foram identificadas restrições relevantes em Serasa ou fontes públicas que indiquem risco impeditivo à concessão de crédito. Faturamento compatível com a operação proposta, carteira de sacados concentrada em empresas de grande porte e sócia com perfil patrimonial positivo.</p>
+        <p style="font-size:13px;line-height:1.75;margin-top:8px;">Parecer favorável ao prosseguimento, condicionado ao esclarecimento sobre a RB Holding Gestão Ltda. vinculada à Rosimeri, apresentação da curva ABC com percentuais e fiança solidária dos sócios.</p>
+      </div>
+      <!-- RB CARD -->
+      <div class="card" style="border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.04);margin-bottom:0;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <div class="av rb" style="width:34px;height:34px;font-size:12px;">RB</div>
+          <div><div class="an" style="font-size:13px;">Rafael Bazan</div><div class="ar">Parecer Contábil / Financeiro</div></div>
+          <div style="margin-left:auto;"><span class="chip cwi">CONDICIONAR</span></div>
+        </div>
+        <p style="font-size:13px;line-height:1.75;">Grupo com operação real e sacados de porte relevante — Carrefour, Rumo, Karsten, Tembici, Viacredi — com contratos anuais de renovação automática. Empresa principal com quase 30 anos de atuação e lucro líquido de R$2,16M em 2025.</p>
+        <p style="font-size:13px;line-height:1.75;margin-top:8px;">Três riscos estruturais exigem tratamento: INSS a Recolher de R$9,95M na Renova JR (267% de crescimento entre 2022–2025); endividamento bancário consolidado ~R$8,7M com despesas financeiras crescendo 302% no triênio; passivo trabalhista contingente com mais de 110 reclamações ativas. Operação tem mérito — risco gerenciável com condicionantes obrigatórias.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MARCELO BLOCK HEADER -->
+<div class="sec" id="overview" style="padding-top:28px;padding-bottom:0;">
+  <div class="ab"><div class="av mv">MV</div><div><div class="an">Marcelo Vazquez</div><div class="ar">Analista de Crédito — AG Antecipa</div></div></div>
+</div>
+
+<!-- SEÇÃO 1: IDENTIFICAÇÃO DO GRUPO -->
+<div class="sec" id="cadastro" style="padding-top:10px;">
+  <div class="sl"><div class="sn">1</div><span class="st">Identificação do Grupo</span></div>
+  <div class="g2">
+    <div class="card">
+      <h4>Renova JR — Empresa Principal</h4>
+      <table>
+        <tr><td style="color:var(--muted);width:42%">Razão Social</td><td>RENOVA J. R. CONSULTORIA E SERVICOS DE RECURSOS HUMANOS LTDA</td></tr>
+        <tr><td style="color:var(--muted)">CNPJ</td><td class="mono">04.699.076/0001-08</td></tr>
+        <tr><td style="color:var(--muted)">Constituição</td><td>19/09/2001 <span style="color:var(--muted)">(24 anos)</span></td></tr>
+        <tr><td style="color:var(--muted)">Natureza</td><td>Consultoria e Terceirização de RH</td></tr>
+        <tr><td style="color:var(--muted)">Atuação</td><td>PR, SC e RS</td></tr>
+        <tr><td style="color:var(--muted)">Sócia</td><td>Rosimeri da Silva Pereira — 100%</td></tr>
+        <tr><td style="color:var(--muted)">Situação RF</td><td><span class="chip cok">ATIVA</span></td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h4>R. Agilidade — Coligada</h4>
+      <table>
+        <tr><td style="color:var(--muted);width:42%">Razão Social</td><td>R. AGILIDADE LOCACAO DE MAO DE OBRA TEMPORARIA LTDA</td></tr>
+        <tr><td style="color:var(--muted)">CNPJ</td><td class="mono">05.411.783/0001-10</td></tr>
+        <tr><td style="color:var(--muted)">Natureza</td><td>Locação de Mão de Obra Temporária</td></tr>
+        <tr><td style="color:var(--muted)">Atuação</td><td>PR, SC e RS</td></tr>
+        <tr><td style="color:var(--muted)">Sócio</td><td>José Carlos de Oliveira — 100%</td></tr>
+        <tr><td style="color:var(--muted)">PL 2025</td><td><span class="chip chi">NEGATIVO -R$ 2,02M</span></td></tr>
+        <tr><td style="color:var(--muted)">Situação RF</td><td><span class="chip cok">ATIVA</span></td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <h4>Outras Entidades do Grupo</h4>
+    <table>
+      <tr><th>Razão Social</th><th>CNPJ</th><th>Sócio</th><th>Relação</th></tr>
+      <tr><td>RB Holding Gestão Ltda.</td><td class="mono">—</td><td>Rosimeri da Silva Pereira</td><td><span class="chip cwi">Esclarecer</span></td></tr>
+      <tr><td>Renova Clean Higienização</td><td class="mono">10.233.951/0001-64</td><td>José Carlos de Oliveira — 100%</td><td><span class="chip cbi">Coligada</span></td></tr>
+      <tr><td>RSM Cabos Elétricos Ltda.</td><td class="mono">12.211.022/0001-80</td><td>Rosimeri — 90%</td><td><span class="chip cbi">Coligada</span></td></tr>
+    </table>
+    <div class="alrt a">⚠ <strong>RB Holding Gestão Ltda.</strong> vinculada à Rosimeri: natureza, operação e relação com o grupo devem ser esclarecidas formalmente antes da aprovação definitiva. A menção de uma sócia chamada Bianca em uma das entidades vinculadas também requer confirmação de relação com o grupo familiar.</div>
+  </div>
+</div>
+
+<!-- SEÇÃO 2: BIRÔ / SERASA -->
+<div class="sec" id="biro" style="padding-top:6px;">
+  <div class="sl"><div class="sn">2</div><span class="st">Serasa / Birô de Crédito</span></div>
+  <div class="g2">
+    <div class="card">
+      <h4>Situação Cadastral — Empresas</h4>
+      <table>
+        <tr><td>Birô / Serasa — Renova JR</td><td><span class="chip cok">SEM RESTRIÇÕES</span></td></tr>
+        <tr><td>Birô / Serasa — R. Agilidade</td><td><span class="chip cok">SEM RESTRIÇÕES</span></td></tr>
+        <tr><td>PEFIN / REFIN</td><td><span class="chip cok">NADA CONSTA</span></td></tr>
+        <tr><td>Protestos</td><td><span class="chip cok">NADA CONSTA</span></td></tr>
+        <tr><td>Histórico 24 anos Renova JR</td><td><span class="chip cok">SEM OCORRÊNCIAS</span></td></tr>
+      </table>
+      <div class="alrt g">✅ <strong>Birô absolutamente limpo</strong> para ambas as empresas e sócios. Nenhum PEFIN, REFIN ou protesto identificado. O histórico de 24 anos sem restrições da Renova JR é indicativo forte de relacionamento financeiro saudável.</div>
+    </div>
+    <div class="card">
+      <h4>Situação Cadastral — Sócios</h4>
+      <table>
+        <tr><td>Birô Rosimeri da Silva Pereira</td><td><span class="chip cok">LIMPO</span></td></tr>
+        <tr><td>Birô José Carlos de Oliveira</td><td><span class="chip cok">LIMPO</span></td></tr>
+        <tr><td>BACEN Rosimeri</td><td><span class="chip cok">NADA CONSTA</span></td></tr>
+        <tr><td>BACEN José Carlos</td><td><span class="chip cok">NADA CONSTA</span></td></tr>
+      </table>
+      <div class="alrt g">✅ Sócios sem restrições em qualquer base consultada. Rosimeri mantém perfil reputacional limpo ao longo de todo o período de operação da empresa.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SEÇÃO 3: BACEN -->
+<div class="sec" id="bacen" style="padding-top:6px;">
+  <div class="sl"><div class="sn">3</div><span class="st">BACEN — Empresas e Sócios</span></div>
+  <div class="g3" style="margin-bottom:13px;">
+    <div class="card" style="text-align:center;margin-bottom:0;border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.07);"><div class="kl" style="margin-bottom:6px;">BACEN — RENOVA JR</div><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--green);">NADA CONSTA</div></div>
+    <div class="card" style="text-align:center;margin-bottom:0;border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.07);"><div class="kl" style="margin-bottom:6px;">BACEN — R. AGILIDADE</div><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--green);">NADA CONSTA</div></div>
+    <div class="card" style="text-align:center;margin-bottom:0;border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.07);"><div class="kl" style="margin-bottom:6px;">BACEN — SÓCIOS</div><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--green);">LIMPO</div></div>
+  </div>
+  <div class="alrt g">✅ Nenhum registro negativo em BACEN para empresas ou sócios do grupo. Ausência de SCR comprometedor, sem dívidas em aberto no sistema financeiro.</div>
+</div>
+
+<!-- SEÇÃO 4: BALANÇO / DRE — RENOVA JR -->
+<div class="sec" id="balanco" style="padding-top:6px;">
+  <div class="sl"><div class="sn">4</div><span class="st">Balanço e DRE — Renova JR (2025)</span></div>
+
+  <!-- DRE -->
+  <div class="g2">
+    <div class="card">
+      <h4>DRE 2025 — Demonstração de Resultado</h4>
+      <table>
+        <tr><td style="color:var(--muted)">Receita Bruta</td><td class="mono" style="color:var(--green);text-align:right">R$ 33.869.821,81</td></tr>
+        <tr><td style="color:var(--muted);padding-left:16px">(–) Deduções ISS/PIS/COFINS</td><td class="mono" style="color:var(--red);text-align:right">–R$ 751.277,55</td></tr>
+        <tr><td style="color:var(--muted)">Custos Totais</td><td class="mono" style="color:var(--red);text-align:right">–R$ 30.031.135,95</td></tr>
+        <tr><td style="color:var(--muted);padding-left:16px">· Salários</td><td class="mono" style="text-align:right">R$ 22.413.704,66</td></tr>
+        <tr><td style="color:var(--muted);padding-left:16px">· INSS / FGTS</td><td class="mono" style="text-align:right">R$ 4.768.057,84</td></tr>
+        <tr><td style="color:var(--muted);padding-left:16px">· Benefícios</td><td class="mono" style="text-align:right">R$ 1.280.917,70</td></tr>
+        <tr><td style="color:var(--muted);padding-left:16px">· Custo de Serviço</td><td class="mono" style="text-align:right">R$ 1.568.455,75</td></tr>
+        <tr style="border-top:1px solid rgba(255,255,255,.1)"><td><strong>Lucro Bruto</strong></td><td class="mono" style="color:var(--green);text-align:right;font-weight:700">R$ 3.087.408,31</td></tr>
+        <tr><td style="color:var(--muted)">Desp. Administrativas</td><td class="mono" style="color:var(--red);text-align:right">–R$ 311.113,31</td></tr>
+        <tr><td style="color:var(--amber)">Desp. Financeiras</td><td class="mono" style="color:var(--amber);text-align:right">–R$ 401.269,97</td></tr>
+        <tr><td style="color:var(--muted);padding-left:16px">· Juros</td><td class="mono" style="text-align:right">R$ 323.103,47</td></tr>
+        <tr><td style="color:var(--muted);padding-left:16px">· IOF</td><td class="mono" style="text-align:right">R$ 25.488,00</td></tr>
+        <tr><td style="color:var(--muted);padding-left:16px">· Tarifas Bancárias</td><td class="mono" style="text-align:right">R$ 52.678,50</td></tr>
+        <tr><td style="color:var(--muted)">Prov. IR + CSLL</td><td class="mono" style="text-align:right">–R$ 185.652,38</td></tr>
+        <tr style="border-top:1px solid rgba(255,255,255,.1)"><td><strong>Lucro Líquido</strong></td><td class="mono" style="color:var(--green);text-align:right;font-weight:700">R$ 2.158.676,88</td></tr>
+        <tr><td style="color:var(--muted)">Margem Líquida</td><td class="mono" style="color:var(--green);text-align:right">6,4%</td></tr>
+      </table>
+    </div>
+
+    <!-- BALANÇO: ATIVO -->
+    <div>
+      <div class="card" style="margin-bottom:11px;">
+        <h4>Balanço Patrimonial — Ativo</h4>
+        <table>
+          <tr><td><strong>Ativo Circulante</strong></td><td class="mono" style="text-align:right">R$ 9.012.788,92</td></tr>
+          <tr><td style="padding-left:16px;color:var(--amber)">Disponível (Caixa + Aplic.)</td><td class="mono" style="color:var(--amber);text-align:right">R$ 208.027,79</td></tr>
+          <tr><td style="padding-left:16px;color:var(--muted)">Contas a Receber</td><td class="mono" style="text-align:right">R$ 277.788,74</td></tr>
+          <tr><td style="padding-left:16px;color:var(--amber)">Impostos a Recuperar</td><td class="mono" style="color:var(--amber);text-align:right">R$ 7.915.898,48</td></tr>
+          <tr><td style="padding-left:32px;color:var(--muted);font-size:12px">INSS a Recuperar</td><td class="mono" style="text-align:right;font-size:12px">R$ 3.272.300,28</td></tr>
+          <tr><td style="padding-left:32px;color:var(--muted);font-size:12px">COFINS a Recuperar</td><td class="mono" style="text-align:right;font-size:12px">R$ 2.098.169,86</td></tr>
+          <tr><td style="padding-left:16px;color:var(--muted)">Outros Recebimentos</td><td class="mono" style="text-align:right">R$ 611.073,91</td></tr>
+          <tr style="border-top:1px solid rgba(255,255,255,.08)"><td><strong>Ativo Não Circulante</strong></td><td class="mono" style="text-align:right">R$ 16.166.713,55</td></tr>
+          <tr><td style="padding-left:16px;color:var(--amber)">Empréstimos Partes Relacionadas</td><td class="mono" style="color:var(--amber);text-align:right">R$ 10.712.278,23</td></tr>
+          <tr><td style="padding-left:16px;color:var(--muted)">Despesas Antecipadas</td><td class="mono" style="text-align:right">R$ 4.554.807,42</td></tr>
+          <tr><td style="padding-left:16px;color:var(--muted)">Investimentos (consórcios)</td><td class="mono" style="text-align:right">R$ 899.627,90</td></tr>
+          <tr style="border-top:1px solid rgba(255,255,255,.12)"><td><strong>Ativo Total</strong></td><td class="mono" style="color:var(--blue);text-align:right;font-weight:700">R$ 25.179.502,47</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <h4>Balanço Patrimonial — Passivo</h4>
+        <table>
+          <tr><td><strong>Passivo Circulante</strong></td><td class="mono" style="text-align:right">R$ 18.736.444,83</td></tr>
+          <tr><td style="padding-left:16px;color:var(--red)"><strong>INSS a Recolher</strong></td><td class="mono" style="color:var(--red);text-align:right;font-weight:700">R$ 9.953.264,48</td></tr>
+          <tr><td style="padding-left:16px;color:var(--amber)">FGTS a Recolher</td><td class="mono" style="color:var(--amber);text-align:right">R$ 860.469,84</td></tr>
+          <tr><td style="padding-left:16px;color:var(--amber)">Empréstimos / Financiamentos</td><td class="mono" style="color:var(--amber);text-align:right">R$ 6.752.957,43</td></tr>
+          <tr><td style="padding-left:32px;color:var(--muted);font-size:12px">BB Conta Garantia</td><td class="mono" style="text-align:right;font-size:12px">R$ 2.803.906,37</td></tr>
+          <tr><td style="padding-left:32px;color:var(--muted);font-size:12px">Bradesco Contrato</td><td class="mono" style="text-align:right;font-size:12px">~R$ 2.813.541</td></tr>
+          <tr><td style="padding-left:32px;color:var(--muted);font-size:12px">Cap. Giro Itaú</td><td class="mono" style="text-align:right;font-size:12px">R$ 418.133,48</td></tr>
+          <tr><td style="padding-left:32px;color:var(--muted);font-size:12px">Sicredi</td><td class="mono" style="text-align:right;font-size:12px">R$ 211.634</td></tr>
+          <tr><td style="padding-left:16px;color:var(--muted)">Salários a Pagar</td><td class="mono" style="text-align:right">R$ 746.330,51</td></tr>
+          <tr><td style="padding-left:16px;color:var(--muted)">Obrig. Tributárias</td><td class="mono" style="text-align:right">R$ 517.214,61</td></tr>
+          <tr><td><strong>Passivo Não Circulante</strong></td><td class="mono" style="text-align:right">R$ 24.000,00</td></tr>
+          <tr style="border-top:1px solid rgba(255,255,255,.08)"><td style="color:var(--green)"><strong>Patrimônio Líquido</strong></td><td class="mono" style="color:var(--green);text-align:right;font-weight:700">R$ 6.419.057,64</td></tr>
+          <tr><td style="padding-left:16px;color:var(--muted)">Capital Social</td><td class="mono" style="text-align:right">R$ 440.000,00</td></tr>
+          <tr><td style="padding-left:16px;color:var(--muted)">Lucros Acumulados</td><td class="mono" style="text-align:right">R$ 3.790.520,75</td></tr>
+          <tr><td style="padding-left:16px;color:var(--muted)">Result. Exercício</td><td class="mono" style="text-align:right">R$ 2.188.536,89</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- INDICADORES -->
+  <div class="g3" style="margin-top:4px;margin-bottom:12px;">
+    <div class="card" style="text-align:center;margin-bottom:0;border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+      <div class="kl">Liquidez Corrente</div>
+      <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--red);">0,48</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px;">AC R$9M / PC R$18,7M</div>
+    </div>
+    <div class="card" style="text-align:center;margin-bottom:0;border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+      <div class="kl">Caixa / Receita Bruta</div>
+      <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--red);">0,6%</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px;">R$208k em R$33,9M</div>
+    </div>
+    <div class="card" style="text-align:center;margin-bottom:0;border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);">
+      <div class="kl">INSS Líquido (net)</div>
+      <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--amber);">~R$ 6,68M</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px;">R$9,95M – R$3,27M recuperar</div>
+    </div>
+  </div>
+
+  <div class="alrt r">🔴 <strong>INSS a Recolher de R$9,95M</strong> é o principal passivo da empresa e ponto crítico da operação. A apresentação de CND Previdenciária válida é condicionante obrigatória e inegociável antes de qualquer exposição.</div>
+  <div class="alrt a" style="margin-top:6px;">⚠ <strong>Liquidez Corrente de 0,48</strong> — passivo circulante (R$18,7M) é o dobro do ativo circulante (R$9M). Quase todo o ativo circulante são impostos a recuperar (R$7,9M) de realização lenta. Caixa disponível de apenas R$208k para empresa com receita de R$33,9M.</div>
+  <div class="alrt a" style="margin-top:6px;">⚠ <strong>Empréstimos a Partes Relacionadas no Ativo: R$10,7M</strong> — a Renova JR tem R$4,1M a receber da R. Agilidade (PL negativo), R$4,27M da Renova Clean e R$1,85M de outras entidades. Esses valores não são ativos líquidos.</div>
+</div>
+
+<!-- SEÇÃO 5: BALANÇO / DRE — R. AGILIDADE -->
+<div class="sec" id="ragilidade" style="padding-top:6px;">
+  <div class="sl"><div class="sn">5</div><span class="st">Balanço e DRE — R. Agilidade (2025)</span></div>
+  <div class="g2">
+    <div class="card">
+      <h4>DRE 2025 — R. Agilidade</h4>
+      <table>
+        <tr><td style="color:var(--muted)">Receita Bruta</td><td class="mono" style="text-align:right">R$ 11.910.445,76</td></tr>
+        <tr><td style="color:var(--muted)">(–) Deduções</td><td class="mono" style="color:var(--red);text-align:right">–R$ 297.269,50</td></tr>
+        <tr><td style="color:var(--muted)">Custos (Folha + INSS + Ben.)</td><td class="mono" style="color:var(--red);text-align:right">–R$ 11.228.821,26</td></tr>
+        <tr><td style="color:var(--muted);padding-left:16px">· Folha de Pagamento</td><td class="mono" style="text-align:right">R$ 7.430.380,42</td></tr>
+        <tr><td style="color:var(--muted);padding-left:16px">· INSS</td><td class="mono" style="text-align:right">R$ 2.093.322,92</td></tr>
+        <tr><td style="color:var(--muted);padding-left:16px">· Benefícios</td><td class="mono" style="text-align:right">R$ 1.705.117,92</td></tr>
+        <tr style="border-top:1px solid rgba(255,255,255,.08)"><td style="color:var(--amber)">Lucro Bruto</td><td class="mono" style="color:var(--amber);text-align:right">R$ 384.355,00 (3,2%)</td></tr>
+        <tr><td style="color:var(--red)">Desp. Adm. (incl. R$165k adv.)</td><td class="mono" style="color:var(--red);text-align:right">–R$ 596.862,26</td></tr>
+        <tr><td style="color:var(--muted)">Desp. Financeiras</td><td class="mono" style="text-align:right">–R$ 132.435,87</td></tr>
+        <tr><td style="color:var(--muted)">Provisões</td><td class="mono" style="text-align:right">–R$ 49.737,36</td></tr>
+        <tr style="border-top:1px solid rgba(255,255,255,.12)"><td style="color:var(--red)"><strong>PREJUÍZO</strong></td><td class="mono" style="color:var(--red);text-align:right;font-weight:700">–R$ 394.680,49</td></tr>
+      </table>
+      <div class="alrt r" style="margin-top:8px;">🔴 Honorários de advogados de R$165k revelam custo operacional elevado decorrente do volume de 110+ reclamações trabalhistas ativas. Desp. adm. (R$597k) supera o lucro bruto (R$384k) — empresa deficitária.</div>
+    </div>
+    <div>
+      <div class="card">
+        <h4>Balanço — R. Agilidade</h4>
+        <table>
+          <tr><td><strong>Ativo Circulante</strong></td><td class="mono" style="text-align:right">R$ 4.980.400,95</td></tr>
+          <tr><td style="padding-left:16px;color:var(--red)">Disponível</td><td class="mono" style="color:var(--red);text-align:right">R$ 53.279,25</td></tr>
+          <tr><td style="padding-left:16px;color:var(--muted)">Contas a Receber</td><td class="mono" style="text-align:right">R$ 1.113.691,26</td></tr>
+          <tr><td style="padding-left:16px;color:var(--muted)">Impostos a Recuperar</td><td class="mono" style="text-align:right">R$ 2.532.727,79</td></tr>
+          <tr><td><strong>Ativo Não Circulante</strong></td><td class="mono" style="text-align:right">R$ 5.553.655,43</td></tr>
+          <tr><td style="padding-left:16px;color:var(--red)">Depósitos Judiciais</td><td class="mono" style="color:var(--red);text-align:right">R$ 3.150.188,31</td></tr>
+          <tr><td style="padding-left:16px;color:var(--muted)">Emprést. Pessoas Ligadas</td><td class="mono" style="text-align:right">R$ 2.250.753,08</td></tr>
+          <tr style="border-top:1px solid rgba(255,255,255,.08)"><td><strong>Ativo Total</strong></td><td class="mono" style="color:var(--blue);text-align:right;font-weight:700">R$ 10.534.056,38</td></tr>
+          <tr style="border-top:1px solid rgba(255,255,255,.08)"><td><strong>Passivo Circulante</strong></td><td class="mono" style="text-align:right">R$ 4.293.667,49</td></tr>
+          <tr><td style="padding-left:16px;color:var(--red)">INSS a Recolher</td><td class="mono" style="color:var(--red);text-align:right">R$ 2.963.711,37</td></tr>
+          <tr><td style="padding-left:16px;color:var(--amber)">Empréstimos Bancários</td><td class="mono" style="text-align:right">R$ 449.223,62</td></tr>
+          <tr><td><strong>Passivo Não Circulante</strong></td><td class="mono" style="color:var(--red);text-align:right">R$ 8.262.961,83</td></tr>
+          <tr><td style="padding-left:16px;color:var(--muted)">Emprést. Renova JR</td><td class="mono" style="text-align:right">R$ 4.109.970,29</td></tr>
+          <tr><td style="padding-left:16px;color:var(--muted)">Emprést. Renova Clean</td><td class="mono" style="text-align:right">R$ 2.384.020,88</td></tr>
+          <tr><td style="padding-left:16px;color:var(--muted)">Emprést. Rosimeri</td><td class="mono" style="text-align:right">R$ 1.768.970,66</td></tr>
+          <tr style="border-top:1px solid rgba(255,255,255,.12)"><td style="color:var(--red)"><strong>PL NEGATIVO</strong></td><td class="mono" style="color:var(--red);text-align:right;font-weight:700">–R$ 2.022.572,94</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHART COMPARATIVO -->
+  <div class="card" style="margin-top:4px;">
+    <h4>Comparativo Grupo — Renova JR vs R. Agilidade (R$ mil, 2025)</h4>
+    <div class="chart-wrap"><canvas id="groupChart"></canvas></div>
+    <div style="display:flex;gap:24px;margin-top:12px;justify-content:center;flex-wrap:wrap;font-size:12px;color:var(--muted);">
+      <span><span style="display:inline-block;width:10px;height:10px;background:rgba(0,212,170,.7);border-radius:2px;margin-right:5px;"></span>Renova JR: Rec R$33,9M | Lucro R$2,16M | PL R$6,4M</span>
+      <span><span style="display:inline-block;width:10px;height:10px;background:rgba(79,142,247,.7);border-radius:2px;margin-right:5px;"></span>R. Agilidade: Rec R$11,9M | Prejuízo –R$395k | PL –R$2M</span>
+    </div>
+  </div>
+
+  <div class="alrt r" style="margin-top:8px;">🔴 <strong>PL negativo de –R$2M na R. Agilidade.</strong> A empresa acumula prejuízos e é sustentada por empréstimos intercompany de R$8,26M vindos principalmente da Renova JR (R$4,1M) e de Rosimeri (R$1,77M).</div>
+  <div class="alrt r" style="margin-top:6px;">🔴 <strong>Depósitos Judiciais: R$3,15M</strong> imobilizados como caução em ações trabalhistas ativas — volume proporcional a mais de 110 reclamações.</div>
+</div>
+
+<!-- SEÇÃO 6: SÓCIOS -->
+<div class="sec" id="socios" style="padding-top:6px;">
+  <div class="sl"><div class="sn">6</div><span class="st">Análise de Sócios — IRPF 2024</span></div>
+  <div class="g2">
+    <!-- ROSIMERI -->
+    <div class="card">
+      <h4>Rosimeri da Silva Pereira — CPF 716.577.039-91</h4>
+      <table>
+        <tr><td style="color:var(--muted);width:50%">Natureza</td><td>Sócia / Dirigente — Renova JR (100%)</td></tr>
+        <tr><td style="color:var(--muted)">BACEN</td><td><span class="chip cok">NADA CONSTA</span></td></tr>
+        <tr><td style="color:var(--muted)">Bens e Direitos 31/12/24</td><td class="mono">R$ 5.142.716,26</td></tr>
+        <tr><td style="color:var(--muted)">Dívidas e Ônus 31/12/24</td><td class="mono" style="color:var(--amber)">R$ 3.130.142,65</td></tr>
+        <tr><td style="color:var(--muted)"><strong>PL Pessoal Estimado</strong></td><td class="mono" style="color:var(--green);font-weight:700">~R$ 2.012.574</td></tr>
+        <tr><td style="color:var(--muted)">Dividendos Recebidos 2024</td><td class="mono" style="color:var(--amber)">R$ 2.000.000</td></tr>
+      </table>
+      <div style="margin-top:12px;">
+        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:7px;">Principais Bens</div>
+        <div class="rr rg" style="margin-bottom:4px;"><div class="rd"></div><div class="rt"><strong>Apto Balneário Camboriú 173m² (Barcelona Plaza)</strong><span>R$ 2.900.000 — adquirido ago/2024 | financiamento Itaú R$1.590.117</span></div></div>
+        <div class="rr rg" style="margin-bottom:4px;"><div class="rd"></div><div class="rt"><strong>Embarcação Focker 330 Black Edition</strong><span>R$ 650.000</span></div></div>
+        <div class="rr rg" style="margin-bottom:4px;"><div class="rd"></div><div class="rt"><strong>Apto Curitiba (Ideale Residencial 100m²)</strong><span>R$ 270.000</span></div></div>
+        <div class="rr rg" style="margin-bottom:4px;"><div class="rd"></div><div class="rt"><strong>VGBL Itaú Previdência</strong><span>R$ 407.356</span></div></div>
+        <div class="rr rg"><div class="rd"></div><div class="rt"><strong>Terrenos Bacacheri + Curitiba + Rural Colombo</strong><span>R$ 313.723</span></div></div>
+      </div>
+      <div class="alrt a" style="margin-top:8px;">⚠ Apartamento de R$2,9M em BC tem financiamento de R$1,59M — patrimônio líquido neste imóvel é ~R$1,31M. A maioria dos bens está hipotecada ou financiada. <strong>Rosimeri distribuiu R$2M em dividendos da Renova JR em 2024</strong> enquanto o INSS já estava crescendo.</div>
+    </div>
+
+    <!-- JOSÉ CARLOS -->
+    <div class="card">
+      <h4>José Carlos de Oliveira — CPF 231.194.209-30</h4>
+      <table>
+        <tr><td style="color:var(--muted);width:50%">Natureza</td><td>Aposentado / Sócio R. Agilidade (100%) e Renova Clean</td></tr>
+        <tr><td style="color:var(--muted)">BACEN</td><td><span class="chip cok">NADA CONSTA</span></td></tr>
+        <tr><td style="color:var(--muted)">Renda Anual (INSS apos.)</td><td class="mono" style="color:var(--amber)">R$ 20.415,01 (~R$1.700/mês)</td></tr>
+        <tr><td style="color:var(--muted)">Bens e Direitos 31/12/24</td><td class="mono">R$ 1.225.651,68</td></tr>
+        <tr><td style="color:var(--muted)">Dívidas e Ônus 31/12/24</td><td class="mono" style="color:var(--red)">R$ 956.118,26</td></tr>
+        <tr><td style="color:var(--muted)"><strong>PL Pessoal Estimado</strong></td><td class="mono" style="color:var(--amber);font-weight:700">~R$ 269.534</td></tr>
+      </table>
+      <div style="margin-top:12px;">
+        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:7px;">Composição do Patrimônio</div>
+        <div class="rr rm" style="margin-bottom:4px;"><div class="rd"></div><div class="rt"><strong>Quotas R. Agilidade (100%)</strong><span>R$ 207.500 — empresa com PL negativo</span></div></div>
+        <div class="rr rm" style="margin-bottom:4px;"><div class="rd"></div><div class="rt"><strong>Quotas Renova Clean (100%)</strong><span>R$ 104.500</span></div></div>
+        <div class="rr rh"><div class="rd"></div><div class="rt"><strong>Crédito concedido à R. Agilidade via consignado pessoal</strong><span>R$ 913.651,68 — Itaú consignado R$448k + R$464k tomados sobre aposentadoria</span></div></div>
+      </div>
+      <div class="alrt r" style="margin-top:8px;">🔴 <strong>José Carlos tomou dois créditos consignados no Itaú (R$448k + R$464k = R$913k) usando sua aposentadoria como garantia para repassar à R. Agilidade.</strong> Isso expõe a renda da aposentadoria ao risco empresarial da coligada e sinaliza que a R. Agilidade não consegue crédito bancário próprio. PL pessoal de ~R$270k é insuficiente para aval significativo.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SEÇÃO 7: SACADOS / CURVA ABC -->
+<div class="sec" id="sacados" style="padding-top:6px;">
+  <div class="sl"><div class="sn">7</div><span class="st">Curva ABC e Sacados</span></div>
+  <div class="g2">
+    <div class="card">
+      <h4>Renova JR — Curva ABC (principais clientes)</h4>
+      <table>
+        <tr><th>Cliente</th><th>Empresa</th><th>Perc. Fat.</th></tr>
+        <tr><td>BIOMA</td><td>Renova JR</td><td><span class="chip cwi">S/ PERCENTUAL</span></td></tr>
+        <tr><td>A.D.S.N.</td><td>Renova JR</td><td><span class="chip cwi">S/ PERCENTUAL</span></td></tr>
+        <tr><td>TEQUALY</td><td>Renova JR</td><td><span class="chip cwi">S/ PERCENTUAL</span></td></tr>
+        <tr><td>KARSTEN</td><td>Renova JR</td><td><span class="chip cwi">S/ PERCENTUAL</span></td></tr>
+        <tr><td>MÃO COLORIDA</td><td>Renova JR</td><td><span class="chip cwi">S/ PERCENTUAL</span></td></tr>
+      </table>
+      <div class="alrt a" style="margin-top:8px;">⚠ <strong>Curva ABC apresentada sem percentuais de faturamento</strong> — impossibilita análise de concentração por sacado. Condicionante obrigatória.</div>
+    </div>
+    <div class="card">
+      <h4>R. Agilidade — Curva ABC (principais clientes)</h4>
+      <table>
+        <tr><th>Cliente</th><th>Empresa</th><th>Perc. Fat.</th></tr>
+        <tr><td>CARREFOUR</td><td>R. Agilidade</td><td><span class="chip cwi">S/ PERCENTUAL</span></td></tr>
+        <tr><td>RUMO</td><td>R. Agilidade</td><td><span class="chip cwi">S/ PERCENTUAL</span></td></tr>
+        <tr><td>TRANE</td><td>R. Agilidade</td><td><span class="chip cwi">S/ PERCENTUAL</span></td></tr>
+      </table>
+      <div class="alrt a" style="margin-top:8px;">⚠ Carrefour e Rumo são sacados da <strong>R. Agilidade</strong>, não da Renova JR. Distinção por CNPJ cedente obrigatória antes da operação.</div>
+    </div>
+  </div>
+  <div class="card">
+    <h4>NFs Apresentadas — Renova JR</h4>
+    <table>
+      <tr><th>NF</th><th>Sacado</th><th>Observação</th></tr>
+      <tr><td class="mono">716</td><td>TEMBICI (Porto Alegre)</td><td><span class="chip cok">Grande Porte</span></td></tr>
+      <tr><td class="mono">715</td><td>TEMBICI (São Paulo)</td><td><span class="chip cok">Grande Porte</span></td></tr>
+      <tr><td class="mono">720</td><td>VIACREDI</td><td><span class="chip cok">Grande Porte</span></td></tr>
+      <tr><td class="mono">705</td><td>REDRAM (Vila São Pedro)</td><td><span class="chip cbi">Verificar porte</span></td></tr>
+      <tr><td class="mono">718</td><td>E MART CAR</td><td><span class="chip cbi">Verificar porte</span></td></tr>
+      <tr><td class="mono">722</td><td>BIOMA</td><td><span class="chip cok">Curva ABC</span></td></tr>
+      <tr><td class="mono">724</td><td>SIMBIOSE (Cruz Alta)</td><td><span class="chip cbi">Verificar porte</span></td></tr>
+      <tr><td class="mono">136</td><td>COD 06</td><td><span class="chip cwi">Identificar</span></td></tr>
+    </table>
+    <div class="alrt a" style="margin-top:8px;">⚠ <strong>Tembici e Viacredi</strong> aparecem nas NFs apresentadas (sacados da Renova JR) mas não estão listados na Curva ABC desta empresa. As Curvas ABC não cobrem todos os sacados ativos — reforça a necessidade de Curva ABC atualizada com percentuais.</div>
+  </div>
+</div>
+
+<!-- SEÇÃO 8: RISCOS -->
+<div class="sec" id="riscos" style="padding-top:6px;">
+  <div class="sl"><div class="sn">8</div><span class="st">Matriz de Riscos</span></div>
+
+  <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">— RISCO ALTO</div>
+  <div class="rr rh"><div class="rd"></div><div class="rt"><strong>INSS a Recolher — Grupo Total R$12,9M</strong><span>Renova JR R$9,95M + R. Agilidade R$2,96M. Passivo previdenciário crítico. CND Previdenciária válida é condicionante inegociável antes de qualquer exposição.</span></div></div>
+  <div class="rr rh"><div class="rd"></div><div class="rt"><strong>PL Negativo R. Agilidade (–R$2,02M)</strong><span>Coligada sustentada por R$8,26M em empréstimos intercompany. Prejuízo em 2025. Estrutura de capital inviável sem suporte do grupo.</span></div></div>
+  <div class="rr rh"><div class="rd"></div><div class="rt"><strong>Passivo Trabalhista — 110+ Reclamações Ativas</strong><span>Depósitos judiciais R$3,15M imobilizados. Estratégia declarada de não acordo prolongando demandas. Passivo real de difícil mensuração — risco oculto relevante.</span></div></div>
+  <div class="rr rh"><div class="rd"></div><div class="rt"><strong>Liquidez Corrente Renova JR: 0,48 — Caixa R$208k</strong><span>PC (R$18,7M) é o dobro do AC (R$9M). Ativo circulante dominado por impostos a recuperar de realização lenta. Caixa disponível representa 0,6% da receita.</span></div></div>
+
+  <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin:12px 0 8px;">— RISCO MÉDIO</div>
+  <div class="rr rm"><div class="rd"></div><div class="rt"><strong>Endividamento Bancário Consolidado ~R$7,2M</strong><span>Despesas financeiras crescendo 302% no triênio. Pressão de caixa contínua. Bradesco R$2,8M + BB Conta Garantia R$2,8M + Itaú CG R$418k + Sicredi R$211k.</span></div></div>
+  <div class="rr rm"><div class="rd"></div><div class="rt"><strong>Curva ABC sem Percentuais — Ambas as Empresas</strong><span>Concentração por sacado desconhecida. Impossibilita análise de risco por cliente. Tembici/Viacredi nas NFs mas ausentes da Curva ABC da Renova JR.</span></div></div>
+  <div class="rr rm"><div class="rd"></div><div class="rt"><strong>José Carlos — Consignado Pessoal R$913k para R. Agilidade</strong><span>Aposentado com renda de R$1.700/mês tomou crédito pessoal para financiar a coligada. PL pessoal ~R$270k — insuficiente como avalista.</span></div></div>
+  <div class="rr rm"><div class="rd"></div><div class="rt"><strong>Dividendos R$2M em 2024 + INSS Crescendo</strong><span>Rosimeri retirou R$2M em dividendos da Renova JR em 2024 enquanto o passivo previdenciário crescia 267% — governança financeira questionável.</span></div></div>
+
+  <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin:12px 0 8px;">— MITIGANTES</div>
+  <div class="rr rg"><div class="rd"></div><div class="rt"><strong>24 Anos de Operação — Birô Absolutamente Limpo</strong><span>Nenhum PEFIN, REFIN, protesto ou restrição em qualquer base consultada. Histórico de relacionamento financeiro saudável.</span></div></div>
+  <div class="rr rg"><div class="rd"></div><div class="rt"><strong>Sacados de Grande Porte — Contratos de Renovação Automática</strong><span>Carrefour, Rumo, Karsten, Tembici, Viacredi. NF = serviço já prestado. Alta previsibilidade de recebimento e baixo risco de inadimplência dos pagadores.</span></div></div>
+  <div class="rr rg"><div class="rd"></div><div class="rt"><strong>Lucro Líquido R$2,16M e PL Positivo R$6,4M — Renova JR</strong><span>Empresa principal saudável operacionalmente. Modelo de negócio compatível com antecipação de recebíveis.</span></div></div>
+</div>
+
+<!-- SEÇÃO 9: PARECER MV -->
+<div class="sec" id="parecer-mv" style="padding-top:6px;">
+  <div class="sl"><div class="sn">9</div><span class="st">Parecer — Marcelo Vazquez</span></div>
+  <div class="card" style="border-color:rgba(0,212,170,.2);background:rgba(0,212,170,.03);">
+    <div class="ab" style="background:transparent;border:none;padding:0;margin-bottom:14px;">
+      <div class="av mv">MV</div>
+      <div><div class="an">Marcelo Vazquez</div><div class="ar">Analista de Crédito — AG Antecipa &nbsp;·&nbsp; Jun/2026</div></div>
+      <div style="margin-left:auto;"><span class="chip cwi">CONDICIONAR APROVAÇÃO</span></div>
+    </div>
+    <div class="pb">A empresa RENOVA J. R. Consultoria e Serviços de Recursos Humanos Ltda., fundada em 19/09/2001, possui 24 anos de atuação, demonstrando estabilidade operacional e histórico consolidado no mercado.</div>
+    <div class="pb">Na análise cadastral, societária e reputacional, não foram identificadas restrições relevantes em Serasa ou fontes públicas que indiquem risco impeditivo à concessão de crédito. Apesar da existência de ex-sócios e de outras empresas vinculadas aos principais envolvidos, os vínculos aparentam ter característica familiar e operacional, sem indícios atuais de irregularidade ou risco material.</div>
+    <div style="font-size:12px;font-weight:700;color:var(--teal);margin:14px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Pontos Fortes</div>
+    <ul class="cl">
+      <li><div class="cn">1</div><div>Empresa com longo histórico de atuação (24 anos), indicando maturidade, continuidade operacional e capacidade de permanência no mercado.</div></li>
+      <li><div class="cn">2</div><div>Ausência de restrições relevantes em consultas de crédito e fontes públicas, sem apontamentos que comprometam a análise.</div></li>
+      <li><div class="cn">3</div><div>Faturamento compatível com a operação proposta, com documentação apresentada e assinatura digital do contador.</div></li>
+      <li><div class="cn">4</div><div>Endividamento não preocupante quando comparado ao volume de faturamento informado.</div></li>
+      <li><div class="cn">5</div><div>Sócia com bom perfil patrimonial conforme IR apresentado, demonstrando poder aquisitivo e capacidade financeira.</div></li>
+      <li><div class="cn">6</div><div>Carteira de sacados concentrada em empresas de grande porte, fator positivo para mitigação de risco de recebimento.</div></li>
+      <li><div class="cn">7</div><div>Baixa variedade na curva ABC, sugerindo operação com perfil mais direcionado, exigindo acompanhamento, mas sem caracterizar impedimento.</div></li>
+      <li><div class="cn">8</div><div>Potencial positivo para parceria financeira, considerando o conjunto de informações analisadas.</div></li>
+    </ul>
+    <div style="font-size:12px;font-weight:700;color:var(--amber);margin:14px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Pontos de Atenção</div>
+    <div class="pb">Recomenda-se aprofundar o entendimento sobre a empresa RB Holding Gestão Ltda., vinculada à Rosimeri, e esclarecer a participação de Bianca no quadro societário e sua relação com o grupo familiar. Recomendável também acompanhar movimentações societárias envolvendo Sandra, José e Rosimeri.</div>
+    <div class="pb">Conclusão: Parecer favorável ao prosseguimento da operação, mantendo como condição o esclarecimento complementar sobre a holding e o acompanhamento das movimentações societárias do grupo.</div>
+  </div>
+</div>
+
+<!-- SPLIT -->
+<div class="split">
+  <div class="sp-t">PERSPECTIVA FINANCEIRA &amp; CONTÁBIL</div>
+  <div class="sp-s">Rafael Bazan — Análise Financeira / Contábil / Passivo Previdenciário / Trabalhista</div>
+</div>
+
+<!-- RB BLOCK HEADER -->
+<div class="rf-sec">
+<div class="sec" style="padding-top:28px;padding-bottom:0;">
+  <div class="ab"><div class="av rb">RB</div><div><div class="an">Rafael Bazan</div><div class="ar">Analista Financeiro — AG Antecipa</div></div></div>
+</div>
+
+<!-- SEÇÃO 10: PERSPECTIVA FINANCEIRA -->
+<div class="sec" id="financeiro" style="padding-top:10px;">
+  <div class="sl"><div class="sn b">10</div><span class="st">Perspectiva Financeira — Rafael Bazan</span></div>
+  <div class="card" style="border-color:rgba(79,142,247,.2);background:rgba(79,142,247,.03);">
+    <div class="ab" style="background:transparent;border:none;padding:0;margin-bottom:14px;">
+      <div class="av rb">RB</div>
+      <div><div class="an">Rafael Bazan</div><div class="ar">Analista Financeiro — AG Antecipa &nbsp;·&nbsp; Jun/2026</div></div>
+      <div style="margin-left:auto;"><span class="chip cwi">APROVAÇÃO CONDICIONADA</span></div>
+    </div>
+    <div class="pb b">O Grupo Agilidade é composto por duas empresas operacionalmente integradas — Renova J.R. Consultoria e Serviços de Recursos Humanos Ltda. (CNPJ 04.699.076/0001-08) e R. Agilidade Locação de Mão de Obra Temporária Ltda. (CNPJ 05.411.783/0001-10) — sob controle de Rosimeri da Silva Pereira e José Carlos de Oliveira, com atuação consolidada nos estados do Paraná, Santa Catarina e Rio Grande do Sul.</div>
+    <div class="pb b">A Renova JR, empresa principal do grupo, registrou receita bruta de R$33,9M em 2025, com lucro líquido de R$2,16M (margem de 6,4%) e quase 30 anos de operação no setor de terceirização de RH. A carteira de clientes inclui sacados de porte relevante — Carrefour, Rumo, Karsten, Tembici e Viacredi — com contratos anuais de renovação automática, conferindo alta previsibilidade de receita. O modelo de negócio é intrinsecamente compatível com antecipação de recebíveis, uma vez que as notas fiscais refletem serviço já prestado, e a empresa demonstrou familiaridade com o processo de confirmação prévia pelos sacados.</div>
+    <div style="font-size:12px;font-weight:700;color:var(--blue);margin:14px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Riscos Estruturais Identificados</div>
+    <ul class="cl">
+      <li><div class="cn b">1</div><div><strong>INSS a Recolher R$9,95M na Renova JR</strong> — crescimento de 267% entre 2022 e 2025. Passivo previdenciário elevado e exige apresentação de CND Previdenciária válida como condicionante obrigatória.</div></li>
+      <li><div class="cn b">2</div><div><strong>Endividamento bancário consolidado ~R$8,7M no grupo</strong> (Bradesco, Banco do Brasil, Itaú, Sicredi), com despesas financeiras crescendo 302% no triênio — evidência direta da pressão de caixa que motiva a busca por antecipação.</div></li>
+      <li><div class="cn b">3</div><div><strong>Passivo trabalhista contingente com mais de 110 reclamações ativas</strong> — estratégia declarada de não buscar acordos e prolongar demandas. Depósitos judiciais de R$3,15M imobilizados na R. Agilidade.</div></li>
+    </ul>
+    <div class="pb b" style="margin-top:14px;">Adicionalmente, a R. Agilidade apresentou prejuízo de R$394k em 2025 e histórico de PL negativo em 2023, além de uma divergência de ~R$2M entre a DRE e a Declaração de Faturamento do mesmo exercício — inconsistência que precisa ser esclarecida formalmente. A Curva ABC apresentada lista apenas os nomes dos clientes sem percentuais de faturamento, o que impossibilita a análise de concentração de sacados neste momento.</div>
+    <div style="font-size:12px;font-weight:700;color:var(--amber);margin:14px 0 8px;text-transform:uppercase;letter-spacing:.5px;">Condicionantes Mínimas</div>
+    <ul class="cl">
+      <li><div class="cn b">i</div><div>CND Previdenciária válida da Renova JR e R. Agilidade.</div></li>
+      <li><div class="cn b">ii</div><div>Curva ABC com percentuais de faturamento por cliente em ambas as empresas.</div></li>
+      <li><div class="cn b">iii</div><div>Esclarecimento formal da divergência de ~R$2M no faturamento da R. Agilidade entre DRE e Declaração.</div></li>
+      <li><div class="cn b">iv</div><div>Fiança solidária de Rosimeri da Silva Pereira e José Carlos de Oliveira.</div></li>
+      <li><div class="cn b">v</div><div>Mapeamento dos contratos de prestação de serviço que permitem cessão de crédito.</div></li>
+      <li><div class="cn b">vi</div><div>Limite de concentração por sacado: máximo 30% da carteira cedida.</div></li>
+    </ul>
+    <div class="pb b" style="margin-top:14px;">Operação restrita exclusivamente a notas fiscais com confirmação prévia do sacado. A recomendação é de aprovação condicionada ao cumprimento integral das condicionantes acima.</div>
+  </div>
+</div>
+
+<!-- SEÇÃO 11: CRUZAMENTO ANALÍTICO -->
+<div class="sec" id="cruzamento" style="padding-top:6px;">
+  <div class="sl"><div class="sn b">11</div><span class="st">Cruzamento Documental — Alinhamento entre Pareceres</span></div>
+
+  <div style="font-size:11px;color:var(--green);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">— CONVERGÊNCIA ENTRE MV E RB (documentos confirmam)</div>
+  <div class="rr rg"><div class="rd"></div><div class="rt"><strong>Direção idêntica: ambos CONDICIONAR APROVAÇÃO</strong><span>MV e RB chegaram independentemente à mesma conclusão — mérito comercial real com condicionantes obrigatórias. Os documentos suportam essa direção.</span></div></div>
+  <div class="rr rg"><div class="rd"></div><div class="rt"><strong>Birô limpo confirmado pelos documentos</strong><span>Nenhum PEFIN, REFIN ou protesto em ambas as empresas e sócios. Histórico de 24 anos sem restrições verificado.</span></div></div>
+  <div class="rr rg"><div class="rd"></div><div class="rt"><strong>Sacados de grande porte confirmados pelas NFs</strong><span>Tembici, Viacredi, BIOMA — NFs apresentadas confirmam a existência de sacados de qualidade. Carrefour e Rumo confirmados na Curva ABC da R. Agilidade.</span></div></div>
+  <div class="rr rg"><div class="rd"></div><div class="rt"><strong>Curva ABC sem percentuais — ambos apontaram</strong><span>Confirmado pelos documentos: ambas as Curvas ABC trazem apenas nomes de clientes sem participação percentual no faturamento.</span></div></div>
+
+  <div style="font-size:11px;color:var(--amber);text-transform:uppercase;letter-spacing:.5px;margin:14px 0 8px;">— DIVERGÊNCIAS E PONTOS DE TENSÃO</div>
+  <div class="rr rm"><div class="rd"></div><div class="rt"><strong>Avaliação do endividamento: MV "não preocupante" vs documentos</strong><span>MV avalia como não preocupante. Os documentos mostram R$6,75M em empréstimos bancários na Renova JR + liquidez corrente de 0,48 + caixa de R$208k. Despesas financeiras de R$401k/ano. A visão de Bazan (crescimento 302% no triênio) está mais alinhada com os números do balanço.</span></div></div>
+  <div class="rr rm"><div class="rd"></div><div class="rt"><strong>Sacados misturados entre as duas empresas do grupo</strong><span>RB cita "Carrefour, Rumo, Karsten, Tembici e Viacredi" como sacados do grupo. Porém os documentos mostram: Carrefour e Rumo são da Curva ABC da R. Agilidade; Tembici, Viacredi, Karsten, BIOMA são da Renova JR. A delimitação por CNPJ cedente é obrigatória antes da operação.</span></div></div>
+
+  <div style="font-size:11px;color:var(--red);text-transform:uppercase;letter-spacing:.5px;margin:14px 0 8px;">— ACHADOS DO CRUZAMENTO DOCUMENTAL (não cobertos explicitamente nos pareceres)</div>
+  <div class="rr rh"><div class="rd"></div><div class="rt"><strong>José Carlos tomou consignado pessoal R$913k para financiar R. Agilidade</strong><span>Identificado no IRPF: aposentado com R$1.700/mês tomou dois créditos Itaú de R$448k + R$464k = R$913k para repassar à R. Agilidade. Isso expõe a aposentadoria ao risco empresarial e confirma que a R. Agilidade não consegue crédito bancário por conta própria. Nenhum dos pareceres destacou esse ponto.</span></div></div>
+  <div class="rr rh"><div class="rd"></div><div class="rt"><strong>INSS consolidado do grupo: R$12,9M (maior que o citado individualmente)</strong><span>Renova JR R$9,95M + R. Agilidade R$2,96M = R$12,9M total. Os pareceres tratam o INSS de cada empresa isoladamente; o risco consolidado é mais elevado.</span></div></div>
+  <div class="rr rh"><div class="rd"></div><div class="rt"><strong>Liquidez real da Renova JR: R$208k em R$33,9M de receita</strong><span>LC = 0,48 e caixa = 0,6% da receita. Ativo circulante é 88% composto por impostos a recuperar de realização lenta e incerta. A pressão de caixa que motiva a antecipação é estrutural, não pontual.</span></div></div>
+  <div class="rr rh"><div class="rd"></div><div class="rt"><strong>Rosimeri distribuiu R$2M em dividendos em 2024 enquanto INSS crescia</strong><span>Apartamento R$2,9M em BC adquirido em agosto/2024, financiado em R$1,59M. No mesmo ano, distribuiu R$2M em dividendos da Renova JR. O INSS cresceu 267% entre 2022–2025. Governança financeira questionável: retiradas pessoais elevadas com passivo previdenciário crítico acumulando.</span></div></div>
+
+  <div class="alrt a" style="margin-top:12px;">⚠ <strong>Conclusão do cruzamento:</strong> Os dois pareceres convergem na decisão e os principais riscos foram identificados. Os documentos suportam a visão mais conservadora do Bazan sobre endividamento e liquidez. Os achados sobre o consignado de José Carlos, o INSS consolidado de R$12,9M e a liquidez real da Renova JR reforçam as condicionantes já propostas e elevam a importância da CND Previdenciária como pré-requisito absoluto.</div>
+</div>
+
+<!-- SEÇÃO 12: VEREDICTO -->
+<div class="sec" id="veredicto" style="padding-top:6px;">
+  <div class="sl"><div class="sn b">12</div><span class="st">Veredicto — Decisão do Comitê</span></div>
+  <div class="vp">
+    <div class="vc tc">
+      <div class="vl">Analista de Crédito</div>
+      <div class="vr">Marcelo Vazquez</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Posição de Crédito</div>
+      <div class="vm" style="color:var(--amber)">CONDICIONAR</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:6px;">Favorável com condições obrigatórias</div>
+    </div>
+    <div class="vc bc">
+      <div class="vl">Analista Financeiro</div>
+      <div class="vr">Rafael Bazan</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Análise Contábil / Financeira</div>
+      <div class="vm" style="color:var(--amber)">CONDICIONAR</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:6px;">Aprovação condicionada — mérito confirmado</div>
+    </div>
+  </div>
+  <div class="vfinal cond">
+    <div class="vff-l">Decisão do Comitê</div>
+    <div class="vff-t">APROVAÇÃO CONDICIONADA</div>
+    <div class="vff-m">Convergência entre analistas — condicionantes obrigatórias antes de qualquer exposição</div>
+    <p style="font-size:13px;color:var(--muted);max-width:780px;margin:0 auto 16px;line-height:1.8;">As condicionantes mínimas para ativação da operação são: <strong>(i)</strong> CND Previdenciária válida da Renova JR e R. Agilidade; <strong>(ii)</strong> Curva ABC com percentuais de faturamento por cliente em ambas as empresas; <strong>(iii)</strong> esclarecimento formal da divergência de ~R$2M no faturamento da R. Agilidade; <strong>(iv)</strong> fiança solidária de Rosimeri da Silva Pereira; <strong>(v)</strong> mapeamento dos contratos que permitem cessão de crédito; <strong>(vi)</strong> esclarecimento sobre RB Holding Gestão Ltda. e estrutura societária do grupo. Limite de concentração por sacado: máximo 30% da carteira cedida. Operação restrita exclusivamente a notas fiscais com confirmação prévia do sacado.</p>
+    <div class="sigs">
+      <div class="sig"><div class="sg-l"></div><div class="sg-n">Marcelo Vazquez</div><div class="sg-r">Analista de Crédito</div></div>
+      <div class="sig"><div class="sg-l"></div><div class="sg-n">Rafael Bazan</div><div class="sg-r">Analista Financeiro</div></div>
+    </div>
+  </div>
+</div>
+</div><!-- end rf-sec -->
+
+<footer>AG Antecipa — Parecer de Comitê &nbsp;·&nbsp; Grupo Agilidade (Renova JR + R. Agilidade) &nbsp;·&nbsp; Jun/2026 &nbsp;·&nbsp; Documento confidencial de uso interno</footer>
+
+<script>
+const ctx = document.getElementById('groupChart').getContext('2d');
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['Receita Bruta', 'INSS a Recolher', 'Dívida Bancária', 'Patrimônio Líquido'],
+    datasets: [
+      {
+        label: 'Renova JR',
+        data: [33870, 9953, 6753, 6419],
+        backgroundColor: ['rgba(0,212,170,.65)','rgba(239,68,68,.75)','rgba(245,158,11,.65)','rgba(34,197,94,.65)'],
+        borderColor: ['rgba(0,212,170,1)','rgba(239,68,68,1)','rgba(245,158,11,1)','rgba(34,197,94,1)'],
+        borderWidth: 1,
+        borderRadius: 5,
+        categoryPercentage: 0.7,
+        barPercentage: 0.5
+      },
+      {
+        label: 'R. Agilidade',
+        data: [11910, 2964, 449, -2023],
+        backgroundColor: ['rgba(79,142,247,.65)','rgba(239,68,68,.45)','rgba(245,158,11,.35)','rgba(239,68,68,.65)'],
+        borderColor: ['rgba(79,142,247,1)','rgba(239,68,68,.8)','rgba(245,158,11,.8)','rgba(239,68,68,1)'],
+        borderWidth: 1,
+        borderRadius: 5,
+        categoryPercentage: 0.7,
+        barPercentage: 0.5
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { labels: { color: '#94a3b8', font: { family: 'DM Sans', size: 11 } } },
+      tooltip: {
+        callbacks: {
+          label: ctx => ' R$ ' + ctx.parsed.y.toLocaleString('pt-BR') + 'k'
+        }
+      }
+    },
+    scales: {
+      x: {
+        ticks: { color: '#94a3b8', font: { size: 11 } },
+        grid: { color: 'rgba(255,255,255,.05)' }
+      },
+      y: {
+        ticks: {
+          color: '#94a3b8',
+          font: { size: 11 },
+          callback: v => 'R$' + (v/1000).toFixed(0) + 'M'
+        },
+        grid: { color: 'rgba(255,255,255,.05)' }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>
